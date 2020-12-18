@@ -4,29 +4,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/classnames": "^2.2.10",
-    "@types/jest": "^25.2.3",
-    "@types/node": "^14.0.9",
-    "@types/react": "^16.9.35",
-    "@types/react-dom": "^16.9.8",
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/redux-form": "^8.2.6",
-    "antd": "^4.3.3",
-    "axios": "^0.19.2",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
+    "@types/classnames": "^2.2.11",
+    "@types/jest": "^26.0.19",
+    "@types/node": "^14.14.14",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.12",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/redux-form": "^8.3.1",
+    "axios": "^0.21.0",
     "axioss": "0.0.1-security",
     "classnames": "^2.2.6",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-redux": "^7.2.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "4.0.1",
     "redux": "^4.0.5",
-    "redux-form": "^8.3.5",
+    "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "reselector": "^0.17.0",
-    "typescript": "^3.9.3"
+    "typescript": "^4.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,6 +51,6 @@
   "author": "kao <secondjump@bk.ru>",
   "license": "MIT",
   "devDependencies": {
-    "gh-pages": "^3.0.0"
+    "gh-pages": "^3.1.0"
   }
 }

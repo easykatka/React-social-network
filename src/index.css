@@ -14,7 +14,6 @@ code {
 }
 a {
 	text-decoration: none;
-	color: red;
 }
 
 .container {
@@ -32,4 +31,9 @@ a {
 }
 a.active> * {
 	background-color: rgb(179, 170, 192);
+}
+.preloader {
+	position:fixed;
+	top:50%;
+	left:50%;
 }

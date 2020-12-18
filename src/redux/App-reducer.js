@@ -1,15 +1,17 @@
 import {getAuthUserData} from "./Auth-reducer";
-//local state
-let initialState = {
-    initialized: false
+
+const SET_INITIALIZED_SUCCESS = "SET_INITIALIZED_SUCCESS" 
+
+const initialState = {
+    isInitialized: false
 }
-// reducer
-const appReducer = (state = initialState, action) => {
+
+export const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SET_INITIALIZED_SUCCESS":
+        case SET_INITIALIZED_SUCCESS:
             return {
                 ...state,
-                initialized: true
+                isInitialized: true
             }
         default :
             return state;
@@ -17,11 +19,11 @@ const appReducer = (state = initialState, action) => {
 }
 // actions
 export const actions = {
-    initializedSuccess: () => ({type: "SET_INITIALIZED_SUCCESS"})
+    initializedSuccess: () => ({type: SET_INITIALIZED_SUCCESS})
 }
 // thunks
-export const initializeApp = () => (dispatch) => {                     // инициализация для App
-    let promise = dispatch(getAuthUserData())
+export const initializeAppThunk = () => (dispatch) => {                    
+    const promise = dispatch(getAuthUserData())
     Promise.all([promise])
         .then(() => {
                 dispatch(actions.initializedSuccess())
@@ -29,4 +31,3 @@ export const initializeApp = () => (dispatch) => {                     // ини
         )
 }
 
-export default appReducer
