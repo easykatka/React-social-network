@@ -1,17 +1,24 @@
 import React from "react";
 import "../../index.css";
 import NavLink from "react-router-dom/NavLink";
-import { connect } from "react-redux";
-import { logout } from "../../redux/Auth-reducer";
+import { useDispatch, useSelector } from "react-redux";
+import {logout} from "../../redux/Auth-reducer";
 import vklogo from "../../pic/vk.png";
 import Button from "@material-ui/core/Button";
+import { Redirect } from "react-router-dom";
 
-export const Header = ({ isAuth, logout, login }) => {
+
+export const Header = () => {
+  const login = useSelector((state) => state.auth.login);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  const dispatch = useDispatch();
+
+  
   return (
+	  <>
     <header className="header">
       <div className="container">
         <div className="header_block">
-			
           <img src={vklogo} width="30px" />
           <Button
             href="https://social-network.samuraijs.com/docs"
@@ -21,16 +28,15 @@ export const Header = ({ isAuth, logout, login }) => {
           >
             API DOCS
           </Button>
-
           <div>
             {isAuth ? (
               <div>
-                {login}{" "}
+                {login}
                 <Button
                   size="small"
                   color="primary"
                   variant="contained"
-                  onClick={logout}
+                  onClick={() => dispatch(logout())}
                 >
                   LOG OUT
                 </Button>
@@ -43,14 +49,11 @@ export const Header = ({ isAuth, logout, login }) => {
               </NavLink>
             )}
           </div>
-        </div>
+        </div>	
       </div>
     </header>
+	{!isAuth ?  <Redirect to={"/login"}/>  : null}    
+	</>
   );
 };
 
-const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth,
-  login: state.auth.login,
-});
-export default connect(mapStateToProps, { logout })(Header);

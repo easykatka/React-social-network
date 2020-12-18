@@ -24,7 +24,7 @@ const Users = ({
           <span>
             <div>
               <NavLink to={"/profile/" + g.id}>
-                <img
+                <img width="50px"
                   src={g.photos.small != null ? g.photos.small : userPhoto}
                   className={userPhoto}
                 />

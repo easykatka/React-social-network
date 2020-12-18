@@ -41,21 +41,21 @@ export const actions = {
 }
 //thunks
 export const getAuthUserData = () => async (dispatch) => {
-    let meData = await authAPI.me()                               //
+    const meData = await authAPI.me()                               //
     if (meData.resultCode === ResultCodes.Success) {                              // выкинули .data.resultCode из-за типизации в апи
         let {id, email, login} = meData.data;
         dispatch(actions.setAuthUserData(id, email, login, true))
     }
 }
 export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
-    let loginData = await authAPI.login(email, password, rememberMe, captcha)
+    const loginData = await authAPI.login(email, password, rememberMe, captcha)
     if (loginData.resultCode === ResultCodes.Success) {
         dispatch(getAuthUserData())
     } else {
         if (loginData.resultCode === ResultCodesCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl())
         }
-        let message = loginData.messages.length > 0 ? loginData.messages[0] : "Some Error" //ответ от сервака
+        const message = loginData.messages.length > 0 ? loginData.messages[0] : "Some Error" //ответ от сервака
         dispatch(stopSubmit("login", {_error: message}))  // login это название формы
     }
 }
@@ -65,7 +65,7 @@ export const getCaptchaUrl = () => async (dispatch) => {
     dispatch(actions.getCaptchaUrlSuccess(captchaUrl))
 }
 export const logout = () => async (dispatch) => {
-    let response = await authAPI.logout()
+    const response = await authAPI.logout()
     if (response.data.resultCode === ResultCodes.Success) {
         dispatch(actions.setAuthUserData(null, null, null, false))
     }

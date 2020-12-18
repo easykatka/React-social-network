@@ -1,10 +1,13 @@
-import React from 'react'
-import preloader from '../../../Reload.svg'
+import React from "react";
+import preloader from "../../../Reload.svg";
+import "../../../index.css"
 
- let Preloader = (props) => {
-	return <div style = { { backgroundcolor:'white'} }>
-		<img src={preloader} />
-	</div>
-}
+let Preloader = () => {
+  return (
+    <div className="preloader">
+      <img src={preloader} />
+    </div>
+  );
+};
 
-export default Preloader
+export default Preloader;
