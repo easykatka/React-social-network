@@ -5,14 +5,13 @@ import ProfileStatusHooks from "./ProfileStatusHooks";
 import userPhoto from "../../../logo.svg";
 import ProfileDataForm from "./ProfileDataForm";
 
-const ProfileInfo = ({profile,isOwner,updateStatus,savePhoto,status,saveProfile,formUpdate,}) => {
+const ProfileInfo = ({profile,isOwner,updateStatus,savePhoto,status,saveProfile,formUpdate,}) => {	
   const [editMode, setEditMode] = useState(false);
   const onSubmit = (formData) => {
 	  
     saveProfile(formData); // через async не будет работаьь
   };
   useEffect(() => {
-    // при приходе статуса с сервера он сетится в стейт и перерисовывает
     setEditMode(false);
   }, [formUpdate]);
   if (!profile) {

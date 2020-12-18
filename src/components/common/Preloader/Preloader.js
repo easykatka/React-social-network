@@ -1,4 +1,4 @@
-import React from "react";
+
 import preloader from "../../../Reload.svg";
 import "../../../index.css"
 
