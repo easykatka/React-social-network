@@ -1,0 +1,54 @@
+{
+  "name": "React Social Media",
+  "homepage": "https://easykatka.github.io/React-social-network",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/classnames": "^2.2.10",
+    "@types/jest": "^25.2.3",
+    "@types/node": "^14.0.9",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/redux-form": "^8.2.6",
+    "axios": "^0.19.2",
+    "axioss": "0.0.1-security",
+    "classnames": "^2.2.6",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-form": "^8.3.5",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "reselector": "^0.17.0",
+    "typescript": "^3.9.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "main": "index.js",
+  "repository": "https://github.com/Easykatka/React-social-network.git",
+  "author": "easykatka <secondjump@bk.ru>",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^3.0.0"
+  }
+}

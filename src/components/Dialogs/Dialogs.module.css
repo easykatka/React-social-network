@@ -1,0 +1,49 @@
+.dialogs {
+	display: grid;
+	grid-template-columns: 30% 1fr;
+	grid-template-rows: 1fr 10%;
+	color: darkred;
+	text-align: left;
+	padding: 10px;
+	padding-left: 100px;
+	grid-template-areas: "f m" "f p";
+	height: 500px;
+
+}
+
+.addpost {
+	grid-area: p ;
+}
+
+.dialogsItems {
+	grid-area: f;
+}
+.dialogsItems a {
+	color: antiquewhite;
+	text-decoration: none;
+}
+
+.post{
+	grid-area: m ;
+	text-align: left;
+
+}
+.messages {
+
+	grid-area: m;
+	font-size: 25px;
+	padding: 10px;
+	color: orchid;
+	text-align: right;
+	border-style: groove;
+	border-radius: 5px;
+}
+
+.dialogs img {
+	vertical-align: middle;
+	height: 40px;
+	width: 40px;
+	border-radius: 30px;
+	margin: 10px;
+}
+
