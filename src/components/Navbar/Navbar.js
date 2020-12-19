@@ -15,7 +15,7 @@ const Navbar = () => {
 	 const classes = useStyles();
   return (
     <div className='container'>
-		<Grid direction="column" xs={3} container className={classes.navbar} wrap="wrap" spacing={2}>
+		<Grid direction="column"  container className={classes.navbar} wrap="wrap" spacing={2}>
     
         <Grid item xs>
           <NavLink to="/profile" activeClassName='active'>

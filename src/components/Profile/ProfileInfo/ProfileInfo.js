@@ -25,7 +25,7 @@ const ProfileInfo = ({profile,isOwner,updateStatus,savePhoto,status,saveProfile,
   return (
     <div className='container'>
       <div >
-        <img src={profile.photos.large || userPhoto} />
+        <img alt='user foto' src={profile.photos.large || userPhoto} />
         {isOwner && <input type="file" onChange={onMainFotoSelected} />}
         {editMode ? (
           <ProfileDataForm

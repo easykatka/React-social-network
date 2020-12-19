@@ -1,5 +1,5 @@
-import React from 'react'
-import {Field, reduxForm, InjectedFormProps} from "redux-form";
+
+import {Field, reduxForm} from "redux-form";
 import {FormControl} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
@@ -21,7 +21,7 @@ const LoginForm = ({handleSubmit, error, captchaUrl}) => {
                 <Field typeF="input" component={FormControl} name={"rememberMe"} type={"checkbox"}/> remember me
             </div>
 
-            {captchaUrl && <img src={captchaUrl}/>}
+            {captchaUrl && <img alt='captcha' src={captchaUrl}/>}
             <div>
                 {captchaUrl &&
 								<Field typeF="input" placeholder={""} name={"captcha"} component={FormControl} validate={[required]}/>}

@@ -43,7 +43,7 @@ export const actions = {
 export const getAuthUserData = () => async (dispatch) => {
     const meData = await authAPI.me()                              
 
-    if (meData.resultCode == 0 )	 {                            
+    if (meData.resultCode === 0 )	 {                            
 
         let {id, email, login} = meData.data;
         dispatch(actions.setAuthUserData(id, email, login, true))
@@ -56,7 +56,7 @@ export const login = (email, password, rememberMe , captcha ) => async (dispatch
     if (loginData.resultCode === 0) {
         dispatch(getAuthUserData())
     } else {
-        if (loginData.resultCode == 10) {
+        if (loginData.resultCode === 10) {
             dispatch(getCaptchaUrl())
         }
         const message = loginData.messages.length > 0 ? loginData.messages[0] : "Some Error" //ответ от сервака
@@ -70,7 +70,7 @@ export const getCaptchaUrl = () => async (dispatch) => {
 }
 export const logout = () => async (dispatch) => {
     const response = await authAPI.logout()
-    if (response.data.resultCode == 0 ) {
+    if (response.data.resultCode === 0 ) {
         dispatch(actions.setAuthUserData(null, null, null, false))
     }
 }

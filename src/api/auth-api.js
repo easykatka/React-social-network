@@ -1,9 +1,8 @@
 import { instance } from "./api";
 
 export const authAPI = {
-//! 
   me() {
-    return instance.get(`auth/me`).then((res) => res.data);  
+    return instance.get(`auth/me`).then((res) => res.data);
   },
   login(email, password, rememberMe = false, captcha) {
     return instance
