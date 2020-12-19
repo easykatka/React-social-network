@@ -6,8 +6,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {Header} from "./components/Header/Header";
 import Login from "./components/Login/Login";
-import { compose } from "redux";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { initializeAppThunk } from "./redux/App-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
 import { withSuspense } from "./hoc/WIthSuspense";
@@ -30,7 +29,7 @@ const App = () => {
   const classes = useStyles();
   const isInitializeApp = useSelector((state) => state.app.isInitialized);
 	const dispatch = useDispatch()
-  useEffect(() => dispatch(initializeAppThunk()), []);
+  useEffect(() => dispatch(initializeAppThunk()), [dispatch]);
 
   if (!isInitializeApp) return <Preloader />;
   return (
@@ -38,7 +37,7 @@ const App = () => {
       <Header />
       <div className={classes.root}>
         <Grid container className="container">
-            <Grid item xs={2} wrap>
+            <Grid item xs={2} >
               <Navbar />
             </Grid>
             <Grid item xs={6}>
@@ -61,7 +60,7 @@ const App = () => {
                   render={() => <UsersContainer pageTitle={"Самураи"} />}
                 />
                 <Route path="/login" render={() => <Login />} />
-                <Route path="*" render={() => <div>404</div>} />
+                <Route path="/*" render={() => <div>404</div>} />
               </Switch>
             </Grid>
           </Grid>

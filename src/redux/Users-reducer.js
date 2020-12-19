@@ -33,7 +33,7 @@ const usersReducer = (state = initialState, action) => {
 				...state, followingInProgress:
 					action.isFetching                                                   // иф
 						? [...state.followingInProgress, action.userId]                     //грузит фолоу=тру=добавляем в массив юсерид
-						: state.followingInProgress.filter(id => id != action.userId) //   при вызове фолс=удаляет нужный айди из массива
+						: state.followingInProgress.filter(id => id !== action.userId) //   при вызове фолс=удаляет нужный айди из массива
 			}
 		}
 		default :
@@ -65,7 +65,7 @@ export const followThunkCreator = (userId)  => {
 		return async (dispatch) => {
 			dispatch(actions.toggleFollowingProgress(true, userId))
 			let response = await usersAPI.followAPI(userId)
-			if (response.resultCode == 0) {
+			if (response.resultCode === 0) {
 				dispatch(actions.toggleFollow(userId))
 			}
 			dispatch(actions.toggleFollowingProgress(false, userId))
@@ -75,7 +75,7 @@ export const unfollowThunkCreator = (userId)  => {
 		return async (dispatch) => {
 			dispatch(actions.toggleFollowingProgress(true, userId))
 			let response = await usersAPI.unFollowAPI(userId)
-			if (response.resultCode == 0) {
+			if (response.resultCode === 0) {
 				dispatch(actions.toggleFollow(userId))
 			}
 			dispatch(actions.toggleFollowingProgress(false, userId))

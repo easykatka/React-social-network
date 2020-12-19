@@ -1,8 +1,7 @@
-import React from 'react';
+
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {actions} from "../../redux/DialogsPage-reducer";
-import {compose} from "redux";
 
 
 let mapStateToProps = (state) => {

@@ -1,4 +1,4 @@
-import {FormAction, stopSubmit} from "redux-form";
+import {stopSubmit} from "redux-form";
 import {profileAPI} from "../api/profile-api";
 // local state
 let initialState = {
@@ -71,7 +71,7 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     const userId = getState().auth.userId
     const data = await profileAPI.saveProfile(profile)
     if (data.resultCode === 0) {
-        if (userId != null)
+        if (userId !== null)
         {dispatch(getUserProfile(userId))
         dispatch(actions.profileFormUpdate())}
         else throw new Error("UserId cant be null")

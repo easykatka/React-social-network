@@ -1,4 +1,4 @@
-import {ResultCodes, ResultCodesCaptcha} from "../api/api";
+
 import {stopSubmit} from 'redux-form'
 import {authAPI} from "../api/auth-api";
 import {securityAPI} from "../api/security-api";
@@ -41,18 +41,22 @@ export const actions = {
 }
 //thunks
 export const getAuthUserData = () => async (dispatch) => {
-    const meData = await authAPI.me()                               //
-    if (meData.resultCode === ResultCodes.Success) {                              // выкинули .data.resultCode из-за типизации в апи
+    const meData = await authAPI.me()                              
+
+    if (meData.resultCode === 0 )	 {                            
+
         let {id, email, login} = meData.data;
         dispatch(actions.setAuthUserData(id, email, login, true))
     }
 }
-export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
-    const loginData = await authAPI.login(email, password, rememberMe, captcha)
-    if (loginData.resultCode === ResultCodes.Success) {
+
+export const login = (email, password, rememberMe , captcha ) => async (dispatch) => {
+	const loginData = await authAPI.login(email, password, rememberMe, captcha)
+	console.log(loginData)
+    if (loginData.resultCode === 0) {
         dispatch(getAuthUserData())
     } else {
-        if (loginData.resultCode === ResultCodesCaptcha.CaptchaIsRequired) {
+        if (loginData.resultCode === 10) {
             dispatch(getCaptchaUrl())
         }
         const message = loginData.messages.length > 0 ? loginData.messages[0] : "Some Error" //ответ от сервака
@@ -66,7 +70,7 @@ export const getCaptchaUrl = () => async (dispatch) => {
 }
 export const logout = () => async (dispatch) => {
     const response = await authAPI.logout()
-    if (response.data.resultCode === ResultCodes.Success) {
+    if (response.data.resultCode === 0 ) {
         dispatch(actions.setAuthUserData(null, null, null, false))
     }
 }

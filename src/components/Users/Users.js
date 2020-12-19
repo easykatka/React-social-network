@@ -25,7 +25,8 @@ const Users = ({
             <div>
               <NavLink to={"/profile/" + g.id}>
                 <img width="50px"
-                  src={g.photos.small != null ? g.photos.small : userPhoto}
+				  src={g.photos.small != null ? g.photos.small : userPhoto}
+				  alt='pop'
                   className={userPhoto}
                 />
               </NavLink>
@@ -33,7 +34,7 @@ const Users = ({
             <div>
               {g.followed ? ( 
                 <button
-                  disabled={props.followingInProgress.some((id) => id == g.id)}
+                  disabled={props.followingInProgress.some((id) => id === g.id)}
                   onClick={() => {
                 
                     props.unfollowThunkCreator(g.id);
@@ -43,7 +44,7 @@ const Users = ({
                 </button>
               ) : (
                 <button
-                  disabled={props.followingInProgress.some((id) => id == g.id)}
+                  disabled={props.followingInProgress.some((id) => id === g.id)}
                   onClick={() => {
                     props.followThunkCreator(g.id);
                   }}
@@ -55,12 +56,8 @@ const Users = ({
             </div>
           </span>
           <span>
-            <div>{g.name}</div>
-            <div>{g.status}</div>
-          </span>
-          <span>
-            <div>{"g.location.country"}</div>
-            <div>{"g.location.city"}</div>
+            <div>{g?.name}</div>
+            <div>Status:{g?.status}</div>
           </span>
         </div>
       ))}
