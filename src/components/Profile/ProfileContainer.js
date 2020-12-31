@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../redux/Profile-reducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
-
 class ProfileContainer extends React.Component {debugger
 		refreshProfile () {
 				let userId = this.props.match.params.userId; //если юзерайди андеф , то мы переходим на авторизационный айди // урл приходит от
@@ -18,7 +17,6 @@ class ProfileContainer extends React.Component {debugger
 				this.props.getUserProfile(userId)
 				this.props.getStatus(userId)
 		}
-
 		componentDidMount () {
 				this.refreshProfile()
 		}
@@ -28,7 +26,6 @@ class ProfileContainer extends React.Component {debugger
 						this.refreshProfile()
 				}
 		}
-
 		render () {
 				return <div>
 						<Profile {...this.props}
