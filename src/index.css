@@ -13,7 +13,7 @@ code {
 }
 a {
 	text-decoration: none;
-
+	color: black;	
 }
 a.active> * {
 	background-color: rgb(179, 170, 192);
