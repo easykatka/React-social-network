@@ -16,12 +16,13 @@ const useStyles = makeStyles(theme => ({
   app__container: {
     width: 1200,
 	margin: "0 auto",
-	maxWidth:"100%"
+	maxWidth:"100%",
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
+	width:200,
 	display:'flex',
 	alignItems:'center',
 
@@ -29,7 +30,8 @@ const useStyles = makeStyles(theme => ({
   header__block: {
 	display: "flex",
 	justifyContent: "space-between",
-	alignItems: "center"
+	alignItems: "center",
+	
 }
 }))
 

@@ -2,7 +2,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {authAPI} from "../../api/auth-api";
 
-
 export const authSlice = createSlice ({
 	name: 'auth',
 	initialState: {
@@ -10,7 +9,8 @@ export const authSlice = createSlice ({
 		email: null ,
 		login: null ,
 		isAuth: false,
-		captchaUrl: null 
+		captchaUrl: null,
+		errorMessage: null 
 	},
 	reducers: {
 	  setCaptchaUrl: (state,action) => {
@@ -18,18 +18,21 @@ export const authSlice = createSlice ({
 	  },
 	  setAuthUserData: (state,action) => { 
 		return {state,...action.payload}
+	  },
+	  setErrorMessage: (state,action) => {
+		  state.errorMessage = action.payload
 	  }
 	},
   });
-
-  export const { setCaptchaUrl,  setAuthUserData } = authSlice.actions;
-  export default authSlice.reducer;
-
+// экшины
+  export const { setCaptchaUrl,  setAuthUserData , setErrorMessage} = authSlice.actions;
+// санка получения урла капчи
   export const getCaptchaThunk = () =>  async dispatch => {
     const data = await authAPI.getCaptchaUrl()
     const captchaUrl = data.url
 	dispatch(setCaptchaUrl(captchaUrl))
 }
+// логаут
 export const logout = () => async dispatch => {
     const response = await authAPI.logout()
 	if (response.data.resultCode === 0 ) {dispatch(setAuthUserData({id:null,email:null, login:null, isAuth:false})) }}
@@ -42,10 +45,11 @@ export const loginThunk = (email, password, rememberMe , captcha ) => async disp
         if (loginData.resultCode === 10) {
             dispatch(getCaptchaThunk())
         }
-        // const message = loginData.messages.length > 0 ? loginData.messages[0] : "Some Error" //ответ от сервака
-        // dispatch(stopSubmit("login", {_error: message}))  // login это название формы
+        const serverError = loginData.messages.length > 0 ? loginData.messages[0] : "Some Error"
+        dispatch(setErrorMessage(serverError)) 
     }
 }
+// получение данных	
 export const getAuthUserData = () => async (dispatch) => {
     const meData = await authAPI.me()                              
     if (meData.resultCode === 0 )	 {           
@@ -54,6 +58,7 @@ export const getAuthUserData = () => async (dispatch) => {
         dispatch(setAuthUserData(meData.data ))
     }
 }
+export default authSlice.reducer;
  
 
 
