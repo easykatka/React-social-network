@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Navbar = () => {
-
   const classes = useStyles();
   return (
       <Grid
