@@ -13,15 +13,17 @@ export const profileAPI = {
       .then((res) => res.data); // инфа о айди в куки,поэтому не
     // нужно его указывать
   },
-  savePhoto(photoFile) {
+  
+  putNewAvatar(file) {
     const formData = new FormData();
-    formData.append("image", photoFile);
+    formData.append("image", file);
     return instance
       .put(`profile/photo`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => res.data);
   },
+
   saveProfile(profile) {
     return instance.put(`profile`, profile).then((res) => res.data);
   },

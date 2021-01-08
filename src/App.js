@@ -41,11 +41,11 @@ function App() {
         className={classes.app__container}
        
       >
-        <Grid item xs={2}>
+        <Grid item xs={2} style={{paddingRight:'10px'}}>
           <Navbar />
           {/* <Users /> */}
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} >
 			<Paper>
           {!isAuth ?  <Login />  : null}
           <Switch>

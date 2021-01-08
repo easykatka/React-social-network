@@ -9,10 +9,10 @@ import {
   Grid,
 } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import { logout } from "../../app/reducers/auth-reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import {getUserProfile,} from "../../app/reducers/profile-reducer";
+import {logout} from "../../app/reducers/auth-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {getAuthUser} from "../../app/reducers/profile-reducer";
 
 const useStyles = makeStyles((theme) => ({
   app__container: {
@@ -40,18 +40,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Header = () => {
+export const Header = () => { debugger
 
-  const profile = useSelector((state) => state.profile.profile);
+  const AuthUser = useSelector((state) => state.profile.AuthUser);
   const isAuth = useSelector((state) => state.auth.isAuth);
   const AuthUserId = useSelector(state => state.auth.id)
-  const profileAvatar = useSelector(
-    (state) => state.profile.profile?.photos.large
-  );
+
   const dispatch = useDispatch();
   useEffect(() => {
-	dispatch(getUserProfile(AuthUserId))
-  }, [dispatch]);
+	dispatch(getAuthUser(AuthUserId))
+  }, []);
 
   const classes = useStyles();
   return (
@@ -81,9 +79,9 @@ export const Header = () => {
           <div>
             {isAuth ? (
               <Grid container spacing={3} className={classes.profile_block}>
-                <Grid item>{profile?.fullName}</Grid>
+                <Grid item>{AuthUser?.fullName}</Grid>
                 <Grid item>
-                  <Avatar alt="Remy Sharp" src={profileAvatar} />
+                  <Avatar alt="Remy Sharp" src={AuthUser?.photos.large} />
                 </Grid>
                 <Button
                   size="small"

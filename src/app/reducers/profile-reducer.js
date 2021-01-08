@@ -4,34 +4,44 @@ import { createSlice } from "@reduxjs/toolkit";
 export const profileSlice = createSlice ({
 	name: 'profile',
 	initialState : {
-		posts: [
-			{id: 1, message: 'Hi, how are you?', likesCount: 12},
-			{id: 2, message: 'It\'s my first post', likesCount: 11},
-			{id: 3, message: 'Blabla', likesCount: 11},
-			{id: 4, message: 'Dada', likesCount: 11}] ,
+		AuthUser: null,
 		profile: null ,
 		status: "",
 		formUpdate: true
 	},
 	reducers: {
-		addPost: () => {},
 		setUserProfile: (state,action) => {state.profile = action.payload},
 		setUserStatus: (state,action) => {state.status = action.payload},
-		setUserPhoto: () => {}
+		setUserPhoto: () => {},
+		setAuthUser: (state,action) => {state.AuthUser = action.payload},
+		setNewAvatar:(state,action) => {state.AuthUser = action.payload}
+		
+
+		
 	  },
 	},
 )
 //action
-export const { addPost,  setUserProfile , setUserStatus,setUserPhoto,} = profileSlice.actions;
+export const { addPost,  setUserProfile , setUserStatus,setUserPhoto,setAuthUser,setNewAvatar} = profileSlice.actions;
 //thunk
 export const getUserProfile = (id) => async (dispatch) => {
-    const data = await profileAPI.getProfile(id)
-    dispatch(setUserProfile(data))
+	const profileData = await profileAPI.getProfile(id)
+	const profileStatus = await profileAPI.getStatus(id)
+	dispatch(setUserProfile(profileData))
+	dispatch(setUserStatus(profileStatus))     
 }
-export const getStatus = (id) => async (dispatch) => {
-    const response = await profileAPI.getStatus(id)
-    dispatch(setUserStatus(response))                 
+export const getAuthUser = id => async(dispatch) =>{
+	const data = await profileAPI.getProfile(id)
+	dispatch(setAuthUser(data))
 }
+
+export const putNewAvatar = (file) => async (dispatch) => {
+    const data = await profileAPI.putNewAvatar(file)
+    if (data.resultCode === 0) {
+        dispatch(setNewAvatar(data.data.photos))
+    }
+}
+
 	
 export default profileSlice.reducer;
 
@@ -39,19 +49,7 @@ export default profileSlice.reducer;
 
 // const profilesReducer = (state = initialState, action) => {
 //     switch (action.type) {
-//         case "ADD_POST": {
-//             let body = action.AddPostBody
-//             return {
-//                 ...state,
-//                 posts:
-//                     [...state.posts, {id: 10, message: body, likesCount: 0}]
-//             }
-//         }
-//         case "SET_USER_PROFILE" : {
-//             return {...state, profile: action.profile}
-//         }
-//         case "SET_STATUS" :
-//             return {...state, status: action.status}
+
 //         case "SET_PHOTO_SUCCESS":
 //             return {...state, profile: {...state.profile, photos: action.photos} }
 //         case "PROFILE_FORM_UPDATE":
@@ -61,37 +59,14 @@ export default profileSlice.reducer;
 //             return state;
 //     }
 // }
-// // action creators
-// export const actions = {
-//     addPostActionCreator : (AddPostBody) => ({type: "ADD_POST", AddPostBody} ),
-//     setUserProfile : (profile) => ({type: "SET_USER_PROFILE", profile} ),
-//     setStatus :  (status) => ({type: "SET_STATUS", status} ),
-//     savePhotoSuccess :  (photos) => ({type: "SET_PHOTO_SUCCESS", photos} ),
-//     profileFormUpdate : () => ({type: "PROFILE_FORM_UPDATE"} )
-// }
-// //thunks
-// export const getUserProfile = (userId) => async (dispatch) => {
-//     const data = await profileAPI.getProfile(userId)
 
-//     dispatch(actions.setUserProfile(data))
-// }
-// export const getStatus = (userId) => async (dispatch) => {         // санка при вызове getstatus , делает запрос getstatus
-//     // на сервер
-//     const response = await profileAPI.getStatus(userId)
-//     dispatch(actions.setStatus(response.data))                 // диспатчит статус в стейт
-// }
 // export const updateStatus = (status) => async (dispatch) => {
 //     const data = await profileAPI.updateStatus(status)
 //     if (data.resultCode === 0) {
 //         dispatch(actions.setStatus(status))
 //     }
 // }
-// export const savePhoto = (file) => async (dispatch) => {
-//     const data = await profileAPI.savePhoto(file)
-//     if (data.resultCode === 0) {
-//         dispatch(actions.savePhotoSuccess(data.data.photos))
-//     }
-// }
+
 // export const saveProfile = (profile) => async (dispatch, getState) => {
 //     const userId = getState().auth.userId
 //     const data = await profileAPI.saveProfile(profile)
