@@ -2,16 +2,16 @@ import { NavLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline'
 
 
 const useStyles = makeStyles((theme) => ({
   navbar__container: {},
-  tabs: {
-    "&>button": {
-      width: "100%",
-    },
-  },
-}));
+  navbar__item:{width:'100%',
+justifyContent:'left'},
+}))
 
 export const Navbar = () => {
   const classes = useStyles();
@@ -24,22 +24,22 @@ export const Navbar = () => {
       >
         <Grid  item xs>
           <NavLink  to="/profile" activeClassName="active">
-              <Button  fullWidth> My profile</Button>
+              <Button className={classes.navbar__item} startIcon={<PermIdentityIcon/>} > My profile</Button>
           </NavLink>
         </Grid>
         <Grid item xs>
           <NavLink to="/messages" activeClassName="active">
-		  <Button fullWidth> Messages</Button>
+		  <Button className={classes.navbar__item} > Messages</Button>
           </NavLink>
         </Grid>
         <Grid item xs >
           <NavLink to="/users" activeClassName="active">
-		  <Button fullWidth> Users</Button>
+		  <Button className={classes.navbar__item} startIcon={<PeopleOutlineIcon/>} > Users</Button>
           </NavLink>
         </Grid>
         <Grid item xs>
 		<NavLink to="/chat" activeClassName="active">
-		<Button fullWidth> Chat</Button>
+		<Button  className={classes.navbar__item} startIcon={<ChatBubbleOutlineIcon/>}> Chat</Button>
 		</NavLink>
         </Grid>
       </Grid>

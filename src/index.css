@@ -16,5 +16,5 @@ a {
 	color: black;	
 }
 a.active> * {
-	background-color: #3f51b5;
+	background-color: #3f51b56f;
 }

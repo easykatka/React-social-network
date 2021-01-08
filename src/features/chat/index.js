@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 
 export const Chat = () => {
@@ -13,6 +14,7 @@ export const Chat = () => {
 const ChatMessages = () => {
   
   const [messages, setMessages] = useState([]);
+  const isAuth = useSelector((state) => state.auth.isAuth);
   useEffect(() => {
 	const ws = new WebSocket(
 		"wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
@@ -21,7 +23,7 @@ const ChatMessages = () => {
       const newMessages = JSON.parse(e.data);
       setMessages((prev) => [...prev, ...newMessages]);
     });
-  }, []);
+  }, [isAuth]);
 
   console.log(messages);
 
@@ -67,6 +69,7 @@ const AddMessageForm = () => {
       </div>
       <div>
         <button onClick={SendMessage}>Send</button>
+		
       </div>
     </>
   );
