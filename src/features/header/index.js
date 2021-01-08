@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export const Header = () => { debugger
+export const Header = () => { 
 
   const AuthUser = useSelector((state) => state.profile.AuthUser);
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -48,8 +48,9 @@ export const Header = () => { debugger
 
   const dispatch = useDispatch();
   useEffect(() => {
-	dispatch(getAuthUser(AuthUserId))
-  }, []);
+	  if (AuthUserId) {
+	dispatch(getAuthUser(AuthUserId))}
+  }, [AuthUserId]);
 
   const classes = useStyles();
   return (
@@ -64,7 +65,7 @@ export const Header = () => { debugger
             >
               <GitHubIcon color="secondary" />
             </IconButton>
-            <Typography variant="h6">Social Media</Typography>
+            <Typography  variant="h6">Social Media</Typography>
           </div>
           <div style={{ justifyContent: "space-around" }}>
             <Button
@@ -81,7 +82,7 @@ export const Header = () => { debugger
               <Grid container spacing={3} className={classes.profile_block}>
                 <Grid item>{AuthUser?.fullName}</Grid>
                 <Grid item>
-                  <Avatar alt="Remy Sharp" src={AuthUser?.photos.large} />
+                  <Avatar alt="Remy Sharp" src={AuthUser?.photos.small} />
                 </Grid>
                 <Button
                   size="small"

@@ -23,7 +23,7 @@ const ChatMessages = () => {
       const newMessages = JSON.parse(e.data);
       setMessages((prev) => [...prev, ...newMessages]);
     });
-  }, [isAuth]);
+  }, []);
 
   console.log(messages);
 
@@ -31,7 +31,8 @@ const ChatMessages = () => {
     <div
       style={{
         height: "500px",
-        overflowY: "auto",
+		overflowY:'auto'
+		
       }}
     >
       {messages.map((i, index) => (

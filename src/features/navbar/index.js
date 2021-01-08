@@ -27,11 +27,6 @@ export const Navbar = () => {
               <Button className={classes.navbar__item} startIcon={<PermIdentityIcon/>} > My profile</Button>
           </NavLink>
         </Grid>
-        <Grid item xs>
-          <NavLink to="/messages" activeClassName="active">
-		  <Button className={classes.navbar__item} > Messages</Button>
-          </NavLink>
-        </Grid>
         <Grid item xs >
           <NavLink to="/users" activeClassName="active">
 		  <Button className={classes.navbar__item} startIcon={<PeopleOutlineIcon/>} > Users</Button>

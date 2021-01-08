@@ -7,11 +7,10 @@ export const profileAPI = {
   getStatus(userId) {
     return instance.get(`profile/status/` + userId).then((res) => res.data); //запрос статуса отдельно с сервера
   },
-  updateStatus(status) {
+  putNewStatus(status) { 
     return instance
       .put(`profile/status`, { status: status })
-      .then((res) => res.data); // инфа о айди в куки,поэтому не
-    // нужно его указывать
+      .then((res) => res.data); 
   },
   
   putNewAvatar(file) {

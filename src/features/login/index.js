@@ -1,7 +1,7 @@
 
 import {useFormik} from 'formik'
 import { makeStyles } from "@material-ui/core/styles";
-import {loginThunk} from "../../app/reducers/auth-reducer";
+import {login} from "../../app/reducers/auth-reducer";
 import { useDispatch, useSelector } from 'react-redux';
 import {TextField,Button , Checkbox , Grid ,FormControlLabel, Typography, Paper } from '@material-ui/core/'
 ;
@@ -34,7 +34,7 @@ export const Login = () => {
 		  },
 		  onSubmit: ({login , password , captcha , rememberMe}) => { 
 			  console.log(login , password , captcha , rememberMe)
-			dispatch(loginThunk(login,password,rememberMe,captcha))
+			dispatch(login(login,password,rememberMe,captcha))
 			 }
 			})
 
