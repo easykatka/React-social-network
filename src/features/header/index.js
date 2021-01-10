@@ -9,10 +9,10 @@ import {
   Grid,
 } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";
-import {logout} from "../../app/reducers/auth-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {getAuthUser} from "../../app/reducers/profile-reducer";
+import { logout } from "../../app/reducers/auth-reducer";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAuthUser } from "../../app/reducers/profile-reducer";
 
 const useStyles = makeStyles((theme) => ({
   app__container: {
@@ -25,39 +25,34 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     width: 200,
-    display: "flex",
     alignItems: "center",
   },
   header__block: {
-    display: "flex",
     justifyContent: "space-between",
-    alignItems: "center",
   },
   profile_block: {
     alignItems: "center",
-    flexGrow: 1,
   },
 }));
 
-
-export const Header = () => { 
-
+export const Header = () => {
   const AuthUser = useSelector((state) => state.profile.AuthUser);
   const isAuth = useSelector((state) => state.auth.isAuth);
-  const AuthUserId = useSelector(state => state.auth.id)
+  const AuthUserId = useSelector((state) => state.auth.id);
 
   const dispatch = useDispatch();
   useEffect(() => {
-	  if (AuthUserId) {
-	dispatch(getAuthUser(AuthUserId))}
+    if (AuthUserId) {
+      dispatch(getAuthUser(AuthUserId));
+    }
   }, [AuthUserId]);
 
   const classes = useStyles();
   return (
     <AppBar position="sticky">
-      <div className={classes.app__container}>
+      <Grid className={classes.app__container}>
         <Toolbar className={classes.header__block}>
-          <div className={classes.title}>
+          <Grid container className={classes.title}>
             <IconButton
               edge="start"
               className={classes.menuButton}
@@ -65,18 +60,16 @@ export const Header = () => {
             >
               <GitHubIcon color="secondary" />
             </IconButton>
-            <Typography  variant="h6">Social Media</Typography>
-          </div>
-          <div style={{ justifyContent: "space-around" }}>
-            <Button
-              className={classes.title}
-              href="https://social-network.samuraijs.com/docs"
-              color="primary"
-              variant="contained"
-            >
-              API DOCS
-            </Button>
-          </div>
+            <Typography variant="h6">Social Media</Typography>
+          </Grid>
+          <Button
+            className={classes.title}
+            href="https://social-network.samuraijs.com/docs"
+            color="primary"
+            variant="contained"
+          >
+            API DOCS
+          </Button>
           <div>
             {isAuth ? (
               <Grid container spacing={3} className={classes.profile_block}>
@@ -100,7 +93,7 @@ export const Header = () => {
             )}
           </div>
         </Toolbar>
-      </div>
+      </Grid>
     </AppBar>
   );
 };

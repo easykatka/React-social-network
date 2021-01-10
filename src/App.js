@@ -3,7 +3,7 @@ import { Header } from "./features/header";
 import { Login } from "./features/login";
 import { Users } from "./features/users";
 import { useDispatch, useSelector } from "react-redux";
-import { initThunk } from "./app/reducers/app-reducer";
+import { init} from "./app/reducers/app-reducer";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { Navbar } from "./features/navbar";
@@ -30,7 +30,7 @@ function App() {
   const isInit = useSelector((state) => state.app.isInit);
   const isAuth = useSelector((state) => state.auth.isAuth);
   const dispatch = useDispatch();
-  useEffect(() => dispatch(initThunk()), [dispatch]);
+  useEffect(() => dispatch(init()), [dispatch]);
   const classes = useStyles();
 //   if (!isInit) {return <Backdrop className={classes.backdrop} open={!isInit} >
 //   <CircularProgress color="inherit" />

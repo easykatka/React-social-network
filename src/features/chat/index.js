@@ -19,7 +19,7 @@ const ChatMessages = () => {
 	const ws = new WebSocket(
 		"wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
 	  );
-    ws.addEventListener("message", (e) => {
+    ws.addEventListener("message", (e) => { console.log(e)
       const newMessages = JSON.parse(e.data);
       setMessages((prev) => [...prev, ...newMessages]);
     });

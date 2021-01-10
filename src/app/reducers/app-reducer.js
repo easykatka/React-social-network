@@ -12,8 +12,7 @@ export const appSlice = createSlice({
     },
   },
 });
-
-export const initThunk = () => (dispatch) => {
+export const init = () => (dispatch) => {
   const promise = dispatch(getAuthUserData());
   Promise.all([promise]).then(() => {
     dispatch(setInit());
