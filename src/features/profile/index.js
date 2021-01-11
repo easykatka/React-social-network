@@ -30,6 +30,8 @@ const useStyles = makeStyles(theme => ({
 	},
 }))
 
+
+
 const Profile = props => {
 	const classes = useStyles()
 	const profile = useSelector(state => state.profile.profile)
@@ -45,7 +47,7 @@ const Profile = props => {
 			dispatch(getUserProfile(profileUserId))
 		}
 	}, [dispatch,profileUserId])
-	if (!profile) {return null}
+	if (!profile) {return <div>FETCHING</div>}
 	
 	return (
 		<Grid container spacing={2}>
@@ -69,7 +71,7 @@ const Profile = props => {
 									Upload new photo
 								</Button>
 							</label>
-							{formEdit || <Button color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit (true))}>Edit</Button>}
+							{formEdit || <Button style={{marginTop:"12px"}}color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit (true))}>Edit</Button>}
 						</div>
 					) : (
 						<Button color='primary' variant='contained'>

@@ -51,9 +51,11 @@ export const putNewProfile = (profile) => async (dispatch) => {
     const data = await profileAPI.saveProfile(profile)
     if (data.resultCode === 0) {
 		dispatch(getUserProfile(profile.userId))
+		dispatch(getAuthUser(profile.userId))
 		dispatch(setFormEdit(false))
     } else if (data.resultCode === 1) {
-		const parsed = data.messages[0].match(/Contacts->(\w+)/)[1]  
+		console.log(data.messages)
+		const parsed = data.messages[0].match(/Contacts->(\w+)/)[1] 
 		const slised = parsed[0].toLowerCase() + parsed.slice(1)
 		dispatch(setFormError(slised))
 		// dispatch(stopSubmit("profileg", {contacts: {[slised]: `type valid url format for ${slised}`}}))

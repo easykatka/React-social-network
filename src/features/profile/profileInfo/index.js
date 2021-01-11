@@ -49,7 +49,7 @@ export const ProfileInfo = ({ routerId }) => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<Typography variant='h6' color={profile?.lookingForAJob ? 'primary' : 'secondary'}>
+						<Typography style={{textAlign:'right'}} variant='h6' color={profile?.lookingForAJob ? 'primary' : 'secondary'}>
 							{profile?.lookingForAJob ? 'Im looking for a job' : 'Im not looking for a job'}
 						</Typography>
 					</Grid>
@@ -66,7 +66,7 @@ export const ProfileInfo = ({ routerId }) => {
 							</div>
 							: (
 								<Grid>
-									<Typography variant='h5' style={{ cursor: 'pointer' }} onClick={activateMode} >
+									<Typography variant='h5' style={{cursor: 'pointer' }} onClick={activateMode} >
 										<NewReleasesIcon fontSize='small' color='primary' />
 										{status}
 									</Typography>
