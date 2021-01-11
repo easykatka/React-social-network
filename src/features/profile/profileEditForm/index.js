@@ -1,84 +1,87 @@
-import { Box, Grid, Button, Input, TextField, Typography, Checkbox, FormControlLabel } from '@material-ui/core'
+import { Grid, Button, TextField, Typography, Checkbox, FormControlLabel } from '@material-ui/core'
 import { useFormik } from 'formik'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { putNewProfile } from '../../../app/reducers/profile-reducer'
 
-export const ProfileEditForm = () => {
+export const ProfileEditForm = ({ setEditMode }) => {
 	const profile = useSelector(state => state.profile.profile)
+	const dispatch = useDispatch()
+
 	const { handleSubmit, handleChange, values } = useFormik({
-		initialValues: {
-			name: '',
-			lookingForAJob: false,
-			skills: '',
-			aboutMe: '',
-			contacts: {
-				vk: '',
-			},
-		},
-		onSubmit: ({ name, lookingForAJob, aboutMe, skills, contacts }) => {
-			console.log(name, lookingForAJob, aboutMe, skills, contacts)
+		initialValues: profile,
+		onSubmit: profile => {
+			dispatch(putNewProfile(profile))
 		},
 	})
 	return (
-		<form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
-			<Box borderBottom={1}>
-				<Typography variant='h4'>Profile info</Typography>
-			</Box>
-			<div>{/* {error && <div>{error}</div>} */}</div>
-			<Grid container direction='column'>
-				<Grid item>
-					{' '}
+		<form onSubmit={handleSubmit} style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+			<Typography variant='h4'>Profile info</Typography>
+			<Grid container spacing={2}>
+				<Grid item xs={12} md={6}>
 					<TextField
 						label='Name'
 						type='text'
-						value={values.name}
+						value={values?.fullName}
 						onChange={handleChange}
 						placeholder={'Enter your name'}
 						id='name'
 					/>
-					<Grid item>
-						<FormControlLabel
-							labelPlacement='start'
-							control={
-								<Checkbox
-									checked={values.lookingForAJob}
-									onChange={handleChange}
-									color='primary'
-									id='lookingForAJob'
-								/>
-							}
-							label='Are you looking for a job?'
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							label='About me'
-							type='text'
-							variant='outlined'
-							multiline
-							rows={4}
-							value={values.aboutMe}
-							onChange={handleChange}
-							id='aboutMe'
-						/>
-					</Grid>
-					<Grid item>
-						<TextField
-							label='Your skills'
-							type='text'
-							variant='outlined'
-							multiline
-							rows={4}
-							value={values.skills}
-							onChange={handleChange}
-							id='skills'
-						/>
-					</Grid>
+				</Grid>
+				<Grid item xs={12} md={6}>
+					<FormControlLabel
+						labelPlacement='start'
+						control={
+							<Checkbox
+								checked={values?.lookingForAJob}
+								onChange={handleChange}
+								color='primary'
+								id='lookingForAJob'
+							/>
+						}
+						label='Are you looking for a job?'
+					/>
+				</Grid>
+				<Grid item xs={12} md={6}>
+					<TextField label='About' type='text' value={values?.aboutMe} onChange={handleChange} id='aboutMe' />
+				</Grid>
+				<Grid item xs={12} md={6}>
+					<TextField
+						label='Skills'
+						type='text'
+						value={values?.lookingForAJobDescription}
+						onChange={handleChange}
+						id='lookingForAJobDescription'
+					/>
 				</Grid>
 			</Grid>
-			
-			<Button variant='contained' type='submit'>
-				Save
-			</Button>
+
+			<Typography variant='h5'> Contacts </Typography>
+			<Grid container spacing={3}>
+				{profile
+					? Object.keys(profile.contacts).map(key => {
+							return (
+								<Grid key={key} item xs={12} md={6}>
+									<TextField
+										value={values.contacts[key] || ''}
+										name={'contacts.' + key}
+										id={key}
+										type='text'
+										label={key}
+										onChange={handleChange}
+									/>
+								</Grid>
+							)
+					  })
+					: null}
+			</Grid>
+			<Grid container justify='space-around' style={{ marginTop: '20px' }}>
+				<Button variant='contained' type='submit' color='primary'>
+					Save
+				</Button>
+				<Button variant='contained' type='submit' color='secondary' onClick={() => setEditMode(false)}>
+					Cancel
+				</Button>
+			</Grid>
 		</form>
 	)
 }

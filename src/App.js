@@ -48,7 +48,7 @@ function App() {
         className={classes.app__container} spacing={2}
        
       >
-        <Grid item xs={2} className={classes.navbar}>
+        <Grid item xs={2}  className={classes.navbar}>
           <Navbar />
           {/* <Users /> */}
         </Grid>

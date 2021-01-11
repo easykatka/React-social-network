@@ -43,5 +43,16 @@ export const putNewStatus = (status) => async (dispatch) => {
         dispatch(setUserStatus(status))
     }
 }
+export const putNewProfile = (profile) => async (dispatch) => {
+    
+    const data = await profileAPI.saveProfile(profile)
+    if (data.resultCode === 0) {
+        dispatch(getUserProfile(profile.userId))
+    } else if (data.resultCode === 1) {
+        // const parsed = data.messages[0].match(/Contacts->(\w+)/)[1]   // прикольно,но ловерит всю строчку
+        // const slised = parsed[0].toLowerCase() + parsed.slice(1)
+        // dispatch(stopSubmit("profileg", {contacts: {[slised]: `type valid url format for ${slised}`}}))
+    }
+}
 export default profileSlice.reducer;
 

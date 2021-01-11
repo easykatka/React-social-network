@@ -79,7 +79,7 @@ const Profile = props => {
 			{/* правый блок */}
 			<Grid item xs>
 				<Paper className={classes.userInfo__block}>
-				{editMode ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} /> }
+				{editMode ? <ProfileEditForm setEditMode={setEditMode}/> : <ProfileInfo routerId={routerId} /> }
 					
 				</Paper>
 			</Grid>
