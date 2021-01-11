@@ -1,12 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { getUsersThunk } from '../../app/reducers/users-reducer'
+import {  useSelector } from 'react-redux'
+
 
 export const Users = () => {
 	const users = useSelector(state => state.users.users)
-	const dispatch = useDispatch()
-	const getUsers = (page, count) => {
-		dispatch(getUsers(page, count))
-		console.log(users)
-	}
-	return <div>users</div>
+	// const dispatch = useDispatch()
+	// const getUsers = (page, count) => {
+	// 	dispatch(getUsers(page, count))
+	// 	console.log(users)
+	
+	return (
+	<div>{users}</div>
+	)
 }

@@ -1,11 +1,13 @@
 import { Grid, Button, TextField, Typography, Checkbox, FormControlLabel } from '@material-ui/core'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
-import { putNewProfile } from '../../../app/reducers/profile-reducer'
+import { putNewProfile, setFormEdit } from '../../../app/reducers/profile-reducer'
 
-export const ProfileEditForm = ({ setEditMode }) => {
+
+export const ProfileEditForm = () => {
 	const profile = useSelector(state => state.profile.profile)
 	const dispatch = useDispatch()
+	const formError = useSelector(state => state.profile.formError)
 
 	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: profile,
@@ -15,9 +17,9 @@ export const ProfileEditForm = ({ setEditMode }) => {
 	})
 	return (
 		<form onSubmit={handleSubmit} style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-			<Typography variant='h4'>Profile info</Typography>
+			<Typography variant='h4'>Edit info</Typography>
 			<Grid container spacing={2}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} >
 					<TextField
 						label='Name'
 						type='text'
@@ -27,7 +29,7 @@ export const ProfileEditForm = ({ setEditMode }) => {
 						id='name'
 					/>
 				</Grid>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} >
 					<FormControlLabel
 						labelPlacement='start'
 						control={
@@ -35,6 +37,7 @@ export const ProfileEditForm = ({ setEditMode }) => {
 								checked={values?.lookingForAJob}
 								onChange={handleChange}
 								color='primary'
+
 								id='lookingForAJob'
 							/>
 						}
@@ -42,12 +45,13 @@ export const ProfileEditForm = ({ setEditMode }) => {
 					/>
 				</Grid>
 				<Grid item xs={12} md={6}>
-					<TextField label='About' type='text' value={values?.aboutMe} onChange={handleChange} id='aboutMe' />
+					<TextField label='About' type='text' value={values?.aboutMe} multiline onChange={handleChange} id='aboutMe' />
 				</Grid>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12} md={6} style={{ marginBottom: '80px' }}>
 					<TextField
 						label='Skills'
 						type='text'
+						multiline
 						value={values?.lookingForAJobDescription}
 						onChange={handleChange}
 						id='lookingForAJobDescription'
@@ -56,29 +60,32 @@ export const ProfileEditForm = ({ setEditMode }) => {
 			</Grid>
 
 			<Typography variant='h5'> Contacts </Typography>
+			{ !formError || <Typography style={{ color: 'red' }}> invalid url format for {formError} </Typography>}
 			<Grid container spacing={3}>
 				{profile
 					? Object.keys(profile.contacts).map(key => {
-							return (
-								<Grid key={key} item xs={12} md={6}>
-									<TextField
-										value={values.contacts[key] || ''}
-										name={'contacts.' + key}
-										id={key}
-										type='text'
-										label={key}
-										onChange={handleChange}
-									/>
-								</Grid>
-							)
-					  })
+						return (
+
+							<Grid key={key} item xs={12} md={6}>
+								{ !formError === key ? <Typography style={{ color: 'red' }}> invalid url format for {formError} </Typography> : null}
+								<TextField
+									value={values.contacts[key] || ''}
+									name={'contacts.' + key}
+									id={key}
+									type='text'
+									label={key}
+									onChange={handleChange}
+								/>
+							</Grid>
+						)
+					})
 					: null}
 			</Grid>
 			<Grid container justify='space-around' style={{ marginTop: '20px' }}>
 				<Button variant='contained' type='submit' color='primary'>
 					Save
 				</Button>
-				<Button variant='contained' type='submit' color='secondary' onClick={() => setEditMode(false)}>
+				<Button variant='contained' type='submit' color='secondary' onClick={() => dispatch(setFormEdit(false))}>
 					Cancel
 				</Button>
 			</Grid>

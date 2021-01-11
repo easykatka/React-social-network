@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 
 
+// offsetHeight, scrollTop, scrollHeight.
 export const Chat = () => {
 	
   return (<>
@@ -14,7 +14,7 @@ export const Chat = () => {
 const ChatMessages = () => {
   
   const [messages, setMessages] = useState([]);
-  const isAuth = useSelector((state) => state.auth.isAuth);
+
   useEffect(() => {
 	const ws = new WebSocket(
 		"wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
@@ -45,7 +45,7 @@ const ChatMessages = () => {
 const Message = ({ message }) => {
   return (
     <div>
-      <img src={message.photo} style={{ width: "30px" }} />{" "}
+      <img alt='avatar' src={message.photo} style={{ width: "30px" }} />{" "}
       <b>{message.userName}</b>
       <br />
       {message.message}

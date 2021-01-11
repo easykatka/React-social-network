@@ -7,7 +7,7 @@ import { init} from "./app/reducers/app-reducer";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { Navbar } from "./features/navbar";
-import { Backdrop, CircularProgress, Grid, Paper } from "@material-ui/core";
+import {  Grid, } from "@material-ui/core";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Profile from "./features/profile";
 import { Chat } from "./features/chat"
@@ -36,6 +36,8 @@ function App() {
 //   <CircularProgress color="inherit" />
 // </Backdrop>} 
 
+if (!isInit) {return <div>INITIALIZATION</div>}
+
 
   return (
     <>
@@ -54,14 +56,16 @@ function App() {
         </Grid>
         <Grid item xs={10} >
 		
-          {!isAuth ?  <Login />  : null}
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
-            <Route exact path="/profile/:userId?" render={() => <Profile />} />
-            <Route exact path="/users" render={() => <Users />} />
-            <Route exact path="/chat" render={() => <Chat />} />
-            <Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
-          </Switch>
+          {!isAuth ?  <Login />  : 
+		   <Switch>
+		   <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+		   <Route exact path="/profile/:userId?" render={() => <Profile />} />
+		   <Route exact path="/users" render={() => <Users />} />
+		   <Route exact path="/chat" render={() => <Chat />} />
+		   <Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
+		 </Switch>
+		 }
+         
 		 
         </Grid>
       </Grid>

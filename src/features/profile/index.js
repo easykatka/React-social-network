@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserProfile, putNewAvatar } from '../../app/reducers/profile-reducer'
-import { useEffect, useState } from 'react'
+import { getUserProfile, putNewAvatar, setFormEdit } from '../../app/reducers/profile-reducer'
+import { useEffect } from 'react'
 import { Avatar, Button, Grid, Paper } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
@@ -34,16 +34,18 @@ const Profile = props => {
 	const classes = useStyles()
 	const profile = useSelector(state => state.profile.profile)
 	const AuthUserId = useSelector(state => state.auth.id)
+	const formEdit = useSelector(state => state.profile.formEdit)
 	const routerId = props.match.params.userId
 	const profileUserId = routerId || AuthUserId
 	const dispatch = useDispatch()
-	const [editMode, setEditMode] = useState(false)
+	
 
 	useEffect(() => {
 		if (profileUserId) {
 			dispatch(getUserProfile(profileUserId))
 		}
-	}, [profileUserId])
+	}, [dispatch,profileUserId])
+	if (!profile) {return null}
 	
 	return (
 		<Grid container spacing={2}>
@@ -67,7 +69,7 @@ const Profile = props => {
 									Upload new photo
 								</Button>
 							</label>
-							{editMode || <Button fullWidth onClick={() => setEditMode(true)}>Edit</Button>}
+							{formEdit || <Button color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit (true))}>Edit</Button>}
 						</div>
 					) : (
 						<Button color='primary' variant='contained'>
@@ -79,7 +81,7 @@ const Profile = props => {
 			{/* правый блок */}
 			<Grid item xs>
 				<Paper className={classes.userInfo__block}>
-				{editMode ? <ProfileEditForm setEditMode={setEditMode}/> : <ProfileInfo routerId={routerId} /> }
+				{formEdit ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} /> }
 					
 				</Paper>
 			</Grid>
