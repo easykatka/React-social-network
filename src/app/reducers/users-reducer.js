@@ -5,47 +5,52 @@ export const usersSlice = createSlice({
 	name: "users",
 	initialState: {
 		users: [],
-		pageSize: 100,
-		totalUsersCount: 0,
-		currentPage: 30,
+		pageSize: 50,
+		totalUsersCount: 1500,
+		currentPage: 15,
 		isFetching: true,
 		followingInProgress: [], // array of followed users
 	},
 	reducers: {
-		setIsFetching: (state, action) => { 
+		setIsFetching: (state, action) => {
 			state.isFetching = action.payload;
 		},
-		setUsers: (state, action) => { 
+		setUsers: (state, action) => {
 			state.users = action.payload;
 		},
 		setCurrentPage: (state, action) => {
 			state.currentPage = action.payload;
 		},
-		setTotalUsersCount: (state, action) => { 
+		setTotalUsersCount: (state, action) => {
 			state.totalUsersCount = action.payload;
 		},
-		toggleFollow: (state, payload) => {
+		toggleFollow: (state, {payload}) => {
 			state.users = state.users.map(user => {
-				if (user.id === payload.userId) {
+				if (user.id === payload) {
 					return { ...user, followed: !user.followed }
 				}
 				return user
 			})
 		},
-		setFollowingInProgress: (state, payload) => { debugger
+		setFollowingInProgress: (state, { payload }) => {
 			state.followingInProgress = payload.isFetching
-				? [...state.followingInProgress, payload.userId]                     //грузит фолоу=тру=добавляем в массив юсерид
-				: state.followingInProgress.filter(id => id !== payload.userId) //   при вызове фолс=удаляет нужный айди из массива
-		}
-	}});
+				? [...state.followingInProgress, payload.userId]
+				: state.followingInProgress.filter(id => id !== payload.userId)
+		},
+		setPageSize: (state, { payload }) => {
+			state.pageSize = payload
+		},
+	}
+});
 //actions
 export const {
+	setCurrentPage,
+	setPageSize,
 	setIsFetching,
 	setUsers,
-	setCurrentPage,
 	setTotalUsersCount,
 	toggleFollow,
-	setFollowingInProgress
+	setFollowingInProgress,
 } = usersSlice.actions;
 //thunk
 export const getUsers = (page, pageSize) => {
@@ -60,22 +65,22 @@ export const getUsers = (page, pageSize) => {
 };
 export const followUser = (userId) => {
 	return async (dispatch) => {
-		dispatch(setFollowingInProgress(true, userId))
+		dispatch(setFollowingInProgress({ isFetching: true, userId }))
 		let response = await usersAPI.followAPI(userId)
 		if (response.resultCode === 0) {
 			dispatch(toggleFollow(userId))
 		}
-		dispatch(setFollowingInProgress(false, userId))
+		dispatch(setFollowingInProgress({ isFetching: false, userId }))
 	}
 }
-export const unfollowUser = (userId)  => {
+export const unfollowUser = (userId) => {
 	return async (dispatch) => {
-		dispatch(setFollowingInProgress(true, userId))
+		dispatch(setFollowingInProgress({ isFetching: true, userId }))
 		let response = await usersAPI.unFollowAPI(userId)
 		if (response.resultCode === 0) {
 			dispatch(toggleFollow(userId))
 		}
-		dispatch(setFollowingInProgress(false, userId))
+		dispatch(setFollowingInProgress({ isFetching: false, userId }))
 	}
 }
 

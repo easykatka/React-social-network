@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile, putNewAvatar, setFormEdit } from '../../app/reducers/profile-reducer'
 import { useEffect } from 'react'
-import { Avatar, Button, Grid, Paper } from '@material-ui/core'
+import { Avatar, Button, Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
 import { ProfileEditForm } from './profileEditForm'
@@ -40,17 +40,20 @@ const Profile = props => {
 	const routerId = props.match.params.userId
 	const profileUserId = routerId || AuthUserId
 	const dispatch = useDispatch()
-	
+
 
 	useEffect(() => {
 		if (profileUserId) {
 			dispatch(getUserProfile(profileUserId))
 		}
-	}, [dispatch,profileUserId])
-	if (!profile) {return <div>FETCHING</div>}
-	
-	return (
+	}, [dispatch, profileUserId])
+	if (!profile) { return <div>FETCHING</div> }
+
+	return (<>
+		<Typography style={{ textAlign: 'center',marginBottom:'10px' }} variant='h4'>Profile </Typography> 
 		<Grid container spacing={2}>
+			
+			
 			{/* левый блок */}
 			<Grid item xs={3}>
 				<Paper className={classes.avatar__block} elevation={0}>
@@ -71,23 +74,24 @@ const Profile = props => {
 									Upload new photo
 								</Button>
 							</label>
-							{formEdit || <Button style={{marginTop:"12px"}}color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit (true))}>Edit</Button>}
+							{formEdit || <Button style={{ marginTop: "12px" }} color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit(true))}>Edit</Button>}
 						</div>
 					) : (
-						<Button color='primary' variant='contained'>
-							Follow
-						</Button>
-					)}{' '}
+							<Button color='primary' variant='contained'>
+								Follow
+							</Button>
+						)}{' '}
 				</Paper>
 			</Grid>
 			{/* правый блок */}
 			<Grid item xs>
 				<Paper className={classes.userInfo__block}>
-				{formEdit ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} /> }
-					
+					{formEdit ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} />}
+
 				</Paper>
 			</Grid>
 		</Grid>
+		</>
 	)
 }
 

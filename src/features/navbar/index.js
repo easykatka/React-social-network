@@ -8,35 +8,37 @@ import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline'
 
 
 const useStyles = makeStyles((theme) => ({
-  navbar__container: {},
-  navbar__item:{width:'100%',
-justifyContent:'left'},
+	navbar__container: {},
+	navbar__item: {
+		width: '100%',
+		justifyContent: 'left'
+	},
 }))
 
 export const Navbar = () => {
-  const classes = useStyles();
-  return (
-      <Grid
-        direction="column"
-        container
-        className={classes.navbar__container}
-    	spacing={2}
-      >
-        <Grid  item xs>
-          <NavLink  to="/profile" activeClassName="active">
-              <Button className={classes.navbar__item} startIcon={<PermIdentityIcon/>} > My profile</Button>
-          </NavLink>
-        </Grid>
-        <Grid item xs >
-          <NavLink to="/users" activeClassName="active">
-		  <Button className={classes.navbar__item} startIcon={<PeopleOutlineIcon/>} > Users</Button>
-          </NavLink>
-        </Grid>
-        <Grid item xs>
-		<NavLink to="/chat" activeClassName="active">
-		<Button  className={classes.navbar__item} startIcon={<ChatBubbleOutlineIcon/>}> Chat</Button>
-		</NavLink>
-        </Grid>
-      </Grid>
-  );
+	const classes = useStyles();
+	return (
+		<Grid
+			direction="column"
+			container
+			className={classes.navbar__container}
+			spacing={2}
+		>
+			<Grid item xs>
+				<NavLink to="/profile" activeClassName="active">
+					<Button className={classes.navbar__item} startIcon={<PermIdentityIcon />} > My profile</Button>
+				</NavLink>
+			</Grid>
+			<Grid item xs >
+				<NavLink to="/users" activeClassName="active">
+					<Button className={classes.navbar__item} startIcon={<PeopleOutlineIcon />} > Users</Button>
+				</NavLink>
+			</Grid>
+			<Grid item xs>
+				<NavLink to="/chat" activeClassName="active">
+					<Button className={classes.navbar__item} startIcon={<ChatBubbleOutlineIcon />}> Chat</Button>
+				</NavLink>
+			</Grid>
+		</Grid>
+	);
 };

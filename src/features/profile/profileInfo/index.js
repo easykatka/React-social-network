@@ -22,7 +22,7 @@ export const ProfileInfo = ({ routerId }) => {
 	const activateMode = () => {
 		setEditMode(true)
 	}
-	const deactivateMode = (action) => { 
+	const deactivateMode = (action) => {
 		if (!action) {
 			setUserStatus(status)
 			setEditMode(false)
@@ -49,15 +49,15 @@ export const ProfileInfo = ({ routerId }) => {
 						</Typography>
 					</Grid>
 					<Grid item xs={12} md={6}>
-						<Typography style={{textAlign:'right'}} variant='h6' color={profile?.lookingForAJob ? 'primary' : 'secondary'}>
+						<Typography style={{ textAlign: 'right' }} variant='h6' color={profile?.lookingForAJob ? 'primary' : 'secondary'}>
 							{profile?.lookingForAJob ? 'Im looking for a job' : 'Im not looking for a job'}
 						</Typography>
 					</Grid>
 					<Grid item xs={12} >
 						{editMode && !routerId ?
 							<div>
-								<Input autoFocus={true} onChange={onStatusChange}  value={userStatus} />
-								<IconButton onClick={() =>  deactivateMode(true)}>
+								<Input autoFocus={true} onChange={onStatusChange} value={userStatus} />
+								<IconButton onClick={() => deactivateMode(true)}>
 									<SaveIcon fontSize='small' color='primary' />
 								</IconButton>
 								<IconButton color='inherit' onClick={() => deactivateMode(false)}>
@@ -66,7 +66,7 @@ export const ProfileInfo = ({ routerId }) => {
 							</div>
 							: (
 								<Grid>
-									<Typography variant='h5' style={{cursor: 'pointer' }} onClick={activateMode} >
+									<Typography variant='h5' style={{ cursor: 'pointer' }} onClick={activateMode} >
 										<NewReleasesIcon fontSize='small' color='primary' />
 										{status}
 									</Typography>

@@ -10,16 +10,17 @@ export const ProfileEditForm = () => {
 	const dispatch = useDispatch()
 	const formError = useSelector(state => state.profile.formError)
 
-	const { handleSubmit, handleChange, values, setSubmitting, resetForm } = useFormik({
+	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: profile,
 		onSubmit: profile => {
 			dispatch(putNewProfile(profile))
 		},
 	})
+	
 	// убрать форму если перешли на другую страницу
 	useEffect(() => () =>
 		dispatch(setFormEdit(false))
-		, [])
+		, [dispatch])
 	return (
 		<form onSubmit={handleSubmit} style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
 			<Typography variant='h4'>Edit info</Typography>
@@ -97,4 +98,3 @@ export const ProfileEditForm = () => {
 		</form>
 	)
 }
-	
