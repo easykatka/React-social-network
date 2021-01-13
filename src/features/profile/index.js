@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
 import { ProfileEditForm } from './profileEditForm'
 import { ProfileInfo } from './profileInfo'
+import { FollowUnfollow } from '../components/follow-unfollow'
 
 const useStyles = makeStyles(theme => ({
 	avatar__block: {
@@ -29,9 +30,6 @@ const useStyles = makeStyles(theme => ({
 		marginBottom: theme.spacing(1),
 	},
 }))
-
-
-
 const Profile = props => {
 	const classes = useStyles()
 	const profile = useSelector(state => state.profile.profile)
@@ -41,7 +39,6 @@ const Profile = props => {
 	const profileUserId = routerId || AuthUserId
 	const dispatch = useDispatch()
 
-
 	useEffect(() => {
 		if (profileUserId) {
 			dispatch(getUserProfile(profileUserId))
@@ -49,11 +46,10 @@ const Profile = props => {
 	}, [dispatch, profileUserId])
 	if (!profile) { return <div>FETCHING</div> }
 
+
 	return (<>
-		<Typography style={{ textAlign: 'center',marginBottom:'10px' }} variant='h4'>Profile </Typography> 
+		<Typography style={{ textAlign: 'center', marginBottom: '10px' }} variant='h4'>Profile </Typography>
 		<Grid container spacing={2}>
-			
-			
 			{/* левый блок */}
 			<Grid item xs={3}>
 				<Paper className={classes.avatar__block} elevation={0}>
@@ -77,22 +73,18 @@ const Profile = props => {
 							{formEdit || <Button style={{ marginTop: "12px" }} color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit(true))}>Edit</Button>}
 						</div>
 					) : (
-							<Button color='primary' variant='contained'>
-								Follow
-							</Button>
-						)}{' '}
+						<FollowUnfollow id={routerId} followed={profile.followed} />
+						)}
 				</Paper>
 			</Grid>
 			{/* правый блок */}
 			<Grid item xs>
 				<Paper className={classes.userInfo__block}>
 					{formEdit ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} />}
-
 				</Paper>
 			</Grid>
 		</Grid>
-		</>
+	</>
 	)
 }
-
 export default withRouter(Profile)

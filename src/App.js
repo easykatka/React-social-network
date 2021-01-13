@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { init } from "./app/reducers/app-reducer";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
-import { Navbar } from "./features/navbar";
 import { Grid, } from "@material-ui/core";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Profile from "./features/profile";
@@ -15,6 +14,7 @@ import { Chat } from "./features/chat"
 
 const useStyles = makeStyles((theme) => ({
 	app__container: {
+	
 		width: 1200,
 		margin: "0 auto",
 		paddingTop: theme.spacing(1),
@@ -32,9 +32,7 @@ function App() {
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(init()), [dispatch]);
 	const classes = useStyles();
-	//   if (!isInit) {return <Backdrop className={classes.backdrop} open={!isInit} >
-	//   <CircularProgress color="inherit" />
-	// </Backdrop>} 
+
 
 	if (!isInit) { return <div>INITIALIZATION</div> }
 
@@ -47,15 +45,8 @@ function App() {
 			<Header />
 			<Grid
 				container
-				className={classes.app__container} spacing={2}
-
-			>
-				<Grid item xs={2} className={classes.navbar}>
-					<Navbar />
-					{/* <Users /> */}
-				</Grid>
-				<Grid item xs={10} >
-
+				className={classes.app__container} spacing={5} >
+				<Grid item xs={12} >
 					{!isAuth ? <Login /> :
 						<Switch>
 							<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
@@ -65,8 +56,6 @@ function App() {
 							<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
 						</Switch>
 					}
-
-
 				</Grid>
 			</Grid>
 		</>

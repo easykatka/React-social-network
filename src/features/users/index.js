@@ -1,31 +1,29 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core'
+import {  Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { followUser, getUsers, setCurrentPage, unfollowUser, setPageSize } from '../../app/reducers/users-reducer'
+import { getUsers, setCurrentPage, setPageSize } from '../../app/reducers/users-reducer'
 import TablePagination from '@material-ui/core/TablePagination'
+import {FollowUnfollow} from '../components/follow-unfollow'
 
 export const Users =	 () => {
 	const users = useSelector((state) => state.users.users)
 	const currentPage = useSelector((state) => state.users.currentPage)
 	const pageSize = useSelector((state) => state.users.pageSize)
-	const followingInProgress = useSelector((state) => state.users.followingInProgress)
 	const totalUsersCount = useSelector((state) => state.users.totalUsersCount)
 	const dispatch = useDispatch()
-	
+
 
 	useEffect(() => {
 		dispatch(getUsers(currentPage, pageSize))
-	}, [currentPage, pageSize,dispatch])
+	}, [currentPage, pageSize,])
 	const handleChangePage = (event, newPage) => {
 		dispatch(setCurrentPage(newPage))
 	}
-
 	const handleChangeRowsPerPage = (event) => {
 		dispatch(setPageSize(parseInt(event.target.value, 10)))
 		dispatch(setCurrentPage(1))
 	}
-	console.log(currentPage,pageSize)
 
 	return (
 		<div className='container' >
@@ -46,8 +44,8 @@ export const Users =	 () => {
 					users
 						.filter((u) => u.photos.small != null)
 						.map((user) => (
-							<Grid item xs={6} key={user.id}>
-								<Card raised={true} style={{ height: '400px' }}>
+							<Grid item xs={4} key={user.id}>
+								<Card raised={true} style={{ height: 360,justify:'center' }}>
 									<CardActionArea>
 										<NavLink to={'/profile/' + user.id}>
 											<CardMedia style={{ height: '200px' }} image={user.photos.large} title='user photo' />
@@ -62,30 +60,7 @@ export const Users =	 () => {
 										</NavLink>
 									</CardActionArea>
 									<CardActions>
-										{user.followed ? (
-											<Button
-												color='secondary'
-												variant='contained'
-												fullWidth
-												disabled={followingInProgress.some((id) => id === user.id)}
-												onClick={() => {
-													dispatch(unfollowUser(user.id))
-												}}>
-												Unfollow
-											</Button>
-										) : (
-												<Button
-													color='primary'
-													fullWidth
-													style={{ position: 'relative ', down: 0, left: 0 }}
-													variant='contained'
-													disabled={followingInProgress.some((id) => id === user.id)}
-													onClick={() => {
-														dispatch(followUser(user.id))
-													}}>
-													Follow
-												</Button>
-											)}
+									<FollowUnfollow id={user.id} followed={user.followed} />
 									</CardActions>
 								</Card>
 							</Grid>

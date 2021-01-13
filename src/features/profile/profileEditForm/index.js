@@ -2,7 +2,7 @@ import { Grid, Button, TextField, Typography, Checkbox, FormControlLabel } from 
 import { useFormik } from 'formik'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { putNewProfile, setFormEdit } from '../../../app/reducers/profile-reducer'
+import { putNewProfile, setFormEdit, setFormError } from '../../../app/reducers/profile-reducer'
 
 //TODO починить конект формы , сделать валидацию для контактов 
 export const ProfileEditForm = () => {
@@ -18,9 +18,13 @@ export const ProfileEditForm = () => {
 	})
 	
 	// убрать форму если перешли на другую страницу
-	useEffect(() => () =>
-		dispatch(setFormEdit(false))
-		, [dispatch])
+	useEffect(() => () => 
+		{dispatch(setFormEdit(false))
+		dispatch(setFormError(""))}
+		, [])
+
+
+
 	return (
 		<form onSubmit={handleSubmit} style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
 			<Typography variant='h4'>Edit info</Typography>
@@ -71,7 +75,6 @@ export const ProfileEditForm = () => {
 				{profile
 					? Object.keys(profile.contacts).map(key => {
 						return (
-
 							<Grid key={key} item xs={12} md={6}>
 								{ !formError === key ? <Typography style={{ color: 'red' }}> invalid url format for {formError} </Typography> : null}
 								<TextField

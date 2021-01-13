@@ -63,7 +63,7 @@ export const getUsers = (page, pageSize) => {
 		dispatch(setTotalUsersCount(data.totalCount));
 	};
 };
-export const followUser = (userId) => {
+export const followUser = (userId) => { 
 	return async (dispatch) => {
 		dispatch(setFollowingInProgress({ isFetching: true, userId }))
 		let response = await usersAPI.followAPI(userId)
