@@ -17,8 +17,8 @@ export const profileSlice = createSlice({
 		setNewAvatar: (state, action) => { state.AuthUser.photos = state.profile.photos = action.payload },
 		setFormEdit: (state, { payload }) => { state.formEdit = payload },
 		setFormError: (state, { payload }) => { state.formError = payload },
-		setUserFollowStatus:(state, {payload}) => {state.profile.followed = payload}
-	},
+		setUserFollowStatus:(state, {payload}) => { state.profile =  {...state.profile , followed : payload}
+	}},
 },
 )
 //action

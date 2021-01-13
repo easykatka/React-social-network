@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserProfile, putNewAvatar, setFormEdit } from '../../app/reducers/profile-reducer'
+import { getUserProfile, putNewAvatar, setFormEdit, setUserProfile } from '../../app/reducers/profile-reducer'
 import { useEffect } from 'react'
 import { Avatar, Button, Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom'
 import { ProfileEditForm } from './profileEditForm'
 import { ProfileInfo } from './profileInfo'
 import { FollowUnfollow } from '../components/follow-unfollow'
+import { Preloader } from '../../common/preloader'
 
 const useStyles = makeStyles(theme => ({
 	avatar__block: {
@@ -32,19 +33,24 @@ const useStyles = makeStyles(theme => ({
 }))
 const Profile = props => {
 	const classes = useStyles()
-	const profile = useSelector(state => state.profile.profile)
+	const { profile, formEdit } = useSelector(state => state.profile)
 	const AuthUserId = useSelector(state => state.auth.id)
-	const formEdit = useSelector(state => state.profile.formEdit)
 	const routerId = props.match.params.userId
 	const profileUserId = routerId || AuthUserId
 	const dispatch = useDispatch()
 
+
+	// устанавливаем юзера ,демонтируем юзера
 	useEffect(() => {
-		if (profileUserId) {
-			dispatch(getUserProfile(profileUserId))
-		}
+		if (profileUserId) dispatch(getUserProfile(profileUserId))
+		return () =>
+			dispatch(setUserProfile(null))
 	}, [dispatch, profileUserId])
-	if (!profile) { return <div>FETCHING</div> }
+
+
+	if (!profile) {return <Preloader />
+	}
+
 
 
 	return (<>
@@ -73,7 +79,7 @@ const Profile = props => {
 							{formEdit || <Button style={{ marginTop: "12px" }} color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit(true))}>Edit</Button>}
 						</div>
 					) : (
-						<FollowUnfollow id={routerId} followed={profile.followed} />
+							<FollowUnfollow id={routerId} followed={profile.followed} />
 						)}
 				</Paper>
 			</Grid>

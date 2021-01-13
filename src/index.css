@@ -10,7 +10,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #edeef0;
-}
+	/* background: url(https://cryptotrek.ru/wp-content/uploads/2020/03/haccc.jpg)   no-repeat ;
+	background-size: 100%; */
+} 
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;

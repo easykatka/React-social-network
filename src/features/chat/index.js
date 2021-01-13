@@ -21,9 +21,7 @@ export const Chat = () => {
 	}
 		, [])
 
-	useEffect(() => {
-		scrollBottom()
-	}, [messages])
+
 
 	let messageList
 	const scrollBottom = () => {
@@ -40,6 +38,11 @@ export const Chat = () => {
 		}
 	}
 
+	useEffect(() => {
+		scrollBottom()
+	}, [messages,scrollBottom])
+
+	
 	return (
 		<Paper>
 			<Grid
@@ -47,25 +50,23 @@ export const Chat = () => {
 				<Grid style={{ overflowY: "scroll", height: "70vh", width: '105%' }}
 					ref={(div) => { messageList = div; }}>
 					{messages.map((i) => (
-						<Box  p={1}>
+						<Box p={1}>
 							<Grid container direction='row' >
-								
-							<NavLink to={'/profile/' + i.userId}>
-								<Avatar alt='avatar' src={i.photo} />
-							</NavLink>
-
-								<div style={{display:'flex' ,flexDirection:'column' ,marginLeft:10}}>
-								<strong> {i.userName}</strong>
-								{i.message}</div> 
-								</Grid>
+								<NavLink to={'/profile/' + i.userId}>
+									<Avatar alt='avatar' src={i.photo} />
+								</NavLink>
+								<div style={{ display: 'flex', flexDirection: 'column', marginLeft: 10 }}>
+									<strong> {i.userName}</strong>
+									{i.message}</div>
+							</Grid>
 						</Box>
-				))}
-			</Grid>
-			<TextField variant='outlined' size='small'
-				name="message" onChange={(e) => setMessage(e.currentTarget.value)}
-				value={message} id="message__input" />
-			<Button onClick={SendMessage}>Send</Button>
-		</Grid >
+					))}
+				</Grid>
+				<TextField variant='outlined' size='small'
+					name="message" onChange={(e) => setMessage(e.currentTarget.value)}
+					value={message} id="message__input" />
+				<Button onClick={SendMessage}>Send</Button>
+			</Grid >
 		</Paper>
 	)
 

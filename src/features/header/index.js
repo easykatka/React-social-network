@@ -1,5 +1,5 @@
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { AppBar, Button, IconButton, Avatar, Grid, Tab, Tabs, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { AppBar, Button, IconButton, Avatar, Grid } from '@material-ui/core';
 import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -12,7 +12,6 @@ const useStyles = makeStyles((theme) => ({
 	app__container: {
 		width: 1200,
 		margin: '20px auto',
-		maxWidth: '100%',
 		display: 'flex',
 	},
 
@@ -30,12 +29,6 @@ export const Header = () => {
 	const isAuth = useSelector((state) => state.auth.isAuth);
 	const AuthUserId = useSelector((state) => state.auth.id);
 
-	const [value, setValue] = React.useState(2);
-
-	const handleChange = (event, newValue) => {
-		setValue(newValue);
-	};
-
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if (AuthUserId) {
@@ -48,35 +41,28 @@ export const Header = () => {
 	const classes = useStyles();
 	return (
 		<AppBar position='sticky' className={classes.app}>
-			<Grid className={classes.app__container} >
+			<Grid className={classes.app__container}>
 				<Grid container spacing={6}>
 					{navTitles.map((item) => {
 						return (
 							<Grid item key={item}>
-								<NavLink style={{ color: "white" }} to={'/' + item} activeClassName='active'>
-									<h2 > {item.toLocaleUpperCase()}</h2>
+								<NavLink style={{ color: 'white' }} to={'/' + item} activeClassName='active'>
+									<h2> {item.toLocaleUpperCase()}</h2>
 								</NavLink>
 							</Grid>
 						);
 					})}
 				</Grid>
-				<Button
-					className={classes.title}
-					href="https://social-network.samuraijs.com/docs"
-					color="primary"
-					variant="contained"
-				>
+				<Button className={classes.title} href='https://social-network.samuraijs.com/docs' color='primary' variant='contained'>
 					API
-          </Button>
-
+				</Button>
 				{isAuth && (
-
 					<Grid container spacing={3} className={classes.profile_block}>
-						<h4 >{AuthUser?.fullName}</h4>
+						<h4>{AuthUser?.fullName}</h4>
 						<Grid item>
 							<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
 						</Grid>
-						<IconButton color='secondary' onClick={() => dispatch(logout())}>
+						<IconButton color='inherit' onClick={() => dispatch(logout())}>
 							<ExitToAppIcon />
 						</IconButton>
 					</Grid>

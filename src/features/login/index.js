@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { putLogin } from "../../app/reducers/auth-reducer";
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button, Checkbox, Grid, FormControlLabel, Typography, Paper } from '@material-ui/core/'
-import VpnKeyOutlinedIcon from '@material-ui/icons/VpnKeyOutlined';
+import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
 	
 const useStyles = makeStyles(theme => ({
 	login__container: {
@@ -15,10 +15,6 @@ const useStyles = makeStyles(theme => ({
 		textAlign:'center',
 		"&>*": { paddingBottom: theme.spacing(2) }
 	},
-	content__container: {
-		width: "100%",
-		margin: "0 auto"
-	}
 }))
 
 export const Login = () => {
@@ -41,10 +37,10 @@ export const Login = () => {
 
 	//TODO сделать валидацию
 	return (
-		<Paper className={classes.content__container}>
+		<Paper>
 			<form onSubmit={handleSubmit} >
-				<Grid container >
-					<Grid item xs={3} className={classes.login__container}>
+				<Grid container spacing={4} >
+					<Grid item className={classes.login__container}>
 						<Typography variant='h5'>LOGIN </Typography>
 						<Typography style={{ color: 'red' }}>{errorMessage} </Typography>
 						<TextField label='Login' type="text" onChange={handleChange} id="login" name="login" value={values.login} required />
@@ -54,7 +50,7 @@ export const Login = () => {
 						{captchaUrl && <img src={captchaUrl} alt='captcha' />}
 						{captchaUrl && (<div><TextField label='Capcha' type="text" onChange={handleChange} id="captcha" name="captcha" value={values.captcha} />
 						</div>)}
-						<Button variant='contained' startIcon={<VpnKeyOutlinedIcon />} size='large' type='submit' color="primary" > Log In</Button>
+						<Button variant='contained' startIcon={<VpnKeyRoundedIcon />} size='large' type='submit' color="primary" > Log In</Button>
 						<p>Для тестового просмотра используйте пару логин/пароль: </p>
 							<p>free@socialnet.com / free</p>
 					</Grid>

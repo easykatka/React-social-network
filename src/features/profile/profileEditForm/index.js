@@ -6,21 +6,23 @@ import { putNewProfile, setFormEdit, setFormError } from '../../../app/reducers/
 
 //TODO починить конект формы , сделать валидацию для контактов 
 export const ProfileEditForm = () => {
-	const profile = useSelector(state => state.profile.profile)
+	const { profile, formError } = useSelector(state => state.profile)
 	const dispatch = useDispatch()
-	const formError = useSelector(state => state.profile.formError)
+
 
 	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: profile,
-		onSubmit: profile => {
-			dispatch(putNewProfile(profile))
+		onSubmit: e => {
+			debugger
+			dispatch(putNewProfile(e))
 		},
 	})
-	
+
 	// убрать форму если перешли на другую страницу
-	useEffect(() => () => 
-		{dispatch(setFormEdit(false))
-		dispatch(setFormError(""))}
+	useEffect(() => () => {
+		dispatch(setFormEdit(false))
+		dispatch(setFormError(""))
+	}
 		, [])
 
 
@@ -57,7 +59,7 @@ export const ProfileEditForm = () => {
 				<Grid item xs={12} md={6}>
 					<TextField label='About' required type='text' value={values?.aboutMe} multiline onChange={handleChange} id='aboutMe' />
 				</Grid>
-				<Grid item xs={12} md={6} style={{ marginBottom: '80px' }}>
+				<Grid item xs={12} md={6} >
 					<TextField
 						label='Skills'
 						type='text'
@@ -66,7 +68,7 @@ export const ProfileEditForm = () => {
 						value={values?.lookingForAJobDescription}
 						onChange={handleChange}
 						id='lookingForAJobDescription'
-					/>
+					/>	
 				</Grid>
 			</Grid>
 			<Typography variant='h5'> Contacts </Typography>
@@ -75,6 +77,7 @@ export const ProfileEditForm = () => {
 				{profile
 					? Object.keys(profile.contacts).map(key => {
 						return (
+
 							<Grid key={key} item xs={12} md={6}>
 								{ !formError === key ? <Typography style={{ color: 'red' }}> invalid url format for {formError} </Typography> : null}
 								<TextField

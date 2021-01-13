@@ -10,11 +10,11 @@ import { Grid, } from "@material-ui/core";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Profile from "./features/profile";
 import { Chat } from "./features/chat"
+import { Preloader } from "./common/preloader";
 
 
 const useStyles = makeStyles((theme) => ({
 	app__container: {
-	
 		width: 1200,
 		margin: "0 auto",
 		paddingTop: theme.spacing(1),
@@ -34,14 +34,11 @@ function App() {
 	const classes = useStyles();
 
 
-	if (!isInit) { return <div>INITIALIZATION</div> }
+	if (!isInit) {return <Preloader/> }
 
 
 	return (
 		<>
-			<div>
-
-			</div>
 			<Header />
 			<Grid
 				container
