@@ -65,25 +65,12 @@ export const getUsers = (page, pageSize) => {
 		dispatch(setTotalUsersCount(data.totalCount));
 	};
 };
-export const followUser = (userId) => { 
+export const followUser = (userId,follow ) => {  debugger
 	return async (dispatch) => { 
-
 		dispatch(setFollowingInProgress({ isFetching: true, userId }))
-		const response = await usersAPI.followAPI(userId)
+		const response = !follow ? await usersAPI.followAPI(userId) : await usersAPI.unFollowAPI(userId)
 		const followStatus = await profileAPI.getFollowStatus(userId)
 		if (response.resultCode === 0) {
-			dispatch(toggleFollow(userId))
-			dispatch(setUserFollowStatus(followStatus))
-		}
-		dispatch(setFollowingInProgress({ isFetching: false, userId }))
-	}
-}
-export const unfollowUser = (userId) => {
-	return async (dispatch) => { 
-		dispatch(setFollowingInProgress({ isFetching: true, userId }))
-		const response = await usersAPI.unFollowAPI(userId)
-		const followStatus = await profileAPI.getFollowStatus(userId)
-		if (response.resultCode ===  0) {
 			dispatch(toggleFollow(userId))
 			dispatch(setUserFollowStatus(followStatus))
 		}

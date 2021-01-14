@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile, putNewAvatar, setFormEdit, setUserProfile } from '../../app/reducers/profile-reducer'
 import { useEffect } from 'react'
-import { Avatar, Button, Grid, Paper, Typography } from '@material-ui/core'
+import { Avatar, Button, Grid, IconButton, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
 import { ProfileEditForm } from './profileEditForm'
 import { ProfileInfo } from './profileInfo'
 import { FollowUnfollow } from '../components/follow-unfollow'
 import { Preloader } from '../../common/preloader'
+import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
+import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
 
 const useStyles = makeStyles(theme => ({
 	avatar__block: {
@@ -34,10 +36,14 @@ const useStyles = makeStyles(theme => ({
 const Profile = props => {
 	const classes = useStyles()
 	const { profile, formEdit } = useSelector(state => state.profile)
-	const AuthUserId = useSelector(state => state.auth.id)
+	const authUserId = useSelector(state => state.auth.id)
+
 	const routerId = props.match.params.userId
-	const profileUserId = routerId || AuthUserId
+	const profileUserId = routerId || authUserId
+
 	const dispatch = useDispatch()
+
+
 
 
 	// устанавливаем юзера ,демонтируем юзера
@@ -48,8 +54,10 @@ const Profile = props => {
 	}, [dispatch, profileUserId])
 
 
-	if (!profile) {return <Preloader />
+	if (!profile) {
+		return <Preloader />
 	}
+	console.log("router", routerId, "auth", authUserId)
 
 
 
@@ -59,32 +67,36 @@ const Profile = props => {
 			{/* левый блок */}
 			<Grid item xs={3}>
 				<Paper className={classes.avatar__block} elevation={0}>
-					<Avatar className={classes.avatar_img} alt='user foto' src={profile?.photos.large} />
-					{!routerId ? (
-						<div>
-							<input
-								accept='image/*'
-								className={classes.input}
-								id='contained-button-file'
-								multiple
-								type='file'
-								style={{ display: 'none' }}
-								onChange={e => dispatch(putNewAvatar(e.target.files[0]))}
-							/>
-							<label htmlFor='contained-button-file'>
-								<Button fullWidth variant='contained' color='primary' component='span'>
-									Upload new photo
-								</Button>
-							</label>
-							{formEdit || <Button style={{ marginTop: "12px" }} color='secondary' variant='contained' fullWidth onClick={() => dispatch(setFormEdit(true))}>Edit</Button>}
-						</div>
-					) : (
-							<FollowUnfollow id={routerId} followed={profile.followed} />
+					<Avatar className={classes.avatar_img} alt='user foto' src={profile.photos?.large} />
+					{( routerId != authUserId && routerId ) ? (
+						<FollowUnfollow id={routerId} followed={profile.followed} />
+					) :
+						(
+							<div>
+								<input
+									accept='image/*'
+									className={classes.input}
+									id='contained-button-file'
+									multiple
+									type='file'
+									style={{ display: 'none' }}
+									onChange={e => dispatch(putNewAvatar(e.target.files[0]))}
+								/>
+								<label htmlFor='contained-button-file'>
+									<IconButton variant='contained' color='primary' component='span'>
+										<AddAPhotoOutlinedIcon />
+									</IconButton>
+								</label>
+								{formEdit ||
+									<IconButton color='secondary' variant='contained' onClick={() => dispatch(setFormEdit(true))}>
+										<SettingsSharpIcon />
+									</IconButton>}
+							</div>
 						)}
 				</Paper>
 			</Grid>
 			{/* правый блок */}
-			<Grid item xs>
+			<Grid item xs={5}>
 				<Paper className={classes.userInfo__block}>
 					{formEdit ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} />}
 				</Paper>

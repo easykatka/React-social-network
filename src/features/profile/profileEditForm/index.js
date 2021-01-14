@@ -29,7 +29,7 @@ export const ProfileEditForm = () => {
 
 	return (
 		<form onSubmit={handleSubmit} style={{ flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-			<Typography variant='h4'>Edit info</Typography>
+			{/* <Typography variant='h4'>Edit info</Typography> */}
 			<Grid container spacing={2}>
 				<Grid item xs={12} md={6} >
 					<TextField
@@ -57,13 +57,15 @@ export const ProfileEditForm = () => {
 					/>
 				</Grid>
 				<Grid item xs={12} md={6}>
-					<TextField label='About' required type='text' value={values?.aboutMe} multiline onChange={handleChange} id='aboutMe' />
+					<TextField label='About' multiline
+						rowsMax={4} required type='text' value={values?.aboutMe} multiline onChange={handleChange} id='aboutMe' />
 				</Grid>
 				<Grid item xs={12} md={6} >
 					<TextField
 						label='Skills'
 						type='text'
 						multiline
+						rowsMax={4}
 						required
 						value={values?.lookingForAJobDescription}
 						onChange={handleChange}

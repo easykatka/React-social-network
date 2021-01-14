@@ -11,7 +11,7 @@ import React from 'react';
 const useStyles = makeStyles((theme) => ({
 	app__container: {
 		width: 1200,
-		margin: '20px auto',
+		margin: '10px auto',
 		display: 'flex',
 	},
 
@@ -53,7 +53,7 @@ export const Header = () => {
 						);
 					})}
 				</Grid>
-				<Button className={classes.title} href='https://social-network.samuraijs.com/docs' color='primary' variant='contained'>
+				<Button className={classes.title} href='https://social-network.samuraijs.com/docs' color='inherit'>
 					API
 				</Button>
 				{isAuth && (

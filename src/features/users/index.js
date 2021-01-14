@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Grid, Typography } from '@material-ui/core'
+import { Card, CardActionArea, CardContent, CardMedia, Grid, Typography } from '@material-ui/core'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -26,7 +26,7 @@ export const Users = () => {
 		dispatch(setCurrentPage(1))
 	}
 	return (
-		<div className='container' >
+		<div className='container'  >
 			<Grid container direction='column' alignItems='center' >
 				<Typography variant='h4'>Users </Typography>
 				<TablePagination
@@ -39,29 +39,27 @@ export const Users = () => {
 				/>
 			</Grid>
 			{isFetching ? <Preloader /> :
-				<Grid container spacing={5}  >
+				<Grid container spacing={5}  style={{overflowY:'scroll' , height:500 , marginTop:10}}>
 					{users &&
 						users
 							// .filter((u) => u.photos.small != null)
 							.map((user) => (
-								<Grid item xs={4} key={user.id}  >
-									<Card raised={true} style={{ height: '100%'}}>
-										<CardActionArea>
+								<Grid item xs={3} key={user.id}  >
+									<Card raised={true} >
+										<CardActionArea style={{ height: "100%"}}>
 											<NavLink to={'/profile/' + user.id}>
-												<CardMedia style={{ height: '200px' }} image={user.photos.large || defaultAvatar} title='user photo' />
+												<CardMedia style={{ height:210}}  image={user?.photos.large || defaultAvatar} title='user photo' />
 												<CardContent>
 													<Typography gutterBottom variant='h5' component='h2'>
 														{user?.name}{' '}
 													</Typography>
 													<Typography variant='body2' color='textSecondary' component='p'>
-														{user?.status}{' '}
+														{user?.status || "😡"}{' '}
 													</Typography>
 												</CardContent>
 											</NavLink>
 										</CardActionArea>
-										<CardActions>
 											<FollowUnfollow id={user.id} followed={user.followed} />
-										</CardActions>
 									</Card>
 								</Grid>
 							))}
