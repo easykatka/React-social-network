@@ -3,12 +3,14 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import SendRoundedIcon from '@material-ui/icons/SendRounded'
+import { useSelector } from "react-redux";
 
 
 // offsetHeight, scrollTop, scrollHeight.
 export const Chat = () => {
 	const [messages, setMessages] = useState([]);
 	const [message, setMessage] = useState("");
+	
 	const ws = new WebSocket("wss://social-network.samuraijs.com/handlers/ChatHandler.ashx");
 
 	useEffect(() => {
@@ -41,14 +43,15 @@ export const Chat = () => {
 
 
 	return (
-		<Paper>
+		<Paper style={{width:600}}>
+			
 			<Grid item xs={12} style={{ width: '100%', overflow: "hidden", height: '100%' }}>
-				<Grid style={{ overflowY: "scroll", height: "65vh", width: '105%' }}
+				<Grid style={{ overflowY: "scroll", height: "65vh", width: '100%' }}
 					ref={(div) => { messageList = div; }}>
 					{messages.map((i, idx) => (
 						<Box p={1} key={idx}>
 							<Grid container direction='row' >
-								<Link to={'/profile/' + i.userId}>
+								<Link to={'/profile/' + i.userId }>
 									<Avatar alt='avatar' src={i.photo} />
 								</Link>
 								<div style={{ display: 'flex', flexDirection: 'column', marginLeft: 10 }}>
@@ -58,7 +61,7 @@ export const Chat = () => {
 						</Box>
 					))}
 				</Grid>
-				<Box container direction='row' p={3}>
+				<Box  direction='row' p={3}>
 					<form onSubmit={SendMessage}>
 					<TextField type="text" style={{width:500}}  autoFocus={true} variant='outlined' placeholder='white a message' size='small'
 						name="message" onChange={(e) => setMessage(e.currentTarget.value)}

@@ -25,10 +25,12 @@ export const Users = () => {
 		dispatch(setPageSize(parseInt(event.target.value, 10)))
 		dispatch(setCurrentPage(1))
 	}
+
+	//TODO исключить последовательные фетчи
 	return (
 		<div className='container'  >
 			<Grid container direction='column' alignItems='center' >
-				<Typography variant='h4'>Users </Typography>
+				<Typography variant='h5'>Users </Typography>
 				<TablePagination
 					component='div'
 					count={totalUsersCount}
@@ -39,16 +41,16 @@ export const Users = () => {
 				/>
 			</Grid>
 			{isFetching ? <Preloader /> :
-				<Grid container spacing={5}  style={{overflowY:'scroll' , height:500 , marginTop:10}}>
+				<Grid container spacing={2}  style={{overflowY:'scroll' , height:500 , marginTop:1}}>
 					{users &&
 						users
 							// .filter((u) => u.photos.small != null)
 							.map((user) => (
-								<Grid item xs={3} key={user.id}  >
+								<Grid item xs={6} md={4} lg={3} key={user.id}  >
 									<Card raised={true} >
 										<CardActionArea style={{ height: "100%"}}>
 											<NavLink to={'/profile/' + user.id}>
-												<CardMedia style={{ height:210}}  image={user?.photos.large || defaultAvatar} title='user photo' />
+												<CardMedia style={{ height:210 }}  image={user?.photos.large || defaultAvatar} title='user photo' />
 												<CardContent>
 													<Typography gutterBottom variant='h5' component='h2'>
 														{user?.name}{' '}

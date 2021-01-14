@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 	avatar_img: {
 		borderRadius: theme.spacing(1),
 		width: '100%',
-		height: theme.spacing(30),
+		height: "100%",
 		marginBottom: theme.spacing(1),
 	},
 }))
@@ -57,18 +57,15 @@ const Profile = props => {
 	if (!profile) {
 		return <Preloader />
 	}
-	console.log("router", routerId, "auth", authUserId)
-
-
 
 	return (<>
-		<Typography style={{ textAlign: 'center', marginBottom: '10px' }} variant='h4'>Profile </Typography>
+		<Typography style={{ textAlign: 'center'}} variant='h5'>Profile </Typography>
 		<Grid container spacing={2}>
 			{/* левый блок */}
 			<Grid item xs={3}>
 				<Paper className={classes.avatar__block} elevation={0}>
 					<Avatar className={classes.avatar_img} alt='user foto' src={profile.photos?.large} />
-					{( routerId != authUserId && routerId ) ? (
+					{routerId  ? (
 						<FollowUnfollow id={routerId} followed={profile.followed} />
 					) :
 						(

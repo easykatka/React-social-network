@@ -19,14 +19,16 @@ code {
 }
 a {
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 a.active > * {
 	color: #61dafb;
-	border-bottom: 2px solid #61dafb
+	border-bottom: 4px solid #61dafb;
+	
 }
 a:hover > * {
 	color: #61dafb;
+	cursor: pointer;
 
 }
 

@@ -1,70 +1,72 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Button, IconButton, Avatar, Grid } from '@material-ui/core';
+import { AppBar, IconButton, Avatar, Grid } from '@material-ui/core';
 import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { getAuthUser } from '../../app/reducers/profile-reducer';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { NavLink } from 'react-router-dom';
+import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
+import { Link, NavLink } from 'react-router-dom';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
-	app__container: {
+	header__container: {
+		color: 'white',
 		width: 1200,
 		margin: '10px auto',
 		display: 'flex',
+		alignItems: 'center',
+		
 	},
-
-	profile_block: {
+	header__profile: {
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 	},
-	app: {
-		backgroundColor: '#20232a',
+	header: {
+		background: '-webkit-linear-gradient(to top, #232526, #414345)',
+		background: 'linear-gradient(to top, #232526, #414345)',
 	},
 }));
 
 export const Header = () => {
+	const classes = useStyles();
 	const AuthUser = useSelector((state) => state.profile.AuthUser);
-	const isAuth = useSelector((state) => state.auth.isAuth);
-	const AuthUserId = useSelector((state) => state.auth.id);
-
+	const { isAuth, id } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
-	useEffect(() => {
-		if (AuthUserId) {
-			dispatch(getAuthUser(AuthUserId));
-		}
-	}, [dispatch, AuthUserId]);
-
+	// если залогинились,диспатчип юзера,получаем аватарку
+	React.useEffect(() => {
+		id && dispatch(getAuthUser(id));
+	}, [dispatch, id]);
+	// список навигационных кнопок
 	const navTitles = ['home', 'profile', 'chat', 'users'];
 
-	const classes = useStyles();
+	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
-		<AppBar position='sticky' className={classes.app}>
-			<Grid className={classes.app__container}>
+		<AppBar position='sticky' className={classes.header}>
+			<Grid className={classes.header__container}>
 				<Grid container spacing={6}>
 					{navTitles.map((item) => {
 						return (
 							<Grid item key={item}>
-								<NavLink style={{ color: 'white' }} to={'/' + item} activeClassName='active'>
+								<NavLink to={'/' + item} activeClassName='active'>
 									<h2> {item.toLocaleUpperCase()}</h2>
 								</NavLink>
 							</Grid>
 						);
 					})}
 				</Grid>
-				<Button className={classes.title} href='https://social-network.samuraijs.com/docs' color='inherit'>
-					API
-				</Button>
+				<a href='https://social-network.samuraijs.com/docs'>
+					<h2>API</h2>
+				</a>
 				{isAuth && (
-					<Grid container spacing={3} className={classes.profile_block}>
-						<h4>{AuthUser?.fullName}</h4>
+					<Grid container spacing={2} className={classes.header__profile}>
+						<Link to={`/profile`}>
+							<h4>{AuthUser?.fullName}</h4>{' '}
+						</Link>
 						<Grid item>
 							<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
 						</Grid>
-						<IconButton color='inherit' onClick={() => dispatch(logout())}>
-							<ExitToAppIcon />
-						</IconButton>
+						<a>
+							<LaunchOutlinedIcon  onClick={() => dispatch(logout())} fontSize='large'/>
+						</a>
 					</Grid>
 				)}
 			</Grid>

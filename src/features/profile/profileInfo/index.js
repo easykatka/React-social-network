@@ -9,8 +9,8 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 
 export const ProfileInfo = ({ routerId }) => {
-	const status = useSelector((state) => state.profile.status);
-	const profile = useSelector((state) => state.profile.profile);
+	const { status, profile } = useSelector((state) => state.profile);
+	const authUserId = useSelector(state => state.auth.id)
 	const [editMode, setEditMode] = useState(false);
 	const [userStatus, setUserStatus] = useState(status);
 	const dispatch = useDispatch();
@@ -18,9 +18,7 @@ export const ProfileInfo = ({ routerId }) => {
 		setUserStatus(status);
 	}, [status]);
 
-	const activateMode = () => {
-		setEditMode(true);
-	};
+
 	const deactivateMode = (action) => {
 		if (!action) {
 			setUserStatus(status);
@@ -33,12 +31,15 @@ export const ProfileInfo = ({ routerId }) => {
 	const onStatusChange = (e) => {
 		setUserStatus(e.currentTarget.value);
 	};
+	console.log(routerId != authUserId && !!routerId || true)
 
 	return (
+		// NAME
 		<Grid container direction='column'>
 			<Grid item xs>
 				<Typography variant='h5'>{profile.fullName?.toUpperCase()}</Typography>
 			</Grid>
+			{/* STATUS */}
 			<Grid item>
 				{editMode && !routerId ? (
 					<div>
@@ -52,7 +53,7 @@ export const ProfileInfo = ({ routerId }) => {
 					</div>
 				) : (
 						<Grid>
-							<Typography variant='body1' style={{ cursor: 'pointer', color: '#ffc800' }} onClick={activateMode}>
+							<Typography variant='body1' style={{ cursor: 'pointer', color: '#ffc800' }} onClick={() => { setEditMode(true) }} >
 								{status}
 								{!routerId && <EditIcon fontSize='small' color='inherit' />}
 							</Typography>

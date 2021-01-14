@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		width: 1200,
 		margin: "0 auto",
 		paddingTop: theme.spacing(1),
+	
 
 	},
 }));
@@ -29,9 +30,13 @@ const useStyles = makeStyles((theme) => ({
 function App() {
 	const isInit = useSelector((state) => state.app.isInit);
 	const isAuth = useSelector((state) => state.auth.isAuth);
+	const authUserId = useSelector(state => state.auth.id)
+	console.log(authUserId)
+
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(init()), [dispatch]);
 	const classes = useStyles();
+
 
 
 	if (!isInit) {return <Preloader/> }
@@ -42,11 +47,12 @@ function App() {
 			<Header />
 			<Grid
 				container
-				className={classes.app__container} spacing={5} >
+				className={classes.app__container} >
 				<Grid item xs={12} >
 					{!isAuth ? <Login /> :
 						<Switch>
 							<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+							<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
 							<Route exact path="/profile/:userId?" render={() => <Profile />} />
 							<Route exact path="/users" render={() => <Users />} />
 							<Route exact path="/chat" render={() => <Chat />} />
