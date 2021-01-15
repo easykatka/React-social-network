@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Avatar, Grid } from '@material-ui/core';
+import { AppBar, IconButton, Avatar, Grid, Button } from '@material-ui/core';
 import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser } from '../../app/reducers/profile-reducer';
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 		margin: '10px auto',
 		display: 'flex',
 		alignItems: 'center',
-		
+
 	},
 	header__profile: {
 		justifyContent: 'flex-end',
@@ -53,11 +53,21 @@ export const Header = () => {
 						);
 					})}
 				</Grid>
-				<a href='https://social-network.samuraijs.com/docs'>
-					<h2>API</h2>
-				</a>
+
+
 				{isAuth && (
-					<Grid container spacing={2} className={classes.header__profile}>
+
+					<Grid container spacing={5} className={classes.header__profile}>
+						<Grid item>
+						<a href='https://social-network.samuraijs.com/docs'>
+							<h2>API</h2>
+						</a>
+						</Grid>
+						<Grid item>
+						<a href='https://docs.google.com/document/d/1ZSXmTzkgq_Kj1VbWuq8fTv_DPD95GFDvPZgqFeIYGoM/edit#'>
+							<h2>API TO DO</h2>
+						</a>
+						</Grid>
 						<Link to={`/profile`}>
 							<h4>{AuthUser?.fullName}</h4>{' '}
 						</Link>
@@ -65,7 +75,7 @@ export const Header = () => {
 							<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
 						</Grid>
 						<a>
-							<LaunchOutlinedIcon  onClick={() => dispatch(logout())} fontSize='large'/>
+							<LaunchOutlinedIcon onClick={() => dispatch(logout())} fontSize='large' />
 						</a>
 					</Grid>
 				)}

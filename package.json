@@ -1,8 +1,8 @@
 {
-  "name": "social_mediag",
+  "name": "social_media",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://easykatka.github.io/React-social-network"
+  "homepage": "https://easykatka.github.io/React-social-network",
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
@@ -15,14 +15,17 @@
     "formik-material-ui": "^3.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-lodash": "^0.1.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "redux-form-material-ui": "^4.3.4",
+    "use-debounce": "^5.2.0",
     "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

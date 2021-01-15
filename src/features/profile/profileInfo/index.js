@@ -31,7 +31,7 @@ export const ProfileInfo = ({ routerId }) => {
 	const onStatusChange = (e) => {
 		setUserStatus(e.currentTarget.value);
 	};
-	console.log(routerId != authUserId && !!routerId || true)
+
 
 	return (
 		// NAME

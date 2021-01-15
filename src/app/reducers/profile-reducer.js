@@ -1,5 +1,6 @@
 import { profileAPI } from "../../api/profile-api";
 import { createSlice } from "@reduxjs/toolkit";
+import { dialogsAPI } from "../../api/dialogs-api";
 
 export const profileSlice = createSlice({
 	name: 'profile',
@@ -25,6 +26,8 @@ export const profileSlice = createSlice({
 export const { setUserFollowStatus,setFormError, setFormEdit, addPost, setUserProfile, setUserStatus, setAuthUser, setNewAvatar } = profileSlice.actions;
 //thunk
 export const getUserProfile = (id) => async (dispatch) => {
+	// const res = await dialogsAPI.putNewDialog(id)
+	// 	console.log(res)
 	const profileData = await profileAPI.getProfile(id)
 	const profileStatus = await profileAPI.getStatus(id)
 	const followStatus = await profileAPI.getFollowStatus(id)
@@ -38,7 +41,6 @@ export const getAuthUser = id => async (dispatch) => {
 }
 export const putNewAvatar = (file) => async (dispatch) => {
 	const data = await profileAPI.putNewAvatar(file)
-	console.log(data.data.photos)
 	if (data.resultCode === 0) {
 		dispatch(setNewAvatar(data.data.photos))
 	}
@@ -57,7 +59,6 @@ export const putNewProfile = (profile) => async (dispatch) => {
 		dispatch(getAuthUser(profile.userId))
 		dispatch(setFormEdit(false))
 	} else if (data.resultCode === 1) {
-		console.log(data.messages)
 		const parsed = data.messages[0].match(/Contacts->(\w+)/)[1]
 		const slised = parsed[0].toLowerCase() + parsed.slice(1)
 		dispatch(setFormError(slised))
