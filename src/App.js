@@ -55,7 +55,7 @@ function App() {
 							<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
 							<Route exact path="/profile/:userId?" render={() => <Profile />} />
 							<Route exact path="/users" render={() => <Users />} />
-							<Route exact path="/chat" render={() => <Chat />} />
+							<Route exact path="/chat" render={() => <Chat id={authUserId} />} />
 							<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
 						</Switch>
 					}

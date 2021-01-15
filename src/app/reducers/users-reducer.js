@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { profileAPI } from "../../api/profile-api";
 import { usersAPI } from "../../api/users-api";
 import { setUserFollowStatus } from "./profile-reducer";
-import { dialogsAPI } from "../../api/dialogs-api";
+
 
 export const usersSlice = createSlice({
 	name: "users",
@@ -50,7 +50,7 @@ export const usersSlice = createSlice({
 		},
 		setFilter : (state,{payload}) => {  
 			state.currentPage = 1
-			state.filter = {...state.filter , ... payload}
+			state.filter = {...state.filter,...payload}
 			
 		},
 

@@ -1,6 +1,6 @@
 import { profileAPI } from "../../api/profile-api";
 import { createSlice } from "@reduxjs/toolkit";
-import { dialogsAPI } from "../../api/dialogs-api";
+
 
 export const profileSlice = createSlice({
 	name: 'profile',

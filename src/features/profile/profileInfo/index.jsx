@@ -10,14 +10,12 @@ import CloseIcon from '@material-ui/icons/Close';
 
 export const ProfileInfo = ({ routerId }) => {
 	const { status, profile } = useSelector((state) => state.profile);
-	const authUserId = useSelector(state => state.auth.id)
 	const [editMode, setEditMode] = useState(false);
 	const [userStatus, setUserStatus] = useState(status);
 	const dispatch = useDispatch();
 	useEffect(() => {
 		setUserStatus(status);
 	}, [status]);
-
 
 	const deactivateMode = (action) => {
 		if (!action) {
@@ -31,7 +29,6 @@ export const ProfileInfo = ({ routerId }) => {
 	const onStatusChange = (e) => {
 		setUserStatus(e.currentTarget.value);
 	};
-
 
 	return (
 		// NAME
@@ -52,13 +49,18 @@ export const ProfileInfo = ({ routerId }) => {
 						</IconButton>
 					</div>
 				) : (
-						<Grid>
-							<Typography variant='body1' style={{ cursor: 'pointer', color: '#ffc800' }} onClick={() => { setEditMode(true) }} >
-								{status}
-								{!routerId && <EditIcon fontSize='small' color='inherit' />}
-							</Typography>
-						</Grid>
-					)}
+					<Grid>
+						<Typography
+							variant='body1'
+							style={{ cursor: 'pointer', color: '#ffc800' }}
+							onClick={() => {
+								setEditMode(true);
+							}}>
+							{status}
+							{!routerId && <EditIcon fontSize='small' color='inherit' />}
+						</Typography>
+					</Grid>
+				)}
 				<hr />
 				<Grid item xs={12} md={6}>
 					<Typography variant='h6' color={profile?.lookingForAJob ? 'primary' : 'secondary'}>
@@ -79,17 +81,16 @@ export const ProfileInfo = ({ routerId }) => {
 			<Grid container direction='column'>
 				{profile.contacts
 					? Object.keys(profile.contacts).map((key) => {
-						return (
-							profile.contacts[key] && (
-								<Grid key={key} item>
-									<Button size='small' style={{ color: 'grey' }} href={'//' + profile.contacts[key]}>
-										{' '}
-										{profile.contacts[key]}{' '}
-									</Button>
-								</Grid>
-							)
-						);
-					})
+							//роутер убирает двоеточие,поэтому пока что так
+							let str = profile.contacts[key] !== null && profile.contacts[key].replace('#(https?|http)://S*?.S*?/S*?/S*?/#', '');
+							return (
+								profile.contacts[key] && (
+									<Grid key={key} item>
+										<Button href={`//${str}`}> {profile.contacts[key]} </Button>
+									</Grid>
+								)
+							);
+					  })
 					: null}
 			</Grid>
 		</Grid>

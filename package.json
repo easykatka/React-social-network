@@ -21,6 +21,7 @@
     "react-scripts": "4.0.1",
     "redux-form-material-ui": "^4.3.4",
     "use-debounce": "^5.2.0",
+    "use-sound": "^2.0.1",
     "yup": "^0.32.8"
   },
   "scripts": {
