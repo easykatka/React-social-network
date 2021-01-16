@@ -1,12 +1,25 @@
-import { Box, IconButton, TextField } from '@material-ui/core';
+import { Grid, IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
+
+const useStyles = makeStyles((theme) => ({
+	chatForm__container: {
+		backgroundColor: '#40444b',
+		alignItems:'center',
+		marginTop:20,
+		borderRadius:7,
+	},
+	chatForm__input:{
+		color:"white",
+		marginLeft:15,
+	}
+}));
 
 export const ChatForm = ({ wsChannel }) => {
 	const [message, setMessage] = useState('');
 	const [readyStatus, setReadyStatus] = useState('pending');
+	const classes = useStyles();
 	useEffect(() => {
 		let openHandler = () => {
 			setReadyStatus('ready');
@@ -24,15 +37,14 @@ export const ChatForm = ({ wsChannel }) => {
 		}
 	};
 	return (
-		<Box p={3}>
-			<form onSubmit={SendMessage} style={{alignItems:'center',display:'flex'}}>
-				<TextField
+		<Grid component='form' onSubmit={SendMessage} className={classes.chatForm__container}>
+				<InputBase
+				className={classes.chatForm__input}
 					disabled={wsChannel === null || readyStatus !== 'ready'}
 					type='text'
 					autoFocus={true}
-					variant='outlined'
 					placeholder='white a message'
-					style={{width:'85%'}}
+					style={{ width: '85%' }}
 					size='small'
 					name='message'
 					onChange={(e) => setMessage(e.currentTarget.value)}
@@ -40,9 +52,8 @@ export const ChatForm = ({ wsChannel }) => {
 					id='message__input'
 				/>
 				<IconButton type='submit' disabled={wsChannel === null || readyStatus !== 'ready'}>
-					<SendRoundedIcon color='primary' />
+					<SendRoundedIcon color='inherit' />
 				</IconButton>
-			</form>
-		</Box>
+		</Grid>
 	);
 };

@@ -4,7 +4,7 @@ import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser } from '../../app/reducers/profile-reducer';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,9 +18,13 @@ const useStyles = makeStyles((theme) => ({
 	header__profile: {
 		justifyContent: 'flex-end',
 		alignItems: 'center',
+		'&>*>a:hover': { color: '#61dafb' },
 	},
 	header: {
 		background: 'linear-gradient(to top, #232526, #414345)',
+	},
+	header__link: {
+		'&:hover': { color: '#61dafb' },
 	},
 }));
 
@@ -34,7 +38,7 @@ export const Header = () => {
 		id && dispatch(getAuthUser(id));
 	}, [dispatch, id]);
 	// список навигационных кнопок
-	const navTitles = ['home', 'profile', 'chat', 'users'];
+	const navTitles = ['profile', 'users', 'chat', 'messanger'];
 
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
@@ -45,15 +49,14 @@ export const Header = () => {
 						return (
 							<Grid item key={item}>
 								<NavLink to={'/' + item} activeClassName='active'>
-									<h2> {item.toLocaleUpperCase()}</h2>
+									<h2 className={classes.header__link}> {item.toLocaleUpperCase()}</h2>
 								</NavLink>
 							</Grid>
 						);
 					})}
 				</Grid>
-
 				{isAuth && (
-					<Grid container spacing={5} className={classes.header__profile}>
+					<Grid container spacing={3} className={classes.header__profile}>
 						<Grid item>
 							<a href='https://social-network.samuraijs.com/docs'>
 								<h2>API</h2>
@@ -64,15 +67,19 @@ export const Header = () => {
 								<h2>API TO DO</h2>
 							</a>
 						</Grid>
-						<Link to={`/profile`}>
-							<h4>{AuthUser?.fullName}</h4>{' '}
-						</Link>
+						<Grid item>
+							<a href={`/profile`}>
+								<h4>{AuthUser?.fullName}</h4>
+							</a>
+						</Grid>
 						<Grid item>
 							<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
 						</Grid>
-						<a>
-							<LaunchOutlinedIcon onClick={() => dispatch(logout())} fontSize='large' />
-						</a>
+						<Grid item>
+							<a>
+								<LaunchOutlinedIcon onClick={() => dispatch(logout())} fontSize='large' />
+							</a>
+						</Grid>
 					</Grid>
 				)}
 			</Grid>

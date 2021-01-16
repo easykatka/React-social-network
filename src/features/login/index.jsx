@@ -29,8 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Login = () => {
-	const captchaUrl = useSelector((state) => state.auth.captchaUrl);
-	const errorMessage = useSelector((state) => state.auth.errorMessage);
+	const {captchaUrl,errorMessage} = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	const classes = useStyles();
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
@@ -51,7 +50,7 @@ export const Login = () => {
 			dispatch(putLogin(login, password, rememberMe, captcha));
 		},
 	});
-	//TODO стили доделать
+	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
 		<Grid container justify='center'>
 			<form onSubmit={handleSubmit}>
@@ -59,7 +58,7 @@ export const Login = () => {
 					<Grid item className={classes.login__container}>
 						<ExitToAppIcon className={classes.login__icon} />
 						<Typography variant='h6' className={classes.login__error}>
-							{errorMessage}{' '}
+							{errorMessage}
 						</Typography>
 						<TextField
 							label='Email'
@@ -101,7 +100,6 @@ export const Login = () => {
 							</>
 						)}
 						<Button variant='contained' startIcon={<VpnKeyRoundedIcon />} size='large' type='submit' color='primary'>
-							{' '}
 							Log In
 						</Button>
 						<p>Для тестового просмотра используйте пару логин/пароль: </p>

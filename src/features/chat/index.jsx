@@ -2,7 +2,7 @@ import { Grid, Paper } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { ChatMessages } from './chatMessages';
-import { ChatOnlineList } from './chatOnlineList';
+import { ChatList } from './chatList';
 
 // offsetHeight, scrollTop, scrollHeight.
 export const Chat = () => {
@@ -39,12 +39,12 @@ export const Chat = () => {
 		};
 	}, [wsChannel]);
 	return (
-		<Paper style={{width:'80%'}}>
+		<div style={{width:'80%' ,height:"85vh" }}>
 			
 			<Grid container direction='row' >
 				<ChatMessages wsChannel={wsChannel} messages={messages} />
-				<ChatOnlineList messages={messages} />
+				<ChatList messages={messages} />
 			</Grid>
-		</Paper>
+		</div>
 	);
 };

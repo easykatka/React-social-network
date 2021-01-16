@@ -53,7 +53,7 @@ export const UsersList = React.memo(({ users, isFetching }) => {
 													{user?.name}
 												</Typography>
 												<Typography variant='body2' color='textSecondary' component='p'>
-													{user?.status || '😡'}{' '}
+													{/* {user?.status || '😡'}{' '} */}
 												</Typography>
 											</CardContent>
 										</NavLink>

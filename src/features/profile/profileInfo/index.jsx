@@ -82,7 +82,7 @@ export const ProfileInfo = ({ routerId }) => {
 				{profile.contacts
 					? Object.keys(profile.contacts).map((key) => {
 							//роутер убирает двоеточие,поэтому пока что так
-							let str = profile.contacts[key] !== null && profile.contacts[key].replace('#(https?|http)://S*?.S*?/S*?/S*?/#', '');
+							let str = profile.contacts[key] !== null && profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
 							return (
 								profile.contacts[key] && (
 									<Grid key={key} item>
