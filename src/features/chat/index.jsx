@@ -7,14 +7,10 @@ import { ChatMessages } from './chatMessages';
 // offsetHeight, scrollTop, scrollHeight.
 export const Chat = () => {
 	const [wsChannel, setWsChannel] = useState(null);
-
-	console.log('render chat');
-
 	// подписка на канал
 	useEffect(() => {
 		let ws;
 		const closeHandler = () => {
-			console.log('close WS');
 			setTimeout(createChannel, 3000);
 		};
 
@@ -25,11 +21,11 @@ export const Chat = () => {
 			ws.addEventListener('close', closeHandler);
 			setWsChannel(ws);
 		};
-		createChannel();
+		createChannel(); // реконект рекурсией
 		return () => {
 			ws.removeEventListener('close', closeHandler);
 			ws.close();
-			console.log('убираем слушатель закрытия канала');
+			//убираем слушатель закрытия канала
 		};
 	}, []);
 	return (

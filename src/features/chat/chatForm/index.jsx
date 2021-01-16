@@ -12,11 +12,8 @@ export const ChatForm = ({ wsChannel }) => {
 			setReadyStatus('ready');
 		};
 		wsChannel?.addEventListener('open', openHandler);
-		console.log('канал готов');
-
 		return () => {
 			wsChannel?.removeEventListener('open', openHandler);
-			console.log('убираем слушатель готовности канала');
 		};
 	}, [wsChannel]);
 	const SendMessage = (e) => {
@@ -24,7 +21,6 @@ export const ChatForm = ({ wsChannel }) => {
 		if (message) {
 			wsChannel?.send(message);
 			setMessage('');
-			console.log('сообщение отправлено');
 		}
 	};
 	return (

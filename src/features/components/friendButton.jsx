@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { followUser } from '../../app/reducers/users-reducer';
 import React from 'react';
 
-export const FollowUnfollow = ({ id, followed }) => {
+export const FriendButton = ({ id, followed }) => {
 	const followingInProgress = useSelector((state) => state.users.followingInProgress);
 	const dispatch = useDispatch();
 

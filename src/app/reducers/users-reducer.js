@@ -8,14 +8,14 @@ export const usersSlice = createSlice({
 	name: "users",
 	initialState: {
 		users: [],
-		pageSize: 25,
+		pageSize: 100,
 		totalUsersCount: 5000,
-		currentPage: 1,
+		currentPage: 0,
 		isFetching: true,
 		followingInProgress: [], // array of followed users
 		filter:{
 			searchTerm:"",
-			friend:null
+			friend:null,
 		}
 	},
 	reducers: {
@@ -24,6 +24,7 @@ export const usersSlice = createSlice({
 		},
 		setUsers: (state, action) => {
 			state.users = action.payload;
+			
 		},
 		setCurrentPage: (state, action) => {
 			state.currentPage = action.payload;
@@ -46,10 +47,10 @@ export const usersSlice = createSlice({
 		},
 		setPageSize: (state, { payload }) => {
 			state.pageSize = payload
-			state.currentPage = 1
+			state.currentPage = 0
 		},
-		setFilter : (state,{payload}) => {  
-			state.currentPage = 1
+		setFilter : (state,{payload}) => {   
+			state.currentPage = 0
 			state.filter = {...state.filter,...payload}
 			
 		},
@@ -75,7 +76,7 @@ export const getUsers = (page, pageSize ,searchTerm ,friend) => {
 		dispatch(setIsFetching(true)); 
 		dispatch(setCurrentPage(page));
 		
-		const data = await usersAPI.getUsers(page, pageSize ,searchTerm,friend);
+		const data = await usersAPI.getUsers(page+1, pageSize ,searchTerm,friend);
 		dispatch(setIsFetching(false));
 		dispatch(setUsers(data.items));
 		dispatch(setTotalUsersCount(data.totalCount));

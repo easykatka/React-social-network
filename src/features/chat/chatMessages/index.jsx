@@ -7,6 +7,7 @@ import messageSound from '../../../assets/sound/message.mp3';
 import useSound from 'use-sound';
 
 export const ChatMessages = ({ wsChannel }) => {
+	console.log('render chatmessages')
 	const [counter, setCounter] = useState(0);
 	const messagesEndRef = useRef();
 	const [play] = useSound(messageSound);
@@ -18,7 +19,6 @@ export const ChatMessages = ({ wsChannel }) => {
 		const lastMessageId = messages?.[messages.length - 1]?.userId;
 		if (counter > 1 && lastMessageId !== id) play();
 		setCounter(counter + 1);
-		console.log(counter);
 	};
 	useEffect(() => scrollToBottom(), [messages]);
 
@@ -33,6 +33,11 @@ export const ChatMessages = ({ wsChannel }) => {
 		};
 	}, [wsChannel]);
 	console.log(messages)
+	// как это блять работает?
+	let chatList = messages.filter((temp => a => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)))
+
+console.log(chatList)
+
 
 	return (
 		<Grid style={{ overflowY: 'scroll', height: '70vh' }}>
@@ -47,6 +52,9 @@ export const ChatMessages = ({ wsChannel }) => {
 							{i.message}
 						</div>
 						<div ref={messagesEndRef}></div>
+					</Grid>
+					<Grid>
+					
 					</Grid>
 				</Box>
 			))}

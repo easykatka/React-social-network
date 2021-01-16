@@ -52,7 +52,7 @@ export const ProfileInfo = ({ routerId }) => {
 					<Grid>
 						<Typography
 							variant='body1'
-							style={{ cursor: 'pointer', color: '#ffc800' }}
+							style={{ cursor: 'pointer', color: 'grey' }}
 							onClick={() => {
 								setEditMode(true);
 							}}>

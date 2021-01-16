@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { ProfileEditForm } from './profileEditForm';
 import { ProfileInfo } from './profileInfo';
-import { FollowUnfollow } from '../components/follow-unfollow';
+import { FriendButton } from '../components/friendButton';
 import { Preloader } from '../../common/preloader';
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 const Profile = (props) => {
+
+	//TODO обработать ошибки сервера
 	const classes = useStyles();
 	const { profile, formEdit } = useSelector((state) => state.profile);
 	const authUserId = useSelector((state) => state.auth.id);
@@ -64,7 +66,7 @@ const Profile = (props) => {
 					<Paper className={classes.avatar__block} elevation={0}>
 						<Avatar className={classes.avatar_img} alt='user foto' src={profile.photos?.large} />
 						{routerId ? (
-							<FollowUnfollow id={routerId} followed={profile.followed} />
+							<FriendButton id={routerId} followed={profile.followed} />
 						) : (
 							<div>
 								<input

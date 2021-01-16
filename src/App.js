@@ -31,17 +31,10 @@ function App() {
 	const isInit = useSelector((state) => state.app.isInit);
 	const isAuth = useSelector((state) => state.auth.isAuth);
 	const authUserId = useSelector(state => state.auth.id)
-	console.log(authUserId)
-
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(init()), [dispatch]);
 	const classes = useStyles();
-
-
-
 	if (!isInit) {return <Preloader/> }
-
-
 	return (
 		<>
 			<Header />

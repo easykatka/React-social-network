@@ -1,9 +1,10 @@
-import { FollowUnfollow } from '../../components/follow-unfollow';
+import { FriendButton } from '../../components/friendButton';
 import { Preloader } from '../../../common/preloader';
 import defaultAvatar from '../../../img/defaultAvatar.png';
 import { NavLink } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
 	users__name: {
@@ -26,7 +27,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const UsersList = React.memo(({ users, isFetching }) => {
 	console.log('render userlist');
+	
+
 	const classes = useStyles();
+
 	return isFetching ? (
 		<Preloader />
 	) : (
@@ -56,7 +60,7 @@ export const UsersList = React.memo(({ users, isFetching }) => {
 										</NavLink>
 									</CardActionArea>
 								</div>
-								<FollowUnfollow id={user.id} followed={user.followed} />
+								<FriendButton id={user.id} followed={user.followed} />
 							</Card>
 						</Grid>
 					))}

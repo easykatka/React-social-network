@@ -26,8 +26,6 @@ export const profileSlice = createSlice({
 export const { setUserFollowStatus,setFormError, setFormEdit, addPost, setUserProfile, setUserStatus, setAuthUser, setNewAvatar } = profileSlice.actions;
 //thunk
 export const getUserProfile = (id) => async (dispatch) => {
-	// const res = await dialogsAPI.putNewDialog(id)
-	// 	console.log(res)
 	const profileData = await profileAPI.getProfile(id)
 	const profileStatus = await profileAPI.getStatus(id)
 	const followStatus = await profileAPI.getFollowStatus(id)
@@ -62,7 +60,6 @@ export const putNewProfile = (profile) => async (dispatch) => {
 		const parsed = data.messages[0].match(/Contacts->(\w+)/)[1]
 		const slised = parsed[0].toLowerCase() + parsed.slice(1)
 		dispatch(setFormError(slised))
-		// dispatch(stopSubmit("profileg", {contacts: {[slised]: `type valid url format for ${slised}`}}))
 	}
 }
 export default profileSlice.reducer;
