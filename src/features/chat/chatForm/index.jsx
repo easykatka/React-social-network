@@ -24,15 +24,15 @@ export const ChatForm = ({ wsChannel }) => {
 		}
 	};
 	return (
-		<Box direction='row' p={3}>
-			<form onSubmit={SendMessage}>
+		<Box p={3}>
+			<form onSubmit={SendMessage} style={{alignItems:'center',display:'flex'}}>
 				<TextField
 					disabled={wsChannel === null || readyStatus !== 'ready'}
 					type='text'
-					style={{ width: 500 }}
 					autoFocus={true}
 					variant='outlined'
 					placeholder='white a message'
+					style={{width:'85%'}}
 					size='small'
 					name='message'
 					onChange={(e) => setMessage(e.currentTarget.value)}

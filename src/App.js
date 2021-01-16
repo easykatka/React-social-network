@@ -18,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
 		width: 1200,
 		margin: "0 auto",
 		paddingTop: theme.spacing(1),
-	
+
+
 
 	},
 }));
@@ -34,25 +35,23 @@ function App() {
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(init()), [dispatch]);
 	const classes = useStyles();
-	if (!isInit) {return <Preloader/> }
+	if (!isInit) { return <Preloader /> }
 	return (
 		<>
 			<Header />
 			<Grid
 				container
-				className={classes.app__container} >
-				<Grid item xs={12} >
-					{!isAuth ? <Login /> :
-						<Switch>
-							<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
-							<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
-							<Route exact path="/profile/:userId?" render={() => <Profile />} />
-							<Route exact path="/users" render={() => <Users />} />
-							<Route exact path="/chat" render={() => <Chat id={authUserId} />} />
-							<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
-						</Switch>
-					}
-				</Grid>
+				className={classes.app__container} justify='center'>
+				{!isAuth ? <Login /> :
+					<Switch>
+						<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
+						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
+						<Route exact path="/profile/:userId?" render={() => <Profile />} />
+						<Route exact path="/users" render={() => <Users />} />
+						<Route exact path="/chat" render={() => <Chat id={authUserId} />} />
+						<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
+					</Switch>
+				}
 			</Grid>
 		</>
 	);

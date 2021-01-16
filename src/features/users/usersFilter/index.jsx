@@ -1,4 +1,4 @@
-import { Checkbox, FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
+import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/reducers/users-reducer';
@@ -27,7 +27,6 @@ export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) 
 		dispatch(setFilter({ friend: e.target.value }));
 	};
 
-	
 	return (
 		<Grid container direction='column' alignItems='center'>
 			<Typography variant='h5'>Users </Typography>
@@ -37,7 +36,6 @@ export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) 
 					<FormControlLabel value='null' control={<Radio size='small' color='primary' />} label='All' />
 					<FormControlLabel value='true' control={<Radio size='small' color='primary' />} label='Friends' />
 					<FormControlLabel value='false' control={<Radio size='small' color='primary' />} label='Without friend' />
-				
 				</RadioGroup>
 			</FormControl>
 			<TablePagination

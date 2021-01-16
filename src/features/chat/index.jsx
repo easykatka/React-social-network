@@ -1,19 +1,19 @@
 import { Grid, Paper } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { ChatForm } from './chatForm';
 import { ChatMessages } from './chatMessages';
+import { ChatOnlineList } from './chatOnlineList';
 
 // offsetHeight, scrollTop, scrollHeight.
 export const Chat = () => {
 	const [wsChannel, setWsChannel] = useState(null);
+	const [messages, setMessages] = useState([]);
 	// подписка на канал
 	useEffect(() => {
 		let ws;
 		const closeHandler = () => {
 			setTimeout(createChannel, 3000);
 		};
-
 		const createChannel = () => {
 			ws?.removeEventListener('close', closeHandler);
 			ws?.close();
@@ -28,11 +28,22 @@ export const Chat = () => {
 			//убираем слушатель закрытия канала
 		};
 	}, []);
+	// загружаем сообщения
+	useEffect(() => {
+		let messageHandler = (e) => {
+			setMessages((prev) => [...prev, ...JSON.parse(e.data)]);
+		};
+		wsChannel?.addEventListener('message', messageHandler);
+		return () => {
+			wsChannel?.removeEventListener('message', messageHandler);
+		};
+	}, [wsChannel]);
 	return (
-		<Paper>
-			<Grid item xs={12}>
-				<ChatMessages wsChannel={wsChannel} />
-				<ChatForm wsChannel={wsChannel} />
+		<Paper style={{width:'80%'}}>
+			
+			<Grid container direction='row' >
+				<ChatMessages wsChannel={wsChannel} messages={messages} />
+				<ChatOnlineList messages={messages} />
 			</Grid>
 		</Paper>
 	);
