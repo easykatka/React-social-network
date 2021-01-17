@@ -6,6 +6,7 @@ export const dialogsSlice = createSlice({
 	initialState: {
 		dialogs: [],
 		isFetching:false,
+		messages:[],
 
 		
 	},
@@ -15,18 +16,27 @@ export const dialogsSlice = createSlice({
 		},
 		setDialogs:(state,{payload}) => { 
 			state.dialogs = payload
+		},
+		setMessages:(state,{payload}) => {
+			state.messages = payload
 		}
 		
 	},
 });
 
-export const { setIsFetching ,setDialogs} = dialogsSlice.actions;
+export const { setIsFetching ,setDialogs ,setMessages} = dialogsSlice.actions;
 
-export const getDialogs = () => async (dispatch) => {
+export const getDialogs = () => async (dispatch) => { 
 	dispatch(setIsFetching(true));
 	const data = await dialogsAPI.getDialogs();
 	dispatch(setIsFetching(false));
 	dispatch(setDialogs(data))
+}
+export const getMessages = (id) => async (dispatch) => {
+	dispatch(setIsFetching(true));
+	const data = await dialogsAPI.getMessages(id);
+	dispatch(setIsFetching(false));
+	dispatch(setMessages(data))
 }
 
 

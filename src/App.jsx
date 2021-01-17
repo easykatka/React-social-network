@@ -6,12 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { init } from "./app/reducers/app-reducer";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
-import { Grid, } from "@material-ui/core";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Profile from "./features/profile";
-import { Chat } from "./features/chat"
+import Messanger from "./features/messanger"
 import { Preloader } from "./common/preloader";
-import { Messanger } from "./features/dialogs";
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,9 +25,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 //TODO сделать lazy load
 //  const Chat = React.lazy(() => import("./features/chat"))
-
-
-
 function App() {
 	const isInit = useSelector((state) => state.app.isInit);
 	const isAuth = useSelector((state) => state.auth.isAuth);
@@ -40,24 +36,21 @@ function App() {
 	return (
 		<>
 			<Header />
-			<Grid
+			<div
 				container
-				className={classes.app__container} justify='center'>
+				className={classes.app__container}>
 				{!isAuth ? <Login /> :
 					<Switch>
 						<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
 						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
 						<Route exact path="/profile/:userId?" render={() => <Profile />} />
-
-
-						<Route exact path='/dialogs/:userId?' render={() => <Messanger />} />
+						{/* <Route exact path='/dialogs/:userId?' render={() => <Messanger />} /> */}
 						<Route exact path="/users" render={() => <Users />} />
-						<Route exact path="/chat" render={() => <Chat id={authUserId} />} />
+						<Route exact path="/messanger/:userId?" render={() => <Messanger/>} />
 						<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
-
 					</Switch>
 				}
-			</Grid>
+			</div>
 		</>
 	);
 }

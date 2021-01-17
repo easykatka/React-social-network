@@ -3,12 +3,16 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { ChatMessages } from './chatMessages';
 import { ChatList } from './chatList';
+import { ChatNavBar } from './chatNavBar';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-// offsetHeight, scrollTop, scrollHeight.
-export const Chat = () => {
+const Messanger = ({ match: { params :{userId} } }) => { debugger
+	
 	const [wsChannel, setWsChannel] = useState(null);
 	const [messages, setMessages] = useState([]);
 	const usersList = messages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
+	const { dialogs } = useSelector((state) => state.dialogs);
 	// подписка на канал
 	useEffect(() => {
 		let ws;
@@ -40,12 +44,24 @@ export const Chat = () => {
 		};
 	}, [wsChannel]);
 	return (
-		<div style={{width:'80%' ,height:"85vh" }}>
-			
-			<Grid container direction='row' >
-				<ChatMessages wsChannel={wsChannel} messages={messages} />
-				<ChatList component={'profile'} usersList={usersList} />
+		<div>
+			<Grid container direction='row' justify='center'>
+				<ChatNavBar dialogs={dialogs} />
+				{/* если есть айди в роутере,то рисуется два компонента под чат с юзером */}
+				{userId ? (
+					<>
+						<ChatMessages messages={messages} />
+						<ChatList component={'messanger'} users={dialogs} />
+					</>
+				) : (
+					<>
+						<ChatMessages wsChannel={wsChannel} messages={messages} />
+						<ChatList component={'profile'} users={usersList} />
+					</>
+				)}
 			</Grid>
 		</div>
 	);
 };
+
+export default withRouter(Messanger);

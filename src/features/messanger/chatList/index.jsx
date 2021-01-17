@@ -17,7 +17,7 @@ const StyledBadge = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
 	chatList__container: {
-		padding: '15px 0',
+		padding: '15px',
 		background: '#2f3136',
 		color: 'white',
 		display: 'flex',
@@ -45,14 +45,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ChatList = ({ usersList, component }) => {
-	debugger;
+export const ChatList = ({ users, component }) => {
 	const classes = useStyles();
 	return (
-		<Grid item className={classes.chatList__container} style={{ height: 600 }}>
-			<h4>Online — {usersList?.length}</h4>
-			<div style={{ overflowY: 'scroll' }}>
-				{usersList?.map((i, idx) => {
+		<Grid item xs={3} className={classes.chatList__container} style={{ height: 600 }}>
+			<h4>Users — {users?.length}</h4>
+			<div style={{ overflowY: 'auto' }}>
+				{users?.map((i, idx) => {
 					return (
 						<Link to={`/${component}/${i.userId || i.id}`} key={idx}>
 							<Grid container alignItems='center' className={classes.chatList__item}>

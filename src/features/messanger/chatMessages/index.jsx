@@ -9,7 +9,7 @@ import { ChatForm } from '../chatForm';
 
 const useStyles = makeStyles((theme) => ({
 	chatMessage__container: {
-		borderRadius: '15px 0px 0px 15px',
+
 		backgroundColor: '#36393f',
 		padding: 15,
 		// height: "100%",
@@ -31,13 +31,12 @@ export const ChatMessages = ({ wsChannel, messages }) => {
 		if (counter > 1 && lastMessageId !== id) play();
 		setCounter(counter + 1);
 	};
-
 	useEffect(() => scrollToBottom(), [messages]);
 
 	return (
-		<Grid item xs={8} className={classes.chatMessage__container}>
+		<Grid item xs={7} className={classes.chatMessage__container}>
 			<Grid item>
-				<Grid style={{ overflowY: 'scroll', height: 500, padding: 8 }}>
+				<Grid style={{ overflowY: 'auto', height: 500, padding: 8 }}>
 					{messages.map((i, idx) => (
 						<div style={{ display: 'flex', padding: '14px 0', borderBottom: '1px solid #40444b' }} key={idx}>
 							<Grid item>
