@@ -1,6 +1,6 @@
 import { FriendButton } from '../../components/friendButton';
 import { Preloader } from '../../../common/preloader';
-import defaultAvatar from '../../../img/defaultAvatar.png';
+import defaultAvatar from '../../../assets/img/defaultAvatar.png';
 import { NavLink } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';

@@ -8,6 +8,7 @@ import { ChatList } from './chatList';
 export const Chat = () => {
 	const [wsChannel, setWsChannel] = useState(null);
 	const [messages, setMessages] = useState([]);
+	const usersList = messages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
 	// подписка на канал
 	useEffect(() => {
 		let ws;
@@ -43,7 +44,7 @@ export const Chat = () => {
 			
 			<Grid container direction='row' >
 				<ChatMessages wsChannel={wsChannel} messages={messages} />
-				<ChatList messages={messages} />
+				<ChatList component={'profile'} usersList={usersList} />
 			</Grid>
 		</div>
 	);

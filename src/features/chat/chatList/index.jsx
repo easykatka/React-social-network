@@ -45,18 +45,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ChatList = ({ messages }) => {
-	// как это блять работает?
-	let chatList = messages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
-
+export const ChatList = ({ usersList, component }) => {
+	debugger;
 	const classes = useStyles();
 	return (
 		<Grid item className={classes.chatList__container} style={{ height: 600 }}>
-			<h4>Online — {chatList.length}</h4>
+			<h4>Online — {usersList?.length}</h4>
 			<div style={{ overflowY: 'scroll' }}>
-				{chatList.map((i, idx) => {
+				{usersList?.map((i, idx) => {
 					return (
-						<Link to={'/profile/' + i.userId} key={idx}>
+						<Link to={`/${component}/${i.userId || i.id}`} key={idx}>
 							<Grid container alignItems='center' className={classes.chatList__item}>
 								<Grid item>
 									<StyledBadge
@@ -66,7 +64,7 @@ export const ChatList = ({ messages }) => {
 											horizontal: 'right',
 										}}
 										variant='dot'>
-										<Avatar alt='Remy Sharp' src={i.photo} className={classes.chatList__avatar} />
+										<Avatar alt='Remy Sharp' src={i?.photo || i?.photos?.small} className={classes.chatList__avatar} />
 									</StyledBadge>
 								</Grid>
 								<p style={{ marginLeft: 12 }} variant='h6'>

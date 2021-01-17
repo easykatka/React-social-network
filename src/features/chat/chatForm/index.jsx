@@ -6,14 +6,15 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 const useStyles = makeStyles((theme) => ({
 	chatForm__container: {
 		backgroundColor: '#40444b',
-		alignItems:'center',
-		marginTop:20,
-		borderRadius:7,
+		alignItems: 'center',
+		marginTop: 20,
+		borderRadius: 7,
 	},
-	chatForm__input:{
-		color:"white",
-		marginLeft:15,
-	}
+	chatForm__input: {
+		color: 'white',
+		marginLeft: 15,
+		width: '85%',
+	},
 }));
 
 export const ChatForm = ({ wsChannel }) => {
@@ -36,24 +37,24 @@ export const ChatForm = ({ wsChannel }) => {
 			setMessage('');
 		}
 	};
+	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
 		<Grid component='form' onSubmit={SendMessage} className={classes.chatForm__container}>
-				<InputBase
+			<InputBase
 				className={classes.chatForm__input}
-					disabled={wsChannel === null || readyStatus !== 'ready'}
-					type='text'
-					autoFocus={true}
-					placeholder='white a message'
-					style={{ width: '85%' }}
-					size='small'
-					name='message'
-					onChange={(e) => setMessage(e.currentTarget.value)}
-					value={message}
-					id='message__input'
-				/>
-				<IconButton type='submit' disabled={wsChannel === null || readyStatus !== 'ready'}>
-					<SendRoundedIcon color='inherit' />
-				</IconButton>
+				disabled={wsChannel === null || readyStatus !== 'ready'}
+				type='text'
+				autoFocus={true}
+				placeholder='white a message'
+				size='small'
+				name='message'
+				onChange={(e) => setMessage(e.currentTarget.value)}
+				value={message}
+				id='message__input'
+			/>
+			<IconButton type='submit' disabled={wsChannel === null || readyStatus !== 'ready'}>
+				<SendRoundedIcon color='inherit' fontSize='small' />
+			</IconButton>
 		</Grid>
 	);
 };

@@ -11,6 +11,7 @@ import { Redirect, Switch, Route } from "react-router-dom";
 import Profile from "./features/profile";
 import { Chat } from "./features/chat"
 import { Preloader } from "./common/preloader";
+import { Messanger } from "./features/dialogs";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -47,9 +48,13 @@ function App() {
 						<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
 						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
 						<Route exact path="/profile/:userId?" render={() => <Profile />} />
+
+
+						<Route exact path='/dialogs/:userId?' render={() => <Messanger />} />
 						<Route exact path="/users" render={() => <Users />} />
 						<Route exact path="/chat" render={() => <Chat id={authUserId} />} />
 						<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
+
 					</Switch>
 				}
 			</Grid>

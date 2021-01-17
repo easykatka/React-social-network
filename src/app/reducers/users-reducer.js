@@ -13,9 +13,9 @@ export const usersSlice = createSlice({
 		currentPage: 0,
 		isFetching: true,
 		followingInProgress: [], // array of followed users
-		filter:{
-			searchTerm:"",
-			friend:null,
+		filter: {
+			searchTerm: "",
+			friend: null,
 		}
 	},
 	reducers: {
@@ -24,7 +24,7 @@ export const usersSlice = createSlice({
 		},
 		setUsers: (state, action) => {
 			state.users = action.payload;
-			
+
 		},
 		setCurrentPage: (state, action) => {
 			state.currentPage = action.payload;
@@ -40,27 +40,27 @@ export const usersSlice = createSlice({
 				return user
 			})
 		},
-		setFollowingInProgress: (state, {payload: { isFetching,userId }}) => {  
+		setFollowingInProgress: (state, { payload: { isFetching, userId } }) => {
 			state.followingInProgress = isFetching
-				? [...state.followingInProgress,userId]
+				? [...state.followingInProgress, userId]
 				: state.followingInProgress.filter(id => id !== userId)
 		},
 		setPageSize: (state, { payload }) => {
 			state.pageSize = payload
 			state.currentPage = 0
 		},
-		setFilter : (state,{payload}) => {   
+		setFilter: (state, { payload }) => {
 			state.currentPage = 0
-			state.filter = {...state.filter,...payload}
-			
+			state.filter = { ...state.filter, ...payload }
+
 		},
 
-		
+
 	}
 });
 //actions
-export const {setFilter,
-	
+export const { setFilter,
+
 	setCurrentPage,
 	setPageSize,
 	setIsFetching,
@@ -70,24 +70,22 @@ export const {setFilter,
 	setFollowingInProgress,
 } = usersSlice.actions;
 //thunk
-export const getUsers = (page, pageSize ,searchTerm ,friend) => {
+export const getUsers = (page, pageSize, searchTerm, friend) => {
 	return async (dispatch) => {
-		
-		dispatch(setIsFetching(true)); 
+
+		dispatch(setIsFetching(true));
 		dispatch(setCurrentPage(page));
-		
-		const data = await usersAPI.getUsers(page+1, pageSize ,searchTerm,friend);
+		const data = await usersAPI.getUsers(page + 1, pageSize, searchTerm, friend);
 		dispatch(setIsFetching(false));
 		dispatch(setUsers(data.items));
 		dispatch(setTotalUsersCount(data.totalCount));
 	};
 };
-export const followUser = (userId,follow ) => {  
+export const followUser = (userId, follow) => {
 
-	return async (dispatch) => { 
+	return async (dispatch) => {
 		dispatch(setFollowingInProgress({ isFetching: true, userId }))
 		const response = !follow ? await usersAPI.followAPI(userId) : await usersAPI.unFollowAPI(userId)
-		
 		const followStatus = await profileAPI.getFollowStatus(userId)
 		if (response.resultCode === 0) {
 			dispatch(toggleFollow(userId))

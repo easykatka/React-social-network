@@ -39,7 +39,7 @@ export const ChatMessages = ({ wsChannel, messages }) => {
 			<Grid item>
 				<Grid style={{ overflowY: 'scroll', height: 500, padding: 8 }}>
 					{messages.map((i, idx) => (
-						<div style={{ display: 'flex', padding: '14px 0' ,borderBottom:'1px solid #40444b' }}>
+						<div style={{ display: 'flex', padding: '14px 0', borderBottom: '1px solid #40444b' }} key={idx}>
 							<Grid item>
 								<Avatar alt='avatar' src={i.photo} />
 							</Grid>
@@ -47,7 +47,6 @@ export const ChatMessages = ({ wsChannel, messages }) => {
 								<div style={{ color: 'white', fontWeight: 600 }}> {i.userName}</div>
 								<div style={{ color: '#dcddde', wordBreak: 'break-all' }}>{i.message} </div>
 							</Grid>
-							
 							<div ref={messagesEndRef}></div>
 						</div>
 					))}

@@ -38,7 +38,7 @@ export const Header = () => {
 		id && dispatch(getAuthUser(id));
 	}, [dispatch, id]);
 	// список навигационных кнопок
-	const navTitles = ['profile', 'users', 'chat', 'messanger'];
+	const navTitles = ['profile', 'users', 'chat', 'dialogs'];
 
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
