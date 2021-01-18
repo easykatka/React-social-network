@@ -1,18 +1,21 @@
-import { Grid, Paper } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { ChatMessages } from './chatMessages';
 import { ChatList } from './chatList';
 import { ChatNavBar } from './chatNavBar';
-import { Route, Switch, withRouter } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import {  useSelector } from 'react-redux';
 
-const Messanger = ({ match: { params :{userId} } }) => { debugger
-	
+import { PrivateMessages } from './privateChat';
+
+const Messanger = ({ match: { params } }) => {
 	const [wsChannel, setWsChannel] = useState(null);
-	const [messages, setMessages] = useState([]);
-	const usersList = messages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
-	const { dialogs } = useSelector((state) => state.dialogs);
+	const [wsMessages, setWsMessages] = useState([]);
+	const {dialogs} = useSelector(state => state.dialogs)
+	const routerId = params.userId;
+
+
 	// подписка на канал
 	useEffect(() => {
 		let ws;
@@ -26,7 +29,7 @@ const Messanger = ({ match: { params :{userId} } }) => { debugger
 			ws.addEventListener('close', closeHandler);
 			setWsChannel(ws);
 		};
-		createChannel(); // реконект рекурсией
+		createChannel();
 		return () => {
 			ws.removeEventListener('close', closeHandler);
 			ws.close();
@@ -34,9 +37,13 @@ const Messanger = ({ match: { params :{userId} } }) => { debugger
 		};
 	}, []);
 	// загружаем сообщения
+
+	// из всех сообщений мы оставляем только объекты с уникальным id
+	const usersList = wsMessages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
+
 	useEffect(() => {
 		let messageHandler = (e) => {
-			setMessages((prev) => [...prev, ...JSON.parse(e.data)]);
+			setWsMessages((prev) => [...prev, ...JSON.parse(e.data)]);
 		};
 		wsChannel?.addEventListener('message', messageHandler);
 		return () => {
@@ -48,15 +55,14 @@ const Messanger = ({ match: { params :{userId} } }) => { debugger
 			<Grid container direction='row' justify='center'>
 				<ChatNavBar dialogs={dialogs} />
 				{/* если есть айди в роутере,то рисуется два компонента под чат с юзером */}
-				{userId ? (
+				{routerId ? (
 					<>
-						<ChatMessages messages={messages} />
-						<ChatList component={'messanger'} users={dialogs} />
+						<PrivateMessages routerId={routerId}/>
 					</>
 				) : (
 					<>
-						<ChatMessages wsChannel={wsChannel} messages={messages} />
-						<ChatList component={'profile'} users={usersList} />
+						<ChatMessages wsChannel={wsChannel} messages={wsMessages} />
+						<ChatList users={usersList} />
 					</>
 				)}
 			</Grid>

@@ -17,14 +17,17 @@ export const dialogsSlice = createSlice({
 		setDialogs:(state,{payload}) => { 
 			state.dialogs = payload
 		},
-		setMessages:(state,{payload}) => {
+		setMessages:(state,{payload}) => { debugger
 			state.messages = payload
-		}
+		},
+		setMessage:(state,payload) =>{
+			state.messages.push(payload)
+		},
 		
 	},
 });
 
-export const { setIsFetching ,setDialogs ,setMessages} = dialogsSlice.actions;
+export const { setIsFetching ,setDialogs ,setMessages,setMessage} = dialogsSlice.actions;
 
 export const getDialogs = () => async (dispatch) => { 
 	dispatch(setIsFetching(true));
@@ -38,6 +41,15 @@ export const getMessages = (id) => async (dispatch) => {
 	dispatch(setIsFetching(false));
 	dispatch(setMessages(data))
 }
+export const sendMessage = (userId,body) => async (dispatch) => {
+	await dialogsAPI.sendMessage(userId, body)
+	dispatch(getMessages(userId))
+
+	dispatch(setMessage)
+}
+
+
+
 
 
 

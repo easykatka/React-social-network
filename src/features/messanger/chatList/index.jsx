@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		borderRadius: '0 15px 15px 0px',
-		height: '100%',
+		height: 600
 	},
 	chatList__item: {
 		color: '#8e9297',
@@ -48,12 +48,12 @@ const useStyles = makeStyles((theme) => ({
 export const ChatList = ({ users, component }) => {
 	const classes = useStyles();
 	return (
-		<Grid item xs={3} className={classes.chatList__container} style={{ height: 600 }}>
+		<Grid item xs={3} className={classes.chatList__container}>
 			<h4>Users — {users?.length}</h4>
 			<div style={{ overflowY: 'auto' }}>
 				{users?.map((i, idx) => {
 					return (
-						<Link to={`/${component}/${i.userId || i.id}`} key={idx}>
+						<Link to={`/messanger/${i.userId || i.id}`} key={idx}>
 							<Grid container alignItems='center' className={classes.chatList__item}>
 								<Grid item>
 									<StyledBadge
@@ -63,7 +63,7 @@ export const ChatList = ({ users, component }) => {
 											horizontal: 'right',
 										}}
 										variant='dot'>
-										<Avatar alt='Remy Sharp' src={i?.photo || i?.photos?.small} className={classes.chatList__avatar} />
+										<Avatar alt='Remy Sharp' src={i?.photo } className={classes.chatList__avatar} />
 									</StyledBadge>
 								</Grid>
 								<p style={{ marginLeft: 12 }} variant='h6'>

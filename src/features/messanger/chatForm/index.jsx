@@ -9,11 +9,15 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		marginTop: 20,
 		borderRadius: 7,
+		
+
 	},
 	chatForm__input: {
 		color: 'white',
 		marginLeft: 15,
-		width: '85%',
+		width:500
+		
+		
 	},
 }));
 
@@ -30,7 +34,8 @@ export const ChatForm = ({ wsChannel }) => {
 			wsChannel?.removeEventListener('open', openHandler);
 		};
 	}, [wsChannel]);
-	const SendMessage = (e) => {
+
+	const SendMessage = (e) => {debugger
 		e.preventDefault();
 		if (message) {
 			wsChannel?.send(message);
@@ -39,6 +44,7 @@ export const ChatForm = ({ wsChannel }) => {
 	};
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
+		<Grid container> 
 		<Grid component='form' onSubmit={SendMessage} className={classes.chatForm__container}>
 			<InputBase
 				className={classes.chatForm__input}
@@ -46,15 +52,17 @@ export const ChatForm = ({ wsChannel }) => {
 				type='text'
 				autoFocus={true}
 				placeholder='white a message'
-				size='small'
 				name='message'
 				onChange={(e) => setMessage(e.currentTarget.value)}
 				value={message}
+				endAdornment={
+					<IconButton disabled={wsChannel === null || readyStatus !== 'ready'} type='submit'>
+						<SendRoundedIcon color='inherit' fontSize='small' />
+					</IconButton>
+				}
 				id='message__input'
 			/>
-			<IconButton type='submit' disabled={wsChannel === null || readyStatus !== 'ready'}>
-				<SendRoundedIcon color='inherit' fontSize='small' />
-			</IconButton>
+	</Grid>
 		</Grid>
 	);
 };

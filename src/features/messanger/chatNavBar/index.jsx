@@ -14,14 +14,15 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		borderRadius: '15px 0px 0px 15px',
+		height: 600
 	},
 	chatNavBar__avatar: {
 		margin: 15,
 	},
 }));
 
-export const ChatNavBar = ({dialogs}) => {
-
+export const ChatNavBar = () => {
+	const { dialogs } = useSelector((state) => state.dialogs);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -34,12 +35,11 @@ export const ChatNavBar = ({dialogs}) => {
 		<div className={classes.chatNavBar__container}>
 			<h4>Chat rooms: </h4>
 			<Link to={'/messanger'}>
-			<Avatar src={devs} style={{ margin: 10 }} />
+				<Avatar src={devs} style={{ margin: 10 }} />
 			</Link>
 			<h4>PM: </h4>
 			<div style={{ overflowY: 'auto' }}>
 				{dialogs.map((item, idx) => {
-					
 					return (
 						<Link to={`/messanger/${item.id}`} key={item.id}>
 							<div className={classes.chatNavBar__avatar}>
