@@ -24,15 +24,16 @@ a {
 	color: white;
 	
 }
-a.active > * {
+a.header > * {
 	color: #61dafb !important;
 	border-bottom: 4px solid #61fbfb;
 	
 }
-a:hover > * {
-	
-	cursor: pointer;
+a.navchat {
 
+}
+a:hover > * {
+	cursor: pointer;
 }
 
 /* Let's get this party started */

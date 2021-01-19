@@ -1,7 +1,7 @@
-import { Avatar, makeStyles } from '@material-ui/core';
+import { Avatar, Badge, Grid, makeStyles, Typography } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { getDialogs } from '../../../app/reducers/dialogs-reducer';
 import devs from '../../../assets/img/devs.jpg';
 
@@ -14,10 +14,12 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 		borderRadius: '15px 0px 0px 15px',
-		height: 600
+		height: 600,
 	},
 	chatNavBar__avatar: {
-		margin: 15,
+		margin: 18,
+		paddingLeft: 5,
+		'&:hover': {},
 	},
 }));
 
@@ -34,18 +36,22 @@ export const ChatNavBar = () => {
 	return (
 		<div className={classes.chatNavBar__container}>
 			<h4>Chat rooms: </h4>
-			<Link to={'/messanger'}>
+			<NavLink to={'/messenger'} activeClassName='navchat'>
 				<Avatar src={devs} style={{ margin: 10 }} />
-			</Link>
+			</NavLink>
 			<h4>PM: </h4>
 			<div style={{ overflowY: 'auto' }}>
 				{dialogs.map((item, idx) => {
 					return (
-						<Link to={`/messanger/${item.id}`} key={item.id}>
+					
 							<div className={classes.chatNavBar__avatar}>
-								<Avatar src={item?.photos?.small} />
+									<NavLink to={`/messenger/${item.id}`} key={item.id} activeClassName='navchat'>
+								<Badge badgeContent={item.newMessagesCount} color='secondary'> 
+									<Avatar src={item?.photos?.small} />
+								</Badge>
+								</NavLink>
 							</div>
-						</Link>
+				
 					);
 				})}
 			</div>

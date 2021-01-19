@@ -53,7 +53,7 @@ export const ChatList = ({ users, component }) => {
 			<div style={{ overflowY: 'auto' }}>
 				{users?.map((i, idx) => {
 					return (
-						<Link to={`/messanger/${i.userId || i.id}`} key={idx}>
+						<Link to={`/messenger/${i.userId || i.id}`} key={idx}>
 							<Grid container alignItems='center' className={classes.chatList__item}>
 								<Grid item>
 									<StyledBadge

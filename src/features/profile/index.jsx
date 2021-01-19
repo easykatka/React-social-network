@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfile, putNewAvatar, setFormEdit, setUserProfile } from '../../app/reducers/profile-reducer';
 import { useEffect } from 'react';
-import { Avatar, Grid, IconButton, Paper, Typography } from '@material-ui/core';
+import { Avatar, Button, Grid, IconButton, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { ProfileEditForm } from './profileEditForm';
 import { ProfileInfo } from './profileInfo';
 import { FriendButton } from '../components/friendButton';
@@ -65,8 +65,16 @@ const Profile = (props) => {
 				<Grid item xs={3}>
 					<Paper className={classes.avatar__block} elevation={0}>
 						<Avatar className={classes.avatar_img} alt='user foto' src={profile.photos?.large} />
-						{routerId ? (
+						{routerId ? (<div>
 							<FriendButton id={routerId} followed={profile.followed} />
+							<Link to={`/messenger/${routerId}`}>
+							<Button color='secondary' fullWidth variant='contained' style={{marginTop:6}}>
+								
+								PM
+							
+								</Button>
+								</Link>
+								</div>
 						) : (
 							<div>
 								<input

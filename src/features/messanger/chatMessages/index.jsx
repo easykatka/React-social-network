@@ -1,9 +1,6 @@
 import { Avatar, Box, Grid, makeStyles, Paper } from '@material-ui/core';
 import { useRef, useState } from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import messageSound from '../../../assets/sound/message.mp3';
-import useSound from 'use-sound';
 import { ChatForm } from '../chatForm';
 import React from 'react';
 
@@ -15,12 +12,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ChatMessages = ({ wsChannel, messages }) => {
+export const ChatMessages = ({ wsChannel, messages }) => { 
 	console.log('render chatmessages');
 	console.log(messages)
 	const messagesEndRef = useRef();
-	// const [play] = useSound(messageSound);
-	// const { id } = useSelector((state) => state.auth);
 	const classes = useStyles();
 	//скролл вниз
 	const scrollToBottom = () => {
@@ -34,7 +29,7 @@ export const ChatMessages = ({ wsChannel, messages }) => {
 			<Grid item>
 				<Grid style={{ overflowY: 'auto', height: 500, padding: 8 }}>
 					{messages?.map((i, idx) => (
-						<div style={{ display: 'flex', padding: '14px 0', borderBottom: '1px solid #40444b' }} key={idx}>
+						<div style={{ display: 'flex', padding: '14px 0', borderTop: '1px solid #40444b' }} key={idx}>
 							<Grid item>
 								<Avatar alt='avatar' src={i.photo || null} />
 							</Grid>

@@ -1,47 +1,31 @@
-import { Avatar, Grid, IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
-import { useRef, useEffect, useState } from 'react';
+import { Avatar, Grid, makeStyles } from '@material-ui/core';
+import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
-import { getMessages ,sendMessage } from '../../../app/reducers/dialogs-reducer';
-import SendRoundedIcon from '@material-ui/icons/SendRounded';
-import { useFormik } from 'formik';
+import { getMessages } from '../../../app/reducers/dialogs-reducer';
+import { PrivateForm } from '../privateForm';
+import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
+import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 
 const useStyles = makeStyles((theme) => ({
-	chatMessage__container: {
+	privateChat__container: {
 		backgroundColor: '#36393f',
 		padding: 15,
 		borderRadius: '0 15px 15px 0px',
-		height: 600
+		height: 600,
 	},
-	chatForm__container: {
-		backgroundColor: '#40444b',
-		alignItems: 'center',
-		marginTop: 20,
-		borderRadius: 7,
-	},
-	chatForm__input: {
-		color: 'white',
-		marginLeft: 15,
-		width: 500,
+	privateChat__messageBody: {
+		color: '#dcddde',
+		wordBreak: 'break-all',
 	},
 }));
-
 export const PrivateMessages = ({ routerId }) => {
-	console.log('render private messages');
-
 	const dispatch = useDispatch();
-	const { messages } = useSelector((state) => state.dialogs);
-	const messagesEndRef = useRef();
 	const classes = useStyles();
-	const { handleSubmit, handleChange, values ,resetForm  } = useFormik({
-		initialValues: {
-			message: '',
-		},
-		onSubmit: ({ message }) => { 
-			dispatch(sendMessage(routerId,message))
-			resetForm()
-		},
-	});
+	const { messages , dialogs } = useSelector((state) => state.dialogs);
+	const {id} = useSelector(state => state.auth)
+	console.log(id , dialogs , messages)
+	const messagesEndRef = useRef();
 
 	//скролл вниз
 	const scrollToBottom = () => {
@@ -50,46 +34,40 @@ export const PrivateMessages = ({ routerId }) => {
 	useEffect(() => dispatch(getMessages(routerId)), [routerId]);
 	useEffect(() => scrollToBottom(), [messages]);
 
-
-	
 	return (
-		<Grid item xs className={classes.chatMessage__container}>
+		<Grid item xs className={classes.privateChat__container}>
 			<Grid item>
 				<Grid style={{ overflowY: 'auto', height: 500, padding: 8 }}>
-					{messages.items
-						? messages.items.map((i, idx) => (
-								<div style={{ display: 'flex', padding: '14px 0', borderBottom: '1px solid #40444b' }} key={idx}>
-									<Grid item>
-										<Avatar alt='avatar' src={i.photo || null} />
-									</Grid>
-									<Grid item style={{ marginLeft: 10 }}>
-										<div style={{ color: 'white', fontWeight: 600 }}> {i.userName || i.senderName}</div>
-										<div style={{ color: '#dcddde', wordBreak: 'break-all' }}>{i.message || i.body} </div>
-									</Grid>
-									<div ref={messagesEndRef}></div>
+					{messages.items?.map((item, idx) => (
+						<div style={{ display: 'flex', padding: '14px 0', borderBottom: '1px solid #40444b' }} key={idx}>
+							<Grid item>
+								<Avatar alt='avatar' src={item.photo || null} />
+							</Grid>
+							<Grid item style={{ marginLeft: 10 }}>
+								<div style={{ color: 'white', fontWeight: 600 }}>
+									{item.senderName}
+									{item.addedAt}
 								</div>
-						  ))
-						: null}
+								<Grid className={classes.privateChat__messageBody}>
+									<Grid container direction='row' spacing={2} alignItems='center'>
+										<Grid item>{item.body}</Grid>
+										<Grid item>
+											{item.viewed ? (
+												<DoneAllRoundedIcon style={{ color: 'green' }} />
+											) : (
+												<DoneRoundedIcon style={{ color: 'orange' }} />
+											)}
+										</Grid>
+									</Grid>
+								</Grid>
+							</Grid>
+							<div ref={messagesEndRef}></div>
+						</div>
+					))}
 				</Grid>
 			</Grid>
-			<Grid container stlye={{ width: '100%' }}>
-				<Grid component='form' onSubmit={handleSubmit} className={classes.chatForm__container}>
-					<InputBase
-						className={classes.chatForm__input}
-						type='text'
-						autoFocus={true}
-						placeholder='white a message'
-						name='message'
-						onChange={handleChange}
-						value={values.message}
-						id='message'
-						endAdornment={
-							<IconButton type='submit'>
-								<SendRoundedIcon color='inherit' fontSize='small' />
-							</IconButton>
-						}
-					/>
-				</Grid>
+			<Grid container>
+				<PrivateForm routerId={routerId} />
 			</Grid>
 		</Grid>
 	);

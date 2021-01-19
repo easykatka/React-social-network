@@ -5,16 +5,15 @@ import { ChatMessages } from './chatMessages';
 import { ChatList } from './chatList';
 import { ChatNavBar } from './chatNavBar';
 import { withRouter } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { PrivateMessages } from './privateChat';
 
-const Messanger = ({ match: { params } }) => {
+const Messenger = ({ match: { params } }) => {
 	const [wsChannel, setWsChannel] = useState(null);
 	const [wsMessages, setWsMessages] = useState([]);
-	const {dialogs} = useSelector(state => state.dialogs)
+	const { dialogs } = useSelector((state) => state.dialogs);
 	const routerId = params.userId;
-
 
 	// подписка на канал
 	useEffect(() => {
@@ -36,6 +35,7 @@ const Messanger = ({ match: { params } }) => {
 			//убираем слушатель закрытия канала
 		};
 	}, []);
+	console.log(wsChannel);
 	// загружаем сообщения
 
 	// из всех сообщений мы оставляем только объекты с уникальным id
@@ -43,11 +43,13 @@ const Messanger = ({ match: { params } }) => {
 
 	useEffect(() => {
 		let messageHandler = (e) => {
+			debugger;
 			setWsMessages((prev) => [...prev, ...JSON.parse(e.data)]);
 		};
 		wsChannel?.addEventListener('message', messageHandler);
 		return () => {
 			wsChannel?.removeEventListener('message', messageHandler);
+			console.log('remove message');
 		};
 	}, [wsChannel]);
 	return (
@@ -57,7 +59,7 @@ const Messanger = ({ match: { params } }) => {
 				{/* если есть айди в роутере,то рисуется два компонента под чат с юзером */}
 				{routerId ? (
 					<>
-						<PrivateMessages routerId={routerId}/>
+						<PrivateMessages routerId={routerId} />
 					</>
 				) : (
 					<>
@@ -70,4 +72,4 @@ const Messanger = ({ match: { params } }) => {
 	);
 };
 
-export default withRouter(Messanger);
+export default withRouter(Messenger);

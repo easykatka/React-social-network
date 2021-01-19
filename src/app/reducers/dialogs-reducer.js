@@ -5,31 +5,31 @@ export const dialogsSlice = createSlice({
 	name: "dialogs",
 	initialState: {
 		dialogs: [],
-		isFetching:false,
-		messages:[],
+		isFetching: false,
+		messages: [],
 
-		
+
 	},
 	reducers: {
-		setIsFetching: (state, {payload}) => {
+		setIsFetching: (state, { payload }) => {
 			state.isFetching = payload;
 		},
-		setDialogs:(state,{payload}) => { 
+		setDialogs: (state, { payload }) => {
 			state.dialogs = payload
 		},
-		setMessages:(state,{payload}) => { debugger
+		setMessages: (state, { payload }) => {
 			state.messages = payload
 		},
-		setMessage:(state,payload) =>{
+		setMessage: (state, payload) => {
 			state.messages.push(payload)
 		},
-		
+
 	},
 });
 
-export const { setIsFetching ,setDialogs ,setMessages,setMessage} = dialogsSlice.actions;
+export const { setIsFetching, setDialogs, setMessages, setMessage } = dialogsSlice.actions;
 
-export const getDialogs = () => async (dispatch) => { 
+export const getDialogs = () => async (dispatch) => {
 	dispatch(setIsFetching(true));
 	const data = await dialogsAPI.getDialogs();
 	dispatch(setIsFetching(false));
@@ -41,12 +41,16 @@ export const getMessages = (id) => async (dispatch) => {
 	dispatch(setIsFetching(false));
 	dispatch(setMessages(data))
 }
-export const sendMessage = (userId,body) => async (dispatch) => {
+export const sendMessage = (userId, body) => async (dispatch) => {
 	await dialogsAPI.sendMessage(userId, body)
 	dispatch(getMessages(userId))
-
 	dispatch(setMessage)
+	// обновить chatnavbar
+	const data = await dialogsAPI.getDialogs()
+	dispatch(setDialogs(data))
+
 }
+
 
 
 

@@ -38,7 +38,7 @@ export const Header = () => {
 		id && dispatch(getAuthUser(id));
 	}, [dispatch, id]);
 	// список навигационных кнопок
-	const navTitles = ['profile', 'users', 'messanger'];
+	const navTitles = ['profile', 'users', 'messenger'];
 
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
@@ -48,7 +48,7 @@ export const Header = () => {
 					{navTitles.map((item) => {
 						return (
 							<Grid item key={item}>
-								<NavLink to={'/' + item} activeClassName='active'>
+								<NavLink to={'/' + item} activeClassName='header'>
 									<h2 className={classes.header__link}> {item.toLocaleUpperCase()}</h2>
 								</NavLink>
 							</Grid>

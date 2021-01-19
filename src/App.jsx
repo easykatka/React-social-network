@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Profile from "./features/profile";
-import Messanger from "./features/messanger"
+import Messenger from "./features/messanger"
 import { Preloader } from "./common/preloader";
 
 
@@ -44,9 +44,9 @@ function App() {
 						<Route exact path="/" render={() => <Redirect to={"/profile"} />} />
 						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={"/profile"} />} />
 						<Route exact path="/profile/:userId?" render={() => <Profile />} />
-						{/* <Route exact path='/dialogs/:userId?' render={() => <Messanger />} /> */}
+						{/* <Route exact path='/dialogs/:userId?' render={() => <Messenger />} /> */}
 						<Route exact path="/users" render={() => <Users />} />
-						<Route exact path="/messanger/:userId?" render={() => <Messanger/>} />
+						<Route exact path="/messenger/:userId?" render={() => <Messenger/>} />
 						<Route exact path="*" render={() => <div>NOT FOUND 404</div>} />
 					</Switch>
 				}

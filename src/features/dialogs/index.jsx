@@ -6,7 +6,7 @@ import { getDialogs, setDialogs } from '../../app/reducers/dialogs-reducer';
 import { ChatList } from '../chat/chatList';
 import { ChatMessages } from '../chat/chatMessages';
 
-export const Messanger = () => {
+export const Messenger = () => {
 	const {dialogs} = useSelector(state => state.dialogs)
 	const dispatch = useDispatch()
 
