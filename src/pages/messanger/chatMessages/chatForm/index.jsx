@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
 	chatForm__input: {
 		color: 'white',
 		marginLeft: 15,
-		width: 500,
+		width: 730,
 	},
 }));
 
 export const ChatForm = ({ wsChannel }) => {
-		const [readyStatus, setReadyStatus] = useState('pending');
+	const [readyStatus, setReadyStatus] = useState('pending');
 	const classes = useStyles();
 	const { handleSubmit, handleChange, values, resetForm } = useFormik({
 		initialValues: {
@@ -31,19 +31,17 @@ export const ChatForm = ({ wsChannel }) => {
 		},
 	});
 
-	useEffect(() => { 
-		const openHandler = () => { 
+	useEffect(() => {
+		const openHandler = () => {
 			setReadyStatus('ready');
-		}
-		
+		};
+
 		wsChannel?.addEventListener('open', openHandler);
-		return () => { 
+		return () => {
 			wsChannel?.removeEventListener('open', openHandler);
-			
 		};
 	}, [wsChannel]);
-
-
+	//TODO допилить readystatus
 	return (
 		<Grid container>
 			<Grid component='form' onSubmit={handleSubmit} className={classes.chatForm__container}>

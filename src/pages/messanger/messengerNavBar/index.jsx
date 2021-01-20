@@ -17,30 +17,31 @@ const useStyles = makeStyles((theme) => ({
 		height: 600,
 	},
 	chatNavBar__avatar: {
-		margin: 18,
+		margin: 11,
 		paddingLeft: 5,
 		'&:hover': {},
+	},
+	chatNavBar__pmContainer: {
+		overflowY: 'auto',
+		
 	},
 }));
 
 export const ChatNavBar = () => {
 	const { dialogs } = useSelector((state) => state.dialogs);
 	const dispatch = useDispatch();
-
 	useEffect(() => {
 		dispatch(getDialogs());
 	}, []);
-
-
 	const classes = useStyles();
 	return (
 		<div className={classes.chatNavBar__container}>
 			<h4>Chat rooms: </h4>
 			<NavLink to={'/messenger'} activeClassName='navchat'>
-				<Avatar src={devs} style={{ margin: 10 }} />
+				<Avatar src={devs} className={classes.chatNavBar__avatar} />
 			</NavLink>
 			<h4>PM: </h4>
-			<div style={{ overflowY: 'auto' }}>
+			<div className={classes.chatNavBar__pmContainer}>
 				{dialogs.map((item, idx) => {
 					return (
 						<div className={classes.chatNavBar__avatar} key={idx}>

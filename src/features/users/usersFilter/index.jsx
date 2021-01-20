@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/reducers/users-reducer';
 import TablePagination from '@material-ui/core/TablePagination';
-import { useDebounce } from '../../../hooks/useDebounce';
+import { useDebounce } from '../../../common/useDebounce'
 
 //TODO последовательные фетчи
 export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) => {

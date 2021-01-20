@@ -15,9 +15,8 @@ const Messenger = ({ match: { params } }) => {
 	const [wsMessages, setWsMessages] = useState([]);
 	const { dialogs } = useSelector((state) => state.dialogs);
 	const routerId = params.userId;
-
-	const recipient = dialogs.filter(item => item.id == routerId)[0]
-
+	const recipient = dialogs.filter((item) => item.id == routerId)[0];
+	const usersList = wsMessages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
 	// подписка на канал
 	useEffect(() => {
 		let ws;
@@ -38,11 +37,7 @@ const Messenger = ({ match: { params } }) => {
 			//убираем слушатель закрытия канала
 		};
 	}, []);
-
-	// загружаем сообщения
-
 	// из всех сообщений мы оставляем только объекты с уникальным id
-	const usersList = wsMessages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
 
 	useEffect(() => {
 		let messageHandler = (e) => {
@@ -57,11 +52,11 @@ const Messenger = ({ match: { params } }) => {
 		<div>
 			<Grid container direction='row' justify='center'>
 				<ChatNavBar dialogs={dialogs} />
-				{/* если есть айди в роутере,то рисуется два компонента под чат с юзером */}
+				{/* если есть айди в роутере,то рисуем чат */}
 				{routerId ? (
 					<>
 						<PrivateMessages routerId={routerId} recipient={recipient} />
-						<PrivateUserInfo recipient={recipient}/> 
+						<PrivateUserInfo recipient={recipient} />
 					</>
 				) : (
 					<>

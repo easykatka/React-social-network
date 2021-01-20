@@ -1,5 +1,7 @@
 import { Avatar, Badge, Grid, makeStyles, Typography, withStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Preloader } from '../../../common/preloader';
 const StyledBadge = withStyles((theme) => ({
 	badge: {
 		backgroundColor: '#44b700',
@@ -17,40 +19,44 @@ const StyledBadge = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
 	chatList__container: {
-		padding: '15px',
+		padding: '15px 0px',
 		background: '#2f3136',
 		color: 'white',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		borderRadius: '0 15px 15px 0px',
-		height: 600
+		height: 600,
 	},
 	chatList__item: {
 		color: '#8e9297',
 		margin: 5,
 		width: 250,
-		padding: 5,
+		padding: '10px 20px',
 
 		'&:hover': {
 			background: 'rgba(79,84,92,0.32)',
 			color: 'white',
 			borderRadius: 7,
-			padding: 5,
+			padding: '10px 20px',
 		},
 	},
 	chatList__avatar: {
 		width: 30,
 		height: 30,
 	},
+	chatList__usersContainer: {
+		overflowY: 'auto',
+	},
 }));
 
-export const ChatList = ({ users, component }) => {
+export const ChatList = ({ users }) => {
 	const classes = useStyles();
+
 	return (
 		<Grid item xs={3} className={classes.chatList__container}>
 			<h4>Users — {users?.length}</h4>
-			<div style={{ overflowY: 'auto' }}>
+			<div className={classes.chatList__usersContainer}>
 				{users?.map((i, idx) => {
 					return (
 						<Link to={`/messenger/${i.userId || i.id}`} key={idx}>
@@ -63,7 +69,7 @@ export const ChatList = ({ users, component }) => {
 											horizontal: 'right',
 										}}
 										variant='dot'>
-										<Avatar alt='Remy Sharp' src={i?.photo } className={classes.chatList__avatar} />
+										<Avatar alt='Remy Sharp' src={i?.photo} className={classes.chatList__avatar} />
 									</StyledBadge>
 								</Grid>
 								<p style={{ marginLeft: 12 }} variant='h6'>

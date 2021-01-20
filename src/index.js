@@ -6,12 +6,24 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
+import { createMuiTheme ,ThemeProvider} from "@material-ui/core";
+
+const theme = createMuiTheme({
+	palette: {
+		type: 'dark',
+	  primary: {
+		main: "#61dafb",
+	  },
+	},
+  });
 
 ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<Provider store={store}>
-				<App />
+				<ThemeProvider theme={theme}>
+					<App />
+				</ThemeProvider>
 			</Provider>
 		</BrowserRouter>
 	</React.StrictMode>,

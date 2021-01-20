@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 	chatForm__input: {
 		color: 'white',
 		marginLeft: 15,
-		width: 500,
+		width: 730,
 	},
 }));
 //* РАБОЧИЙ КОМПОНЕНТ
