@@ -31,7 +31,7 @@ export const ChatNavBar = () => {
 		dispatch(getDialogs());
 	}, []);
 
-	console.log(dialogs);
+
 	const classes = useStyles();
 	return (
 		<div className={classes.chatNavBar__container}>
@@ -43,15 +43,13 @@ export const ChatNavBar = () => {
 			<div style={{ overflowY: 'auto' }}>
 				{dialogs.map((item, idx) => {
 					return (
-					
-							<div className={classes.chatNavBar__avatar}>
-									<NavLink to={`/messenger/${item.id}`} key={item.id} activeClassName='navchat'>
-								<Badge badgeContent={item.newMessagesCount} color='secondary'> 
+						<div className={classes.chatNavBar__avatar} key={idx}>
+							<NavLink to={`/messenger/${item.id}`} key={item.id} activeClassName='navchat'>
+								<Badge badgeContent={item.newMessagesCount} color='secondary'>
 									<Avatar src={item?.photos?.small} />
 								</Badge>
-								</NavLink>
-							</div>
-				
+							</NavLink>
+						</div>
 					);
 				})}
 			</div>

@@ -37,17 +37,21 @@ export const getDialogs = () => async (dispatch) => {
 }
 export const getMessages = (id) => async (dispatch) => {
 	dispatch(setIsFetching(true));
-	const data = await dialogsAPI.getMessages(id);
+	const response = await dialogsAPI.getMessages(id);
 	dispatch(setIsFetching(false));
-	dispatch(setMessages(data))
+	dispatch(setMessages(response))
+	// обновить chatnavbar
+	const data = await dialogsAPI.getDialogs()
+	dispatch(setDialogs(data))
 }
 export const sendMessage = (userId, body) => async (dispatch) => {
 	await dialogsAPI.sendMessage(userId, body)
 	dispatch(getMessages(userId))
 	dispatch(setMessage)
-	// обновить chatnavbar
-	const data = await dialogsAPI.getDialogs()
-	dispatch(setDialogs(data))
+		// обновить chatnavbar
+		const data = await dialogsAPI.getDialogs()
+		dispatch(setDialogs(data))
+	
 
 }
 

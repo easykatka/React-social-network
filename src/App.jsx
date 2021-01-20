@@ -37,7 +37,6 @@ function App() {
 		<>
 			<Header />
 			<div
-				container
 				className={classes.app__container}>
 				{!isAuth ? <Login /> :
 					<Switch>

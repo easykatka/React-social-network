@@ -1,7 +1,7 @@
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import { Grid, IconButton, InputBase, makeStyles } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { sendMessage } from '../../../app/reducers/dialogs-reducer';
+import { sendMessage } from '../../../../app/reducers/dialogs-reducer';
 import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({

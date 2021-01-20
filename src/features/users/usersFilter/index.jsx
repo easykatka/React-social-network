@@ -7,7 +7,7 @@ import { useDebounce } from '../../../hooks/useDebounce';
 
 //TODO последовательные фетчи
 export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) => {
-	console.log('render userFilter');
+
 	const dispatch = useDispatch();
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
 	// получения списка пользователей и обновление его при изменении параметров

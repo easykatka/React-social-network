@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfile, putNewAvatar, setFormEdit, setUserProfile } from '../../app/reducers/profile-reducer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Avatar, Button, Grid, IconButton, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
@@ -42,15 +42,13 @@ const Profile = (props) => {
 	const routerId = props.match.params.userId;
 	const profileUserId = routerId || authUserId;
 	const dispatch = useDispatch();
-
-	console.log('render profile');
+	const [editMode, setEditMode] = useState(false);
 
 	// устанавливаем юзера ,демонтируем юзера
 	useEffect(() => {
 		if (profileUserId) dispatch(getUserProfile(profileUserId));
 		return () => dispatch(setUserProfile(null));
 	}, [dispatch, profileUserId]);
-
 	if (!profile) {
 		return <Preloader />;
 	}
@@ -92,7 +90,7 @@ const Profile = (props) => {
 									</IconButton>
 								</label>
 								{formEdit || (
-									<IconButton color='secondary' variant='contained' onClick={() => dispatch(setFormEdit(true))}>
+									<IconButton color='secondary' variant='contained' onClick={() => setEditMode(true)}>
 										<SettingsSharpIcon />
 									</IconButton>
 								)}
@@ -102,7 +100,7 @@ const Profile = (props) => {
 				</Grid>
 				{/* правый блок */}
 				<Grid item xs={5}>
-					<Paper className={classes.userInfo__block}>{formEdit ? <ProfileEditForm /> : <ProfileInfo routerId={routerId} />}</Paper>
+					<Paper className={classes.userInfo__block}>{editMode ? <ProfileEditForm setEditMode={setEditMode}/> : <ProfileInfo routerId={routerId} />}</Paper>
 				</Grid>
 			</Grid>
 		</>

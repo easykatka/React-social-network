@@ -56,6 +56,7 @@ export const putNewProfile = (profile) => async (dispatch) => {
 		dispatch(getUserProfile(profile.userId))
 		dispatch(getAuthUser(profile.userId))
 		dispatch(setFormEdit(false))
+		dispatch(setFormError(null))
 	} else if (data.resultCode === 1) {
 		const parsed = data.messages[0].match(/Contacts->(\w+)/)[1]
 		const slised = parsed[0].toLowerCase() + parsed.slice(1)

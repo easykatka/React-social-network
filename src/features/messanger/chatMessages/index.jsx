@@ -1,20 +1,19 @@
 import { Avatar, Box, Grid, makeStyles, Paper } from '@material-ui/core';
 import { useRef, useState } from 'react';
 import { useEffect } from 'react';
-import { ChatForm } from '../chatForm';
+import { ChatForm } from './chatForm';
 import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
 	chatMessage__container: {
 		backgroundColor: '#36393f',
 		padding: 15,
-		// height: "100%",
+		
 	},
 }));
 
 export const ChatMessages = ({ wsChannel, messages }) => { 
-	console.log('render chatmessages');
-	console.log(messages)
+
 	const messagesEndRef = useRef();
 	const classes = useStyles();
 	//скролл вниз

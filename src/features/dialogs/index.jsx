@@ -49,7 +49,6 @@ export const Messenger = () => {
 		totalCount: 0,
 	};
 
-	console.log(dialogs)
 	return (
 		<>
 			{/* <ChatMessages messages={messages} /> */}

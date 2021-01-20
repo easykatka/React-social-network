@@ -1,4 +1,4 @@
-import { Grid, IconButton, InputBase, makeStyles, Paper } from '@material-ui/core';
+import { Grid, IconButton, InputBase, makeStyles } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ChatForm = ({ wsChannel }) => {
-	const [readyStatus, setReadyStatus] = useState('pending');
+		const [readyStatus, setReadyStatus] = useState('pending');
 	const classes = useStyles();
 	const { handleSubmit, handleChange, values, resetForm } = useFormik({
 		initialValues: {
@@ -31,18 +31,18 @@ export const ChatForm = ({ wsChannel }) => {
 		},
 	});
 
-	useEffect(() => { debugger
+	useEffect(() => { 
 		const openHandler = () => { 
 			setReadyStatus('ready');
 		}
 		
 		wsChannel?.addEventListener('open', openHandler);
-		return () => { debugger
+		return () => { 
 			wsChannel?.removeEventListener('open', openHandler);
-			console.log('remove open');
+			
 		};
 	}, [wsChannel]);
-	console.log(readyStatus)
+
 
 	return (
 		<Grid container>
