@@ -1,55 +1,18 @@
-import { Avatar, Grid, makeStyles } from '@material-ui/core';
+import { Avatar, Grid } from '@material-ui/core';
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
-import { PrivateForm } from './privateForm';
+import { PrivateForm } from './privateForm/privateForm';
 import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
 import { getMessages } from '../../../app/reducers/dialogs-reducer';
 import { dateHelper } from '../../../common/dateHelper';
 import { Preloader } from '../../../common/preloader';
+import { privateMessages } from './privateMessages_styles';
 
-const useStyles = makeStyles((theme) => ({
-	privateChat__container: {
-		backgroundColor: '#36393f',
-		padding: 15,
-		height: 600,
-		position: 'relative',
-	},
-	privateChat__messageBody: {
-		color: '#dcddde',
-		wordBreak: 'break-all',
-	},
-	privateChat__doneIcon: {
-		color: 'orange',
-		fontSize: 12,
-	},
-	privateChat__doneAllIcon: {
-		color: 'green',
-		fontSize: 12,
-	},
-	privateChat__addedAt: {
-		fontSize: 10,
-		color: 'grey',
-	},
-	privateChat__senderName: {
-		color: '#fff',
-		fontWeight: 700,
-	},
-	privateChat__messageContent: {
-		display: 'flex',
-		padding: '14px 0',
-		borderTop: '1px solid #40444b',
-	},
-	privateChat__messageContainer: {
-		overflowY: 'auto',
-		height: 500,
-		padding: 8,
-	},
-}));
 export const PrivateMessages = ({ routerId, recipient }) => {
 	const dispatch = useDispatch();
-	const classes = useStyles();
+	const classes = privateMessages();
 	const { messages, dialogsFetching } = useSelector((state) => state.dialogs);
 	const { AuthUser } = useSelector((state) => state.profile);
 	const messagesEndRef = useRef();
@@ -57,7 +20,7 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 	const scrollToBottom = () => {
 		messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
 	};
-	useEffect(() => dispatch(getMessages(routerId)), [routerId]);
+	useEffect(() => dispatch(getMessages(routerId)), [routerId,dispatch]);
 	useEffect(() => scrollToBottom(), [messages]);
 
 	//* РАБОЧИЙ КОМПОНЕНТ

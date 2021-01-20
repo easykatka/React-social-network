@@ -15,7 +15,7 @@ export const usersSlice = createSlice({
 		followingInProgress: [], // array of followed users
 		filter: {
 			searchTerm: "",
-			friend: null,
+			friend: 'null',
 		}
 	},
 	reducers: {
@@ -24,7 +24,6 @@ export const usersSlice = createSlice({
 		},
 		setUsers: (state, action) => {
 			state.users = action.payload;
-
 		},
 		setCurrentPage: (state, action) => {
 			state.currentPage = action.payload;
@@ -52,15 +51,11 @@ export const usersSlice = createSlice({
 		setFilter: (state, { payload }) => {
 			state.currentPage = 0
 			state.filter = { ...state.filter, ...payload }
-
 		},
-
-
 	}
 });
 //actions
 export const { setFilter,
-
 	setCurrentPage,
 	setPageSize,
 	setIsFetching,
@@ -72,7 +67,6 @@ export const { setFilter,
 //thunk
 export const getUsers = (page, pageSize, searchTerm, friend) => {
 	return async (dispatch) => {
-
 		dispatch(setIsFetching(true));
 		dispatch(setCurrentPage(page));
 		const data = await usersAPI.getUsers(page + 1, pageSize, searchTerm, friend);
@@ -81,18 +75,25 @@ export const getUsers = (page, pageSize, searchTerm, friend) => {
 		dispatch(setTotalUsersCount(data.totalCount));
 	};
 };
-export const followUser = (userId, follow) => {
-
+export const getFriends = (friend) => {
 	return async (dispatch) => {
-		dispatch(setFollowingInProgress({ isFetching: true, userId }))
-		const response = !follow ? await usersAPI.followAPI(userId) : await usersAPI.unFollowAPI(userId)
-		const followStatus = await profileAPI.getFollowStatus(userId)
-		if (response.resultCode === 0) {
-			dispatch(toggleFollow(userId))
-			dispatch(setUserFollowStatus(followStatus))
-		}
-		dispatch(setFollowingInProgress({ isFetching: false, userId }))
-	}
-}
+		dispatch(setIsFetching(true));
+		const data = await usersAPI.getUsers(1 , 100 , '' , friend);
+		dispatch(setUsers(data.items))
+		dispatch(setIsFetching(false));
 
-export default usersSlice.reducer;
+	}}
+	export const followUser = (userId, follow) => {
+		return async (dispatch) => {
+			dispatch(setFollowingInProgress({ isFetching: true, userId }))
+			const response = !follow ? await usersAPI.followAPI(userId) : await usersAPI.unFollowAPI(userId)
+			const followStatus = await profileAPI.getFollowStatus(userId)
+			if (response.resultCode === 0) {
+				dispatch(toggleFollow(userId))
+				dispatch(setUserFollowStatus(followStatus))
+			}
+			dispatch(setFollowingInProgress({ isFetching: false, userId }))
+		}
+	}
+
+	export default usersSlice.reducer;

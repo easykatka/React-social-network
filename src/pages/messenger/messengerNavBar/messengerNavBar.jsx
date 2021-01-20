@@ -1,31 +1,10 @@
-import { Avatar, Badge, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Badge } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { getDialogs } from '../../../app/reducers/dialogs-reducer';
 import devs from '../../../assets/img/devs.jpg';
-
-const useStyles = makeStyles((theme) => ({
-	chatNavBar__container: {
-		padding: '15px',
-		background: '#2f3136',
-		color: 'white',
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		borderRadius: '15px 0px 0px 15px',
-		height: 600,
-	},
-	chatNavBar__avatar: {
-		margin: 11,
-		paddingLeft: 5,
-		'&:hover': {},
-	},
-	chatNavBar__pmContainer: {
-		overflowY: 'auto',
-		
-	},
-}));
+import { messengerNavBar } from './messengerNavBar_styles';
 
 export const ChatNavBar = () => {
 	const { dialogs } = useSelector((state) => state.dialogs);
@@ -33,7 +12,7 @@ export const ChatNavBar = () => {
 	useEffect(() => {
 		dispatch(getDialogs());
 	}, []);
-	const classes = useStyles();
+	const classes = messengerNavBar();
 	return (
 		<div className={classes.chatNavBar__container}>
 			<h4>Chat rooms: </h4>

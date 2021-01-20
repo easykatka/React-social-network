@@ -1,21 +1,20 @@
 import { Grid } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { ChatMessages } from './chatMessages';
-import { ChatList } from './chatUsersList';
-import { ChatNavBar } from './messengerNavBar';
+import { ChatMessages } from './chatMessages/chatMessages';
+import { ChatNavBar } from './messengerNavBar/messengerNavBar';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-import { PrivateMessages } from './privateMessages';
+import { PrivateMessages } from './privateMessages/privateMessages';
 import { PrivateUserInfo } from './privateUserInfo';
+import { ChatUsersList } from './chatUsersList/chatUsersList';
 
 const Messenger = ({ match: { params } }) => {
 	const [wsChannel, setWsChannel] = useState(null);
 	const [wsMessages, setWsMessages] = useState([]);
 	const { dialogs } = useSelector((state) => state.dialogs);
 	const routerId = params.userId;
-	const recipient = dialogs.filter((item) => item.id == routerId)[0];
+	const recipient = dialogs.filter((item) => item.id.toString() === routerId)[0];
 	const usersList = wsMessages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
 	// подписка на канал
 	useEffect(() => {
@@ -37,7 +36,6 @@ const Messenger = ({ match: { params } }) => {
 			//убираем слушатель закрытия канала
 		};
 	}, []);
-	// из всех сообщений мы оставляем только объекты с уникальным id
 
 	useEffect(() => {
 		let messageHandler = (e) => {
@@ -49,23 +47,20 @@ const Messenger = ({ match: { params } }) => {
 		};
 	}, [wsChannel]);
 	return (
-		<div>
-			<Grid container direction='row' justify='center'>
-				<ChatNavBar dialogs={dialogs} />
-				{/* если есть айди в роутере,то рисуем чат */}
-				{routerId ? (
-					<>
-						<PrivateMessages routerId={routerId} recipient={recipient} />
-						<PrivateUserInfo recipient={recipient} />
-					</>
-				) : (
-					<>
-						<ChatMessages wsChannel={wsChannel} messages={wsMessages} />
-						<ChatList users={usersList} />
-					</>
-				)}
-			</Grid>
-		</div>
+		<Grid container direction='row' justify='center'>
+			<ChatNavBar dialogs={dialogs} />
+			{routerId ? (
+				<>
+					<PrivateMessages routerId={routerId} recipient={recipient} />
+					<PrivateUserInfo recipient={recipient} />
+				</>
+			) : (
+				<>
+					<ChatMessages wsChannel={wsChannel} messages={wsMessages} />
+					<ChatUsersList users={usersList} />
+				</>
+			)}
+		</Grid>
 	);
 };
 

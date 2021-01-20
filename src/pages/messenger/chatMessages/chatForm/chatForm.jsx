@@ -1,26 +1,13 @@
-import { Grid, IconButton, InputBase, makeStyles } from '@material-ui/core';
+import { Grid, IconButton, InputBase } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import { useFormik } from 'formik';
-
-const useStyles = makeStyles((theme) => ({
-	chatForm__container: {
-		backgroundColor: '#40444b',
-		alignItems: 'center',
-		marginTop: 20,
-		borderRadius: 7,
-	},
-	chatForm__input: {
-		color: 'white',
-		marginLeft: 15,
-		width: 730,
-	},
-}));
+import { chatForm } from './chatForm_styles';
 
 export const ChatForm = ({ wsChannel }) => {
 	const [readyStatus, setReadyStatus] = useState('pending');
-	const classes = useStyles();
+	const classes = chatForm();
 	const { handleSubmit, handleChange, values, resetForm } = useFormik({
 		initialValues: {
 			message: '',

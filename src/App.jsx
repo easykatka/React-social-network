@@ -1,14 +1,14 @@
 import React from 'react';
 import { Header } from './features/header';
-import { Login } from './features/login';
+import { Login } from './pages/login';
 import { Users } from './features/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { init } from './app/reducers/app-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import Profile from './features/profile';
-import Messenger from './pages/messanger';
+import Profile from './features/profile/Profile';
+import Messenger from './pages/messenger/messenger';
 import { Preloader } from './common/preloader';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,8 +41,8 @@ function App() {
 						<Route exact path='/' render={() => <Redirect to={'/profile'} />} />
 						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={'/profile'} />} />
 						<Route exact path='/profile/:userId?' render={() => <Profile />} />
-						{/* <Route exact path='/dialogs/:userId?' render={() => <Messenger />} /> */}
 						<Route exact path='/users' render={() => <Users />} />
+						<Route exact path={'/messenger/' + authUserId} render={() => <Redirect to={'/messenger'} />} />
 						<Route exact path='/messenger/:userId?' render={() => <Messenger />} />
 						<Route exact path='*' render={() => <div>NOT FOUND 404</div>} />
 					</Switch>

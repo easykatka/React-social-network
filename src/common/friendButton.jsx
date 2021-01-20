@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { followUser } from '../../app/reducers/users-reducer';
+import { followUser } from '../app/reducers/users-reducer';
 import React from 'react';
 
 export const FriendButton = ({ id, followed }) => {

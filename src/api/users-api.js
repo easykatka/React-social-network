@@ -2,7 +2,7 @@ import { instance } from "./api";
 
 
 export const usersAPI = {
-	getUsers(currentPage = 1, pageSize = 10 , searchTerm='', friend) {
+	getUsers(currentPage = 1, pageSize = 100, searchTerm = '', friend) {
 		return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${searchTerm}&friend=${friend}`)
 			.then(res => res.data)
 	},
@@ -12,5 +12,5 @@ export const usersAPI = {
 	unFollowAPI(userId) {
 		return instance.delete(`follow/${userId}`).then(res => res.data)
 	}
-	
+
 }

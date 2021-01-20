@@ -3,17 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/reducers/users-reducer';
 import TablePagination from '@material-ui/core/TablePagination';
-import { useDebounce } from '../../../common/useDebounce'
+import { useDebounce } from '../../../common/useDebounce';
 
 //TODO последовательные фетчи
 export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) => {
-
 	const dispatch = useDispatch();
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
 	// получения списка пользователей и обновление его при изменении параметров
 	useEffect(() => {
 		dispatch(getUsers(currentPage, pageSize, debouncedSearchTerm, filter.friend));
-	}, [currentPage, pageSize, debouncedSearchTerm, filter.friend]);
+	}, [dispatch, currentPage, pageSize, debouncedSearchTerm, filter.friend]);
 	const handleChangePage = (event, newPage) => {
 		dispatch(setCurrentPage(newPage));
 	};

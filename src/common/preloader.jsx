@@ -7,11 +7,13 @@ export const Preloader = () => {
 				size={200}
 				color='primary'
 				style={{
+					
 					position:'absolute',
 					top: '50%',
 					left: '50%',
 					marginLeft: '-100px',
 					marginTop: '-100px',
+					
 				}}
 			/>
 	

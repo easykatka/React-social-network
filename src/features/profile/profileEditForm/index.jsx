@@ -1,18 +1,17 @@
 import { Grid, Button, TextField, Typography, Checkbox, FormControlLabel } from '@material-ui/core';
 import { useFormik } from 'formik';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { putNewProfile, setFormEdit, setFormError } from '../../../app/reducers/profile-reducer';
+import { putNewProfile, setFormEdit } from '../../../app/reducers/profile-reducer';
 
 //TODO починить конект формы , сделать валидацию для контактов
-export const ProfileEditForm = ({setEditMode}) => {
+export const ProfileEditForm = ({ setEditMode }) => {
 	const { profile, formError } = useSelector((state) => state.profile);
 	const dispatch = useDispatch();
-	const { handleSubmit, handleChange, values ,submitForm } = useFormik({
+	const { handleSubmit, handleChange, values } = useFormik({
 		initialValues: profile,
 		onSubmit: (e) => {
 			dispatch(putNewProfile(e));
-			setEditMode(false)
+			setEditMode(false);
 		},
 	});
 	//! ошибки формы не обнуляются при переходе

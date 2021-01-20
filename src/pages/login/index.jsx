@@ -1,44 +1,17 @@
 import { useFormik } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
+
 import { putLogin } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
-import { TextField, Button, Checkbox, Grid, FormControlLabel, Typography, Paper } from '@material-ui/core/';
+import { TextField, Button, Checkbox, Grid, FormControlLabel, Typography } from '@material-ui/core/';
 import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
 import * as Yup from 'yup';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
-const useStyles = makeStyles((theme) => ({
-	login__formContainer: {
-		padding: theme.spacing(5),
-		flexDirection: 'column',
-		textAlign: 'center',
-		margin:'0 auto',
-		width:400,color:'white',
-		'&>*': { paddingBottom: theme.spacing(1) },
-	},
-	login__icon: {
-		fontSize: 130,
-		width: '100%',
-		color: '#61dafb',
-	},
-	login__captcha: { margin: '0 auto', width: '100px' },
-	login__error: {
-		color: 'red',
-	},
-	login__container: {
-		height: 600,
-		width:400,
-		margin:'0 auto',
-		background: '#2f3136',
-		borderRadius: '15px',
-		color:'white'
-	},
-}));
+import { loginStyles } from './login_styles';
 
 export const Login = () => {
 	const { captchaUrl, errorMessage } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
-	const classes = useStyles();
+	const classes = loginStyles();
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
 		initialValues: {
 			login: '',
@@ -57,7 +30,6 @@ export const Login = () => {
 			dispatch(putLogin(login, password, rememberMe, captcha));
 		},
 	});
-	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
 		<div className={classes.login__container}>
 			<form onSubmit={handleSubmit}>
