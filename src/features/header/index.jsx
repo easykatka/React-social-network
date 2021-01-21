@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 		margin: '15px auto',
 		display: 'flex',
 		alignItems: 'center',
+		position:'sticky'
 	},
 	header__profile: {
 		justifyContent: 'flex-end',
@@ -43,7 +44,7 @@ export const Header = () => {
 
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
-		<AppBar position='sticky' className={classes.header}>
+		<AppBar  className={classes.header}>
 			<Grid className={classes.header__container}>
 				<Grid container spacing={6}>
 					{navTitles.map((item) => {

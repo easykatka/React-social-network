@@ -1,98 +1,56 @@
 import React from 'react';
-import { Button, Grid, Input, Typography } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { Checkbox, FormControlLabel, Grid, IconButton, Radio } from '@material-ui/core';
 import { useSelector, useDispatch } from 'react-redux';
-import { putNewStatus } from '../../../app/reducers/profile-reducer';
-import IconButton from '@material-ui/core/IconButton';
-import SaveIcon from '@material-ui/icons/Save';
-import EditIcon from '@material-ui/icons/Edit';
-import CloseIcon from '@material-ui/icons/Close';
+import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
 
-export const ProfileInfo = ({ routerId }) => {
-	const { status, profile } = useSelector((state) => state.profile);
-	const [editMode, setEditMode] = useState(false);
-	const [userStatus, setUserStatus] = useState(status);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		setUserStatus(status);
-	}, [status]);
+export const ProfileInfo = () => {
+	const { profile } = useSelector((state) => state.profile);
 
-	const deactivateMode = (action) => {
-		if (!action) {
-			setUserStatus(status);
-			setEditMode(false);
-		} else {
-			setEditMode(false);
-			dispatch(putNewStatus(userStatus));
-		}
-	};
-	const onStatusChange = (e) => {
-		setUserStatus(e.currentTarget.value);
-	};
-
+	const isContacts = Object.values(profile.contacts).find((i) => !!i);
+	console.log(isContacts);
 	return (
-		// NAME
-		<Grid container direction='column'>
-			<Grid item xs>
-				<Typography variant='h5'>{profile.fullName?.toUpperCase()}</Typography>
-			</Grid>
-			{/* STATUS */}
-			<Grid item>
-				{editMode && !routerId ? (
-					<div>
-						<Input autoFocus={true} onChange={onStatusChange} value={userStatus} />
-						<IconButton onClick={() => deactivateMode(true)}>
-							<SaveIcon fontSize='small' color='primary' />
-						</IconButton>
-						<IconButton color='inherit' onClick={() => deactivateMode(false)}>
-							<CloseIcon fontSize='small' color='secondary' />
-						</IconButton>
-					</div>
-				) : (
-					<Grid>
-						<Typography
-							variant='body1'
-							style={{ cursor: 'pointer', color: 'grey' }}
-							onClick={() => {
-								setEditMode(true);
-							}}>
-							{status}
-							{!routerId && <EditIcon fontSize='small' color='inherit' />}
-						</Typography>
-					</Grid>
-				)}
-				<hr />
-				<Grid item xs={12} md={6}>
-					<Typography variant='h6' color={profile?.lookingForAJob ? 'primary' : 'secondary'}>
-						{profile?.lookingForAJob ? 'Im looking for a job' : 'Im not looking for a job'}
-					</Typography>
+		<Grid container direction='column' alignItems='center' justify='space-around' style={{ height: 600, padding: 20 }}>
+			{profile?.lookingForAJob && (
+				<Grid item xs={3} style={{ color: 'grey', textAlign: 'center' }}>
+					<h2 style={{ color: 'white' }}>About me:</h2>
+					<p>{profile?.aboutMe}</p>
 				</Grid>
-				<hr />
-				<Grid item xs={12} md={6}>
-					<Typography variant='h5'> About me </Typography>
-					<Typography> {profile?.aboutMe} </Typography>
+			)}
+			{profile?.lookingForAJobDescription && (
+				<Grid item xs={3} s style={{ color: 'grey', textAlign: 'center' }}>
+					<h2 style={{ color: 'white' }}> Skills: </h2>
+					<p>{profile?.lookingForAJobDescription}</p>
+					
+
+					<FormControlLabel
+						value='best'
+						control={<Radio checked={profile?.lookingForAJob} color='primary' disabled />}
+						label='Looking for a job'
+					/>
 				</Grid>
-				<Grid item xs={12} md={6}>
-					<Typography variant='h5'> Skills </Typography>
-					<Typography>{profile?.lookingForAJobDescription}</Typography>
+			)}
+			{isContacts && (
+				<Grid item xs={3} style={{ color: 'grey', textAlign: 'center' }}>
+					<h2 style={{ color: 'white' }}>Contacts:</h2>
+					<p>
+						{profile.contacts &&
+							Object.keys(profile.contacts).map((key) => {
+								//роутер убирает двоеточие,поэтому пока что так
+								let str = profile.contacts[key] !== null && profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
+								return (
+									profile.contacts[key] && (
+										<Grid key={key} item>
+											<a href={`//${str}`}> {profile.contacts[key]} </a>
+										</Grid>
+									)
+								);
+							})}
+					</p>
 				</Grid>
-			</Grid>
-			<Typography variant='h5'> Contacts </Typography>
-			<Grid container direction='column'>
-				{profile.contacts
-					? Object.keys(profile.contacts).map((key) => {
-							//роутер убирает двоеточие,поэтому пока что так
-							let str = profile.contacts[key] !== null && profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
-							return (
-								profile.contacts[key] && (
-									<Grid key={key} item>
-										<Button href={`//${str}`}> {profile.contacts[key]} </Button>
-									</Grid>
-								)
-							);
-					  })
-					: null}
-			</Grid>
+			)}{' '}
+			<IconButton color='secondary' style={{ marginBottom: 20 }} variant='contained'>
+				<SettingsSharpIcon />
+			</IconButton>
 		</Grid>
 	);
 };

@@ -5,15 +5,15 @@ import React from 'react';
 import { PrivateForm } from './privateForm/privateForm';
 import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
-import { getMessages, getNewMessagesCount } from '../../../app/reducers/dialogs-reducer';
+import { getMessages } from '../../../app/reducers/dialogs-reducer';
 import { dateHelper } from '../../../common/dateHelper';
-import { Preloader } from '../../../common/preloader';
+import { Preloader2 } from '../../../common/preloader2';
 import { privateMessages } from './privateMessages_styles';
 
 export const PrivateMessages = ({ routerId, recipient }) => {
 	const dispatch = useDispatch();
 	const classes = privateMessages();
-	const { messages, dialogsFetching } = useSelector((state) => state.dialogs);
+	const { messages, messagesFething } = useSelector((state) => state.dialogs);
 	const { AuthUser } = useSelector((state) => state.profile);
 	const messagesEndRef = useRef();
 	//скролл вниз
@@ -24,12 +24,11 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 		dispatch(getMessages(routerId));
 	}, [routerId, dispatch]);
 	useEffect(() => scrollToBottom(), [messages]);
-
-	//* РАБОЧИЙ КОМПОНЕНТ
+	console.log(messagesFething)
 	return (
 		<Grid item xs className={classes.privateChat__container}>
-			{dialogsFetching ? (
-				<Preloader />
+			{messagesFething ? (
+				<Preloader2 />
 			) : (
 				<>
 					<Grid className={classes.privateChat__messageContainer}>

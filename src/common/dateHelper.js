@@ -1,16 +1,22 @@
 
-export const dateHelper = (date) =>{
-const currentDate = new Date().toISOString().substring(0, 10);
-const yesterdayDate = new Date(Date.now()-86400000).toISOString().substring(0, 10)
+export const dateHelper = (date) => {
+	// работает,но че-т хрень какая-то)
+	
+	const ruTime = new Date(date).getTime()
+	const currentTime = new Date(ruTime+10800000).toLocaleTimeString('ru', {hour: '2-digit', minute:'2-digit'})
+	const formatedDate = new Date(ruTime+10800000).toLocaleDateString()
+	const currentDate = new Date().toLocaleDateString()
+	const yesterdayDate = new Date(Date.now() - 75600000).toLocaleDateString()
 
-const visibleDate = 
-date.substring(0, 10) === currentDate ?
- 'today ' + date.substr(11, 5)
- : 
- date.substring(0, 10) === yesterdayDate ?
- 'yesterday ' + date.substr(11, 5)
- :
- date.substr(0, 10).replaceAll('-', '/');
 
-return visibleDate
+	const visibleDate =
+		formatedDate === currentDate ?
+			'today ' + currentTime
+			:
+			formatedDate === yesterdayDate ?
+				'yesterday ' + currentTime
+				:
+				formatedDate
+
+	return visibleDate
 }
