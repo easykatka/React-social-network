@@ -5,7 +5,7 @@ import React from 'react';
 import { PrivateForm } from './privateForm/privateForm';
 import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
-import { getMessages } from '../../../app/reducers/dialogs-reducer';
+import { getMessages, getNewMessagesCount } from '../../../app/reducers/dialogs-reducer';
 import { dateHelper } from '../../../common/dateHelper';
 import { Preloader } from '../../../common/preloader';
 import { privateMessages } from './privateMessages_styles';
@@ -20,7 +20,9 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 	const scrollToBottom = () => {
 		messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
 	};
-	useEffect(() => dispatch(getMessages(routerId)), [routerId,dispatch]);
+	useEffect(() => {
+		dispatch(getMessages(routerId));
+	}, [routerId, dispatch]);
 	useEffect(() => scrollToBottom(), [messages]);
 
 	//* РАБОЧИЙ КОМПОНЕНТ

@@ -6,8 +6,8 @@ import { ChatNavBar } from './messengerNavBar/messengerNavBar';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PrivateMessages } from './privateMessages/privateMessages';
-import { PrivateUserInfo } from './privateUserInfo';
-import { ChatUsersList } from './chatUsersList/chatUsersList';
+import { PrivateUserInfo } from './privateUserInfo/privateUserInfo';
+import { ChatUsersList } from './chatUsersList/chatUsersList'
 
 const Messenger = ({ match: { params } }) => {
 	const [wsChannel, setWsChannel] = useState(null);
@@ -48,7 +48,9 @@ const Messenger = ({ match: { params } }) => {
 	}, [wsChannel]);
 	return (
 		<Grid container direction='row' justify='center'>
+				
 			<ChatNavBar dialogs={dialogs} />
+		
 			{routerId ? (
 				<>
 					<PrivateMessages routerId={routerId} recipient={recipient} />
@@ -57,9 +59,11 @@ const Messenger = ({ match: { params } }) => {
 			) : (
 				<>
 					<ChatMessages wsChannel={wsChannel} messages={wsMessages} />
+				
 					<ChatUsersList users={usersList} />
 				</>
 			)}
+			
 		</Grid>
 	);
 };

@@ -1,17 +1,18 @@
-import { putNewStatus } from '../../../app/reducers/profile-reducer';
+import { putNewStatus } from '../../../../app/reducers/profile-reducer';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFriends } from '../../../app/reducers/users-reducer';
-import {randomArray} from '../../../common/randomArray'
+import { getFriends } from '../../../../app/reducers/users-reducer';
 
 
 
 
-export const useProfileMain = () => {
+
+export const useStatus = () => {
 	const [editMode, setEditMode] = useState(false);
 	const [userStatus, setUserStatus] = useState(null);
 	const { status} = useSelector((state) => state.profile);
 	const {users} = useSelector((state) =>state.users)
+	
 	const dispatch = useDispatch();
 	useEffect(() => {
 		setUserStatus(status);
@@ -20,7 +21,7 @@ export const useProfileMain = () => {
 		dispatch(getFriends(true))
 	}, []);
 
-	const deactivateMode = (action) => () => { debugger
+	const deactivateMode = (action) => () => {
 		if (!action) {
 			setUserStatus(status);
 			setEditMode(false);
@@ -32,7 +33,7 @@ export const useProfileMain = () => {
 	const onStatusChange = (e) => {
 		setUserStatus(e.currentTarget.value);
 	};
-	const randomUsers = users && randomArray (users, 6);
+	
 
-	return [onStatusChange,deactivateMode,editMode,setEditMode,userStatus,status ,users,randomUsers]
+	return [onStatusChange,deactivateMode,editMode,setEditMode,userStatus,status ,users]
 }

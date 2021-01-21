@@ -32,8 +32,12 @@ a.header > * {
 a.navchat {
 
 }
+a:hover {
+	color: #61dafb;
+}
 a:hover > * {
 	cursor: pointer;
+
 }
 
 /* Let's get this party started */

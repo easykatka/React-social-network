@@ -1,30 +1,27 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Avatar, Grid } from '@material-ui/core';
+import { AppBar, Avatar, Badge, Grid } from '@material-ui/core';
 import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser } from '../../app/reducers/profile-reducer';
 import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import React from 'react';
+import { getNewMessagesCount } from '../../app/reducers/dialogs-reducer';
 
 const useStyles = makeStyles((theme) => ({
 	header__container: {
 		color: 'white',
 		width: 1200,
-		margin: '10px auto',
+		margin: '15px auto',
 		display: 'flex',
 		alignItems: 'center',
 	},
 	header__profile: {
 		justifyContent: 'flex-end',
 		alignItems: 'center',
-		'&>*>a:hover': { color: '#61dafb' },
 	},
 	header: {
 		background: 'linear-gradient(to top, #232526, #414345)',
-	},
-	header__link: {
-		'&:hover': { color: '#61dafb' },
 	},
 }));
 
@@ -33,11 +30,15 @@ export const Header = () => {
 	const AuthUser = useSelector((state) => state.profile.AuthUser);
 	const { isAuth, id } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
-	// если залогинились,диспатчип юзера,получаем аватарку
+	const { newMessagesCount } = useSelector((state) => state.dialogs);
+
 	React.useEffect(() => {
-		id && dispatch(getAuthUser(id));
+		if (id) {
+			dispatch(getAuthUser(id));
+			dispatch(getNewMessagesCount());
+		}
 	}, [dispatch, id]);
-	// список навигационных кнопок
+
 	const navTitles = ['profile', 'users', 'messenger'];
 
 	//* РАБОЧИЙ КОМПОНЕНТ
@@ -49,7 +50,7 @@ export const Header = () => {
 						return (
 							<Grid item key={item}>
 								<NavLink to={'/' + item} activeClassName='header'>
-									<h2 className={classes.header__link}> {item.toLocaleUpperCase()}</h2>
+									<h2> {item.toLocaleUpperCase()}</h2>
 								</NavLink>
 							</Grid>
 						);
@@ -73,7 +74,15 @@ export const Header = () => {
 							</a>
 						</Grid>
 						<Grid item>
-							<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
+							{newMessagesCount ? (
+								<Link to={`/messenger`}>
+									<Badge badgeContent={newMessagesCount} color='secondary'>
+										<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
+									</Badge>
+								</Link>
+							) : (
+								<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
+							)}
 						</Grid>
 						<Grid item>
 							<a>

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { authAPI } from '../../api/auth-api'
 
+
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
@@ -12,15 +13,9 @@ export const authSlice = createSlice({
 		errorMessage: null,
 	},
 	reducers: {
-		setCaptchaUrl: (state, action) => {
-			state.captchaUrl = action.payload
-		},
-		setAuthUserData: (state, action) => {
-			return { state, ...action.payload }
-		},
-		setErrorMessage: (state, action) => {
-			state.errorMessage = action.payload
-		},
+		setCaptchaUrl: (state, action) => { state.captchaUrl = action.payload },
+		setAuthUserData: (state, action) => { return { state, ...action.payload } },
+		setErrorMessage: (state, action) => { state.errorMessage = action.payload },
 	},
 })
 // экшины
@@ -38,7 +33,7 @@ export const logout = () => async dispatch => {
 		dispatch(setAuthUserData({ id: null, email: null, login: null, isAuth: false }))
 	}
 }
-export const putLogin = (email, password, rememberMe, captcha) => async dispatch => {
+export const sendLogin = (email, password, rememberMe, captcha) => async dispatch => {
 	const loginData = await authAPI.login(email, password, rememberMe, captcha)
 	if (loginData.resultCode === 0) {
 		dispatch(getAuthUserData())

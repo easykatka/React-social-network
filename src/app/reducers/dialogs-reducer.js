@@ -8,31 +8,25 @@ export const dialogsSlice = createSlice({
 		dialogsFetching: false,
 		messages: [],
 		messagesFething: false,
-
-
+		newMessagesCount: null,
 	},
 	reducers: {
-		setDialogsFetching: (state, { payload }) => {
-			state.dialogsFetching = payload;
-		},
-		setMessagesFetching: (state, { payload }) => {
-			state.messagesFething = payload;
-		},
-		setDialogs: (state, { payload }) => {
-			state.dialogs = payload
-		},
-		setMessages: (state, { payload }) => {
-			state.messages = payload
-		},
-		setMessage: (state, payload) => {
-			state.messages.push(payload)
-		},
+		setDialogsFetching: (state, { payload }) => { state.dialogsFetching = payload },
+		setMessagesFetching: (state, { payload }) => { state.messagesFething = payload },
+		setDialogs: (state, { payload }) => { state.dialogs = payload },
+		setMessages: (state, { payload }) => { state.messages = payload },
+		setMessage: (state, payload) => { state.messages.push(payload) },
+		setNewMessagesCount: (state, {payload}) => { state.newMessagesCount = payload },
+	}
+})
 
-	},
-});
 
-export const { setMessagesFetching,setDialogsFetching, setDialogs, setMessages, setMessage } = dialogsSlice.actions;
+export const { setNewMessagesCount, setMessagesFetching, setDialogsFetching, setDialogs, setMessages, setMessage } = dialogsSlice.actions;
 
+export const getNewMessagesCount = () => async (dispatch) => {
+	const count = await dialogsAPI.getNewMessagesCount()
+	dispatch(setNewMessagesCount(count))
+}
 export const getDialogs = () => async (dispatch) => {
 	dispatch(setDialogsFetching(true));
 	const data = await dialogsAPI.getDialogs();

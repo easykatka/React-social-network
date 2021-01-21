@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 
-import { putLogin } from '../../app/reducers/auth-reducer';
+import { sendLogin } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { TextField, Button, Checkbox, Grid, FormControlLabel, Typography } from '@material-ui/core/';
 import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
@@ -27,7 +27,7 @@ export const Login = () => {
 				.required('Required'),
 		}),
 		onSubmit: ({ login, password, captcha, rememberMe }) => {
-			dispatch(putLogin(login, password, rememberMe, captcha));
+			dispatch(sendLogin(login, password, rememberMe, captcha));
 		},
 	});
 	return (

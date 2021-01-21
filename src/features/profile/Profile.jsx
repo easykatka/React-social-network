@@ -5,7 +5,7 @@ import { Avatar, Button, Grid, IconButton, Paper, Typography } from '@material-u
 import { makeStyles } from '@material-ui/core/styles';
 import { Link, withRouter } from 'react-router-dom';
 import { ProfileEditForm } from './profileEditForm';
-import { ProfileInfo } from './profileInfo';
+import { ProfileInfo } from './profileInfo/index';
 import { Preloader } from '../../common/preloader';
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
@@ -35,12 +35,12 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: theme.spacing(1),
 	},
 }));
-const Profile = React.memo(((props) => {
+const Profile = React.memo((({match:{params}}) => {
 	//TODO обработать ошибки сервера
 	const classes = useStyles();
 	const { profile, formEdit } = useSelector((state) => state.profile);
 	const authUserId = useSelector((state) => state.auth.id);
-	const routerId = props.match.params.userId;
+	const routerId = params.userId;
 	const profileUserId = routerId || authUserId;
 	const dispatch = useDispatch();
 	const [editMode, setEditMode] = useState(false);
