@@ -5,7 +5,7 @@ import React from 'react';
 import { PrivateForm } from './privateForm/privateForm';
 import DoneRoundedIcon from '@material-ui/icons/DoneRounded';
 import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
-import { getMessages } from '../../../app/reducers/dialogs-reducer';
+import { deleteMessage, getMessages } from '../../../app/reducers/dialogs-reducer';
 import { dateHelper } from '../../../common/dateHelper';
 import { Preloader2 } from '../../../common/preloader2';
 import { privateMessages } from './privateMessages_styles';
@@ -24,7 +24,7 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 		dispatch(getMessages(routerId));
 	}, [routerId, dispatch]);
 	useEffect(() => scrollToBottom(), [messages]);
-	console.log(messagesFething)
+	console.log(messagesFething);
 	return (
 		<Grid item xs className={classes.privateChat__container}>
 			{messagesFething ? (
@@ -33,7 +33,7 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 				<>
 					<Grid className={classes.privateChat__messageContainer}>
 						{messages.items?.map((item, idx) => (
-							<Grid item className={classes.privateChat__messageContent} key={idx}>
+							<Grid item className={classes.privateChat__messageContent} key={idx} onClick={() => dispatch(deleteMessage(item.id , routerId))}>
 								<Grid item>
 									<Avatar
 										alt='avatar'

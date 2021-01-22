@@ -5,6 +5,8 @@ export const loginStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		textAlign: 'center',
 		margin: '0 auto',
+		background: '#2f3136',
+		height: '100%',
 		width: 400,
 		color: 'white',
 		'&>*': { paddingBottom: theme.spacing(1) },
@@ -14,16 +16,12 @@ export const loginStyles = makeStyles((theme) => ({
 		width: '100%',
 		color: '#61dafb',
 	},
-	login__captcha: { margin: '0 auto', width: '100px' },
+	login__captcha:
+	{
+		margin: '0 auto',
+		width: '100px'
+	},
 	login__error: {
 		color: 'red',
-	},
-	login__container: {
-		height: 600,
-		width: 400,
-		margin: '0 auto',
-		background: '#2f3136',
-		borderRadius: '15px',
-		color: 'white',
-	},
-}));
+	}
+}))

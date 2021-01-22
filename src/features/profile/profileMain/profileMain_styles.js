@@ -5,7 +5,8 @@ export const profileMain = makeStyles((theme) => ({
 		color: 'white',
 		borderRadius: '15px 0px 0px 15px',
 		height: 600,
-		alignItems: 'center'
+		alignItems: 'center',
+		padding:15
 	},
 
 	profileMain__name: {

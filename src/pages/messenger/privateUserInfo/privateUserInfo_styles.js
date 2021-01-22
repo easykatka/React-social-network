@@ -14,7 +14,8 @@ export const privateUserInfo = makeStyles((theme) => ({
 	},
 	privateUserInfo__avatar: {
 		borderRadius: '50%',
-		width: '70%',
+		width: 250,
+		height: 250,
 	},
 
 }));

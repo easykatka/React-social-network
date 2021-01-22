@@ -1,4 +1,4 @@
-import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from '@material-ui/core';
+import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/reducers/users-reducer';
@@ -26,15 +26,27 @@ export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) 
 		dispatch(setFilter({ friend: e.target.value }));
 	};
 
+	const radioValues = [
+		{ value: 'null', label: 'All' },
+		{ value: 'true', label: 'Friends' },
+		{ value: 'false', label: 'Without friend' },
+	];
+
 	return (
 		<Grid container direction='column' alignItems='center'>
-			<Typography variant='h5'>Users </Typography>
 			<TextField label='Search people' onChange={handleChangeSearchTerm} id='searchTerm' name='searchTerm' value={filter.searchTerm} />
-			<FormControl onChange={handleFriendFilter} component='fieldset'>
-				<RadioGroup row aria-label='position' name='position' defaultValue='top'>
-					<FormControlLabel value='null' control={<Radio size='small' color='primary' />} label='All' />
-					<FormControlLabel value='true' control={<Radio size='small' color='primary' />} label='Friends' />
-					<FormControlLabel value='false' control={<Radio size='small' color='primary' />} label='Without friend' />
+			<FormControl onChange={handleFriendFilter} component='fieldset' >
+				<RadioGroup row aria-label='position' name='position' value={filter.friend}>
+					{radioValues.map((item) => {
+						return (
+							<FormControlLabel key={item.label}
+								style={{ color: 'white' }}
+								value={item.value}
+								control={<Radio size='small' color='primary' />}
+								label={item.label}
+							/>
+						);
+					})}
 				</RadioGroup>
 			</FormControl>
 			<TablePagination

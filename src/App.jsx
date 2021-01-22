@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from './features/header';
-import { Login } from './pages/login';
+import { Login } from './pages/login/login';
 import { Users } from './features/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { init } from './app/reducers/app-reducer';
@@ -9,13 +9,16 @@ import { useEffect } from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Profile from './features/profile/Profile';
 import Messenger from './pages/messenger/messenger';
-import { Preloader } from './common/preloader';
+import { Preloader2 } from './common/preloader2';
 
 const useStyles = makeStyles((theme) => ({
 	app__container: {
 		width: 1200,
 		margin: '0 auto',
-		paddingTop: theme.spacing(1),
+		backgroundColor: '#36393f',
+		borderRadius: '15px',
+		position: 'relative',
+		height: 600,
 	},
 }));
 //TODO сделать lazy load
@@ -27,14 +30,14 @@ function App() {
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(init()), [dispatch]);
 	const classes = useStyles();
-	if (!isInit) {
-		return <Preloader />;
-	}
+
 	return (
 		<>
 			<Header />
 			<div className={classes.app__container}>
-				{!isAuth ? (
+				{!isInit ? (
+					<Preloader2 />
+				) : !isAuth ? (
 					<Login />
 				) : (
 					<Switch>

@@ -1,5 +1,5 @@
 import { Grid, Avatar } from '@material-ui/core';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { profileFreinds } from './profileFriends_style';
 import React from 'react'
 import { randomArray } from '../../../../common/randomArray';
@@ -14,7 +14,7 @@ export const ProfileFriends = React.memo(() => {
 			<p className={classes.profileFreinds__friendsLabel}> Friends: <Link to={`/users`}>{users.length}</Link> </p>
 			<Grid container className={classes.profileFreinds__friendsContainer}>
 				{randomUsers.map((item) => (
-					<Grid item xs={4}>
+					<Grid item xs={4} key={item.id} >
 						<Link to={`/profile/${item.id}`}>
 							<Grid container className={classes.profileFreinds__friendItem} direction='column' alignItems='center'>
 								<div>

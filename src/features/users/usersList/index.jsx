@@ -1,5 +1,5 @@
 
-import { Preloader } from '../../../common/preloader';
+import { Preloader2 } from '../../../common/preloader2';
 import defaultAvatar from '../../../assets/img/defaultAvatar.png';
 import { NavLink } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
@@ -13,29 +13,33 @@ const useStyles = makeStyles((theme) => ({
 	},
 	users__cards: {
 		overflowY: 'scroll',
-		height: '72vh',
+		width:'100%',
+		height: 400,
+		padding:10
 	},
 	users__card: {
+		height:150,
+		
 		'&>:hover': {
 			background: 'linear-gradient(to right, #8e9eab, #eef2f3)',
 		},
 	},
 	users__cardmedia: {
-		height: 200,
+		height: 100,
 	},
 }));
 
 export const UsersList = React.memo(({ users, isFetching }) => {
 	const classes = useStyles();
 	return isFetching ? (
-		<Preloader />
+		<Preloader2 />
 	) : (
 		<Grid container spacing={2} className={classes.users__cards}>
 			{users &&
 				users
 					// .filter((u) => u.photos.small != null)
 					.map((user) => (
-						<Grid item xs={6} md={4} lg={3} key={user.id}>
+						<Grid item xs={2} key={user.id}>
 							<Card>
 								<div className={classes.users__card}>
 									<CardActionArea>

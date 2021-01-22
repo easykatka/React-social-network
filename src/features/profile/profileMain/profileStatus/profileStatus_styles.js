@@ -6,7 +6,8 @@ export const profileStatus = makeStyles((theme) => ({
 		fontSize: 16,
 		"&:hover": { color: "orange" },
 		color: '#61fbfb',
-		wordBreak: 'break-all',
+		wordBreak: 'break-word',
+		padding: 5
 	},
 	profileAvatar__editIcon: {
 		marginLeft: 10,

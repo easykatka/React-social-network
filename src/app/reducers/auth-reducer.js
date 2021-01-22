@@ -14,7 +14,9 @@ export const authSlice = createSlice({
 	},
 	reducers: {
 		setCaptchaUrl: (state, action) => { state.captchaUrl = action.payload },
-		setAuthUserData: (state, action) => { return { state, ...action.payload } },
+		setAuthUserData: (state, action) => {
+			return { state, ...action.payload }
+		},
 		setErrorMessage: (state, action) => { state.errorMessage = action.payload },
 	},
 })

@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Avatar, Grid } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Preloader } from '../../../common/preloader';
@@ -18,7 +18,7 @@ export const PrivateUserInfo = ({ recipient }) => {
 					) : (
 						<>
 							<h2>{recipient?.userName}</h2>
-							<img alt='profile avatar' src={recipient?.photos.large} className={classes.privateUserInfo__avatar} />
+							<Avatar alt='profile avatar' src={recipient?.photos.large} className={classes.privateUserInfo__avatar} />
 							<Grid container direction='column' alignItems='center'>
 								<div> Was online:</div>
 								<div>{recipient?.lastUserActivityDate && dateHelper(recipient?.lastUserActivityDate)}</div>

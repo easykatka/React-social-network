@@ -5,16 +5,17 @@ export const profileFreinds = makeStyles((theme) => ({
 		alignItems: 'flex-start'
 	},
 	profileFreinds__friendName: {
-		wordBreak: 'break-all'
+		textAlign:'center',
+		wordBreak:'break-word'
 	},
 	profileFreinds__friendAvatar: {
 		width: 60,
 		height: 60,
-		marginBottom: 5
+		marginBottom: 4
 	},
 	profileFreinds__friendItem: {
 		color: 'grey',
-		padding: 10,
+		padding:10,
 		'&:hover': {
 			color: '#61fbfb'
 		},
