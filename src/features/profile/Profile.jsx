@@ -38,19 +38,21 @@ const Profile = React.memo(({ match: { params } }) => {
 					<Grid item xs={4}>
 						<ProfileMain profile={profile} routerId={routerId} />
 					</Grid>
-					<Grid item xs={8}>
-						<Grid container direction='row' style={{ height: 600 }}>
-							<Grid item>
-								{editForm ? (
-									<ProfileEditForm setEditForm={setEditForm} />
-								) : (
-									<ProfileInfo routerId={routerId} setEditForm={setEditForm} />
-								)}
-							</Grid>
-							<Grid item xs>
-								<ProfileWall />
-							</Grid>
-						</Grid>
+					<Grid item xs={8} style={{ height: 600 }}>
+						{editForm ? (
+							<ProfileEditForm setEditForm={setEditForm} />
+						) : (
+							<>
+								<Grid container>
+									<Grid>
+										<ProfileInfo routerId={routerId} setEditForm={setEditForm} />
+									</Grid>
+									<Grid xs>
+										<ProfileWall profile={profile} />
+									</Grid>
+								</Grid>
+							</>
+						)}
 					</Grid>
 				</>
 			)}

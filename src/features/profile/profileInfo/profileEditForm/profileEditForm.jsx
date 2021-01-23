@@ -30,7 +30,8 @@ export const ProfileEditForm = ({ setEditForm }) => {
 			direction='column'
 			alignItems='center'
 			justify='space-between'
-			style={{ height: 600, padding: 15 }}>
+			
+			style={{  padding: 15 ,height:600 , width:'100%'}}>
 			<Grid item style={{ color: 'grey', textAlign: 'center' }}>
 				<h2 style={{ color: 'white' }}> Name: </h2>
 				<TextField
@@ -43,11 +44,11 @@ export const ProfileEditForm = ({ setEditForm }) => {
 					size='small'
 				/>
 			</Grid>
-			<Grid item style={{ color: 'grey', textAlign: 'center' }}>
+			<Grid item  style={{ color: 'grey', textAlign: 'center' }}>
 				<h2 style={{ color: 'white' }}> About: </h2>
 				<TextField rowsMax={2} required type='text' value={values?.aboutMe} multiline onChange={handleChange} id='aboutMe' />
 			</Grid>
-			<Grid item style={{ color: 'grey', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
+			<Grid item  style={{ color: 'grey', textAlign: 'center', display: 'flex', flexDirection: 'column' }}>
 				<h2 style={{ color: 'white' }}> Skills: </h2>
 				<TextField
 					type='text'

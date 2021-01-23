@@ -18,7 +18,7 @@ export const ChatMessages = ({ wsChannel, messages }) => {
 			<Grid item>
 				<Grid className={classes.chatMessage__messagesContainer}>
 					{messages?.map((i, idx) => (
-						<Grid className={classes.chatMessage__messageContainer} key={idx}>
+						<Grid className={classes.chatMessage__container} key={idx}>
 							<Grid item>
 								<Avatar alt='avatar' src={i?.photo} />
 							</Grid>

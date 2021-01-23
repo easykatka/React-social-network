@@ -7,13 +7,13 @@ export const appSlice = createSlice({
 		isInit: false,
 	},
 	reducers: {
-		setInit: (state) => { 
+		setInit: (state) => {
 			state.isInit = true;
 		},
 	},
 });
 export const init = () => (dispatch) => {
-	dispatch(getAuthUserData()).then(() => { 
+	dispatch(getAuthUserData()).then(() => {
 		dispatch(setInit());
 	});
 };

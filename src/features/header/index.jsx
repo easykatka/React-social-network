@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = () => {
 	const classes = useStyles();
-	const AuthUser = useSelector((state) => state.profile.AuthUser);
+	const authUser = useSelector((state) => state.profile.authUser);
 	const { isAuth, id } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 	const { newMessagesCount } = useSelector((state) => state.dialogs);
@@ -66,23 +66,23 @@ export const Header = () => {
 						</Grid>
 						<Grid item>
 							<a href={`/profile`}>
-								<h4>{AuthUser?.fullName}</h4>
+								<h4>{authUser?.fullName}</h4>
 							</a>
 						</Grid>
 						<Grid item>
 							{newMessagesCount ? (
 								<Link to={`/messenger`}>
 									<Badge badgeContent={newMessagesCount} color='secondary'>
-										<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
+										<Avatar alt='Remy Sharp' src={authUser?.photos.small} />
 									</Badge>
 								</Link>
 							) : (
-								<Avatar alt='Remy Sharp' src={AuthUser?.photos.small} />
+								<Avatar alt='Remy Sharp' src={authUser?.photos.small} />
 							)}
 						</Grid>
 						<Grid item>
 							<IconButton onClick={() => dispatch(logout())}>
-								<LaunchOutlinedIcon style={{color:'orange'}}/>
+								<LaunchOutlinedIcon style={{ color: 'orange' }} />
 							</IconButton>
 						</Grid>
 					</Grid>

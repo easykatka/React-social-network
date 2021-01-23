@@ -44,12 +44,3 @@ export const ProfileMain = React.memo(({ profile, routerId }) => {
 		</Grid>
 	);
 });
-
-// 	<div>
-// 		{formEdit || (
-// 			<IconButton color='secondary' variant='contained' onClick={() => setEditMode(true)}>
-// 				<SettingsSharpIcon />
-// 			</IconButton>
-// 		)}
-// 	</div>
-// )}

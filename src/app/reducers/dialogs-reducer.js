@@ -20,9 +20,9 @@ export const dialogsSlice = createSlice({
 		setMessages: (state, { payload }) => { state.messages = payload },
 		setMessage: (state, payload) => { state.messages.push(payload) },
 		setNewMessagesCount: (state, { payload }) => { state.newMessagesCount = payload },
-		// setDeletedMessage(state, payload) {
-		// 	debugger
-		// }
+		setDeletedMessage(state, { payload }) {
+			state.messages.items = state.messages.items.filter(item => item.id !== payload)
+		}
 
 
 	}
@@ -59,10 +59,11 @@ export const sendMessage = (userId, body) => async (dispatch) => {
 	dispatch(setDialogs(data))
 }
 export const deleteMessage = (messageId, userId) => async (dispatch) => {
-	// const data = await dialogsAPI.deleteMessage(messageId)
-	// if(data.resultCode===0){
-	// 	dispatch(getMessages(userId))
-	dispatch(setDeletedMessage(messageId))
+	const data = await dialogsAPI.deleteMessage(messageId)
+	if (data.resultCode === 0) {
+		dispatch(getMessages(userId))
+		dispatch(setDeletedMessage(messageId))
+	}
 }
 
 

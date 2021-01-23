@@ -13,6 +13,7 @@ export const usersSlice = createSlice({
 		currentPage: 0,
 		isFetching: true,
 		followingInProgress: [], // array of followed users
+	
 		filter: {
 			searchTerm: "",
 			friend: 'null',

@@ -1,4 +1,4 @@
-import { Avatar, Grid } from '@material-ui/core';
+import { Avatar, Grid, IconButton } from '@material-ui/core';
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import React from 'react';
@@ -9,12 +9,14 @@ import { deleteMessage, getMessages } from '../../../app/reducers/dialogs-reduce
 import { dateHelper } from '../../../common/dateHelper';
 import { Preloader2 } from '../../../common/preloader2';
 import { privateMessages } from './privateMessages_styles';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
 export const PrivateMessages = ({ routerId, recipient }) => {
 	const dispatch = useDispatch();
 	const classes = privateMessages();
-	const { messages, messagesFething } = useSelector((state) => state.dialogs);
-	const { AuthUser } = useSelector((state) => state.profile);
+	const { messagesFething } = useSelector((state) => state.dialogs);
+	const { items } = useSelector((state) => state.dialogs.messages);
+	const { authUser } = useSelector((state) => state.profile);
 	const messagesEndRef = useRef();
 	//скролл вниз
 	const scrollToBottom = () => {
@@ -23,42 +25,49 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 	useEffect(() => {
 		dispatch(getMessages(routerId));
 	}, [routerId, dispatch]);
-	useEffect(() => scrollToBottom(), [messages]);
-	console.log(messagesFething);
+	useEffect(() => scrollToBottom(), [items]);
+
 	return (
-		<Grid item xs className={classes.privateChat__container}>
+		<Grid item xs className={classes.privateMessages__container}>
 			{messagesFething ? (
 				<Preloader2 />
 			) : (
 				<>
-					<Grid className={classes.privateChat__messageContainer}>
-						{messages.items?.map((item, idx) => (
-							<Grid item className={classes.privateChat__messageContent} key={idx} onClick={() => dispatch(deleteMessage(item.id , routerId))}>
+					<Grid className={classes.privateMessages__messagesList}>
+						{items?.map((item, idx) => (
+							<Grid
+								item
+								className={classes.privateMessages__messageContent}
+								key={idx}
+								onClick={() => dispatch(deleteMessage(item.id, routerId))}>
 								<Grid item>
 									<Avatar
 										alt='avatar'
-										src={item.senderId === AuthUser?.userId ? AuthUser?.photos?.large : recipient?.photos?.large}
+										src={item.senderId === authUser?.userId ? authUser?.photos?.large : recipient?.photos?.large}
 									/>
 								</Grid>
 								<Grid item style={{ marginLeft: 10 }}>
-									<span className={classes.privateChat__senderName}>{item.senderName}</span>
-									<Grid className={classes.privateChat__messageBody}>
+									<span className={classes.privateMessages__senderName}>{item.senderName}</span>
+									<Grid className={classes.privateMessages__messageBody}>
 										<Grid container direction='row' spacing={2} alignItems='center'>
 											<Grid item>{item.body}</Grid>
 											<Grid item>
 												<span>
-													{item.senderId === AuthUser?.userId &&
+													{item.senderId === authUser?.userId &&
 														(item.viewed ? (
-															<DoneAllRoundedIcon className={classes.privateChat__doneAllIcon} />
+															<DoneAllRoundedIcon className={classes.privateMessages__doneAllIcon} />
 														) : (
-															<DoneRoundedIcon className={classes.privateChat__doneIcon} />
+															<DoneRoundedIcon className={classes.privateMessages__doneIcon} />
 														))}
 												</span>
-												<span className={classes.privateChat__addedAt}>{dateHelper(item.addedAt)}</span>
+												<span className={classes.privateMessages__addedAt}>{dateHelper(item.addedAt)}</span>
 											</Grid>
 										</Grid>
 									</Grid>
 								</Grid>
+								<IconButton className={classes.privateMessages__deleteIcon}>
+									<DeleteOutlineOutlinedIcon />
+								</IconButton>
 								<div ref={messagesEndRef}></div>
 							</Grid>
 						))}

@@ -18,10 +18,10 @@ export const dialogsAPI = {
 		return instance.get(`/dialogs/messages/new/count`).then(res => res.data)
 	},
 	startDialog(userId) {
-		return instance.put(`dialogs/${userId}`).then(res => res.data)
+		return instance.put(`/dialogs/${userId}`).then(res => res.data)
 	},
 	deleteMessage(messageId) {
-		return instance.delete(`dialogs/messages/${messageId}
+		return instance.delete(`/dialogs/messages/${messageId}
 		`).then(res => res.data)
 	}
 

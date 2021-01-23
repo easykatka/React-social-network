@@ -1,12 +1,11 @@
 import React from 'react';
-import {  FormControlLabel, Grid, IconButton, Radio } from '@material-ui/core';
+import { FormControlLabel, Grid, IconButton, Radio } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
 
 export const ProfileInfo = ({ setEditForm, routerId }) => {
 	const { profile } = useSelector((state) => state.profile);
 	const isContacts = Object.values(profile.contacts).find((i) => !!i);
-	console.log(isContacts);
 	const editHandler = () => {
 		setEditForm(true);
 	};

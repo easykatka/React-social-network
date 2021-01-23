@@ -1,4 +1,3 @@
-
 import { Preloader2 } from '../../../common/preloader2';
 import defaultAvatar from '../../../assets/img/defaultAvatar.png';
 import { NavLink } from 'react-router-dom';
@@ -13,19 +12,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	users__cards: {
 		overflowY: 'scroll',
-		width:'100%',
-		height: 400,
-		padding:10
+		width: '100%',
+		height: 450,
+		padding: 15,
 	},
 	users__card: {
-		height:150,
-		
+		height: 160,
+
+
 		'&>:hover': {
 			background: 'linear-gradient(to right, #8e9eab, #eef2f3)',
 		},
 	},
 	users__cardmedia: {
-		height: 100,
+		height: 80,
 	},
 }));
 

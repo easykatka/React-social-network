@@ -14,14 +14,14 @@ export const authSlice = createSlice({
 	},
 	reducers: {
 		setCaptchaUrl: (state, action) => { state.captchaUrl = action.payload },
-		setAuthUserData: (state, action) => {
-			return { state, ...action.payload }
+		setauthUserData: (state, action) => {
+			return { ...state, ...action.payload }
 		},
 		setErrorMessage: (state, action) => { state.errorMessage = action.payload },
 	},
 })
 // экшины
-export const { setCaptchaUrl, setAuthUserData, setErrorMessage } = authSlice.actions
+export const { setCaptchaUrl, setauthUserData, setErrorMessage } = authSlice.actions
 // санки
 export const getCaptcha = () => async dispatch => {
 	const data = await authAPI.getCaptchaUrl()
@@ -32,7 +32,7 @@ export const getCaptcha = () => async dispatch => {
 export const logout = () => async dispatch => {
 	const response = await authAPI.logout()
 	if (response.data.resultCode === 0) {
-		dispatch(setAuthUserData({ id: null, email: null, login: null, isAuth: false }))
+		dispatch(setauthUserData({ id: null, email: null, login: null, isAuth: false }))
 	}
 }
 export const sendLogin = (email, password, rememberMe, captcha) => async dispatch => {
@@ -51,7 +51,7 @@ export const getAuthUserData = () => async dispatch => {
 	const meData = await authAPI.me()
 	if (meData.resultCode === 0) {
 		meData.data.isAuth = true
-		dispatch(setAuthUserData(meData.data))
+		dispatch(setauthUserData(meData.data))
 	}
 }
 export default authSlice.reducer

@@ -5,25 +5,27 @@ import { createSlice } from "@reduxjs/toolkit";
 export const profileSlice = createSlice({
 	name: 'profile',
 	initialState: {
-		AuthUser: null,
+		authUser: null,
 		profile: null,
 		status: "",
-		formEdit: false,
-		formError: ""
+		posts: [{
+			userId: null,
+			body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.Et non minima quae odit blanditiis temporibus hic ipsum eaque, totam magnam minus eum dolorum reprehenderit rem odio consequatur placeat accusamus ex",
+			date: '10/12/20',
+			likesCount:5,
+		}],
 	},
 	reducers: {
 		setUserProfile: (state, action) => { state.profile = action.payload },
 		setUserStatus: (state, action) => { state.status = action.payload },
-		setAuthUser: (state, action) => { state.AuthUser = action.payload },
-		setNewAvatar: (state, action) => { state.AuthUser.photos = state.profile.photos = action.payload },
-		setFormEdit: (state, { payload }) => { state.formEdit = payload },
-		setFormError: (state, { payload }) => { state.formError = payload },
-		setUserFollowStatus:(state, {payload}) => {state.profile =  {...state.profile , followed : payload}}
+		setauthUser: (state, action) => { state.authUser = action.payload },
+		setNewAvatar: (state, action) => { state.authUser.photos = state.profile.photos = action.payload },
+		setUserFollowStatus: (state, { payload }) => { state.profile = { ...state.profile, followed: payload } }
 	},
 },
 )
 //action
-export const { setUserFollowStatus,setFormError, setFormEdit, addPost, setUserProfile, setUserStatus, setAuthUser, setNewAvatar } = profileSlice.actions;
+export const { setUserFollowStatus, addPost, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
 //thunk
 export const getUserProfile = (id) => async (dispatch) => {
 	const profileData = await profileAPI.getProfile(id)
@@ -35,7 +37,7 @@ export const getUserProfile = (id) => async (dispatch) => {
 }
 export const getAuthUser = id => async (dispatch) => {
 	const data = await profileAPI.getProfile(id)
-	dispatch(setAuthUser(data))
+	dispatch(setauthUser(data))
 }
 export const putNewAvatar = (file) => async (dispatch) => {
 	const data = await profileAPI.putNewAvatar(file)
@@ -50,17 +52,10 @@ export const putNewStatus = (status) => async (dispatch) => {
 	}
 }
 export const putNewProfile = (profile) => async (dispatch) => {
-
 	const data = await profileAPI.saveProfile(profile)
 	if (data.resultCode === 0) {
 		dispatch(getUserProfile(profile.userId))
 		dispatch(getAuthUser(profile.userId))
-		dispatch(setFormEdit(false))
-		dispatch(setFormError(null))
-	} else if (data.resultCode === 1) {
-		const parsed = data.messages[0].match(/Contacts->(\w+)/)[1]
-		const slised = parsed[0].toLowerCase() + parsed.slice(1)
-		dispatch(setFormError(slised))
 	}
 }
 export default profileSlice.reducer;

@@ -33,7 +33,7 @@ export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) 
 	];
 
 	return (
-		<Grid container direction='column' alignItems='center'>
+		<Grid container direction='column' alignItems='center' style={{padding:10}}>
 			<TextField label='Search people' onChange={handleChangeSearchTerm} id='searchTerm' name='searchTerm' value={filter.searchTerm} />
 			<FormControl onChange={handleFriendFilter} component='fieldset' >
 				<RadioGroup row aria-label='position' name='position' value={filter.friend}>
