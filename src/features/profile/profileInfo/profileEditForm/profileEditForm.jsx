@@ -30,7 +30,6 @@ export const ProfileEditForm = ({ setEditForm }) => {
 			direction='column'
 			alignItems='center'
 			justify='space-between'
-			
 			style={{  padding: 15 ,height:600 , width:'100%'}}>
 			<Grid item style={{ color: 'grey', textAlign: 'center' }}>
 				<h2 style={{ color: 'white' }}> Name: </h2>

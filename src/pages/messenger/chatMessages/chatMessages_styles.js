@@ -20,7 +20,7 @@ export const chatMessages = makeStyles((theme) => ({
 		height: 500,
 		padding: 8
 	},
-	chatMessage__container: {
+	chatMessage__item: {
 		padding: '14px 0',
 		borderTop: '1px solid #40444b',
 		display: 'flex',

@@ -10,22 +10,44 @@ export const profileSlice = createSlice({
 		status: "",
 		posts: [{
 			userId: null,
-			body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.Et non minima quae odit blanditiis temporibus hic ipsum eaque, totam magnam minus eum dolorum reprehenderit rem odio consequatur placeat accusamus ex",
+			body: "Hello world!",
 			date: '10/12/20',
-			likesCount:5,
+			likesCount: 14,
+			isLiked: true,
+		},
+		{
+			userId: 1,
+			body: "Lorem uae odit blanditiis temporibusinus odio consequatur placeat accusamus ex",
+			date: '10/12/20',
+			likesCount: 1,
+			isLiked: false,
+		},
+		{
+			userId: null,
+			body: "Lorem ipsum dolor sit amet, ct blanditiis temporibus hic ipsum eaque, totam magnam minus eum dolorum reprehenderit rem odio consequatur placeat accusamus ex",
+			date: '10/12/20',
+			likesCount: 66,
+			isLiked: false,
 		}],
 	},
 	reducers: {
-		setUserProfile: (state, action) => { state.profile = action.payload },
-		setUserStatus: (state, action) => { state.status = action.payload },
-		setauthUser: (state, action) => { state.authUser = action.payload },
-		setNewAvatar: (state, action) => { state.authUser.photos = state.profile.photos = action.payload },
-		setUserFollowStatus: (state, { payload }) => { state.profile = { ...state.profile, followed: payload } }
-	},
-},
-)
+		setUserProfile: (state, { payload }) => { state.profile = payload },
+		setUserStatus: (state, { payload }) => { state.status = payload },
+		setauthUser: (state, { payload }) => { state.authUser = payload },
+		setNewAvatar: (state, { payload }) => { state.authUser.photos = state.profile.photos = payload },
+		setUserFollowStatus: (state, { payload }) => { state.profile = { ...state.profile, followed: payload } },
+		setPost: (state,  {payload} ) =>  {
+			state.posts.push(payload)
+		},
+		setLike:(state,{payload}) => { 
+			const item = state.posts[payload.idx]
+			item.isLiked = payload.like
+			payload.like ? ++item.likesCount : --item.likesCount
+		},
+	}
+})
 //action
-export const { setUserFollowStatus, addPost, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
+export const { setLike,setPost, setUserFollowStatus, addPost, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
 //thunk
 export const getUserProfile = (id) => async (dispatch) => {
 	const profileData = await profileAPI.getProfile(id)

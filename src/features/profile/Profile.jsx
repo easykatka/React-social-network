@@ -48,7 +48,7 @@ const Profile = React.memo(({ match: { params } }) => {
 										<ProfileInfo routerId={routerId} setEditForm={setEditForm} />
 									</Grid>
 									<Grid xs>
-										<ProfileWall profile={profile} />
+										<ProfileWall routerId={routerId} profile={profile} />
 									</Grid>
 								</Grid>
 							</>
