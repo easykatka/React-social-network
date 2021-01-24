@@ -5,12 +5,14 @@ import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
 
 export const ProfileInfo = ({ setEditForm, routerId }) => {
 	const { profile } = useSelector((state) => state.profile);
-	const isContacts = Object.values(profile.contacts).find((i) => !!i);
+
+	//! при добавлении друга и переходе на профайл ошибка
+	const isContacts = Object.values(profile?.contacts).find((i) => !!i);
 	const editHandler = () => {
 		setEditForm(true);
 	};
 	return (
-		<Grid container direction='column' alignItems='center' justify='space-around' style={{ height: 600, maxWidth: 200, padding: 5 }}>
+		<Grid container direction='column' alignItems='center' justify='space-around' style={{ height: 600, maxWidth: 200, padding: 2 }}>
 			{profile?.aboutMe && (
 				<Grid item style={{ color: 'grey', textAlign: 'center' }}>
 					<h2 style={{ color: 'white' }}>About me:</h2>

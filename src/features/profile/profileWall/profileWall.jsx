@@ -56,7 +56,7 @@ export const ProfileWall = ({ profile, routerId }) => {
 				style={{
 					overflowY: 'auto',
 					height: 450,
-					width:'100%',
+					width: '100%',
 				}}>
 				<div
 					style={{
@@ -67,12 +67,13 @@ export const ProfileWall = ({ profile, routerId }) => {
 						flexDirection: 'column-reverse',
 						justifyContent: 'flex-end',
 						overflowY: 'auto',
-						width:'100%',
+						width: '100%',
 					}}>
 					{posts?.map((item, idx) => {
-						console.log(idx);
 						return (
-							<div style={{ width: '100%' ,display: 'flex', backgroundColor: '#202225', padding: 10, marginTop: 20 }}>
+							<div
+								key={item.date}
+								style={{ width: '100%', display: 'flex', backgroundColor: '#202225', padding: 10, marginTop: 20 }}>
 								<Avatar src={item.userId ? authUser?.photos.small : profile?.photos.small} style={{ marginRight: 20 }} />
 								<div>
 									<p>{dateHelper(item.date, 0)}</p>
