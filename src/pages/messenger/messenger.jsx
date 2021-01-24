@@ -1,52 +1,31 @@
 import { Grid } from '@material-ui/core';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { ChatMessages } from './chatMessages/chatMessages';
 import { ChatNavBar } from './messengerNavBar/messengerNavBar';
 import { withRouter } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PrivateMessages } from './privateMessages/privateMessages';
 import { PrivateUserInfo } from './privateUserInfo/privateUserInfo';
 import { ChatUsersList } from './chatUsersList/chatUsersList';
-
+import { startMessagesListening, stopMessagesListening } from './../../app/reducers/chat-reducer';
 
 const Messenger = ({ match: { params } }) => {
-	const [wsChannel, setWsChannel] = useState(null);
-	const [wsMessages, setWsMessages] = useState([]);
 	const { dialogs } = useSelector((state) => state.dialogs);
 	const routerId = params.userId;
 	const recipient = dialogs.filter((item) => item.id.toString() === routerId)[0];
-	const usersList = wsMessages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
-	// подписка на канал
-	useEffect(() => {
-		let ws;
-		const closeHandler = () => {
-			setTimeout(createChannel, 3000);
-		};
-		const createChannel = () => {
-			ws?.removeEventListener('close', closeHandler);
-			ws?.close();
-			ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
-			ws.addEventListener('close', closeHandler);
-			setWsChannel(ws);
-		};
-		createChannel();
-		return () => {
-			ws.removeEventListener('close', closeHandler);
-			ws.close();
-			//убираем слушатель закрытия канала
-		};
-	}, []);
+	const {status,messages} = useSelector((state) => state.chat);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		let messageHandler = (e) => {
-			setWsMessages((prev) => [...prev, ...JSON.parse(e.data)]);
-		};
-		wsChannel?.addEventListener('message', messageHandler);
+		dispatch(startMessagesListening());
 		return () => {
-			wsChannel?.removeEventListener('message', messageHandler);
+			dispatch(stopMessagesListening());
 		};
-	}, [wsChannel]);
+	}, []);
+	// фильтр тех,кто хоть раз писал в чат
+	const usersList = messages.filter(((temp) => (a) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
+	// подписка на канал
+
 	return (
 		<Grid container direction='row' justify='center'>
 			<ChatNavBar dialogs={dialogs} />
@@ -58,7 +37,8 @@ const Messenger = ({ match: { params } }) => {
 				</>
 			) : (
 				<>
-					<ChatMessages wsChannel={wsChannel} messages={wsMessages} />
+					{status === 'error' && <div>Some error occured. Please refresh the page</div>}
+					<ChatMessages />
 
 					<ChatUsersList users={usersList} />
 				</>

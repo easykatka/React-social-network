@@ -24,7 +24,6 @@ export const dialogsSlice = createSlice({
 			state.dialogs = payload
 		},
 		setMessages: (state, { payload }) => {
-			debugger
 			state.messages = payload.items
 		},
 		setNewMessagesCount: (state, { payload }) => { state.newMessagesCount = payload },

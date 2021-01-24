@@ -6,19 +6,17 @@ import { createSlice } from '@reduxjs/toolkit';
 
 type ChatMessageType = ChatMessageAPIType & { id: string }
 
-let initialState = {
-	messages: [] as ChatMessageType[],
-	status: 'pending' as StatusType
-}
-
-
 export const chatSlice = createSlice({
 	name: "chat",
-	initialState,
+	initialState: {
+		messages: [] as ChatMessageType[],
+		status: 'pending' as StatusType
+	},
 	reducers: {
 		messagesReceived: (state, { payload }) => {
-			state.messages = [...state.messages, ...payload.messages.map((m: ChatMessageType[]) => ({ ...m, id: v1() }))]
-			.filter((m, index, array) => index >= array.length - 100)
+			debugger
+			state.messages = [...state.messages, ...payload.map((m: any) => ({ ...m, id: v1() }))]
+				.filter((m, index, array) => index >= array.length - 100)
 		},
 		statusChanged: (state, { payload }) => {
 			state.status = payload
@@ -66,6 +64,5 @@ export const sendMessage = (message: string) => async () => {
 }
 
 
-export default chatSlice
+export default chatSlice.reducer
 
-export type InitialStateType = typeof initialState;

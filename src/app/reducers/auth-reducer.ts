@@ -31,8 +31,7 @@ export const getCaptcha = () => async (dispatch: AppDispatch) => {
 	const { url } = await authAPI.getCaptchaUrl()
 	dispatch(setCaptchaUrl(url))
 }
-export const logout = () => async (dispatch: AppDispatch) => {
-	debugger
+export const logout = () => async (dispatch: AppDispatch) => {	
 	const response = await authAPI.logout()
 	if (response.resultCode === resultCodeEnum.success) {
 		dispatch(setauthUserData({ id: null, email: null, login: null, isAuth: false }))
@@ -52,7 +51,7 @@ export const sendLogin = (loginUserData: loginUserData) => async (dispatch: AppD
 }
 export const getAuthUserData = () => async (dispatch: AppDispatch) => {
 	const response = await authAPI.me()
-	if (response.resultCode === resultCodeEnum.success) { debugger
+	if (response.resultCode === resultCodeEnum.success) { 
 		dispatch(setauthUserData({...response.data,isAuth:true})
 		)
 	}

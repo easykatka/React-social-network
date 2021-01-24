@@ -4,15 +4,15 @@ import { useEffect } from 'react';
 import { ChatForm } from './chatForm/chatForm';
 import React from 'react';
 import { chatMessages } from './chatMessages_styles';
+import { useSelector } from 'react-redux';
 
-export const ChatMessages = ({ wsChannel, messages }) => {
+export const ChatMessages = () => {
+	const messages = useSelector((state) => state.chat.messages)
 	const messagesEndRef = useRef();
 	const classes = chatMessages();
 	//скролл вниз
-	const scrollToBottom = () => {
-		messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
-	};
-	useEffect(() => scrollToBottom(), [messages]);
+	useEffect(() => messagesEndRef.current && messagesEndRef.current?.scrollIntoView(false), [messages]);
+
 	return (
 		<Grid item xs className={classes.chatMessage__container}>
 			<Grid item>
@@ -30,7 +30,7 @@ export const ChatMessages = ({ wsChannel, messages }) => {
 						</Grid>
 					))}
 				</Grid>
-				<ChatForm wsChannel={wsChannel} />
+				<ChatForm/>
 			</Grid>
 		</Grid>
 	);
