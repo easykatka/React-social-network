@@ -13,20 +13,20 @@ export const Login = () => {
 	const classes = loginStyles();
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
 		initialValues: {
-			login: '',
+			email: '',
 			password: '',
-			captcha: '',
 			rememberMe: false,
+			captcha: '',
 		},
 		validationSchema: Yup.object({
-			login: Yup.string().email('Insert correct email ').required('Required'),
+			email: Yup.string().email('Insert correct email ').required('Required'),
 			password: Yup.string()
 				.min(4, 'Password must be longer than 4 characters.')
 				.max(12, 'Password must be shorter than 12 characters.')
 				.required('Required'),
 		}),
-		onSubmit: ({ login, password, captcha, rememberMe }) => {
-			dispatch(sendLogin(login, password, rememberMe, captcha));
+		onSubmit: (loginUserData) => { 
+			dispatch(sendLogin(loginUserData));
 		},
 	});
 	return (
@@ -35,14 +35,15 @@ export const Login = () => {
 			<Typography variant='h6' className={classes.login__error}>
 				{errorMessage}
 			</Typography>
-			<TextField label='Email' onBlur={handleBlur} size='small' onChange={handleChange} id='login' name='login' value={values.login} />
-			{errors.login && touched.login && <div className={classes.login__error}>{errors.login}</div>}
+			<TextField label='Email' onBlur={handleBlur} size='small' onChange={handleChange} id='email' name='email' value={values.email} />
+			{errors.email && touched.email && <div className={classes.login_error}>{errors.email}</div>}
 			<TextField
 				label='Password'
 				onBlur={handleBlur}
 				size='small'
 				type='password'
 				onChange={handleChange}
+				variant='standard'
 				id='password'
 				name='password'
 				value={values.password}

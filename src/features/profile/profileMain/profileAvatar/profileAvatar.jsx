@@ -1,7 +1,7 @@
 import { Avatar, IconButton } from '@material-ui/core';
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
 import { useDispatch } from 'react-redux';
-import { putNewAvatar } from '../../../../app/reducers/profile-reducer';
+import { updateAvatar } from '../../../../app/reducers/profile-reducer';
 import { profileAvatar, StyledBadge } from './profileAvatar_styles';
 import React from 'react';
 
@@ -19,7 +19,7 @@ export const ProfileAvatar = React.memo(({ profile, routerId }) => {
 								id='contained-button-file'
 								type='file'
 								style={{ display: 'none' }}
-								onChange={(e) => dispatch(putNewAvatar(e.target.files[0]))}
+								onChange={(e) => dispatch(updateAvatar(e.target.files[0]))}
 							/>
 							<label htmlFor='contained-button-file'>
 								<IconButton variant='contained' color='primary' className={classes.profileAvatar__uploadBtn} component='span'>

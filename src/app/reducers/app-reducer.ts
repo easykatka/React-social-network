@@ -1,5 +1,8 @@
-import { getAuthUserData } from "../reducers/auth-reducer";
+import { getAuthUserData } from "./auth-reducer";
 import { createSlice } from "@reduxjs/toolkit";
+import { AppDispatch } from "../store";
+
+
 
 export const appSlice = createSlice({
 	name: "app",
@@ -12,10 +15,16 @@ export const appSlice = createSlice({
 		},
 	},
 });
-export const init = () => (dispatch) => {
+
+//action
+export const { setInit } = appSlice.actions;
+//thunk
+export const init = () => (dispatch: AppDispatch) => {
 	dispatch(getAuthUserData()).then(() => {
 		dispatch(setInit());
 	});
 };
-export const { setInit } = appSlice.actions;
+
 export default appSlice.reducer;
+
+

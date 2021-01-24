@@ -1,34 +1,19 @@
 import { profileAPI } from "../../api/profile-api";
 import { createSlice } from "@reduxjs/toolkit";
+import { postType ,profileDataType} from '../../types/types'
+import { posts } from "../../common/posts";
+import { AppDispatch } from "../store";
+
+
 
 
 export const profileSlice = createSlice({
 	name: 'profile',
 	initialState: {
-		authUser: null,
-		profile: null,
-		status: "",
-		posts: [{
-			userId: null,
-			body: "Hello world!",
-			date: '10/10/20',
-			likesCount: 14,
-			isLiked: true,
-		},
-		{
-			userId: 1,
-			body: "Lorem uae odit blanditiis temporibusinus odio consequatur placeat accusamus ex",
-			date: '8/11/20',
-			likesCount: 1,
-			isLiked: false,
-		},
-		{
-			userId: null,
-			body: "Lorem ipsum dolor sit amet, ct blanditiis temporibus hic ipsum eaque, totam magnam minus eum dolorum reprehenderit rem odio consequatur placeat accusamus ex",
-			date: '10/12/20',
-			likesCount: 66,
-			isLiked: false,
-		}],
+		authUser: {} as profileDataType,
+		profile: {} as profileDataType,
+		status: "" as string,
+		posts: posts as Array<postType> ,
 	},
 	reducers: {
 		setUserProfile: (state, { payload }) => { state.profile = payload },
@@ -36,10 +21,10 @@ export const profileSlice = createSlice({
 		setauthUser: (state, { payload }) => { state.authUser = payload },
 		setNewAvatar: (state, { payload }) => { state.authUser.photos = state.profile.photos = payload },
 		setUserFollowStatus: (state, { payload }) => { state.profile = { ...state.profile, followed: payload } },
-		setPost: (state,  {payload} ) =>  {
+		setPost: (state, { payload }) => {
 			state.posts.push(payload)
 		},
-		setLike:(state,{payload}) => { 
+		setLike: (state, { payload }) => {
 			const item = state.posts[payload.idx]
 			item.isLiked = payload.like
 			payload.like ? ++item.likesCount : --item.likesCount
@@ -47,9 +32,9 @@ export const profileSlice = createSlice({
 	}
 })
 //action
-export const { setLike,setPost, setUserFollowStatus, addPost, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
+export const { setLike, setPost, setUserFollowStatus, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
 //thunk
-export const getUserProfile = (id) => async (dispatch) => {
+export const getUserProfile = (id:number) => async (dispatch: AppDispatch) => {
 	const profileData = await profileAPI.getProfile(id)
 	const profileStatus = await profileAPI.getStatus(id)
 	const followStatus = await profileAPI.getFollowStatus(id)
@@ -57,28 +42,30 @@ export const getUserProfile = (id) => async (dispatch) => {
 	dispatch(setUserStatus(profileStatus))
 	dispatch(setUserFollowStatus(followStatus))
 }
-export const getAuthUser = id => async (dispatch) => {
+export const getAuthUser = (id:number) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.getProfile(id)
 	dispatch(setauthUser(data))
 }
-export const putNewAvatar = (file) => async (dispatch) => {
-	const data = await profileAPI.putNewAvatar(file)
+export const updateAvatar = (file:File) => async (dispatch: AppDispatch) => {
+	const data = await profileAPI.updateAvatar(file)
 	if (data.resultCode === 0) {
 		dispatch(setNewAvatar(data.data.photos))
 	}
 }
-export const putNewStatus = (status) => async (dispatch) => {
-	const data = await profileAPI.putNewStatus(status)
+export const updateStatus = (status:string) => async (dispatch: AppDispatch) => {
+	const data = await profileAPI.updateStatus(status)
 	if (data.resultCode === 0) {
 		dispatch(setUserStatus(status))
 	}
 }
-export const putNewProfile = (profile) => async (dispatch) => {
-	const data = await profileAPI.saveProfile(profile)
+export const putNewProfile = (profile: profileDataType) => async (dispatch: AppDispatch) => {
+	const data = await profileAPI.updateProfile(profile)
 	if (data.resultCode === 0) {
 		dispatch(getUserProfile(profile.userId))
 		dispatch(getAuthUser(profile.userId))
 	}
 }
 export default profileSlice.reducer;
+
+
 

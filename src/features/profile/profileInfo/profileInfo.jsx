@@ -7,7 +7,7 @@ export const ProfileInfo = ({ setEditForm, routerId }) => {
 	const { profile } = useSelector((state) => state.profile);
 
 	//! при добавлении друга и переходе на профайл ошибка
-	const isContacts = Object.values(profile?.contacts).find((i) => !!i);
+	const isContacts = profile.contacts && Object.values(profile.contacts).find((i) => !!i);
 	const editHandler = () => {
 		setEditForm(true);
 	};

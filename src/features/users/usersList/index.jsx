@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const UsersList = React.memo(({ users, isFetching }) => {
+
 	const classes = useStyles();
 	return isFetching ? (
 		<Preloader2 />

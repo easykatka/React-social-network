@@ -1,14 +1,16 @@
 const subcribers = {
-    'messages-received': [] ,
-    'status-changed': [] 
+    'messages-received': [] as MessagesReceivedSubscriberType[],
+    'status-changed': [] as StatusChangedSubscriberType[]
 }
-let ws = null
+
+let ws: WebSocket | null = null
+type EventsNamesType = 'messages-received' | 'status-changed'
 
 const closeHandler = () => {
     notifySubscribersAboutStatus('pending')
     setTimeout(createChannel, 3000)
 }
-const messageHandler = (e) => {
+const messageHandler = (e: MessageEvent) => {
     const newMessages = JSON.parse(e.data)
     subcribers['messages-received'].forEach(s => s(newMessages))
 }
@@ -51,17 +53,30 @@ export const chatAPI = {
         cleanUp()
         ws?.close()
     },
-    subscribe(eventName, callback) {
+    subscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+        // @ts-ignore
         subcribers[eventName].push(callback)
         return () => {
+            // @ts-ignore
             subcribers[eventName] = subcribers[eventName].filter(s => s !== callback)
         }
     },
-    unsubscribe(eventName, callback) {
+    unsubscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+        // @ts-ignore
         subcribers[eventName] = subcribers[eventName].filter(s => s !== callback)
     },
-    sendMessage(message) {
+    sendMessage(message: string) {
         ws?.send(message)
     }
 }
 
+type MessagesReceivedSubscriberType = (messages: ChatMessageAPIType[]) => void
+type StatusChangedSubscriberType = (status: StatusType) => void
+
+export type ChatMessageAPIType = {
+    message: string
+    photo: string
+    userId: number
+    userName: string
+}
+export type StatusType = 'pending' | 'ready' | 'error'

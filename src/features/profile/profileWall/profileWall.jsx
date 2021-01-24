@@ -34,7 +34,7 @@ export const ProfileWall = ({ profile, routerId }) => {
 				direction='row'
 				alignItems='center'
 				style={{ backgroundColor: '#202225', marginBottom: 20, color: 'white', padding: 10, width: '100%', borderRadius: 8 }}>
-				<Avatar src={authUser?.photos.small} />
+				<Avatar src={authUser.photos?.small} />
 				<Grid item xs component='form' style={{ marginLeft: 20 }} onSubmit={handleSubmit}>
 					<InputBase
 						placeholder='White something'
@@ -60,7 +60,6 @@ export const ProfileWall = ({ profile, routerId }) => {
 				}}>
 				<div
 					style={{
-						overflowY: 'auto',
 						paddingRight: 30,
 						color: 'grey',
 						display: 'flex',
@@ -74,7 +73,7 @@ export const ProfileWall = ({ profile, routerId }) => {
 							<div
 								key={item.date}
 								style={{ width: '100%', display: 'flex', backgroundColor: '#202225', padding: 10, marginTop: 20 }}>
-								<Avatar src={item.userId ? authUser?.photos.small : profile?.photos.small} style={{ marginRight: 20 }} />
+								<Avatar src={item.userId ? authUser.photos?.small : profile.photos?.small} style={{ marginRight: 20 }} />
 								<div>
 									<p>{dateHelper(item.date, 0)}</p>
 									<p style={{ width: '100%' }}>{item.body}</p>

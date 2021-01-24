@@ -1,12 +1,13 @@
 import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/reducers/users-reducer';
 import TablePagination from '@material-ui/core/TablePagination';
 import { useDebounce } from '../../../common/useDebounce';
 
 //TODO последовательные фетчи
-export const UsersFilter = ({ currentPage, pageSize, totalUsersCount, filter }) => {
+export const UsersFilter = () => {
+	const { currentPage, pageSize, totalUsersCount, filter } = useSelector ((state) => state.users);
 	const dispatch = useDispatch();
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
 	// получения списка пользователей и обновление его при изменении параметров

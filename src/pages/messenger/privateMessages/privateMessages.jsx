@@ -14,8 +14,7 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 export const PrivateMessages = ({ routerId, recipient }) => {
 	const dispatch = useDispatch();
 	const classes = privateMessages();
-	const { messagesFething } = useSelector((state) => state.dialogs);
-	const { items } = useSelector((state) => state.dialogs.messages);
+	const { messagesFething,messages } = useSelector((state) => state.dialogs);
 	const { authUser } = useSelector((state) => state.profile);
 	const messagesEndRef = useRef();
 	//скролл вниз
@@ -25,7 +24,7 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 	useEffect(() => {
 		dispatch(getMessages(routerId));
 	}, [routerId, dispatch]);
-	useEffect(() => scrollToBottom(), [items]);
+	useEffect(() => scrollToBottom(), [messages]);
 
 	return (
 		<Grid item xs className={classes.privateMessages__container}>
@@ -34,7 +33,7 @@ export const PrivateMessages = ({ routerId, recipient }) => {
 			) : (
 				<>
 					<Grid className={classes.privateMessages__messagesList}>
-						{items?.map((item, idx) => (
+						{messages && messages.map((item, idx) => (
 							<Grid
 								item
 								className={classes.privateMessages__messageContent}

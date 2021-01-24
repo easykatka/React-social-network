@@ -73,11 +73,11 @@ export const Header = () => {
 							{newMessagesCount ? (
 								<Link to={`/messenger`}>
 									<Badge badgeContent={newMessagesCount} color='secondary'>
-										<Avatar alt='Remy Sharp' src={authUser?.photos.small} />
+										<Avatar alt='Remy Sharp' src={authUser?.photos?.small} />
 									</Badge>
 								</Link>
 							) : (
-								<Avatar alt='Remy Sharp' src={authUser?.photos.small} />
+								<Avatar alt='Remy Sharp' src={authUser?.photos?.small} />
 							)}
 						</Grid>
 						<Grid item>
