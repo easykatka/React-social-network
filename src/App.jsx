@@ -1,7 +1,7 @@
 import React from 'react';
 import { Header } from './features/header/header';
 import { Login } from './pages/login/login';
-import { Users } from './features/users';
+import { Users } from './features/users/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { init } from './app/reducers/app-reducer';
 import { makeStyles } from '@material-ui/core/styles';

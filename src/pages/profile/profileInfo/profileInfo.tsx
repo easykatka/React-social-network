@@ -45,7 +45,7 @@ export const ProfileInfo: React.FC<PropsType> = ({ setEditForm, routerId }) => {
 						Object.keys(profile.contacts).map((key) => {
 							//!роутер убирает двоеточие,потому пока что так 
 							{/*// @ts-ignore */ }
-							const str = profile.contacts[key] ?? profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
+							const str = profile.contacts[key] ==! null &&  profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
 							return (
 								profile.contacts[key] && (
 									<Grid key={key} item>

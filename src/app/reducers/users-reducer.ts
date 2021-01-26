@@ -41,7 +41,7 @@ export const usersSlice = createSlice({
 			state.pageSize = payload
 			state.currentPage = 0
 		},
-		setFilter: (state, { payload }) => {
+		setFilter: (state, { payload }) => { 
 			state.currentPage = 0
 			state.filter = { ...state.filter, ...payload }
 		},

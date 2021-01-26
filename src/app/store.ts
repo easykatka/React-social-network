@@ -15,7 +15,12 @@ const store = configureStore({
 		auth: authReducer,
 		profile: profileReducer,
 		dialogs: dialogsReducer,
+		
 	},
+	middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false, //!почитать 
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>

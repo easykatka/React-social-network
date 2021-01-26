@@ -8,31 +8,14 @@ import { Link, NavLink } from 'react-router-dom';
 import React from 'react';
 import { getNewMessagesCount } from '../../app/reducers/dialogs-reducer';
 import { RootState } from '../../app/store';
-
-const useStyles = makeStyles((theme) => ({
-	header__container: {
-		color: 'white',
-		width: 1200,
-		margin: '15px auto',
-		display: 'flex',
-		alignItems: 'center',
-		position: 'sticky',
-	},
-	header__profile: {
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-	},
-	header: {
-		background: 'linear-gradient(to top, #232526, #414345)',
-	},
-}));
+import { header } from './header_styles';
 
 export const Header = () => {
-	const classes = useStyles();
-	const authUser = useSelector((state:RootState) => state.profile.authUser);
-	const { isAuth, id } = useSelector((state:RootState) => state.auth);
+	const classes = header();
+	const authUser = useSelector((state: RootState) => state.profile.authUser);
+	const { isAuth, id } = useSelector((state: RootState) => state.auth);
 	const dispatch = useDispatch();
-	const { newMessagesCount } = useSelector((state:RootState) => state.dialogs);
+	const { newMessagesCount } = useSelector((state: RootState) => state.dialogs);
 
 	React.useEffect(() => {
 		if (id) {
@@ -78,8 +61,8 @@ export const Header = () => {
 									</Badge>
 								</Link>
 							) : (
-								<Avatar alt='Remy Sharp' src={authUser?.photos?.small} />
-							)}
+									<Avatar alt='Remy Sharp' src={authUser?.photos?.small} />
+								)}
 						</Grid>
 						<Grid item>
 							<IconButton onClick={() => dispatch(logout())}>

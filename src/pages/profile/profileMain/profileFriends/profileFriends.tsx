@@ -6,19 +6,22 @@ import { randomArray } from '../../../../common/randomArray';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../app/store';
 import { allUsersItemType } from '../../../../common/types/types';
+import { useAppDispatch } from './../../../../app/store';
+import { setFilter } from '../../../../app/reducers/users-reducer';
 
-export const ProfileFriends:React.FC = React.memo(() => {
+export const ProfileFriends: React.FC = React.memo(() => {
 	const { users } = useSelector((state: RootState) => state.users)
 	const randomUsers = users && randomArray(users, 6) as allUsersItemType[];
+	const dispatch = useAppDispatch()
 	const classes = profileFreinds();
 	return (
 		<Grid container justify='center'>
-			<p className={classes.profileFreinds__friendsLabel}> Friends: <Link to={`/users`}><div>{users.length}</div></Link> </p>
+			<p className={classes.profileFreinds__friendsLabel}> Friends: <Link onClick={() => dispatch(setFilter({friend:'true'}))} to={`/users`}>{users.length}</Link> </p>
 			<Grid container className={classes.profileFreinds__friendsContainer}>
 				{randomUsers.map((item) => (
 					<Grid item xs={4} key={item.id} >
 						<Link to={`/profile/${item.id}`}>
-							<Grid container className={classes.profileFreinds__friendItem} direction='column' alignItems='center'>
+							<Grid container className={classes.profileFreinds__friendItem} >
 								<div>
 									<Avatar className={classes.profileFreinds__friendAvatar} src={item.photos?.large} />
 								</div>

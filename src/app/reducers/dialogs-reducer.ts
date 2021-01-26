@@ -20,7 +20,7 @@ export const dialogsSlice = createSlice({
 		setMessagesFetching: (state, { payload }) => {
 			state.messagesFething = payload
 		},
-		setDialogs: (state, { payload }) => { debugger
+		setDialogs: (state, { payload }) => {
 			state.dialogs = payload
 		},
 		setMessages: (state, { payload }) => {

@@ -15,9 +15,12 @@ export const profileFreinds = makeStyles((theme) => ({
 	profileFreinds__friendItem: {
 		color: 'grey',
 		padding: 10,
+		flexDirection: 'column',
+		alignItems: 'center',
 		'&:hover': {
 			color: '#61fbfb'
 		},
+
 	},
 	profileFreinds__friendsLabel: {
 		color: 'grey',

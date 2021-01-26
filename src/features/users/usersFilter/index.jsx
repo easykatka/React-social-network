@@ -10,10 +10,11 @@ export const UsersFilter = () => {
 	const { currentPage, pageSize, totalUsersCount, filter } = useSelector ((state) => state.users);
 	const dispatch = useDispatch();
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
+	const debouncedCurrentPage = useDebounce(currentPage,500)
 	// получения списка пользователей и обновление его при изменении параметров
 	useEffect(() => {
-		dispatch(getUsers(currentPage, pageSize, debouncedSearchTerm, filter.friend));
-	}, [dispatch, currentPage, pageSize, debouncedSearchTerm, filter.friend]);
+		dispatch(getUsers(debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend));
+	}, [dispatch, debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend]);
 	const handleChangePage = (event, newPage) => {
 		dispatch(setCurrentPage(newPage));
 	};

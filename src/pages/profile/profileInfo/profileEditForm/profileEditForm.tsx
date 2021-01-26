@@ -9,16 +9,17 @@ import * as Yup from 'yup';
 import { Dispatch } from 'react';
 import { RootState } from '../../../../app/store';
 
-type PropsType ={
+type PropsType = {
 	setEditForm: Dispatch<boolean>
 }
-export const ProfileEditForm:React.FC<PropsType> = ({ setEditForm }) => {
-	const { profile } = useSelector((state:RootState) => state.profile);
+export const ProfileEditForm: React.FC<PropsType> = ({ setEditForm }) => {
+	const { profile } = useSelector((state: RootState) => state.profile);
 	const dispatch = useDispatch();
 	const classes = profileEditForm();
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
 		initialValues: profile,
-		onSubmit: (e) => { debugger
+		onSubmit: (e) => {
+			debugger
 			dispatch(putNewProfile(e));
 			setEditForm(false);
 		},

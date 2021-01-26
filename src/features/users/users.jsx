@@ -5,7 +5,7 @@ export const Users = () => {
 	const { users, isFetching } = useSelector((state) => state.users);
 	return (
 		<>
-			<UsersFilter  />
+			<UsersFilter />
 			<UsersList users={users} isFetching={isFetching} />
 		</>
 	);

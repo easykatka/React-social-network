@@ -10,7 +10,7 @@ export const profileAPI = {
 	},
 	updateStatus(status: string) {
 		return instance
-			.put<responseResultObject>(`profile/status`, { status: status })
+			.put<responseResultObject>(`profile/status/`, { status: status })
 			.then((res) => res.data);
 	},
 	updateAvatar(photo: File) {

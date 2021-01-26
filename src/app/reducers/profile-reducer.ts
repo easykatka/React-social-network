@@ -9,8 +9,10 @@ export const profileSlice = createSlice({
 	initialState: {
 		authUser: {} as profileDataType,
 		profile: {} as profileDataType,
-		status: "" as string,
+		status: "",
 		posts: posts as Array<postType>,
+		isLoading: false,
+		isError: '' as string
 	},
 	reducers: {
 		setUserProfile: (state, { payload }) => { state.profile = payload },
@@ -26,18 +28,29 @@ export const profileSlice = createSlice({
 			item.isLiked = payload.like.checked
 			payload.like.checked ? ++item.likesCount : --item.likesCount
 		},
+		setIsLoading: (state, {payload}) => { state.isLoading = payload },
+		setIsError: (state, {payload}) => { state.isError = payload }
 	}
 })
 //action
-export const { setLike, setPost, setUserFollowStatus, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
+export const { setIsError, setIsLoading, setLike, setPost, setUserFollowStatus, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
 //thunk
 export const getUserProfile = (id: number) => async (dispatch: AppDispatch) => {
-	const profileData = await profileAPI.getProfile(id)
-	const profileStatus = await profileAPI.getStatus(id)
-	const followStatus = await profileAPI.getFollowStatus(id)
-	dispatch(setUserProfile(profileData))
-	dispatch(setUserStatus(profileStatus))
-	dispatch(setUserFollowStatus(followStatus))
+	try {
+		dispatch(setIsLoading(true))
+		const profileData = await profileAPI.getProfile(id)
+		const profileStatus = await profileAPI.getStatus(id)
+		const followStatus = await profileAPI.getFollowStatus(id)
+		dispatch(setUserProfile(profileData))
+		dispatch(setUserStatus(profileStatus))
+		dispatch(setUserFollowStatus(followStatus))
+	}
+	catch (error) {
+		dispatch(setIsError(error))
+	}
+	finally {
+		dispatch(setIsLoading(false))
+	}
 }
 export const getAuthUser = (id: number) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.getProfile(id)

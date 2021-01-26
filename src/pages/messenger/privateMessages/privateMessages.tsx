@@ -56,26 +56,26 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 									</Grid>
 									<Grid item style={{ marginLeft: 10 }}>
 										<span className={classes.privateMessages__senderName}>{item.senderName}</span>
-										<Grid className={classes.privateMessages__messageBody}>
-											<Grid container direction='row' spacing={2} alignItems='center'>
-												<Grid item>{item.body}</Grid>
-												<Grid item>
-													<span>
-														{item.senderId === authUser?.userId &&
-															(item.viewed ? (
-																<DoneAllRoundedIcon className={classes.privateMessages__doneAllIcon} />
-															) : (
-																	<DoneRoundedIcon className={classes.privateMessages__doneIcon} />
-																))}
-													</span>
-													<span className={classes.privateMessages__addedAt}>{dateHelper(item.addedAt)}</span>
-												</Grid>
+										<Grid container direction='row' spacing={2} alignItems='center' className={classes.privateMessages__messageBody}>
+											<Grid item>{item.body}</Grid>
+											<Grid item>
+												<span>
+													{item.senderId === authUser?.userId &&
+														(item.viewed ? (
+															<DoneAllRoundedIcon className={classes.privateMessages__doneAllIcon} />
+														) : (
+																<DoneRoundedIcon className={classes.privateMessages__doneIcon} />
+															))}
+												</span>
+												<span className={classes.privateMessages__addedAt}>{dateHelper(item.addedAt)}</span>
+												
 											</Grid>
+											<DeleteOutlineOutlinedIcon className={classes.privateMessages__deleteIcon} color='secondary' />
 										</Grid>
 									</Grid>
-									<IconButton className={classes.privateMessages__deleteIcon}>
-										<DeleteOutlineOutlinedIcon />
-									</IconButton>
+
+
+
 									<div ref={messagesEndRef}></div>
 								</Grid>
 							))}

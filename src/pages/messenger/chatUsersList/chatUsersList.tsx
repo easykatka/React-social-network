@@ -30,7 +30,6 @@ export const ChatUsersList:React.FC = () => {
 									</StyledBadge>
 								</Grid>
 								<p style={{ marginLeft: 12 }}>
-									{' '}
 									{i.userName}
 								</p>
 							</Grid>

@@ -14,6 +14,10 @@ export const privateMessages = makeStyles((theme) => ({
 	privateMessages__messageBody: {
 		color: '#dcddde',
 		wordBreak: 'break-all',
+		"&:hover": {
+			"&>*":{opacity: 1}
+		}
+		
 	},
 	privateMessages__doneIcon: {
 		color: 'orange',
@@ -35,12 +39,14 @@ export const privateMessages = makeStyles((theme) => ({
 		display: 'flex',
 		padding: '14px 0',
 		borderTop: '1px solid #40444b',
-		"&:hover": {
-			opacity: 0
-		}
+		
 	},
 
 	privateMessages__deleteIcon: {
-		opacity: 0
+		cursor:'pointer',
+		opacity: 0,
+		fontSize:20,
+		
+		
 	},
 }));
