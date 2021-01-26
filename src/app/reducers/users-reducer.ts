@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { profileAPI } from "../../api/profile-api";
-import { usersAPI } from "../../api/users-api";
-import { allUsersItemType } from "../../types/types";
+import { profileAPI } from "../api/profile-api";
+import { usersAPI } from "../api/users-api";
+import { allUsersItemType } from "../../common/types/types";
 import { AppDispatch } from "../store";
 import { setUserFollowStatus } from "./profile-reducer";
 

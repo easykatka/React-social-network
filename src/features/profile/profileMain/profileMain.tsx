@@ -6,8 +6,15 @@ import React from 'react';
 import { ProfileStatus } from './profileStatus/profileStatus';
 import { FriendButton } from '../../../common/friendButton';
 import { Link } from 'react-router-dom';
+import { RootState } from '../../../app/store';
+import { useSelector } from 'react-redux';
 
-export const ProfileMain = React.memo(({ profile, routerId }) => {
+type PropsType = {
+	routerId: number
+}
+
+export const ProfileMain: React.FC<PropsType> = React.memo(({routerId }) => {
+	const { profile } = useSelector((state: RootState) => state.profile);
 	const classes = profileMain();
 	return (
 		<Grid container className={classes.profileMain__container} direction='column' justify='space-around'>
@@ -24,23 +31,23 @@ export const ProfileMain = React.memo(({ profile, routerId }) => {
 					<ProfileFriends />
 				</Grid>
 			) : (
-				<Grid item>
-					{routerId && (
-						<div>
-							<div className={classes.profileMain__profileFriendBtn}>
-								<FriendButton id={routerId} followed={profile.followed} />
-							</div>
-							<div >
-								<Link to={`/messenger/${routerId}`}>
-									<Button color='primary' variant='contained' className={classes.profileMain__profilePmBtn} >
-										White a message
+					<Grid item>
+						{routerId && (
+							<div>
+								<div className={classes.profileMain__profileFriendBtn}>
+									<FriendButton id={routerId} followed={profile.followed} />
+								</div>
+								<div >
+									<Link to={`/messenger/${routerId}`}>
+										<Button color='primary' variant='contained' className={classes.profileMain__profilePmBtn} >
+											White a message
 									</Button>
-								</Link>
+									</Link>
+								</div>
 							</div>
-						</div>
-					)}
-				</Grid>
-			)}
+						)}
+					</Grid>
+				)}
 		</Grid>
 	);
 });

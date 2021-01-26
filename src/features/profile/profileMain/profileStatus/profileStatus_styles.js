@@ -9,8 +9,8 @@ export const profileStatus = makeStyles((theme) => ({
 		wordBreak: 'break-word',
 		padding: 5
 	},
-	profileAvatar__editIcon: {
-		marginLeft: 10,
-		fontSize: 18
-	},
+		profileAvatar__editIcon: {
+			marginLeft: 10,
+			fontSize: 18
+		},
 }))

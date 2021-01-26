@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from './features/header';
+import { Header } from './features/header/header';
 import { Login } from './pages/login/login';
 import { Users } from './features/users';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
 	app__container: {
 		width: 1200,
 		margin: '0 auto',
+		marginTop:70,	
 		backgroundColor: '#36393f',
 		borderRadius: '15px',
-		position: 'relative',
+		position: 'static',
 		height: 600,
 	},
 }));

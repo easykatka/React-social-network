@@ -1,12 +1,12 @@
-import { dialogsArrayType, messagesArrayType } from '../../types/types'
+import { dialogsArrayType, messagesArrayType } from '../../common/types/types'
 import { createSlice } from "@reduxjs/toolkit";
-import { dialogsAPI } from "../../api/dialogs-api";
+import { dialogsAPI } from "../api/dialogs-api";
 import { AppDispatch } from '../store';
 
 //типы
 const initialState = {
-	dialogs: [] as Array<dialogsArrayType>,
-	messages: [] as Array<messagesArrayType>,
+	dialogs: [] as dialogsArrayType[],
+	messages: [] as messagesArrayType[],
 	dialogsFetching: false,
 	messagesFething: false,
 	newMessagesCount: null as number | null
@@ -20,7 +20,7 @@ export const dialogsSlice = createSlice({
 		setMessagesFetching: (state, { payload }) => {
 			state.messagesFething = payload
 		},
-		setDialogs: (state, { payload }) => {
+		setDialogs: (state, { payload }) => { debugger
 			state.dialogs = payload
 		},
 		setMessages: (state, { payload }) => {
@@ -42,6 +42,7 @@ export const getNewMessagesCount = () => async (dispatch: AppDispatch) => {
 }
 export const getDialogs = () => async (dispatch: AppDispatch) => {
 	dispatch(setDialogsFetching(true));
+	// обновить chatnavbar
 	const data = await dialogsAPI.getDialogs();
 	dispatch(setDialogsFetching(false));
 	dispatch(setDialogs(data))
@@ -60,7 +61,7 @@ export const sendMessage = (userId: number, body: string) => async (dispatch: Ap
 	dispatch(getMessages(userId))
 	// обновить chatnavbar
 	const data = await dialogsAPI.getDialogs()
-	dispatch(setDialogs({ data }))
+	dispatch(setDialogs( data ))
 }
 export const deleteMessage = (messageId: string, userId: number) => async (dispatch: AppDispatch) => {
 	const data = await dialogsAPI.deleteMessage(messageId)

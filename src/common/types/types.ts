@@ -8,19 +8,19 @@ export type loginUserData = {
 	email: string
 	password: string
 	rememberMe: boolean
-	captcha: boolean
+	captcha: string
 }
 
 export type profileDataType = {
-	userId: number 
+	userId: number
 	aboutMe: string | null
 	lookingForAJob: boolean
 	lookingForAJobDescription: string | null
 	fullName: string | null
-	followed:boolean 
-	photos:photosType
+	followed: boolean
+	photos: photosType
 	contacts: {
-		facebook: string | null
+		[facebook: string]: string | null
 		instagram: string | null
 		vk: string | null
 		github: string | null
@@ -31,6 +31,7 @@ export type profileDataType = {
 	}
 }
 
+
 export type responseResultObject = {
 	data: {}
 	fieldsErrors: Array<string>
@@ -38,8 +39,8 @@ export type responseResultObject = {
 	resultCode: resultCodeEnum
 }
 export type photosType = {
-	large: string | null
-	small: string | null
+	large: string
+	small: string
 }
 export type usersSearchType = {
 	currentPage: number,
@@ -83,7 +84,7 @@ export type messagesArrayType = {
 export type postType = {
 	userId: number | null
 	date: string
-	body:string
+	body: string
 	likesCount: number
 	isLiked: boolean
 }

@@ -1,4 +1,4 @@
-import { loginUserData, resultCodeEnum } from "../types/types";
+import { loginUserData, resultCodeEnum } from "../../common/types/types";
 import { instance } from "./api";
 	//апи
 export const authAPI = {

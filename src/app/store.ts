@@ -15,7 +15,6 @@ const store = configureStore({
 		auth: authReducer,
 		profile: profileReducer,
 		dialogs: dialogsReducer,
-	
 	},
 });
 

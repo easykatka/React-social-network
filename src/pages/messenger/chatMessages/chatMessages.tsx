@@ -5,13 +5,17 @@ import { ChatForm } from './chatForm/chatForm';
 import React from 'react';
 import { chatMessages } from './chatMessages_styles';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../../app/store';
 
-export const ChatMessages = () => {
-	const messages = useSelector((state) => state.chat.messages)
-	const messagesEndRef = useRef();
+export const ChatMessages:React.FC = () => {
+	const messages = useSelector((state: RootState) => state.chat.messages)
+	const messagesEndRef = useRef<HTMLDivElement>(null);
 	const classes = chatMessages();
 	//скролл вниз
-	useEffect(() => messagesEndRef.current && messagesEndRef.current?.scrollIntoView(false), [messages]);
+	const scrollToBottom = () => {
+		messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
+	};
+	useEffect(() => scrollToBottom(), [messages]);
 
 	return (
 		<Grid item xs className={classes.chatMessage__container}>
@@ -26,11 +30,11 @@ export const ChatMessages = () => {
 								<p className={classes.chatMessage__senderName}> {i.userName}</p>
 								<p className={classes.chatMessage__body}>{i.message} </p>
 							</Grid>
-							<p ref={messagesEndRef}></p>
+							<div ref={messagesEndRef}></div>
 						</Grid>
 					))}
 				</Grid>
-				<ChatForm/>
+				<ChatForm />
 			</Grid>
 		</Grid>
 	);

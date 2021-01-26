@@ -4,20 +4,20 @@ export const profileAvatar = makeStyles((theme) => ({
 		width: 150,
 		height: 150,
 	},
-	profileAvatar__uploadBtn:{
-		"&:hover":{
-			color:'orange'
+	profileAvatar__uploadBtn: {
+		"&:hover": {
+			color: 'orange'
 		}
 	}
 
 }));
 export const StyledBadge = withStyles((theme) => ({
 	badge: {
-		backgroundColor:'transparent',
-		position:'absolute',
-		top:140,
-		right:5,
-		
-		
+		backgroundColor: 'transparent',
+		position: 'absolute',
+		top: 140,
+		right: 5,
+
+
 	},
 }))(Badge);

@@ -1,5 +1,5 @@
 
-import { chatAPI, ChatMessageAPIType, StatusType } from '../../api/chat-api'
+import { chatAPI, ChatMessageAPIType, StatusType } from '../api/chat-api'
 import { v1 } from 'uuid'
 import { AppDispatch } from '../store'
 import { createSlice } from '@reduxjs/toolkit';

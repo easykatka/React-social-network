@@ -1,14 +1,16 @@
 import { Avatar, Badge } from '@material-ui/core';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getDialogs } from '../../../app/reducers/dialogs-reducer';
-import devs from '../../../assets/img/devs.jpg';
+import { RootState } from '../../../app/store';
+import devs from '../../../common/assets/img/devs.jpg';
 import { messengerNavBar } from './messengerNavBar_styles';
+import { useAppDispatch } from './../../../app/store';
 
-export const ChatNavBar = () => {
-	const { dialogs } = useSelector((state) => state.dialogs);
-	const dispatch = useDispatch();
+export const ChatNavBar:React.FC = () => {
+	const { dialogs } = useSelector((state: RootState) => state.dialogs);
+	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(getDialogs());
 	}, []);

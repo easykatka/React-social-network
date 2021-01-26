@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import { resultCodeEnum, responseResultObject, messagesArrayType, dialogsArrayType } from "../types/types";
+import { resultCodeEnum, responseResultObject, messagesArrayType, dialogsArrayType } from "../../common/types/types";
 
 export const dialogsAPI = {
 	getDialogs() {

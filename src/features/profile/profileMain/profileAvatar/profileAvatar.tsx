@@ -1,13 +1,20 @@
 import { Avatar, IconButton } from '@material-ui/core';
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined';
-import { useDispatch } from 'react-redux';
 import { updateAvatar } from '../../../../app/reducers/profile-reducer';
 import { profileAvatar, StyledBadge } from './profileAvatar_styles';
 import React from 'react';
+import { profileDataType } from '../../../../common/types/types';
+import { useAppDispatch } from './../../../../app/store';
 
-export const ProfileAvatar = React.memo(({ profile, routerId }) => {
+type PropsType = {
+	profile: profileDataType
+	routerId: number
+}
+
+
+export const ProfileAvatar: React.FC<PropsType> = React.memo(({ profile, routerId }) => {
 	const classes = profileAvatar();
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	return (
 		<>
 			{!routerId ? (
@@ -19,10 +26,10 @@ export const ProfileAvatar = React.memo(({ profile, routerId }) => {
 								id='contained-button-file'
 								type='file'
 								style={{ display: 'none' }}
-								onChange={(e) => dispatch(updateAvatar(e.target.files[0]))}
+								onChange={(e) => e.target.files && dispatch(updateAvatar(e.target.files[0]))}
 							/>
 							<label htmlFor='contained-button-file'>
-								<IconButton variant='contained' color='primary' className={classes.profileAvatar__uploadBtn} component='span'>
+								<IconButton color='primary' className={classes.profileAvatar__uploadBtn} component='span'>
 									<AddAPhotoOutlinedIcon />
 								</IconButton>
 							</label>
@@ -32,8 +39,8 @@ export const ProfileAvatar = React.memo(({ profile, routerId }) => {
 					<Avatar className={classes.profileAvatar__avatar} alt='user foto' src={profile.photos?.large} />
 				</StyledBadge>
 			) : (
-				<Avatar className={classes.profileAvatar__avatar} alt='user foto' src={profile.photos?.large} />
-			)}
+					<Avatar className={classes.profileAvatar__avatar} alt='user foto' src={profile.photos?.large} />
+				)}
 		</>
 	);
 });

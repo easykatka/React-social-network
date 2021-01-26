@@ -1,11 +1,8 @@
-import { profileAPI } from "../../api/profile-api";
+import { profileAPI } from "../api/profile-api";
 import { createSlice } from "@reduxjs/toolkit";
-import { postType ,profileDataType} from '../../types/types'
+import { postType, profileDataType, resultCodeEnum } from '../../common/types/types'
 import { posts } from "../../common/posts";
 import { AppDispatch } from "../store";
-
-
-
 
 export const profileSlice = createSlice({
 	name: 'profile',
@@ -13,7 +10,7 @@ export const profileSlice = createSlice({
 		authUser: {} as profileDataType,
 		profile: {} as profileDataType,
 		status: "" as string,
-		posts: posts as Array<postType> ,
+		posts: posts as Array<postType>,
 	},
 	reducers: {
 		setUserProfile: (state, { payload }) => { state.profile = payload },
@@ -26,15 +23,15 @@ export const profileSlice = createSlice({
 		},
 		setLike: (state, { payload }) => {
 			const item = state.posts[payload.idx]
-			item.isLiked = payload.like
-			payload.like ? ++item.likesCount : --item.likesCount
+			item.isLiked = payload.like.checked
+			payload.like.checked ? ++item.likesCount : --item.likesCount
 		},
 	}
 })
 //action
 export const { setLike, setPost, setUserFollowStatus, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
 //thunk
-export const getUserProfile = (id:number) => async (dispatch: AppDispatch) => {
+export const getUserProfile = (id: number) => async (dispatch: AppDispatch) => {
 	const profileData = await profileAPI.getProfile(id)
 	const profileStatus = await profileAPI.getStatus(id)
 	const followStatus = await profileAPI.getFollowStatus(id)
@@ -42,25 +39,25 @@ export const getUserProfile = (id:number) => async (dispatch: AppDispatch) => {
 	dispatch(setUserStatus(profileStatus))
 	dispatch(setUserFollowStatus(followStatus))
 }
-export const getAuthUser = (id:number) => async (dispatch: AppDispatch) => {
+export const getAuthUser = (id: number) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.getProfile(id)
 	dispatch(setauthUser(data))
 }
-export const updateAvatar = (file:File) => async (dispatch: AppDispatch) => {
+export const updateAvatar = (file: File) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.updateAvatar(file)
-	if (data.resultCode === 0) {
+	if (data.resultCode === resultCodeEnum.success) {
 		dispatch(setNewAvatar(data.data.photos))
 	}
 }
-export const updateStatus = (status:string) => async (dispatch: AppDispatch) => {
+export const updateStatus = (status: string) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.updateStatus(status)
-	if (data.resultCode === 0) {
+	if (data.resultCode === resultCodeEnum.success) {
 		dispatch(setUserStatus(status))
 	}
 }
 export const putNewProfile = (profile: profileDataType) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.updateProfile(profile)
-	if (data.resultCode === 0) {
+	if (data.resultCode === resultCodeEnum.success) {
 		dispatch(getUserProfile(profile.userId))
 		dispatch(getAuthUser(profile.userId))
 	}

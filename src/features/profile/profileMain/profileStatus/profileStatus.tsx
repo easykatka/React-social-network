@@ -7,7 +7,12 @@ import { Grid, InputBase } from '@material-ui/core';
 import { useStatus } from './useStatus';
 import { profileStatus } from './profileStatus_styles';
 
-export const ProfileStatus = React.memo(({ routerId }) => {
+type PropsType = {
+	routerId: number
+}
+
+
+export const ProfileStatus: React.FC<PropsType> = React.memo(({ routerId }) => {
 	const [onStatusChange, deactivateMode, editMode, setEditMode, userStatus, status] = useStatus();
 	const classes = profileStatus();
 	return (
@@ -16,7 +21,7 @@ export const ProfileStatus = React.memo(({ routerId }) => {
 				{editMode && !routerId ? (
 					<Grid component='form' onSubmit={deactivateMode(true)}>
 						<InputBase
-							style={{ width: 220 ,padding:10}}
+							style={{ width: 220, padding: 10 }}
 							autoFocus={true}
 							onChange={onStatusChange}
 							value={userStatus}
@@ -33,19 +38,17 @@ export const ProfileStatus = React.memo(({ routerId }) => {
 						/>
 					</Grid>
 				) : (
-					<Grid>
-						<span
-							variant='body1'
-							
-							className={classes.profileAvatar__status}
-							onClick={() => {
-								setEditMode(true);
-							}}>
-							{status}
-							<span>{!routerId && <EditIcon className={classes.profileAvatar__editIcon} color='inherit' />}</span>
-						</span>
-					</Grid>
-				)}
+						<Grid>
+							<span
+								className={classes.profileAvatar__status}
+								onClick={() => {
+									setEditMode(true);
+								}}>
+								{status}
+								<span>{!routerId && <EditIcon className={classes.profileAvatar__editIcon} color='inherit' />}</span>
+							</span>
+						</Grid>
+					)}
 			</Grid>
 		</Grid>
 	);

@@ -4,14 +4,16 @@ import { profileFreinds } from './profileFriends_style';
 import React from 'react'
 import { randomArray } from '../../../../common/randomArray';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../../../app/store';
+import { allUsersItemType } from '../../../../common/types/types';
 
 export const ProfileFriends = React.memo(() => {
-	const {users} = useSelector((state) =>state.users)
-	const randomUsers = users && randomArray (users, 6);
+	const { users } = useSelector((state: RootState) => state.users)
+	const randomUsers = users && randomArray(users, 6) as allUsersItemType[];
 	const classes = profileFreinds();
 	return (
 		<Grid container justify='center'>
-			<p className={classes.profileFreinds__friendsLabel}> Friends: <Link to={`/users`}>{users.length}</Link> </p>
+			<p className={classes.profileFreinds__friendsLabel}> Friends: <Link to={`/users`}><div>{users.length}</div></Link> </p>
 			<Grid container className={classes.profileFreinds__friendsContainer}>
 				{randomUsers.map((item) => (
 					<Grid item xs={4} key={item.id} >

@@ -4,9 +4,15 @@ import { Link } from 'react-router-dom';
 import { Preloader } from '../../../common/preloader';
 import { dateHelper } from '../../../common/dateHelper';
 import { privateUserInfo } from './privateUserInfo_styles';
+import { RootState } from '../../../app/store';
+import { dialogsArrayType } from '../../../common/types/types';
 
-export const PrivateUserInfo = ({ recipient }) => {
-	const { dialogsFetching } = useSelector((state) => state.dialogs);
+type PropsType = {
+	recipient:dialogsArrayType
+}
+
+export const PrivateUserInfo:React.FC<PropsType> = ({recipient}) => {
+	const { dialogsFetching } = useSelector((state:RootState) => state.dialogs);
 	const classes = privateUserInfo();
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (

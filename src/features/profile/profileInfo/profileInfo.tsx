@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { FormControlLabel, Grid, IconButton, Radio } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
+import { RootState } from '../../../app/store';
 
-export const ProfileInfo = ({ setEditForm, routerId }) => {
-	const { profile } = useSelector((state) => state.profile);
 
-	//! при добавлении друга и переходе на профайл ошибка
+type PropsType = {
+	setEditForm: Dispatch<boolean>
+	routerId: number
+}
+export const ProfileInfo: React.FC<PropsType> = ({ setEditForm, routerId }) => {
+	const { profile } = useSelector((state: RootState) => state.profile);
 	const isContacts = profile.contacts && Object.values(profile.contacts).find((i) => !!i);
 	const editHandler = () => {
 		setEditForm(true);
@@ -36,8 +40,9 @@ export const ProfileInfo = ({ setEditForm, routerId }) => {
 					<h2 style={{ color: 'white' }}>Contacts:</h2>
 					{profile.contacts &&
 						Object.keys(profile.contacts).map((key) => {
-							//роутер убирает двоеточие,поэтому пока что так
-							let str = profile.contacts[key] !== null && profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
+							//роутер убирает двоеточие,потому пока что так 
+							{/*// @ts-ignore */ }
+							const str = profile.contacts[key] ?? profile.contacts[key].replace(/(^\w+:|^)\/\//, '');
 							return (
 								profile.contacts[key] && (
 									<Grid key={key} item>
@@ -47,10 +52,10 @@ export const ProfileInfo = ({ setEditForm, routerId }) => {
 							);
 						})}
 				</Grid>
-			)}{' '}
+			)}
 			{!routerId && (
 				<Grid item>
-					<IconButton color='secondary' variant='contained' onClick={editHandler}>
+					<IconButton onClick={editHandler}>
 						<SettingsSharpIcon />
 					</IconButton>
 				</Grid>

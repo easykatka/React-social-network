@@ -1,4 +1,4 @@
-import { responseResultObject ,allUsersItemType } from "../types/types";
+import { responseResultObject ,allUsersItemType } from "../../common/types/types";
 import { instance } from "./api";
 
 

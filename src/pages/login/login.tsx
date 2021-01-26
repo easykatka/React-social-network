@@ -1,15 +1,18 @@
 import { useFormik } from 'formik';
 import { sendLogin } from '../../app/reducers/auth-reducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { TextField, Button, Checkbox, Grid, FormControlLabel, Typography } from '@material-ui/core/';
 import VpnKeyRoundedIcon from '@material-ui/icons/VpnKeyRounded';
 import * as Yup from 'yup';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { loginStyles } from './login_styles';
+import { RootState } from '../../app/store';
+import { loginUserData } from '../../common/types/types';
+import { useAppDispatch } from './../../app/store';
 
-export const Login = () => {
-	const { captchaUrl, errorMessage } = useSelector((state) => state.auth);
-	const dispatch = useDispatch();
+export const Login:React.FC = () => {
+	const { captchaUrl, errorMessage } = useSelector((state:RootState) => state.auth);
+	const dispatch = useAppDispatch();
 	const classes = loginStyles();
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
 		initialValues: {
@@ -25,7 +28,7 @@ export const Login = () => {
 				.max(12, 'Password must be shorter than 12 characters.')
 				.required('Required'),
 		}),
-		onSubmit: (loginUserData) => { 
+		onSubmit: (loginUserData:loginUserData) => { 
 			dispatch(sendLogin(loginUserData));
 		},
 	});
@@ -36,7 +39,7 @@ export const Login = () => {
 				{errorMessage}
 			</Typography>
 			<TextField label='Email' onBlur={handleBlur} size='small' onChange={handleChange} id='email' name='email' value={values.email} />
-			{errors.email && touched.email && <div className={classes.login_error}>{errors.email}</div>}
+			{errors.email && touched.email && <div className={classes.login__error}>{errors.email}</div>}
 			<TextField
 				label='Password'
 				onBlur={handleBlur}

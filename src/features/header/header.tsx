@@ -7,6 +7,7 @@ import LaunchOutlinedIcon from '@material-ui/icons/LaunchOutlined';
 import { Link, NavLink } from 'react-router-dom';
 import React from 'react';
 import { getNewMessagesCount } from '../../app/reducers/dialogs-reducer';
+import { RootState } from '../../app/store';
 
 const useStyles = makeStyles((theme) => ({
 	header__container: {
@@ -28,10 +29,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = () => {
 	const classes = useStyles();
-	const authUser = useSelector((state) => state.profile.authUser);
-	const { isAuth, id } = useSelector((state) => state.auth);
+	const authUser = useSelector((state:RootState) => state.profile.authUser);
+	const { isAuth, id } = useSelector((state:RootState) => state.auth);
 	const dispatch = useDispatch();
-	const { newMessagesCount } = useSelector((state) => state.dialogs);
+	const { newMessagesCount } = useSelector((state:RootState) => state.dialogs);
 
 	React.useEffect(() => {
 		if (id) {

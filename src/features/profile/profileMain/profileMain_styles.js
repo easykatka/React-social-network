@@ -6,7 +6,7 @@ export const profileMain = makeStyles((theme) => ({
 		borderRadius: '15px 0px 0px 15px',
 		height: 600,
 		alignItems: 'center',
-		padding:15
+		padding: 15
 	},
 
 	profileMain__name: {
@@ -20,16 +20,16 @@ export const profileMain = makeStyles((theme) => ({
 		paddingTop: 5,
 		width: '100%'
 	},
-	profileMain__profileFriendBtn:{
-		margin:20,
-		width:200
-		
+	profileMain__profileFriendBtn: {
+		margin: 20,
+		width: 200
+
 	},
-	profileMain__profilePmBtn:{
-		margin:20,
-		color:'black',
-		backgroundColor:'orange',
-		width:200
+	profileMain__profilePmBtn: {
+		margin: 20,
+		color: 'black',
+		backgroundColor: 'orange',
+		width: 200
 	}
 
 }))

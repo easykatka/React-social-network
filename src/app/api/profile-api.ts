@@ -1,5 +1,5 @@
 import { instance } from "./api";
-import { resultCodeEnum, responseResultObject, photosType, profileDataType } from "../types/types";
+import { resultCodeEnum, responseResultObject, photosType, profileDataType } from "../../common/types/types";
 
 export const profileAPI = {
 	getProfile(userId: number | null) {

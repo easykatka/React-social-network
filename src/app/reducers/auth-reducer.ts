@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { authAPI } from '../../api/auth-api'
-import { loginUserData, resultCodeEnum } from '../../types/types'
+import { authAPI } from '../api/auth-api'
+import { loginUserData, resultCodeEnum } from '../../common/types/types'
 import { AppDispatch } from '../store'
 
 //типы
