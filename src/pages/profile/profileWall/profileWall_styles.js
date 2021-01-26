@@ -17,5 +17,8 @@ export const profileWall = makeStyles((theme) => ({
 	profileWall__input: {
 		width: '90%',
 		marginLeft: 20
+	},
+	profileWall__inputWrapper:{
+		marginLeft: 20
 	}
 }))

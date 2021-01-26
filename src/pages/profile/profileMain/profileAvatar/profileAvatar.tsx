@@ -4,7 +4,7 @@ import { updateAvatar } from '../../../../app/reducers/profile-reducer';
 import { profileAvatar, StyledBadge } from './profileAvatar_styles';
 import React from 'react';
 import { profileDataType } from '../../../../common/types/types';
-import { useAppDispatch } from './../../../../app/store';
+import { useAppDispatch } from '../../../../app/store';
 
 type PropsType = {
 	profile: profileDataType

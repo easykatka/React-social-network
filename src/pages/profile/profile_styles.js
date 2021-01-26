@@ -6,8 +6,11 @@ export const profileStyles = makeStyles((theme) => ({
 		position: 'relative',
 		width: '100%',
 		height: 600,
-		justifyContent:'center',
-		display:'flex',
-		flexDirection:'row',
+		justifyContent: 'center',
+		display: 'flex',
+		flexDirection: 'row',
 	},
+	profileStyles__rightblock: {
+		height: 600
+	}
 }));

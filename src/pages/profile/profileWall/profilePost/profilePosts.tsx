@@ -3,7 +3,7 @@ import { RootState } from "../../../../app/store";
 import { dateHelper } from '../../../../common/dateHelper'
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import { Avatar, Checkbox, FormControlLabel, Grid } from '@material-ui/core';
-import { useAppDispatch } from './../../../../app/store';
+import { useAppDispatch } from '../../../../app/store';
 import { setLike } from "../../../../app/reducers/profile-reducer";
 import { profilePosts } from "./profilePosts_styles";
 

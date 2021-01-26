@@ -7,7 +7,7 @@ import { init } from './app/reducers/app-reducer';
 import { makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
-import Profile from './features/profile/Profile';
+import Profile from './pages/profile/Profile';
 import Messenger from './pages/messenger/messenger';
 import { Preloader2 } from './common/preloader2';
 
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 	app__container: {
 		width: 1200,
 		margin: '0 auto',
-		marginTop:70,	
+		marginTop: 70,
 		backgroundColor: '#36393f',
 		borderRadius: '15px',
 		position: 'static',
@@ -42,13 +42,12 @@ function App() {
 					<Login />
 				) : (
 					<Switch>
-						<Route exact path='/' render={() => <Redirect to={'/profile'} />} />
 						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={'/profile'} />} />
 						<Route exact path='/profile/:userId?' render={() => <Profile />} />
 						<Route exact path='/users' render={() => <Users />} />
 						<Route exact path={'/messenger/' + authUserId} render={() => <Redirect to={'/messenger'} />} />
 						<Route exact path='/messenger/:userId?' render={() => <Messenger />} />
-						<Route exact path='*' render={() => <div>NOT FOUND 404</div>} />
+						<Route exact path='*' render={() => <Redirect to={'/profile'} />} />
 					</Switch>
 				)}
 			</div>

@@ -13,7 +13,7 @@ type PropsType = {
 	routerId: number
 }
 
-export const ProfileMain: React.FC<PropsType> = React.memo(({routerId }) => {
+export const ProfileMain: React.FC<PropsType> = React.memo(({ routerId }) => {
 	const { profile } = useSelector((state: RootState) => state.profile);
 	const classes = profileMain();
 	return (

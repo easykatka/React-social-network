@@ -1,14 +1,13 @@
 import { makeStyles } from '@material-ui/core';
-import { FormatAlignJustify } from '@material-ui/icons';
 
 export const profileEditForm = makeStyles((theme) => ({
 	profileEditForm__container: {
 		alignItems: 'center',
-		padding: 50,
 		height: 600,
 		width: '100%',
 		display:'flex',
 		justifyContent:'space-around',
+		flexDirection:'column'
 	},
 	profileEditForm__leftBlock:{
 		display:'flex',
@@ -30,9 +29,13 @@ export const profileEditForm = makeStyles((theme) => ({
 		margin:30
 	},
 	profileEditForm__job:{
-		paddingRight:15
+
+		color:'white',
 	},
 	profileEditForm__error:{
 		color:'red'
+	},
+	profileEditForm__buttons:{
+		margin:20,
 	}
 }));

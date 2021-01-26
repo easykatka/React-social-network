@@ -9,7 +9,7 @@ import { ProfileInfo } from './profileInfo/profileInfo';
 import { ProfileEditForm } from './profileInfo/profileEditForm/profileEditForm';
 import { ProfileWall } from './profileWall/profileWall';
 import { RootState } from '../../app/store';
-import { useAppDispatch } from './../../app/store';
+import { useAppDispatch } from '../../app/store';
 import { profileStyles } from './profile_styles'
 
 const Profile: React.FC = ({ match }: any) => {
@@ -34,7 +34,7 @@ const Profile: React.FC = ({ match }: any) => {
 					<Grid item xs={4}>
 						<ProfileMain routerId={routerId} />
 					</Grid>
-					<Grid item xs={8} style={{ height: 600 }}>
+					<Grid item xs={8} className={classes.profileStyles__rightblock}>
 						{editForm ? (
 							<ProfileEditForm setEditForm={setEditForm} />) : (
 								<>

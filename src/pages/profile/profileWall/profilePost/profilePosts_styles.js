@@ -4,6 +4,7 @@ export const profilePosts = makeStyles((theme) => ({
 		overflowY: 'auto',
 		height: 450,
 		width: '100%',
+
 	},
 	profilePosts__content: {
 		paddingRight: 30,
@@ -13,6 +14,7 @@ export const profilePosts = makeStyles((theme) => ({
 		justifyContent: 'flex-end',
 		overflowY: 'auto',
 		width: '100%',
+
 	},
 	profilePosts__item: {
 		width: '100%',
@@ -20,16 +22,17 @@ export const profilePosts = makeStyles((theme) => ({
 		backgroundColor: '#202225',
 		padding: 10,
 		marginTop: 20,
-	
+		borderRadius: 5
+
 	},
-	profilePosts__date:{
-		color:'orange',
-		fontSize:10
+	profilePosts__date: {
+		color: 'orange',
+		fontSize: 10
 	},
-	profilePosts__body:{
-		width:'100%',
+	profilePosts__body: {
+		width: '100%',
 	},
-	profilePosts__avatar:{
-		marginRight:20
+	profilePosts__avatar: {
+		marginRight: 20
 	}
 }));

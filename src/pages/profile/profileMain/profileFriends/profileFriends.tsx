@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../../app/store';
 import { allUsersItemType } from '../../../../common/types/types';
 
-export const ProfileFriends = React.memo(() => {
+export const ProfileFriends:React.FC = React.memo(() => {
 	const { users } = useSelector((state: RootState) => state.users)
 	const randomUsers = users && randomArray(users, 6) as allUsersItemType[];
 	const classes = profileFreinds();

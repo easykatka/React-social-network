@@ -9,7 +9,7 @@ export const profileAvatar = makeStyles((theme) => ({
 			color: 'orange'
 		}
 	}
-
+	
 }));
 export const StyledBadge = withStyles((theme) => ({
 	badge: {
@@ -17,7 +17,5 @@ export const StyledBadge = withStyles((theme) => ({
 		position: 'absolute',
 		top: 140,
 		right: 5,
-
-
 	},
 }))(Badge);
