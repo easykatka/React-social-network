@@ -71,14 +71,15 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 
 										</Grid>
 
-
+										
 										<Grid container spacing={2} alignItems='center' className={classes.privateMessages__messageBody}>
 											<Grid item>{item.body}</Grid>
 										</Grid>
 									</Grid>
-									<div ref={messagesEndRef}></div>
+								
 								</Grid>
 							))}
+								<div ref={messagesEndRef}></div>
 						</Grid>
 						<Grid container>
 							<PrivateForm routerId={routerId} />
