@@ -48,34 +48,34 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 									className={classes.privateMessages__messageContent}
 									key={idx}
 									onClick={() => dispatch(deleteMessage(item.id, routerId))}>
-									<Grid item>
-										<Avatar
-											alt='avatar'
-											src={item.senderId === authUser?.userId ? authUser?.photos?.large : recipient?.photos?.large}
-										/>
-									</Grid>
-									<Grid item style={{ marginLeft: 10 }}>
+									<Avatar
+										alt='avatar'
+										className={classes.privateMessages__avatar}
+										src={item.senderId === authUser?.userId ? authUser?.photos?.large : recipient?.photos?.large}
+									/>
+									<Grid container >
 										<span className={classes.privateMessages__senderName}>{item.senderName}</span>
-										<Grid container direction='row' spacing={2} alignItems='center' className={classes.privateMessages__messageBody}>
-											<Grid item>{item.body}</Grid>
-											<Grid item>
-												<span>
-													{item.senderId === authUser?.userId &&
-														(item.viewed ? (
-															<DoneAllRoundedIcon className={classes.privateMessages__doneAllIcon} />
-														) : (
-																<DoneRoundedIcon className={classes.privateMessages__doneIcon} />
-															))}
-												</span>
-												<span className={classes.privateMessages__addedAt}>{dateHelper(item.addedAt)}</span>
-												
-											</Grid>
+
+
+										<Grid className={classes.privateMessages__messageTitle}>
+											<span>
+												{item.senderId === authUser?.userId &&
+													(item.viewed ? (
+														<DoneAllRoundedIcon className={classes.privateMessages__doneAllIcon} />
+													) : (
+															<DoneRoundedIcon className={classes.privateMessages__doneIcon} />
+														))}
+											</span>
+											<span className={classes.privateMessages__addedAt}>{dateHelper(item.addedAt)}</span>
 											<DeleteOutlineOutlinedIcon className={classes.privateMessages__deleteIcon} color='secondary' />
+
+										</Grid>
+
+
+										<Grid container spacing={2} alignItems='center' className={classes.privateMessages__messageBody}>
+											<Grid item>{item.body}</Grid>
 										</Grid>
 									</Grid>
-
-
-
 									<div ref={messagesEndRef}></div>
 								</Grid>
 							))}

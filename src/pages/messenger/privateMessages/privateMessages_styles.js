@@ -13,11 +13,7 @@ export const privateMessages = makeStyles((theme) => ({
 	},
 	privateMessages__messageBody: {
 		color: '#dcddde',
-		wordBreak: 'break-all',
-		"&:hover": {
-			"&>*":{opacity: 1}
-		}
-		
+		wordBreak: 'break-word',
 	},
 	privateMessages__doneIcon: {
 		color: 'orange',
@@ -26,6 +22,7 @@ export const privateMessages = makeStyles((theme) => ({
 	privateMessages__doneAllIcon: {
 		color: 'green',
 		fontSize: 12,
+
 	},
 	privateMessages__addedAt: {
 		fontSize: 10,
@@ -34,19 +31,39 @@ export const privateMessages = makeStyles((theme) => ({
 	privateMessages__senderName: {
 		color: '#fff',
 		fontWeight: 700,
+		marginRight: 10
+
 	},
 	privateMessages__messageContent: {
 		display: 'flex',
-		padding: '14px 0',
+		padding: '10px 0',
 		borderTop: '1px solid #40444b',
-		
+		alignItems: 'center',
+		"&:hover": {
+			"&>*": {
+				"&>*": {
+					"&>*": { opacity: 1 }
+				}
+			}
+		}
 	},
 
 	privateMessages__deleteIcon: {
-		cursor:'pointer',
+		cursor: 'pointer',
 		opacity: 0,
-		fontSize:20,
-		
-		
+		fontSize: 15,
+		marginLeft: 5
+
 	},
+	privateMessages__messageTitle: {
+		display: 'flex',
+		alignItems: 'center',
+		"&:hover": {
+			"&>*": { opacity: 1 }
+		}
+
+	},
+	privateMessages__avatar: {
+		marginRight: 15
+	}
 }));
