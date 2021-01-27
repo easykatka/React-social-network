@@ -11,7 +11,7 @@ export const Preloader = () => {
 					position:'absolute',
 					top: '50%',
 					left: '50%',
-					marginLeft: '-100px',
+					marginLeft: '-225px',
 					marginTop: '-100px',
 					
 				}}

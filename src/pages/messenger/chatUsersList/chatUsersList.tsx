@@ -11,7 +11,7 @@ export const ChatUsersList:React.FC = () => {
 
 	const classes = chatUsersList();
 	return (
-		<Grid item xs={3} className={classes.chatList__container}>
+		<div className={classes.chatList__container}>
 			<h4>Users — {usersList?.length}</h4>
 			<div className={classes.chatList__usersContainer}>
 				{usersList?.map((i, idx) => {
@@ -37,6 +37,6 @@ export const ChatUsersList:React.FC = () => {
 					);
 				})}
 			</div>
-		</Grid>
+		</div>
 	);
 };

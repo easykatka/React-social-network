@@ -1,5 +1,4 @@
-import { Grid, IconButton, InputBase } from '@material-ui/core';
-import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import { Grid, InputBase } from '@material-ui/core';
 import { useFormik } from 'formik';
 import {  useSelector } from 'react-redux';
 import { sendMessage } from '../../../../app/reducers/chat-reducer';
@@ -34,13 +33,6 @@ export const ChatForm:React.FC = () => {
 					name='message'
 					onChange={handleChange}
 					value={values.message}
-					endAdornment={
-						<IconButton
-						disabled={status !== 'ready'}
-							type='submit'>
-							<SendRoundedIcon color='inherit' fontSize='small' />
-						</IconButton>
-					}
 					id='message__input'
 				/>
 			</Grid>

@@ -74,7 +74,7 @@ export const Login:React.FC = () => {
 				Log In
 			</Button>
 			<p>Для тестового просмотра используйте пару логин/пароль: </p>
-			<p>free@socialnet.com / free</p>
+			<p> free@samuraijs.com / free</p>
 		</Grid>
 	);
 };

@@ -5,18 +5,22 @@ export const header = makeStyles((theme) => ({
 	header__container: {
 		color: 'white',
 		width: 1200,
-		margin: '15px auto',
+		margin: '0 auto',
 		display: 'flex',
 		alignItems: 'center',
-		position: 'sticky',
 
+		marginBottom:10,
+		padding:'15px 30px'
 	},
 	header__profile: {
 		justifyContent: 'flex-end',
 		alignItems: 'center',
+	
 	},
 	header: {
 		background: 'linear-gradient(to top, #232526, #414345)',
-		height: 80
+		
+		
+	
 	},
 }));

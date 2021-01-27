@@ -9,6 +9,7 @@ export const loginStyles = makeStyles((theme) => ({
 		height: '100%',
 		width: 500,
 		color: 'white',
+		borderRadius:20,
 		'&>*': { paddingBottom: theme.spacing(1) },
 	},
 	login__icon: {

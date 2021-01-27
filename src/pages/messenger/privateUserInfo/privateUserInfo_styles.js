@@ -8,13 +8,15 @@ export const privateUserInfo = makeStyles((theme) => ({
 		color: '#8e9297',
 		position: 'relative',
 		'&:hover': {
-			color: 'white',
+			color: 'orange',
 		},
+		padding:30
 	},
 	privateUserInfo__avatar: {
 		borderRadius: '50%',
 		width: 250,
 		height: 250,
+		padding:30
 	},
 
 }));

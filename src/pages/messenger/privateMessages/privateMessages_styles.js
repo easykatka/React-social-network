@@ -3,13 +3,12 @@ export const privateMessages = makeStyles((theme) => ({
 	privateMessages__container: {
 		backgroundColor: '#36393f',
 		padding: 15,
-		height: 600,
 		position: 'relative',
 	},
 	privateMessages__messagesList: {
 		overflowY: 'auto',
 		height: 500,
-		padding: 8,
+		padding: 8
 	},
 	privateMessages__messageBody: {
 		color: '#dcddde',
@@ -36,7 +35,7 @@ export const privateMessages = makeStyles((theme) => ({
 	},
 	privateMessages__messageContent: {
 		display: 'flex',
-		padding: '10px 0',
+		padding: '9px 0',
 		borderTop: '1px solid #40444b',
 		alignItems: 'center',
 		"&:hover": {
@@ -47,7 +46,6 @@ export const privateMessages = makeStyles((theme) => ({
 			}
 		}
 	},
-
 	privateMessages__deleteIcon: {
 		cursor: 'pointer',
 		opacity: 0,

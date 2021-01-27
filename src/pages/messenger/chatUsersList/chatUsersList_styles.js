@@ -3,7 +3,7 @@ import { Badge, makeStyles, withStyles } from "@material-ui/core";
 
 export const chatUsersList = makeStyles((theme) => ({
 	chatList__container: {
-		padding: '15px 0px',
+		padding: 15,
 		background: '#2f3136',
 		color: 'white',
 		display: 'flex',
@@ -31,6 +31,8 @@ export const chatUsersList = makeStyles((theme) => ({
 	},
 	chatList__usersContainer: {
 		overflowY: 'auto',
+		padding:7,
+		margin:'16px auto'
 	},
 }));
 

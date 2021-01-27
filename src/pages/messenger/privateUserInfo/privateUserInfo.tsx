@@ -16,23 +16,19 @@ export const PrivateUserInfo:React.FC<PropsType> = ({recipient}) => {
 	const classes = privateUserInfo();
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
-		<Grid item xs={3}>
+		<>
 			<Link to={'/profile/' + recipient?.id}>
 				<Grid container direction='column' alignItems='center' justify='space-around' className={classes.privateUserInfo__container}>
-					{dialogsFetching ? (
-						<Preloader />
-					) : (
-						<>
+					
 							<h2>{recipient?.userName}</h2>
 							<Avatar alt='profile avatar' src={recipient?.photos.large} className={classes.privateUserInfo__avatar} />
 							<Grid container direction='column' alignItems='center'>
 								<div> Was online:</div>
 								<div>{recipient?.lastUserActivityDate && dateHelper(recipient?.lastUserActivityDate)}</div>
 							</Grid>
-						</>
-					)}
+						
 				</Grid>
 			</Link>
-		</Grid>
+	</>
 	);
 };

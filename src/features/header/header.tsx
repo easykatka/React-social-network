@@ -28,8 +28,8 @@ export const Header = () => {
 
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
-		<AppBar className={classes.header}>
-			<Grid className={classes.header__container}>
+		<div className={classes.header}>
+			<div className={classes.header__container}>
 				<Grid container spacing={6}>
 					{navTitles.map((item) => {
 						return (
@@ -49,9 +49,9 @@ export const Header = () => {
 							</a>
 						</Grid>
 						<Grid item>
-							<a href={`/profile`}>
+							<Link to={`/profile`}>
 								<h4>{authUser?.fullName}</h4>
-							</a>
+							</Link>
 						</Grid>
 						<Grid item>
 							{newMessagesCount ? (
@@ -71,7 +71,7 @@ export const Header = () => {
 						</Grid>
 					</Grid>
 				)}
-			</Grid>
-		</AppBar>
+			</div>
+		</div>
 	);
 };

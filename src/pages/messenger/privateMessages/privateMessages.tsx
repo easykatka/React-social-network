@@ -55,8 +55,6 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 									/>
 									<Grid container >
 										<span className={classes.privateMessages__senderName}>{item.senderName}</span>
-
-
 										<Grid className={classes.privateMessages__messageTitle}>
 											<span>
 												{item.senderId === authUser?.userId &&
@@ -68,18 +66,14 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 											</span>
 											<span className={classes.privateMessages__addedAt}>{dateHelper(item.addedAt)}</span>
 											<DeleteOutlineOutlinedIcon className={classes.privateMessages__deleteIcon} color='secondary' />
-
 										</Grid>
-
-										
 										<Grid container spacing={2} alignItems='center' className={classes.privateMessages__messageBody}>
 											<Grid item>{item.body}</Grid>
 										</Grid>
 									</Grid>
-								
 								</Grid>
 							))}
-								<div ref={messagesEndRef}></div>
+							<div ref={messagesEndRef}></div>
 						</Grid>
 						<Grid container>
 							<PrivateForm routerId={routerId} />

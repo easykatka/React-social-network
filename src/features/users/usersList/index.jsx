@@ -7,24 +7,30 @@ import { FriendButton } from '../../../common/friendButton';
 
 const useStyles = makeStyles((theme) => ({
 	users__name: {
-		color: 'black',
-		'&:hover': { color: '#61dafb' },
+		color: 'black',	
 	},
 	users__cards: {
 		overflowY: 'scroll',
 		width: '100%',
-		height: 450,
-		padding: 15,
+		height: 430,
+		paddingLeft:30
+	
 	},
 	users__card: {
-		height: 160,
+		height: 150,
+		
 
 		'&>:hover': {
 			background: 'linear-gradient(to right, #8e9eab, #eef2f3)',
 		},
 	},
 	users__cardmedia: {
-		height: 80,
+		height: 90,
+		
+	},
+	users__name: {
+		fontSize:15,
+		textAlign:'center',
 	},
 }));
 
@@ -33,7 +39,7 @@ export const UsersList = React.memo(({ users, isFetching }) => {
 	return isFetching ? (
 		<Preloader2 />
 	) : (
-		<Grid container spacing={2} className={classes.users__cards}>
+		<Grid container spacing={4} className={classes.users__cards}>
 			{users.length === 0 && <div style={{ color: 'white', textAlign: 'center', fontSize: 50, margin: '0 auto' }}>User not found</div>}
 			{users &&
 				users
@@ -50,12 +56,9 @@ export const UsersList = React.memo(({ users, isFetching }) => {
 												title='user photo'
 											/>
 											<CardContent>
-												<Typography className={classes.users__name} variant='h5' component='h2'>
+												<span className={classes.users__name} >
 													{user?.name}
-												</Typography>
-												<Typography variant='body2' color='textSecondary' component='p'>
-													{/* {user?.status || '😡'}{' '} */}
-												</Typography>
+												</span>
 											</CardContent>
 										</NavLink>
 									</CardActionArea>

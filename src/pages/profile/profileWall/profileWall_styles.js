@@ -4,7 +4,8 @@ export const profileWall = makeStyles((theme) => ({
 	profileWall__container: {
 		backgroundColor: '#2f3136',
 		height: 600,
-		padding: 30
+		padding: 30,
+		borderRadius:'0px 15px 15px 0'
 	},
 	profileWall__content: {
 		backgroundColor: '#202225',

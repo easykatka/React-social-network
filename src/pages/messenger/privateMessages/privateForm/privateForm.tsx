@@ -1,5 +1,4 @@
-import SendRoundedIcon from '@material-ui/icons/SendRounded';
-import { Grid, IconButton, InputBase } from '@material-ui/core';
+import { Grid,  InputBase } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { sendMessage } from '../../../../app/reducers/dialogs-reducer';
 import { privateForm } from './privateForm_styles ';
@@ -32,11 +31,6 @@ export const PrivateForm: React.FC<PropsType> = ({ routerId }) => {
 				onChange={handleChange}
 				value={values.message}
 				id='message'
-				endAdornment={
-					<IconButton type='submit'>
-						<SendRoundedIcon color='inherit' fontSize='small' />
-					</IconButton>
-				}
 			/>
 		</Grid>
 	);

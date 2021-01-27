@@ -43,13 +43,11 @@ export const ProfileInfo: React.FC<PropsType> = ({ setEditForm, routerId }) => {
 					<p className={classes.profileInfo__label}>Contacts:</p>
 					{profile.contacts &&
 						Object.keys(profile.contacts).map((key) => {
-							//!роутер убирает двоеточие,потому пока что так 
-							{/*// @ts-ignore */ }
-							const str = profile.contacts[key] ==! null ||	  profile.contacts[key].replace(/(^\w+:|^)\/\//, '')  ;
 							return (
 								profile.contacts[key] && (
 									<Grid key={key} item>
-										<a href={`//${str}`}> {profile.contacts[key]} </a>
+										<a href={`//${profile.contacts[key]}`}>
+											{profile.contacts[key]} </a>
 									</Grid>
 								)
 							);

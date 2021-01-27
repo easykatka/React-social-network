@@ -27,19 +27,26 @@ const Messenger: React.FC = ({ match }: any) => {
 
 	return (
 		<Grid container direction='row' justify='center'>
-			<ChatNavBar />
-			{routerId ? (
-				<>
-					<PrivateMessages routerId={routerId} recipient={recipient} />
-					<PrivateUserInfo recipient={recipient} />
-				</>
-			) : (
-					<>
-						{status === 'error' && <div>Some error occured. Please refresh the page</div>}
-						<ChatMessages />
-						<ChatUsersList />
-					</>
-				)}
+			<Grid item xs={2}>
+				<ChatNavBar />
+			</Grid>
+			<Grid item xs={10}>
+				<Grid container >
+					{routerId ? (
+						<>
+							<PrivateMessages routerId={routerId} recipient={recipient} />
+							<PrivateUserInfo recipient={recipient} />
+						</>
+					) : (
+							<>
+								{status === 'error' && <div>Some error occured. Please refresh the page</div>}
+								<ChatMessages />
+								<ChatUsersList />
+							</>
+						)}
+				</Grid>
+			</Grid>
+
 		</Grid>
 	);
 };

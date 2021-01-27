@@ -15,11 +15,14 @@ const useStyles = makeStyles((theme) => ({
 	app__container: {
 		width: 1200,
 		margin: '0 auto',
-		marginTop: 70,
-		backgroundColor: '#36393f',
-		borderRadius: '15px',
-		position: 'static',
-		height: 600,
+		padding:"0 30px"
+
+	
+	},
+	app__wrapper: {
+		width: '100vw',
+
+		height: '100vh',
 	},
 }));
 //TODO сделать lazy load
@@ -34,22 +37,26 @@ function App() {
 
 	return (
 		<>
+		<div className={classes.app__wrapper}>
+
 			<Header />
-			<div className={classes.app__container}>
-				{!isInit ? (
-					<Preloader2 />
-				) : !isAuth ? (
-					<Login />
-				) : (
-					<Switch>
-						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={'/profile'} />} />
-						<Route exact path='/profile/:userId?' render={() => <Profile />} />
-						<Route exact path='/users' render={() => <Users />} />
-						<Route exact path={'/messenger/' + authUserId} render={() => <Redirect to={'/messenger'} />} />
-						<Route exact path='/messenger/:userId?' render={() => <Messenger />} />
-						<Route exact path='*' render={() => <Redirect to={'/profile'} />} />
-					</Switch>
-				)}
+			
+				<div className={classes.app__container}>
+					{!isInit ? (
+						<Preloader2 />
+					) : !isAuth ? (
+						<Login />
+					) : (
+						<Switch>
+							<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={'/profile'} />} />
+							<Route exact path='/profile/:userId?' render={() => <Profile />} />
+							<Route exact path='/users' render={() => <Users />} />
+							<Route exact path={'/messenger/' + authUserId} render={() => <Redirect to={'/messenger'} />} />
+							<Route exact path='/messenger/:userId?' render={() => <Messenger />} />
+							<Route exact path='*' render={() => <Redirect to={'/profile'} />} />
+						</Switch>
+					)}
+				</div>
 			</div>
 		</>
 	);

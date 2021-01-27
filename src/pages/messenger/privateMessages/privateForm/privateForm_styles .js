@@ -5,11 +5,13 @@ export const privateForm = makeStyles((theme) => ({
 		alignItems: 'center',
 		marginTop: 20,
 		borderRadius: 7,
+		width:'100%'
 	},
 	chatForm__input: {
 		color: 'white',
 		marginLeft: 15,
-		width: 730,
+		width: '100%',
+		padding:8
 	},
 
 }));
