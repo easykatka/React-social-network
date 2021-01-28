@@ -1,23 +1,20 @@
 import { Avatar, Grid } from '@material-ui/core';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Preloader } from '../../../common/preloader';
 import { dateHelper } from '../../../common/dateHelper';
 import { privateUserInfo } from './privateUserInfo_styles';
-import { RootState } from '../../../app/store';
 import { dialogsArrayType } from '../../../common/types/types';
 
 type PropsType = {
-	recipient:dialogsArrayType
+	recipient:dialogsArrayType,
+	routerId:number
 }
 
-export const PrivateUserInfo:React.FC<PropsType> = ({recipient}) => {
-	const { dialogsFetching } = useSelector((state:RootState) => state.dialogs);
+export const PrivateUserInfo:React.FC<PropsType> = ({recipient,routerId}) => {
 	const classes = privateUserInfo();
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
 		<>
-			<Link to={'/profile/' + recipient?.id}>
+			<Link to={'/profile/' + routerId}>
 				<Grid container direction='column' alignItems='center' justify='space-around' className={classes.privateUserInfo__container}>
 					
 							<h2>{recipient?.userName}</h2>

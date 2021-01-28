@@ -11,7 +11,8 @@ export const privateForm = makeStyles((theme) => ({
 		color: 'white',
 		marginLeft: 15,
 		width: '100%',
-		padding:8
+		padding:8,
+		paddingRight:40
 	},
 
 }));

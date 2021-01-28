@@ -13,10 +13,10 @@ export const chatSlice = createSlice({
 		status: 'pending' as StatusType
 	},
 	reducers: {
-		messagesReceived: (state, { payload }) => {
-			state.messages = [...state.messages, ...payload.map((m: any) => ({ ...m, id: v1() }))]
+		messagesReceived: (state, { payload }) => { debugger
+			if (state.messages.length != payload.length)  {state.messages = [...state.messages, ...payload.map((m: any) => ({ ...m, id: v1() }))]
 				.filter((m, index, array) => index >= array.length - 100)
-		},
+		}},
 		statusChanged: (state, { payload }) => {
 			state.status = payload
 		}
@@ -27,6 +27,8 @@ export const chatSlice = createSlice({
 export const { messagesReceived, statusChanged } = chatSlice.actions;
 
 let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null = null
+
+
 const newMessageHandlerCreator = (dispatch: AppDispatch) => {
 	if (_newMessageHandler === null) {
 		_newMessageHandler = (messages) => {
@@ -37,6 +39,8 @@ const newMessageHandlerCreator = (dispatch: AppDispatch) => {
 }
 
 let _statusChangedHandler: ((status: StatusType) => void) | null = null
+
+
 const statusChangedHandlerCreator = (dispatch: AppDispatch) => {
 	if (_statusChangedHandler === null) {
 		_statusChangedHandler = (status) => {

@@ -7,11 +7,13 @@ import { useAppDispatch } from '../../../app/store';
 import { setPost } from '../../../app/reducers/profile-reducer';
 import { ProfilePosts } from './profilePost/profilePosts';
 import { profileWall } from './profileWall_styles';
+import React from 'react'
 
 
 
-export const ProfileWall: React.FC = () => {
-	const { authUser } = useSelector((state: RootState) => state.profile);
+export const ProfileWall: React.FC = React.memo(() => {
+	console.log('render wall')
+	const authUser = useSelector((state: RootState) => state.profile.authUser);
 	const dispatch = useAppDispatch();
 	const classes = profileWall()
 	const { handleSubmit, handleChange, values, resetForm } = useFormik({
@@ -60,4 +62,4 @@ export const ProfileWall: React.FC = () => {
 			<ProfilePosts />
 		</Grid>
 	);
-};
+});

@@ -13,7 +13,8 @@ export const profileWall = makeStyles((theme) => ({
 		color: 'white',
 		padding: 10,
 		width: '95%',
-		borderRadius: 8
+		borderRadius: 8,
+		wordBreak:'break-word'
 	},
 	profileWall__input: {
 		width: '90%',

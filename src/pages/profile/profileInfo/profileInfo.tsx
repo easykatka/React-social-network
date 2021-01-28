@@ -7,12 +7,14 @@ import { profileInfoStyles } from './profileInfo_styles'
 
 
 
+
 type PropsType = {
 	setEditForm: Dispatch<boolean>
 	routerId: number
 }
-export const ProfileInfo: React.FC<PropsType> = ({ setEditForm, routerId }) => {
-	const { profile } = useSelector((state: RootState) => state.profile);
+export const ProfileInfo: React.FC<PropsType> = React.memo(({ setEditForm, routerId }) => {
+	console.log('render info')
+	const  profile  = useSelector((state: RootState) => state.profile.profile);
 	const isContacts = profile.contacts && Object.values(profile.contacts).find((i) => !!i);
 	const classes = profileInfoStyles();
 	const editHandler = () => {
@@ -63,4 +65,4 @@ export const ProfileInfo: React.FC<PropsType> = ({ setEditForm, routerId }) => {
 			)}
 		</Grid>
 	);
-};
+});

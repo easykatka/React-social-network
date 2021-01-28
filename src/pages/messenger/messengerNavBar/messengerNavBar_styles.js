@@ -12,20 +12,17 @@ export const messengerNavBar = makeStyles((theme) => ({
 	},
 	chatNavBar__avatar: {
 		margin: 11,
-		paddingLeft: 5,
 		'&:hover': {},
 	},
 	chatNavBar__pmContainer: {
 		overflowY: 'auto',
-		padding:'0 5px'
+		padding: '0 5px'
 	},
-	chatNavBar__chip:{
-		
-		width:160,
-		justifyContent:'left',
-		
-		margin:'5px 0',
-		background:'#40444b',
+	chatNavBar__chip: {
+		width: 160,
+		justifyContent: 'left',
+		margin: '5px 0',
+		background: '#40444b',
 	},
 }));
 

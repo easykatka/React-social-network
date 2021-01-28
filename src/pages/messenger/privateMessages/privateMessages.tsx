@@ -1,4 +1,4 @@
-import { Avatar, Grid, IconButton } from '@material-ui/core';
+import { Avatar, Grid } from '@material-ui/core';
 import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import React from 'react';
@@ -13,6 +13,7 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import { dialogsArrayType } from '../../../common/types/types';
 import { RootState } from '../../../app/store';
 import { useAppDispatch } from './../../../app/store';
+import { getNewMessagesCount } from './../../../app/reducers/dialogs-reducer';
 
 
 type PropsType = {
@@ -31,9 +32,16 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 		messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
 	};
 	useEffect(() => {
-		dispatch(getMessages(routerId));
-	}, [routerId, dispatch]);
-	useEffect(() => scrollToBottom(), [messages]);
+		if (routerId) {
+			dispatch(getMessages(routerId));
+
+		}
+	}, [routerId]);
+
+	useEffect(() => {
+		dispatch(getNewMessagesCount())
+		scrollToBottom()
+	}, [messages]);
 
 	return (
 		<Grid item xs className={classes.privateMessages__container}>

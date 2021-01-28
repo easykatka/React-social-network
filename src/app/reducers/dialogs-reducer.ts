@@ -26,7 +26,9 @@ export const dialogsSlice = createSlice({
 		setMessages: (state, { payload }) => {
 			state.messages = payload.items
 		},
-		setNewMessagesCount: (state, { payload }) => { state.newMessagesCount = payload },
+		setNewMessagesCount: (state, { payload }) => {
+			state.newMessagesCount = payload
+		},
 		setDeletedMessage(state, { payload }) {
 			state.messages = state.messages.filter(item => item.id !== payload)
 		}
@@ -61,7 +63,7 @@ export const sendMessage = (userId: number, body: string) => async (dispatch: Ap
 	dispatch(getMessages(userId))
 	// обновить chatnavbar
 	const data = await dialogsAPI.getDialogs()
-	dispatch(setDialogs( data ))
+	dispatch(setDialogs(data))
 }
 export const deleteMessage = (messageId: string, userId: number) => async (dispatch: AppDispatch) => {
 	const data = await dialogsAPI.deleteMessage(messageId)

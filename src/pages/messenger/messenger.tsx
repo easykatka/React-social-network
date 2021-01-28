@@ -35,7 +35,7 @@ const Messenger: React.FC = ({ match }: any) => {
 					{routerId ? (
 						<>
 							<PrivateMessages routerId={routerId} recipient={recipient} />
-							<PrivateUserInfo recipient={recipient} />
+							<PrivateUserInfo routerId={routerId}  recipient={recipient} />
 						</>
 					) : (
 							<>

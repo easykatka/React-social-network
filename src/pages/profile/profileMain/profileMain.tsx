@@ -13,8 +13,10 @@ type PropsType = {
 	routerId: number
 }
 
-export const ProfileMain: React.FC<PropsType> = React.memo(({ routerId }) => {
-	const { profile } = useSelector((state: RootState) => state.profile);
+export const ProfileMain: React.FC<PropsType> = ({ routerId }) => {
+	console.log('render main')
+	const  profile  = useSelector((state: RootState) => state.profile.profile);
+	
 	const classes = profileMain();
 	return (
 		<Grid container className={classes.profileMain__container} direction='column' justify='space-around'>
@@ -50,4 +52,4 @@ export const ProfileMain: React.FC<PropsType> = React.memo(({ routerId }) => {
 				)}
 		</Grid>
 	);
-});
+};

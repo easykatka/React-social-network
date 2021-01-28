@@ -19,7 +19,7 @@ export const ProfileEditForm: React.FC<PropsType> = ({ setEditForm }) => {
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
 		initialValues: profile,
 		onSubmit: (e) => {
-			debugger
+
 			dispatch(putNewProfile(e));
 			setEditForm(false);
 		},

@@ -26,15 +26,17 @@ const Profile: React.FC = ({ match }: any) => {
 	const dispatch = useAppDispatch();
 	const [editForm, setEditForm] = useState(false);
 	const classes = profileStyles();
-	const { isError, isLoading } = useSelector((state: RootState) => state.profile);
-
+	const isLoading = useSelector((state: RootState) => state.profile.isLoading);
+	const isError = useSelector((state: RootState) => state.profile.isError);
+	
 	useEffect(
 		() => {
-			if (profileUserId) dispatch(getUserProfile(profileUserId));
+			if (profileUserId) dispatch(getUserProfile(profileUserId)) 
+			return () => console.log('unmount')
 		}, [dispatch, profileUserId]);
 
 	const handleClose = () => {
-		dispatch(setIsError(''))
+		dispatch(setIsError('')) 
 	};
 
 	return (

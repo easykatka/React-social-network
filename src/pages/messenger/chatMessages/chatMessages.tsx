@@ -17,6 +17,7 @@ export const ChatMessages:React.FC = () => {
 	};
 	useEffect(() => scrollToBottom(), [messages]);
 
+
 	return (
 		<Grid item xs className={classes.chatMessage__container}>
 			<Grid item>

@@ -1,4 +1,4 @@
-import { Avatar, Badge, Chip } from '@material-ui/core';
+import { Avatar,Chip } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';

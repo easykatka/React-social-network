@@ -14,6 +14,7 @@ export const profilePosts = makeStyles((theme) => ({
 		justifyContent: 'flex-end',
 		overflowY: 'auto',
 		width: '100%',
+		wordBreak:'break-word'
 
 	},
 	profilePosts__item: {

@@ -1,7 +1,7 @@
 import { updateStatus } from '../../../../app/reducers/profile-reducer';
 import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getFriends } from '../../../../app/reducers/users-reducer';
+import { useSelector} from 'react-redux';
+import { useAppDispatch } from './../../../../app/store';
 
 
 
@@ -10,16 +10,13 @@ import { getFriends } from '../../../../app/reducers/users-reducer';
 export const useStatus = () => {
 	const [editMode, setEditMode] = useState(false);
 	const [userStatus, setUserStatus] = useState(null);
-	const { status } = useSelector((state) => state.profile);
-	const { users } = useSelector((state) => state.users)
+	const status = useSelector((state) => state.profile.status);
 
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	useEffect(() => {
 		setUserStatus(status);
 	}, [status]);
-	useEffect(() => {
-		dispatch(getFriends(true))
-	}, []);
+
 
 	const deactivateMode = (action) => () => {
 		if (!action) {
@@ -35,5 +32,5 @@ export const useStatus = () => {
 	};
 
 
-	return [onStatusChange, deactivateMode, editMode, setEditMode, userStatus, status, users]
+	return [onStatusChange, deactivateMode, editMode, setEditMode, userStatus, status]
 }

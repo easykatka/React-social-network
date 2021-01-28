@@ -1,5 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Avatar, Badge, Grid, IconButton } from '@material-ui/core';
+import {  Avatar, Badge, Grid, IconButton } from '@material-ui/core';
 import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser } from '../../app/reducers/profile-reducer';

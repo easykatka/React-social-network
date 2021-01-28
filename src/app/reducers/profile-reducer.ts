@@ -11,7 +11,7 @@ export const profileSlice = createSlice({
 		profile: {} as profileDataType,
 		status: "",
 		posts: posts as Array<postType>,
-		isLoading: false,
+		isLoading: true,
 		isError: '' as string
 	},
 	reducers: {

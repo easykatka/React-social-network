@@ -5,7 +5,7 @@ import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/r
 import TablePagination from '@material-ui/core/TablePagination';
 import { useDebounce } from '../../../common/useDebounce';
 
-//TODO последовательные фетчи
+
 export const UsersFilter = () => {
 	const { currentPage, pageSize, totalUsersCount, filter } = useSelector ((state) => state.users);
 	const dispatch = useDispatch();
