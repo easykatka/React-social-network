@@ -7,13 +7,10 @@ export const messengerNavBar = makeStyles((theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		borderRadius: '15px 0px 0px 15px',
+		borderRadius: '0px 0px 0px 15px',
 		height: 600,
 	},
-	chatNavBar__avatar: {
-		margin: 11,
-		'&:hover': {},
-	},
+	
 	chatNavBar__pmContainer: {
 		overflowY: 'auto',
 		padding: '0 5px'

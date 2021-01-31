@@ -6,11 +6,12 @@ import store from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter, HashRouter } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
-import { createMuiTheme ,ThemeProvider} from "@material-ui/core";
+import { createMuiTheme ,CssBaseline,ThemeProvider} from "@material-ui/core";
 
 const theme = createMuiTheme({
 	palette: {
 		type: 'dark',
+		background:'light',
 	  primary: {
 		main: "#61dafb",
 	  },
@@ -23,6 +24,7 @@ ReactDOM.render(
 			<Provider store={store}>
 				<ThemeProvider theme={theme}>
 				<HashRouter>
+				<CssBaseline />
 					<App />
 					</HashRouter>
 				</ThemeProvider>

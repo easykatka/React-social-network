@@ -13,8 +13,8 @@ export const chatSlice = createSlice({
 		status: 'pending' as StatusType
 	},
 	reducers: {
-		messagesReceived: (state, { payload }) => { 
-			if (state.messages != payload.length)  {state.messages = [...state.messages, ...payload.map((m: any) => ({ ...m, id: v1() }))]
+		messagesReceived: (state, { payload }) => {  debugger
+			if (state.messages.length != payload.length)  {state.messages = [...state.messages, ...payload.map((m: any) => ({ ...m, id: v1() }))]
 				.filter((m, index, array) => index >= array.length - 100)
 		}},
 		statusChanged: (state, { payload }) => {

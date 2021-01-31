@@ -19,7 +19,7 @@ export const ChatNavBar: React.FC = () => {
 		<div className={classes.chatNavBar__container}>
 			<h4>Chat rooms: </h4>
 			<NavLink to={'/messenger'} activeClassName='navchat'>
-				<Avatar src={devs} className={classes.chatNavBar__avatar} />
+				<Avatar src={devs} />
 			</NavLink>
 			<h4>PM: </h4>
 			<div className={classes.chatNavBar__pmContainer}>

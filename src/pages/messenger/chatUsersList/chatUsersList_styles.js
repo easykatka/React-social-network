@@ -9,7 +9,7 @@ export const chatUsersList = makeStyles((theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		borderRadius: '0 15px 15px 0px',
+		borderRadius: '0 0 15px 0',
 		height: 600,
 	},
 	chatList__item: {

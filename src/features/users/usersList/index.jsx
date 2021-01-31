@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	users__card: {
 		height: 150,
+		backgroundColor:'grey',
 
 		'&>:hover': {
 			background: 'linear-gradient(to right, #8e9eab, #eef2f3)',

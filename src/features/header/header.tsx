@@ -1,4 +1,4 @@
-import {  Avatar, Badge, Grid, IconButton } from '@material-ui/core';
+import { AppBar, Avatar, Badge, Grid, IconButton } from '@material-ui/core';
 import { logout } from '../../app/reducers/auth-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuthUser } from '../../app/reducers/profile-reducer';
@@ -27,6 +27,7 @@ export const Header = () => {
 
 	//* РАБОЧИЙ КОМПОНЕНТ
 	return (
+
 		<div className={classes.header}>
 			<div className={classes.header__container}>
 				<Grid container spacing={6}>

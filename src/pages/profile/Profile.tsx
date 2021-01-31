@@ -18,7 +18,7 @@ function Alert(props: AlertProps) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
 
 }
-const haha=23
+const haha = 23
 
 const Profile: React.FC = ({ match }: any) => {
 	//TODO обработать ошибки сервера
@@ -30,14 +30,14 @@ const Profile: React.FC = ({ match }: any) => {
 	const classes = profileStyles();
 	const isLoading = useSelector((state: RootState) => state.profile.isLoading);
 	const isError = useSelector((state: RootState) => state.profile.isError);
-	
+
 	useEffect(
 		() => {
-			if (profileUserId) dispatch(getUserProfile(profileUserId)) 
+			if (profileUserId) dispatch(getUserProfile(profileUserId))
 		}, [dispatch, profileUserId]);
 
 	const handleClose = () => {
-		dispatch(setIsError('')) 
+		dispatch(setIsError(''))
 	};
 
 	return (

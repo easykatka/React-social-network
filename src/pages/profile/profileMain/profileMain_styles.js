@@ -4,7 +4,7 @@ export const profileMain = makeStyles((theme) => ({
 	profileMain__container: {
 		background: '#2f3136',
 		color: 'white',
-		borderRadius: '15px 0px 0px 15px',
+		borderRadius: '0 0 0 15px',
 		height: 600,
 		alignItems: 'center',
 		padding: 15

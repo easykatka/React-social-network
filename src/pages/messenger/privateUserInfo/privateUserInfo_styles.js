@@ -3,8 +3,8 @@ export const privateUserInfo = makeStyles((theme) => ({
 	privateUserInfo__container: {
 	
 		background: '#2f3136',
-		borderRadius: '0 15px 15px 0px',
-		height: 600,
+		borderRadius: '0 0 15px 0',
+		height: '100%',
 		color: '#8e9297',
 		position: 'relative',
 		
