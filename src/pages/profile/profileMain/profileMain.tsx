@@ -14,7 +14,6 @@ type PropsType = {
 }
 
 export const ProfileMain: React.FC<PropsType> = ({ routerId }) => {
-	console.log('render main')
 	const  profile  = useSelector((state: RootState) => state.profile.profile);
 	
 	const classes = profileMain();

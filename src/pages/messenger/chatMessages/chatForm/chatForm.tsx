@@ -1,14 +1,14 @@
 import { Grid, InputBase } from '@material-ui/core';
 import { useFormik } from 'formik';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { sendMessage } from '../../../../app/reducers/chat-reducer';
 import { RootState } from '../../../../app/store';
 import { chatForm } from './chatForm_styles';
 import { useAppDispatch } from './../../../../app/store';
 
 
-export const ChatForm:React.FC = () => {
-	const {status} = useSelector((state:RootState) => state.chat);
+export const ChatForm: React.FC = () => {
+	const { status } = useSelector((state: RootState) => state.chat);
 	const dispatch = useAppDispatch()
 	const classes = chatForm();
 	const { handleSubmit, handleChange, values, resetForm } = useFormik({
@@ -29,7 +29,7 @@ export const ChatForm:React.FC = () => {
 					disabled={status !== 'ready'}
 					type='text'
 					autoFocus={true}
-					placeholder='white a message'
+					placeholder='write a message'
 					name='message'
 					onChange={handleChange}
 					value={values.message}

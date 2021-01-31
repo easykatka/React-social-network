@@ -13,7 +13,6 @@ export const ProfileFriends: React.FC = React.memo(() => {
 	const  users  = useSelector((state: RootState) => state.users.users)
 	const randomUsers = users && randomArray(users, 6) as allUsersItemType[];
 	const dispatch = useAppDispatch()
-	console.log('render friend')
 
 	React.useEffect(() => 
 	 {dispatch(getFriends('true'))}

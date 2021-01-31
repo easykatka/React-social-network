@@ -12,7 +12,6 @@ import React from 'react'
 
 
 export const ProfileWall: React.FC = React.memo(() => {
-	console.log('render wall')
 	const authUser = useSelector((state: RootState) => state.profile.authUser);
 	const dispatch = useAppDispatch();
 	const classes = profileWall()
@@ -44,7 +43,7 @@ export const ProfileWall: React.FC = React.memo(() => {
 				<Avatar src={authUser.photos?.small} />
 				<Grid item xs component='form' className={classes.profileWall__inputWrapper} onSubmit={handleSubmit}>
 					<InputBase
-						placeholder='White something'
+						placeholder='Write something'
 						type='text'
 						onChange={handleChange}
 						color='primary'

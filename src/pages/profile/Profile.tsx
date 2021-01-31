@@ -16,7 +16,9 @@ import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 function Alert(props: AlertProps) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
+
 }
+const haha=23
 
 const Profile: React.FC = ({ match }: any) => {
 	//TODO обработать ошибки сервера
@@ -32,7 +34,6 @@ const Profile: React.FC = ({ match }: any) => {
 	useEffect(
 		() => {
 			if (profileUserId) dispatch(getUserProfile(profileUserId)) 
-			return () => console.log('unmount')
 		}, [dispatch, profileUserId]);
 
 	const handleClose = () => {
@@ -41,14 +42,11 @@ const Profile: React.FC = ({ match }: any) => {
 
 	return (
 		<div className={classes.profileStyles__container}>
-
-
 			<Snackbar open={!!isError} autoHideDuration={5000} onClose={handleClose} >
 				<Alert onClose={handleClose} severity="error">
 					Fetch error
 				</Alert>
 			</Snackbar>
-
 			{isLoading ? (<Preloader2 />) : (
 				<>
 					<Grid item xs={4}>

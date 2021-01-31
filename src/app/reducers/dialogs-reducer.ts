@@ -6,9 +6,9 @@ import { AppDispatch } from '../store';
 //типы
 const initialState = {
 	dialogs: [] as dialogsArrayType[],
-	messages: [] as messagesArrayType[],
-	dialogsFetching: false,
-	messagesFething: false,
+	messages: [] as messagesArrayType[] ,
+	dialogsFetching: true,
+	messagesFething: true,
 	newMessagesCount: null as number | null
 };
 

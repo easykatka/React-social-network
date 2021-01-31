@@ -13,7 +13,6 @@ type PropsType = {
 
 
 export const ProfileAvatar: React.FC<PropsType> = React.memo(({ profile, routerId }) => {
-	console.log('render avatar')
 	const classes = profileAvatar();
 	const dispatch = useAppDispatch();
 	return (

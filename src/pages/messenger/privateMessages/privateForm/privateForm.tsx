@@ -1,4 +1,4 @@
-import { Grid,  InputBase } from '@material-ui/core';
+import { Grid, InputBase } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { sendMessage } from '../../../../app/reducers/dialogs-reducer';
 import { privateForm } from './privateForm_styles ';
@@ -26,7 +26,7 @@ export const PrivateForm: React.FC<PropsType> = ({ routerId }) => {
 				className={classes.chatForm__input}
 				type='text'
 				autoFocus={true}
-				placeholder='white a message'
+				placeholder='write a message'
 				name='message'
 				onChange={handleChange}
 				value={values.message}

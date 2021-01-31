@@ -11,7 +11,6 @@ type PropsType = {
 	routerId: number
 }
 export const ProfileStatus: React.FC<PropsType> = React.memo(({ routerId }) => {
-	console.log('render status')
 	const [onStatusChange, deactivateMode, editMode, setEditMode, userStatus, status] = useStatus();
 	const classes = profileStatus();
 	return (
