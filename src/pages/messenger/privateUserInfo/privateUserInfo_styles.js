@@ -7,7 +7,7 @@ export const privateUserInfo = makeStyles((theme) => ({
 		height: '100%',
 		color: '#8e9297',
 		position: 'relative',
-		
+		height: 600,
 		'&:hover': {
 			color: 'orange',
 		},

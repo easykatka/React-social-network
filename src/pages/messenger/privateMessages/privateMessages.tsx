@@ -45,7 +45,7 @@ export const PrivateMessages: React.FC<PropsType> = ({ routerId, recipient }) =>
 
 	return (
 		<Grid item xs className={classes.privateMessages__container}>
-			{messages?.length < 0 ? (
+			{messagesFething && messages?.length === 0 ? (
 				<Preloader2 />
 			) : (
 					<>

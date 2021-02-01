@@ -3,8 +3,6 @@ export const privateMessages = makeStyles((theme) => ({
 	privateMessages__container: {
 		backgroundColor: '#36393f',
 		padding: 15,
-		position: 'relative',
-
 	},
 	privateMessages__messagesList: {
 		overflowY: 'auto',
