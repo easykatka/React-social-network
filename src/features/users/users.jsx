@@ -1,5 +1,5 @@
-import { UsersList } from './usersList';
-import { UsersFilter } from './usersFilter';
+import { UsersList } from './usersList/usersList';
+import { UsersFilter } from './usersFilter/usersFilter';
 import { useSelector } from 'react-redux';
 export const Users = () => {
 	const { users, isFetching } = useSelector((state) => state.users);
