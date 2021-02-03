@@ -1,16 +1,15 @@
-import { Grid, InputBase } from '@material-ui/core';
+
 import { useFormik } from 'formik';
 import { sendMessage } from '../../../../app/reducers/dialogs-reducer';
-import { privateForm } from './privateForm_styles ';
 import { useAppDispatch } from './../../../../app/store';
+import { ChatInput } from '../../../../components/ChatInput/ChatInput';
 
 type PropsType = {
 	routerId: number
 }
-//* РАБОЧИЙ КОМПОНЕНТ
+
 export const PrivateForm: React.FC<PropsType> = ({ routerId }) => {
 	const dispatch = useAppDispatch();
-	const classes = privateForm();
 	const { handleSubmit, handleChange, values, resetForm } = useFormik({
 		initialValues: {
 			message: '',
@@ -21,17 +20,6 @@ export const PrivateForm: React.FC<PropsType> = ({ routerId }) => {
 		},
 	});
 	return (
-		<Grid component='form' onSubmit={handleSubmit} className={classes.chatForm__container}>
-			<InputBase
-				className={classes.chatForm__input}
-				type='text'
-				autoFocus={true}
-				placeholder='write a message'
-				name='message'
-				onChange={handleChange}
-				value={values.message}
-				id='message'
-			/>
-		</Grid>
+		<ChatInput handleSubmit={handleSubmit} handleChange={handleChange} message={values.message} />
 	);
 };

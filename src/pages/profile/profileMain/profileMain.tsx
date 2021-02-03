@@ -4,7 +4,7 @@ import { ProfileFriends } from './profileFriends/profileFriends';
 import { ProfileAvatar } from './profileAvatar/profileAvatar';
 import React from 'react';
 import { ProfileStatus } from './profileStatus/profileStatus';
-import { FriendButton } from '../../../common/friendButton';
+import { FriendButton } from '../../../components/FriendButton/FriendButton';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../../app/store';
 import { useSelector } from 'react-redux';

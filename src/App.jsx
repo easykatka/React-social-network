@@ -1,16 +1,15 @@
 import React from 'react';
-import { Header } from './features/header/header';
 import { Login } from './pages/login/login';
-import { Users } from './features/users/users';
+import { Users } from './pages/users/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { init } from './app/reducers/app-reducer';
-import { makeStyles } from '@material-ui/core/styles';
 import { useEffect } from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Profile from './pages/profile/Profile';
 import Messenger from './pages/messenger/messenger';
 import { Preloader2 } from './common/preloader2';
 import { Container, Grid } from '@material-ui/core';
+import { Header } from './components/Header/Header';
 
 //TODO сделать lazy load
 //  const Chat = React.lazy(() => import("./features/chat"))

@@ -18,8 +18,9 @@ export const ProfileFriends: React.FC = React.memo(() => {
 	 {dispatch(getFriends('true'))}
 	, []);
 
-
+	
 	const classes = profileFreinds();
+	console.log(users)
 	return (
 		<Grid container justify='center'>
 			<p className={classes.profileFreinds__friendsLabel}> Friends: <Link onClick={() => dispatch(setFilter({friend:'true'}))} to={`/users`}>{users.length}</Link> </p>
