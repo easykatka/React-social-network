@@ -24,8 +24,7 @@ export const Header = () => {
 	}, [dispatch, id]);
 
 	const navTitles = ['profile', 'users', 'messenger'];
-
-	//* РАБОЧИЙ КОМПОНЕНТ
+	
 	return (
 
 		<div className={classes.header}>

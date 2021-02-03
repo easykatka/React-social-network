@@ -12,8 +12,6 @@ interface IProps {
 export const FriendButton: React.FC<IProps> = ({ id, followed }) => {
 	const followingInProgress = useSelector((state: RootState) => state.users.followingInProgress);
 	const dispatch = useDispatch();
-	console.log(id, followingInProgress)
-
 	return (
 		<Button
 			color={followed ? 'secondary' : 'primary'}

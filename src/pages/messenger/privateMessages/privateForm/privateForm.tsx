@@ -20,6 +20,6 @@ export const PrivateForm: React.FC<PropsType> = ({ routerId }) => {
 		},
 	});
 	return (
-		<ChatInput handleSubmit={handleSubmit} handleChange={handleChange} message={values.message} />
+		<ChatInput handleSubmit={handleSubmit} onChange={handleChange} value={values.message} />
 	);
 };

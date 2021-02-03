@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
 import { useEffect } from 'react';
 import { ChatMessages } from './chatMessages/chatMessages';
-import { ChatNavBar } from './messengerNavBar/messengerNavBar';
+import { ChatNavBar } from '../../components/ChatNavBar/ChatNavBar';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { PrivateMessages } from './privateMessages/privateMessages';

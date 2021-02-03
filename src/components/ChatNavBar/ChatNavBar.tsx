@@ -2,11 +2,11 @@ import { Avatar,Chip } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { getDialogs } from '../../../app/reducers/dialogs-reducer';
-import { RootState } from '../../../app/store';
-import devs from '../../../common/assets/img/devs.jpg';
-import { messengerNavBar ,NavBadge} from './messengerNavBar_styles';
-import { useAppDispatch } from './../../../app/store';
+import { getDialogs } from '../../app/reducers/dialogs-reducer';
+import { RootState } from '../../app/store';
+import devs from '../../common/assets/img/devs.jpg';
+import { messengerNavBar ,NavBadge} from './chatNavBar_styles';
+import { useAppDispatch } from '../../app/store';
 
 export const ChatNavBar: React.FC = () => {
 	const { dialogs } = useSelector((state: RootState) => state.dialogs);
@@ -35,15 +35,6 @@ export const ChatNavBar: React.FC = () => {
 								></Chip>
 							</NavBadge>
 						</NavLink>
-
-
-						// <div className={classes.chatNavBar__avatar} key={idx}>
-						// 	<NavLink to={`/messenger/${item.id}`} key={item.id} activeClassName='navchat'>
-						// 		<Badge badgeContent={item.newMessagesCount} color='secondary'>
-						// 			<Avatar src={item?.photos?.small} />
-						// 		</Badge>
-						// 	</NavLink>
-						// </div>
 					);
 				})}
 			</div>

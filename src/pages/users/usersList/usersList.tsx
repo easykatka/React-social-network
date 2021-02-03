@@ -14,7 +14,6 @@ type PropsType = {
 	isFetching: boolean
 }
 export const UsersList: React.FC<PropsType> = React.memo(({ users, isFetching }) => {
-	console.log(users)
 	const classes = usersList();
 	return isFetching ? (
 		<Preloader2 />
