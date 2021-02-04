@@ -27,15 +27,13 @@ a {
 	
 }
 a.header > * {
-	color: #61dafb !important;
-	border-bottom: 4px solid #61fbfb;
+	color: #00BFFF !important;
+	border-bottom: 4px solid #00BFFF;
 	
 }
-a.navchat {
 
-}
 a:hover {
-	color: #61dafb;
+	color: #00BFFF;
 }
 a:hover > * {
 	cursor: pointer;

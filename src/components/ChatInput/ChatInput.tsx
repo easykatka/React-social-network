@@ -11,14 +11,13 @@ interface IProps {
 export const ChatInput: React.FC<IProps> = ({ handleSubmit, ...props}) => {
 	const classes = chatForm()
 	return (
-		<Grid component='form' onSubmit={handleSubmit} className={classes.chatForm__container}>
+		<Grid component='form' onSubmit={handleSubmit} className={classes.root}>
 			<InputBase inputProps={{...props}}
-				className={classes.chatForm__input}
+				className={classes.input}
 				type='text'
 				autoFocus={true}
 				placeholder='write a message'
 				name='message'
-				
 				id='message'
 			/>
 		</Grid>
