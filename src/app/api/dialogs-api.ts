@@ -28,7 +28,7 @@ export const dialogsAPI = {
 }
 
 //типы
-type responseSendMsg = {
+interface responseSendMsg {
 	data: {
 		message: messagesArrayType
 	}
@@ -36,7 +36,7 @@ type responseSendMsg = {
 	messages: Array<string>
 	resultCode: resultCodeEnum
 }
-type responseGetMessages = {
+interface responseGetMessages {
 	error: boolean
 	items: Array<messagesArrayType>
 	totalCount: number

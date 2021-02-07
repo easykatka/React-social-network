@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-export const profileMain = makeStyles((theme) => ({
+export const profileMain = makeStyles(() => ({
 	
 	root: {
 		background: '#2f3136',

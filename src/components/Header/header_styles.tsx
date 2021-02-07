@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-export const header = makeStyles((theme) => ({
+export const header = makeStyles(() => ({
 	wrapper: {
 		color: 'white',
 		display: 'flex',

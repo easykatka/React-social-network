@@ -1,10 +1,10 @@
 import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, setCurrentPage, setFilter, setPageSize, setUsers } from '../../../app/reducers/users-reducer';
+import { getUsers, setCurrentPage, setFilter, setPageSize, setUsers } from '../../app/reducers/users-reducer';
 import TablePagination from '@material-ui/core/TablePagination';
-import { useDebounce } from '../../../common/useDebounce';
-import { RootState } from '../../../app/store';
+import { useDebounce } from '../../common/useDebounce';
+import { RootState } from '../../app/store';
 import { usersFilter } from './usersFilter_styles'
 
 
@@ -61,7 +61,7 @@ export const UsersFilter: React.FC = () => {
 				component='div'
 				count={totalUsersCount}
 				page={currentPage}
-				onChangePage={(e, newPage: number) => { dispatch(setCurrentPage(newPage)) }}
+				onChangePage={(_, newPage: number) => { dispatch(setCurrentPage(newPage)) }}
 				rowsPerPage={pageSize}
 				onChangeRowsPerPage={(event: React.ChangeEvent<HTMLInputElement>) => { dispatch(setPageSize(parseInt(event.target.value, 10))) }}
 			/>

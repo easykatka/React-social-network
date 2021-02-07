@@ -1,17 +1,13 @@
 import { loginUserData, resultCodeEnum } from "../../common/types/types";
 import { instance } from "./api";
-const login ={
-	email: 'secondjump@bk.ru',
-	password: 'qwaszx',
-	rememberMe: true
-}
-	//апи
+
+//апи
 export const authAPI = {
 	me() {
 		return instance.get<responseIsAuthUser>(`auth/me`).then((res) => res.data);
 	},
 	login(loginUserData: loginUserData) {
-		return instance.post<responseLoginUser>('/auth/login', login).then((res) => res.data);
+		return instance.post<responseLoginUser>('/auth/login', loginUserData).then((res) => res.data);
 	},
 	logout() {
 		return instance.delete<responseLogoutUser>(`auth/login`).then(res => res.data);
@@ -21,22 +17,22 @@ export const authAPI = {
 	},
 };
 
-	//типы
-type responseIsAuthUser = {
+//типы
+interface responseIsAuthUser {
 	data: { id: number, email: string, login: string }
 	resultCode: resultCodeEnum
 	messages: Array<string>
-	fieldsErrors:Array<string>
+	fieldsErrors: Array<string>
 }
-type responseLoginUser = {
+interface responseLoginUser {
 	data: { userId: number }
 	resultCode: resultCodeEnum
 	messages: Array<string>
 }
-type responseLogoutUser = {
+interface responseLogoutUser {
 	resultCode: resultCodeEnum
 }
-type responseCaptchaUrl = {
+interface responseCaptchaUrl {
 	url: string
 }
 

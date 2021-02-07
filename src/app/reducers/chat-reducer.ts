@@ -15,7 +15,7 @@ export const chatSlice = createSlice({
 	reducers: {
 		messagesReceived: (state, { payload }) => { 
 			if (state.messages.length != payload.length)  {state.messages = [...state.messages, ...payload.map((m: any) => ({ ...m, id: v1() }))]
-				.filter((m, index, array) => index >= array.length - 100)
+				.filter((_, index, array) => index >= array.length - 100)
 		}},
 		statusChanged: (state, { payload }) => {
 			state.status = payload

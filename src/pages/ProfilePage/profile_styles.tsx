@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-export const profileStyles = makeStyles((theme) => ({
+export const profileStyles = makeStyles(() => ({
 	root: {
 		backgroundColor: '#36393f',
 		borderRadius: '0 0 15px 15px',
@@ -9,6 +9,7 @@ export const profileStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		display: 'flex',
 		flexDirection: 'row',
+		
 
 	},
 	rightBlockWrapper: {

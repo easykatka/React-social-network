@@ -1,5 +1,5 @@
 import { makeStyles, Badge, withStyles } from '@material-ui/core';
-export const messengerNavBar = makeStyles((theme) => ({
+export const messengerNavBar = makeStyles(() => ({
 	root: {
 		padding: '15px',
 		background: '#2f3136',
@@ -23,7 +23,7 @@ export const messengerNavBar = makeStyles((theme) => ({
 	},
 }));
 
-export const NavBadge = withStyles((theme) => ({
+export const NavBadge = withStyles(() => ({
 	badge: {
 		position: 'absolute',
 		top: 21,

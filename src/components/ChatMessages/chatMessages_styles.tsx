@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 
 
-export const chatMessages = makeStyles((theme) => ({
+export const chatMessages = makeStyles(() => ({
 	root: {
 		backgroundColor: '#36393f',
 		padding: 15,

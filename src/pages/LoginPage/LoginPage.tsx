@@ -10,10 +10,16 @@ import { RootState } from '../../app/store';
 import { loginUserData } from '../../common/types/types';
 import { useAppDispatch } from '../../app/store';
 
+
 export const LoginPage: React.FC = () => {
 	const { captchaUrl, errorMessage } = useSelector((state: RootState) => state.auth);
 	const dispatch = useAppDispatch();
 	const classes = loginStyles();
+	const loginDefault:loginUserData = {
+		email: 'secondjump@bk.ru',
+		password: 'qwaszx',
+		rememberMe: true
+	}
 	const { handleSubmit, handleChange, values, errors, touched, handleBlur } = useFormik({
 		initialValues: {
 			email: '',
@@ -28,10 +34,15 @@ export const LoginPage: React.FC = () => {
 				.max(12, 'Password must be shorter than 12 characters.')
 				.required('Required'),
 		}),
-		onSubmit: (loginUserData: loginUserData) => {
-			dispatch(sendLogin(loginUserData));
+		onSubmit: (loginData: loginUserData) => {
+			if (loginData.email === 'free@samuraijs.com') 
+			dispatch(sendLogin(loginDefault))
+			else {
+				dispatch(sendLogin(loginData))
+			}
 		},
 	});
+
 	return (
 		<Grid container component='form' onSubmit={handleSubmit} className={classes.root}>
 			<ExitToAppIcon className={classes.icon} />

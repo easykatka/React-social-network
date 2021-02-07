@@ -1,4 +1,6 @@
-export const randomArray = (arr , len)  => {  
+import { allUsersItemType } from "./types/types";
+
+export const randomArray = (arr:allUsersItemType[] , len:number)  => {  
 	const sorted = arr.slice().sort(() => Math.random() - 0.5);
 	sorted.length = len
 	return sorted;

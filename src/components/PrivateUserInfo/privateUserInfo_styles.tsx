@@ -19,5 +19,4 @@ export const privateUserInfo = makeStyles((theme) => ({
 		height: 250,
 		padding:30
 	},
-
 }));

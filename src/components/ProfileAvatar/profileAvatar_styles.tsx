@@ -11,7 +11,7 @@ export const profileAvatar = makeStyles((theme) => ({
 	}
 
 }));
-export const StyledBadge = withStyles((theme) => ({
+export const StyledBadge = withStyles(() => ({
 	badge: {
 		backgroundColor: 'transparent',
 		position: 'absolute',

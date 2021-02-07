@@ -16,7 +16,7 @@ export const usersAPI = {
 }
 
 //типы
-type responseGetUsers = {
+interface responseGetUsers  {
 	error: boolean
 	items: Array<allUsersItemType>
 	totalCount: number

@@ -12,7 +12,7 @@ export const profileSlice = createSlice({
 		status: "",
 		posts: posts as Array<postType>,
 		isLoading: true,
-		isError: '' as string
+		isError: '' 
 	},
 	reducers: {
 		setUserProfile: (state, { payload }) => { state.profile = payload },

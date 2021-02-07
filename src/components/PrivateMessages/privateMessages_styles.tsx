@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-export const privateMessages = makeStyles((theme) => ({
+export const privateMessages = makeStyles(() => ({
 	root: {
 		backgroundColor: '#36393f',
 		padding: 15,

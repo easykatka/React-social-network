@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const profileEditForm = makeStyles((theme) => ({
+export const profileEditForm = makeStyles(() => ({
 	root: {
 		alignItems: 'center',
 		height: 600,

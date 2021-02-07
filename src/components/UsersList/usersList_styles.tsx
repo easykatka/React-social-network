@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const usersList = makeStyles((theme) => ({
+export const usersList = makeStyles(() => ({
 	name: {
 		color: 'black',
 		fontSize: 15,

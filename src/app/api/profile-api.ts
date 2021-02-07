@@ -3,7 +3,7 @@ import { resultCodeEnum, responseResultObject, photosType, profileDataType } fro
 
 export const profileAPI = {
 	getProfile(userId: number | null) {
-		return instance.get<responseGetUserProfile>(`profile/` + userId).then((res) => res.data);
+		return instance.get<profileDataType>(`profile/` + userId).then((res) => res.data);
 	},
 	getStatus(userId: number | null) {
 		return instance.get<string>(`profile/status/` + userId).then((res) => res.data); //запрос статуса отдельно с сервера
@@ -31,25 +31,7 @@ export const profileAPI = {
 };
 
 //типы
-type responseGetUserProfile = {
-	userId: number
-	aboutMe: string | null
-	lookingForAJob: boolean
-	lookingForAJobDescription: string | null
-	fullName: string
-	photos: photosType
-	contacts: {
-		facebook: string | null
-		instagram: string | null
-		vk: string | null
-		github: string | null
-		mainLink: string | null
-		twitter: string | null
-		website: string | null
-		youtube: string | null
-	}
-}
-type responseUpdatePhoto = {
+interface responseUpdatePhoto {
 	data: {
 		photos: photosType
 	}

@@ -3,7 +3,7 @@ import { getUserProfile, setIsError, setIsLoading } from '../../app/reducers/pro
 import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
-import { Preloader2 } from '../../common/preloader2';
+import { Preloader3 } from '../../common/preloader3';
 import { ProfileMain } from '../../components/ProfileMain/ProfileMain';
 import { ProfileInfo } from '../../components/ProfileInfo/ProfileInfo';
 import { ProfileEditForm } from '../../components/ProfileEditForm/ProfileEditForm';
@@ -43,10 +43,10 @@ const ProfilePage: React.FC = ({ match }: any) => {
 
 	if (isLoading) {
 		return <div className={classes.root}>
-			<Preloader2 />
+			<Preloader3 />
 		</div>
 	}
-	
+
 	return (
 		<div className={classes.root}>
 			<Snackbar open={!!isError} autoHideDuration={5000} onClose={handleClose} >

@@ -12,9 +12,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	background: url(https://sapagroup.net/wp-content/uploads/2018/12/how-to-grow-in-the-automotive-sector-sapa-received-the-elite-certificate-of-the-italian-stock-exchange_01.jpg) no-repeat ;
+	/* background: url(https://sapagroup.net/wp-content/uploads/2018/12/how-to-grow-in-the-automotive-sector-sapa-received-the-elite-certificate-of-the-italian-stock-exchange_01.jpg) no-repeat ; */
 
- /* background: url(https://cryptotrek.ru/wp-content/uploads/2020/03/haccc.jpg)   no-repeat ; */
+ background: url(https://cryptotrek.ru/wp-content/uploads/2020/03/haccc.jpg)   no-repeat ;
 	background-size: 100%; 
 }  */
 

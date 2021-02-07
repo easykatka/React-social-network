@@ -8,10 +8,10 @@ export type loginUserData = {
 	email: string
 	password: string
 	rememberMe: boolean
-	captcha: string
+	captcha?: string
 }
 
-export type profileDataType = {
+export interface profileDataType  {
 	userId: number
 	aboutMe: string | null
 	lookingForAJob: boolean
@@ -30,25 +30,23 @@ export type profileDataType = {
 		youtube: string | null
 	}
 }
-
-
-export type responseResultObject = {
+export interface responseResultObject  {
 	data: {}
 	fieldsErrors: Array<string>
 	messages: Array<string>
 	resultCode: resultCodeEnum
 }
-export type photosType = {
+export interface photosType  {
 	large: string
 	small: string
 }
-export type usersSearchType = {
+export interface usersSearchType  {
 	currentPage: number,
 	pageSize: number,
 	searchTerm: string,
 	friend: string,
 }
-export type allUsersItemType = {
+export interface allUsersItemType  {
 	followed: boolean
 	id: number
 	name: string
@@ -56,7 +54,7 @@ export type allUsersItemType = {
 	status: null | string
 	uniqueUrlName: null | string
 }
-export type dialogsArrayType = {
+export interface dialogsArrayType  {
 	hasNewMessages: boolean
 	id: number
 	lastDialogActivityDate: string
@@ -66,7 +64,7 @@ export type dialogsArrayType = {
 	userName: string
 }
 
-export type messagesArrayType = {
+export interface messagesArrayType  {
 	addedAt: string
 	body: string
 	deletedByRecipient?: boolean
@@ -81,7 +79,7 @@ export type messagesArrayType = {
 	translatedBody: null
 	viewed?: boolean
 }
-export type postType = {
+export interface postType  {
 	userId: number | null
 	date: string
 	body: string

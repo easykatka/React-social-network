@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-export const profilePosts = makeStyles((theme) => ({
+export const profilePosts = makeStyles(() => ({
 	root: {
 		overflowY: 'auto',
 		height: 450,
