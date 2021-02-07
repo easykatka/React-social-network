@@ -9,6 +9,7 @@ export const messengerNavBar = makeStyles(() => ({
 		alignItems: 'center',
 		borderRadius: '0px 0px 0px 15px',
 		height: 600,
+	
 	},
 	
 	pmWrapper: {
@@ -16,8 +17,8 @@ export const messengerNavBar = makeStyles(() => ({
 		padding: '0 5px'
 	},
 	chip: {
-		width: 160,
-		justifyContent: 'left',
+		width: 150,
+		justifyContent:'flex-start',
 		margin: '5px 0',
 		background: '#40444b',
 	},

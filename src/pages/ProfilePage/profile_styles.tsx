@@ -5,7 +5,7 @@ export const profileStyles = makeStyles(() => ({
 		borderRadius: '0 0 15px 15px',
 		position: 'relative',
 		width: '100%',
-		height: 600,
+		minHeight: 600,
 		justifyContent: 'center',
 		display: 'flex',
 		flexDirection: 'row',
@@ -13,6 +13,6 @@ export const profileStyles = makeStyles(() => ({
 
 	},
 	rightBlockWrapper: {
-		height: 600
+		minHeight: 600
 	}
 }));

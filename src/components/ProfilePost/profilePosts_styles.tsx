@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 export const profilePosts = makeStyles(() => ({
 	root: {
 		overflowY: 'auto',
-		height: 450,
+		height: 500,
 		width: '100%',
 		marginTop:20,
 		paddingRight:3
@@ -13,7 +13,6 @@ export const profilePosts = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column-reverse',
 		justifyContent: 'flex-end',
-		
 		width: '100%',
 		wordBreak: 'break-word'
 

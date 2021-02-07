@@ -8,32 +8,38 @@ import { RootState } from '../../app/store';
 import { allUsersItemType } from '../../common/types/types';
 import { useAppDispatch } from '../../app/store';
 import { getFriends, setFilter } from '../../app/reducers/users-reducer';
+import {Preloader3} from '../../common/preloader3'
 
 export const ProfileFriends: React.FC = React.memo(() => {
 	const users = useSelector((state: RootState) => state.users.users)
+	const isFetching = useSelector((state: RootState) => state.users.isFetching)
 	const randomUsers = randomArray(users, 6) as allUsersItemType[];
 	const dispatch = useAppDispatch()
-	React.useEffect(() => {dispatch(getFriends('true')) }
-	
+	React.useEffect(() => { users.length ||  dispatch(getFriends('true')) }
 		, []);
 	const classes = profileFreinds();
 	return (
-		<Grid container justify='center'>
-			<p className={classes.friendsLabel}> Friends: <Link onClick={() => dispatch(setFilter({ friend: 'true' }))} to={`/users`}>{users.length}</Link> </p>
-			<Grid container className={classes.friendsWrapper}>
-				{randomUsers.map((item) => (
-					<Grid item xs={4} key={item.id} >
-						<Link to={`/profile/${item.id}`}>
-							<Grid container className={classes.friendItemWrapper} >
-								<div>
-									<Avatar className={classes.avatar} src={item.photos?.large} />
-								</div>
-								<div className={classes.name}>{item.name}</div>
+		<Grid container justify='center' style={{position:'relative',height:250}}>
+			{isFetching ? <Preloader3 /> : (
+				<>
+					<p className={classes.friendsLabel}> Friends: <Link onClick={() => dispatch(setFilter({ friend: 'true' }))} to={`/users`}>{users.length}</Link> </p>
+					<Grid container className={classes.friendsWrapper}>
+						{randomUsers.map((item) => (
+							<Grid item xs={4} key={item.id} >
+								<Link to={`/profile/${item.id}`}>
+									<Grid container className={classes.friendItemWrapper} >
+										<div>
+											<Avatar className={classes.avatar} src={item.photos?.large} />
+										</div>
+										<div className={classes.name}>{item.name}</div>
+									</Grid>
+								</Link>
 							</Grid>
-						</Link>
+						))}
 					</Grid>
-				))}
-			</Grid>
+				</>
+			)}
+
 		</Grid>
 	);
 });

@@ -9,20 +9,25 @@ import { usersFilter } from './usersFilter_styles'
 
 
 export const UsersFilter: React.FC = () => {
-	const { currentPage, pageSize, totalUsersCount, filter } = useSelector((state: RootState) => state.users);
+	const currentPage = useSelector((state: RootState) => state.users.currentPage);
+	const pageSize  = useSelector((state: RootState) => state.users.pageSize);
+	const totalUsersCount = useSelector((state: RootState) => state.users.totalUsersCount);
+	const filter  = useSelector((state: RootState) => state.users.filter);
 	const classes = usersFilter();
 	const dispatch = useDispatch();
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
-	const debouncedCurrentPage = useDebounce(currentPage, 500)
+	const debouncedCurrentPage = useDebounce(currentPage, 1000)
+	const debouncedpageSize = useDebounce(pageSize, 1000)
+	const debouncedFriend = useDebounce(filter.friend, 1000)
+
 	// получения списка пользователей и обновление его при изменении параметров
 	
 	useEffect(() => {
-		dispatch(getUsers(debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend))
+		dispatch(getUsers(debouncedCurrentPage, debouncedpageSize, debouncedSearchTerm, debouncedFriend))
 		return () => {
 			dispatch(setUsers([]))
 		}
-	}, [dispatch, debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend])
-
+	}, [dispatch, debouncedCurrentPage, debouncedpageSize, debouncedSearchTerm, debouncedFriend])
 
 
 
@@ -63,6 +68,8 @@ export const UsersFilter: React.FC = () => {
 				page={currentPage}
 				onChangePage={(_, newPage: number) => { dispatch(setCurrentPage(newPage)) }}
 				rowsPerPage={pageSize}
+				labelRowsPerPage='rows/page'
+				
 				onChangeRowsPerPage={(event: React.ChangeEvent<HTMLInputElement>) => { dispatch(setPageSize(parseInt(event.target.value, 10))) }}
 			/>
 		</Grid>

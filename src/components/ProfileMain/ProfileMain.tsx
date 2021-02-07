@@ -13,7 +13,7 @@ type IProps = {
 	routerId: number
 }
 
-export const ProfileMain: React.FC<IProps> = ({ routerId }) => {
+export const ProfileMain: React.FC<IProps> = React.memo(({ routerId }) => {
 	const profile = useSelector((state: RootState) => state.profile.profile);
 
 	const classes = profileMain();
@@ -35,8 +35,8 @@ export const ProfileMain: React.FC<IProps> = ({ routerId }) => {
 					<Grid item>
 						{routerId && (
 							<div>
-								<div className={classes.friendButton}>
-									<FriendButton id={routerId} followed={profile.followed} />
+								<div >
+									<FriendButton className={classes.friendButton} id={routerId} followed={profile.followed} />
 								</div>
 								<div >
 									<Link to={`/messenger/${routerId}`}>
@@ -51,4 +51,4 @@ export const ProfileMain: React.FC<IProps> = ({ routerId }) => {
 				)}
 		</Grid>
 	);
-};
+});

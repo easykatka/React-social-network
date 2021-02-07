@@ -38,12 +38,15 @@ export const usersSlice = createSlice({
 				: state.followingInProgress.filter(id => id !== userId)
 		},
 		setPageSize: (state, { payload }) => {
-			state.pageSize = payload
 			state.currentPage = 0
+			state.pageSize = payload
 		},
 		setFilter: (state, { payload }) => { 
 			state.currentPage = 0
 			state.filter = { ...state.filter, ...payload }
+			// return {...state,
+			// 	currentPage:0 ,
+			// 	filter:{ ...state.filter, ...payload }}
 		},
 	}
 });
@@ -59,13 +62,14 @@ export const { setFilter,
 } = usersSlice.actions;
 //thunk
 export const getUsers = (page:number, pageSize:number, searchTerm:string, friend:string) => {
-	return async (dispatch: AppDispatch) => {
-		dispatch(setIsFetching(true));
-		dispatch(setCurrentPage(page));
-		const data = await usersAPI.getUsers(page + 1, pageSize, searchTerm, friend);
-		dispatch(setIsFetching(false));
-		dispatch(setUsers(data.items));
-		dispatch(setTotalUsersCount(data.totalCount));
+	return async (dispatch: AppDispatch ) => {
+		dispatch(setIsFetching(true))
+		dispatch(setCurrentPage(page))
+		const data = await usersAPI.getUsers(page + 1, pageSize, searchTerm, friend)
+		dispatch(setUsers(data.items))
+		dispatch(setTotalUsersCount(data.totalCount))
+		dispatch(setIsFetching(false)) 
+		
 	};
 };
 export const getFriends = (friend:string) => {

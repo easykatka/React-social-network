@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { getUserProfile, setIsError, setIsLoading } from '../../app/reducers/profile-reducer';
+import { getUserProfile, setIsError } from '../../app/reducers/profile-reducer';
 import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
@@ -33,7 +33,7 @@ const ProfilePage: React.FC = ({ match }: any) => {
 	useEffect(() => {
 		profileUserId && dispatch(getUserProfile(profileUserId))
 		return () => {
-			dispatch(setIsLoading(true))
+			console.log('unmount')
 		}
 	}, [dispatch, profileUserId])
 
@@ -41,7 +41,7 @@ const ProfilePage: React.FC = ({ match }: any) => {
 		dispatch(setIsError(''))
 	};
 
-	if (isLoading) {
+	if (isLoading || 0) {
 		return <div className={classes.root}>
 			<Preloader3 />
 		</div>

@@ -8,7 +8,11 @@ export const profileAvatar = makeStyles((theme) => ({
 		"&:hover": {
 			color: theme.palette.secondary.main
 		}
-	}
+	},
+	root: {
+		position: 'relative',
+		height: 150,
+	},
 
 }));
 export const StyledBadge = withStyles(() => ({

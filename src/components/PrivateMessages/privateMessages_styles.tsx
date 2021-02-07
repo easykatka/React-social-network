@@ -8,7 +8,8 @@ export const privateMessages = makeStyles(() => ({
 	messagesWrapper: {
 		overflowY: 'auto',
 		height: 500,
-		padding: 8
+		padding: 8,
+		position:'relative',
 	},
 	messageBody: {
 		color: '#dcddde',

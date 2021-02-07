@@ -12,7 +12,8 @@ export const profileSlice = createSlice({
 		status: "",
 		posts: posts as Array<postType>,
 		isLoading: true,
-		isError: '' 
+		isError: '',
+		avatarIsLoading: false,
 	},
 	reducers: {
 		setUserProfile: (state, { payload }) => { state.profile = payload },
@@ -28,12 +29,13 @@ export const profileSlice = createSlice({
 			item.isLiked = payload.like.checked
 			payload.like.checked ? ++item.likesCount : --item.likesCount
 		},
-		setIsLoading: (state, {payload}) => { state.isLoading = payload },
-		setIsError: (state, {payload}) => { state.isError = payload }
+		setIsLoading: (state, { payload }) => { state.isLoading = payload },
+		setIsError: (state, { payload }) => { state.isError = payload },
+		setAvatarIsLoading: (state, { payload }) => { state.avatarIsLoading = payload }
 	}
 })
 //action
-export const { setIsError, setIsLoading, setLike, setPost, setUserFollowStatus, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
+export const { setAvatarIsLoading, setIsError, setIsLoading, setLike, setPost, setUserFollowStatus, setUserProfile, setUserStatus, setauthUser, setNewAvatar } = profileSlice.actions;
 //thunk
 export const getUserProfile = (id: number) => async (dispatch: AppDispatch) => {
 	try {
@@ -57,10 +59,12 @@ export const getAuthUser = (id: number) => async (dispatch: AppDispatch) => {
 	dispatch(setauthUser(data))
 }
 export const updateAvatar = (file: File) => async (dispatch: AppDispatch) => {
+	dispatch(setAvatarIsLoading(true))
 	const data = await profileAPI.updateAvatar(file)
 	if (data.resultCode === resultCodeEnum.success) {
 		dispatch(setNewAvatar(data.data.photos))
 	}
+	dispatch(setAvatarIsLoading(false))
 }
 export const updateStatus = (status: string) => async (dispatch: AppDispatch) => {
 	const data = await profileAPI.updateStatus(status)

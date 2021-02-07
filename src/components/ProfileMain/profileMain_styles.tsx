@@ -24,7 +24,6 @@ export const profileMain = makeStyles(() => ({
 	friendButton: {
 		margin: 20,
 		width: 200
-
 	},
 	pmButton: {
 		margin: 20,

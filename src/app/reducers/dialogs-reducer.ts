@@ -23,7 +23,7 @@ export const dialogsSlice = createSlice({
 		setDialogs: (state, { payload }) => {
 			state.dialogs = payload
 		},
-		setMessages: (state, { payload }) => { debugger
+		setMessages: (state, { payload }) => { 
 			state.messages = payload.items
 		},
 		setNewMessagesCount: (state, { payload }) => {
