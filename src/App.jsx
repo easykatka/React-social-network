@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import MessengerPage from './pages/MessangerPage/MessengerPage';
-import { Preloader2 } from './common/preloader2';
+import { Preloader } from './common/preloader';
 import { Container} from '@material-ui/core';
 import { Header } from './components/Header/Header';
 
@@ -21,9 +21,9 @@ function App() {
 	useEffect(() => dispatch(init()), [dispatch]);
 
 	return (
-		<Container>
+		<Container >
 			{!isInit ? (
-				<Preloader2 />
+				<Preloader />
 			) : !isAuth ? (
 				<LoginPage />
 			) : (

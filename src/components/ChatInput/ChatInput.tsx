@@ -1,24 +1,27 @@
-import { Grid, InputBase } from '@material-ui/core';
+import { Grid, InputBase, IconButton } from '@material-ui/core';
 import { chatForm } from './chatInput_styles';
-
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 interface IProps {
-	handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void,
-	onChange: { (e: React.ChangeEvent<any>): void },
-	value: string,
-	disabled?: boolean
+	disabled?: boolean,
+	[x:string]:any,
 }
 
-export const ChatInput: React.FC<IProps> = ({ handleSubmit, ...props}) => {
+export const ChatInput: React.FC<IProps> = ({ handleSubmit, ...props }) => {
 	const classes = chatForm()
 	return (
 		<Grid component='form' onSubmit={handleSubmit} className={classes.root}>
-			<InputBase inputProps={{...props}}
+			<InputBase inputProps={{ ...props }}
 				className={classes.input}
 				type='text'
 				autoFocus={true}
 				placeholder='write a message'
 				name='message'
 				id='message'
+				endAdornment={
+					<IconButton type='submit'>
+						<SendRoundedIcon color='inherit' className={classes.sendIcon} />
+					</IconButton>
+				}
 			/>
 		</Grid>
 	);

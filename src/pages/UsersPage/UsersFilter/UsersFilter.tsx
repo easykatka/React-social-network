@@ -1,7 +1,7 @@
 import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField } from '@material-ui/core';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers, setCurrentPage, setFilter, setPageSize } from '../../../app/reducers/users-reducer';
+import { getUsers, setCurrentPage, setFilter, setPageSize, setUsers } from '../../../app/reducers/users-reducer';
 import TablePagination from '@material-ui/core/TablePagination';
 import { useDebounce } from '../../../common/useDebounce';
 import { RootState } from '../../../app/store';
@@ -15,9 +15,15 @@ export const UsersFilter: React.FC = () => {
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
 	const debouncedCurrentPage = useDebounce(currentPage, 500)
 	// получения списка пользователей и обновление его при изменении параметров
+	
 	useEffect(() => {
-		dispatch(getUsers(debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend));
-	}, [dispatch, debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend]);
+		dispatch(getUsers(debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend))
+		return () => {
+			dispatch(setUsers([]))
+		}
+	}, [dispatch, debouncedCurrentPage, pageSize, debouncedSearchTerm, filter.friend])
+
+
 
 
 	const radioValues = [

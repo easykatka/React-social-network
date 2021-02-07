@@ -3,7 +3,7 @@ export const chatForm = makeStyles((theme) => ({
 	root: {
 		backgroundColor: '#40444b',
 		alignItems: 'center',
-		marginTop: 20,
+		marginTop: 10,
 		borderRadius: 7,
 		width: '100%'
 	},
@@ -11,7 +11,11 @@ export const chatForm = makeStyles((theme) => ({
 		color: 'white',
 		marginLeft: 15,
 		width: '100%',
-		padding: 8,
-		paddingRight: 40
+		paddingRight: 20,
+		padding:4
 	},
+	sendIcon:{
+		fontSize:13,
+		color:theme.palette.primary.main
+	}
 }))

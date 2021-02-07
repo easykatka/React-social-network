@@ -24,7 +24,7 @@ export const usersSlice = createSlice({
 	,
 	reducers: {
 		setIsFetching: (state, action) => { state.isFetching = action.payload; },
-		setUsers: (state, action) => { state.users = action.payload; },
+		setUsers: (state, action) => { state.users = action.payload},
 		setCurrentPage: (state, action) => { state.currentPage = action.payload; },
 		setTotalUsersCount: (state, action) => { state.totalUsersCount = action.payload; },
 		toggleFollow: (state, { payload }) => {

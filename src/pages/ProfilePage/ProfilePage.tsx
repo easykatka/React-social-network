@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
-import { getUserProfile, setIsError } from '../../app/reducers/profile-reducer';
+import { getUserProfile, setIsError, setIsLoading } from '../../app/reducers/profile-reducer';
 import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { withRouter } from 'react-router-dom';
 import { Preloader2 } from '../../common/preloader2';
-import { ProfileMain } from './ProfileMain/ProfileMain';
-import { ProfileInfo } from './ProfileInfo/ProfileInfo';
-import { ProfileEditForm } from './ProfileInfo/ProfileEditForm/ProfileEditForm';
-import { ProfileWall } from './ProfileWall/ProfileWall';
+import { ProfileMain } from '../../components/ProfileMain/ProfileMain';
+import { ProfileInfo } from '../../components/ProfileInfo/ProfileInfo';
+import { ProfileEditForm } from '../../components/ProfileEditForm/ProfileEditForm';
+import { ProfileWall } from '../../components/ProfileWall/ProfileWall';
 import { RootState } from '../../app/store';
 import { useAppDispatch } from '../../app/store';
 import { profileStyles } from './profile_styles'
@@ -29,15 +29,24 @@ const ProfilePage: React.FC = ({ match }: any) => {
 	const isLoading = useSelector((state: RootState) => state.profile.isLoading);
 	const isError = useSelector((state: RootState) => state.profile.isError);
 
-	useEffect(
-		() => {
-			if (profileUserId) dispatch(getUserProfile(profileUserId))
-		}, [dispatch, profileUserId]);
+
+	useEffect(() => {
+		profileUserId && dispatch(getUserProfile(profileUserId))
+		return () => {
+			dispatch(setIsLoading(true))
+		}
+	}, [dispatch, profileUserId])
 
 	const handleClose = () => {
 		dispatch(setIsError(''))
 	};
 
+	if (isLoading) {
+		return <div className={classes.root}>
+			<Preloader2 />
+		</div>
+	}
+	
 	return (
 		<div className={classes.root}>
 			<Snackbar open={!!isError} autoHideDuration={5000} onClose={handleClose} >
@@ -45,28 +54,24 @@ const ProfilePage: React.FC = ({ match }: any) => {
 					Fetch error
 				</Alert>
 			</Snackbar>
-			{isLoading ? (<Preloader2 />) : (
-				<>
-					<Grid item xs={4}>
-						<ProfileMain routerId={routerId} />
-					</Grid>
-					<Grid item xs={8} className={classes.rightBlockWrapper}>
-						{editForm ? (
-							<ProfileEditForm setEditForm={setEditForm} />) : (
-								<>
-									<Grid container>
-										<Grid>
-											<ProfileInfo routerId={routerId} setEditForm={setEditForm} />
-										</Grid>
-										<Grid item xs>
-											<ProfileWall />
-										</Grid>
-									</Grid>
-								</>
-							)}
-					</Grid>
-				</>
-			)}
+			<Grid item xs={4}>
+				<ProfileMain routerId={routerId} />
+			</Grid>
+			<Grid item xs={8} className={classes.rightBlockWrapper}>
+				{editForm ? (
+					<ProfileEditForm setEditForm={setEditForm} />) : (
+						<>
+							<Grid container>
+								<Grid>
+									<ProfileInfo routerId={routerId} setEditForm={setEditForm} />
+								</Grid>
+								<Grid item xs>
+									<ProfileWall />
+								</Grid>
+							</Grid>
+						</>
+					)}
+			</Grid>
 		</div>
 	);
 };

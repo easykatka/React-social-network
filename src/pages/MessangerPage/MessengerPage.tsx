@@ -1,12 +1,12 @@
 import { Grid } from '@material-ui/core';
 import { useEffect } from 'react';
-import { ChatMessages } from './ChatMessages/ChatMessages';
+import { ChatMessages } from '../../components/ChatMessages/ChatMessages';
 import { ChatNavBar } from '../../components/ChatNavBar/ChatNavBar';
 import { withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { PrivateMessages } from './privateMessages/PrivateMessages';
-import { PrivateUserInfo } from './privateUserInfo/PrivateUserInfo';
-import { ChatUsersList } from './ChatUsersList/ChatUsersList';
+import { PrivateMessages } from '../../components/PrivateMessages/PrivateMessages';
+import { PrivateUserInfo } from '../../components/PrivateUserInfo/PrivateUserInfo';
+import { ChatUsersList } from '../../components/ChatUsersList/ChatUsersList';
 import { startMessagesListening, stopMessagesListening } from '../../app/reducers/chat-reducer';
 import { RootState } from '../../app/store';
 import { useAppDispatch } from '../../app/store';

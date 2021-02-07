@@ -15,7 +15,7 @@ export const loginStyles = makeStyles((theme) => ({
 	icon: {
 		fontSize: 90,
 		width: '100%',
-		color: '#61dafb',
+		color: theme.palette.primary.main,
 	},
 	captcha:
 	{

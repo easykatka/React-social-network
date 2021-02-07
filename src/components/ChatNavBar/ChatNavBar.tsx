@@ -7,6 +7,7 @@ import { RootState } from '../../app/store';
 import devs from '../../common/assets/img/devs.jpg';
 import { messengerNavBar, NavBadge } from './chatNavBar_styles';
 import { useAppDispatch } from '../../app/store';
+import defaultAvatar from '../../common/assets/img/defaultAvatar.png'
 
 export const ChatNavBar: React.FC = () => {
 	const { dialogs } = useSelector((state: RootState) => state.dialogs);
@@ -29,7 +30,7 @@ export const ChatNavBar: React.FC = () => {
 							<NavBadge badgeContent={item.newMessagesCount} color='secondary' >
 								<Chip key={idx}
 									className={classes.chip}
-									avatar={<Avatar src={item?.photos?.small} />}
+									avatar={<Avatar src={item?.photos?.small || defaultAvatar} />}
 									label={item?.userName}
 									clickable
 								></Chip>

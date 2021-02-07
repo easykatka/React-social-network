@@ -5,15 +5,15 @@ import { Card, CardActionArea, CardContent, CardMedia, Grid } from '@material-ui
 import React from 'react';
 import { usersList } from './usersList_styles';
 import { allUsersItemType } from '../../../common/types/types'
-import { FriendButton } from '../../../components/FriendButton/FriendButton';
+import { FriendButton } from '../../../components/CustomFriendButton/FriendButton';
 
 
 
-type PropsType = {
+interface IProps {
 	users: allUsersItemType[],
 	isFetching: boolean
 }
-export const UsersList: React.FC<PropsType> = React.memo(({ users, isFetching }) => {
+export const UsersList: React.FC<IProps> = React.memo(({ users, isFetching }) => {
 	const classes = usersList();
 	return isFetching ? (
 		<Preloader2 />
