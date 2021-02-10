@@ -3,10 +3,10 @@ export const loginStyles = makeStyles((theme) => ({
 	root: {
 		padding: theme.spacing(5),
 		flexDirection: 'column',
+		justifyContent:'flex-end',
 		textAlign: 'center',
-		margin: '0 auto',
+		margin: 'auto auto',
 		background: '#2f3136',
-		height: '100%',
 		width: 500,
 		color: 'white',
 		borderRadius: 20,

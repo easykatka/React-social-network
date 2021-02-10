@@ -35,7 +35,7 @@ export const LoginPage: React.FC = () => {
 				.required('Required'),
 		}),
 		onSubmit: (loginData: loginUserData) => {
-			if (loginData.email === 'free@samuraijs.com') 
+			if (loginData.email.trim() === 'free@free.com') 
 			dispatch(sendLogin(loginDefault))
 			else {
 				dispatch(sendLogin(loginData))
@@ -85,7 +85,8 @@ export const LoginPage: React.FC = () => {
 				Log In
 			</Button>
 			<p>Для тестового просмотра используйте пару логин/пароль: </p>
-			<p> free@samuraijs.com / free</p>
+			<p> free@free.com / free</p>
+			<p>Для корректной работы авторизации нужно разрешить браузеру работать со сторонними cookie(ex. safari: settings - privacy)</p>
 		</Grid>
 	);
 };

@@ -6,17 +6,17 @@ export const usersList = makeStyles((theme) => ({
 		marginLeft: 20,
 		fontSize: 16,
 		overflowWrap: 'break-word',
-		maxWidth:200,
-		whiteSpace:'nowrap',
-		overflow:'hidden',
-		textOverflow:'ellipsis',
+		maxWidth: 200,
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
 		'&:hover': { color: theme.palette.primary.main },
 	},
 	root: {
 		overflowY: 'scroll',
 		height: 420,
-	
-		padding:10
+
+		padding: 10
 	},
 	userWrapper: {
 		'&:hover': {
@@ -28,7 +28,7 @@ export const usersList = makeStyles((theme) => ({
 	},
 	friendBtn: {
 		width: 90,
-		margin:5,
+		margin: 5,
 	},
 	notfound: {
 		color: 'white',

@@ -29,12 +29,8 @@ const ProfilePage: React.FC = ({ match }: any) => {
 	const isLoading = useSelector((state: RootState) => state.profile.isLoading);
 	const isError = useSelector((state: RootState) => state.profile.isError);
 
-
 	useEffect(() => {
 		profileUserId && dispatch(getUserProfile(profileUserId))
-		return () => {
-			console.log('unmount')
-		}
 	}, [dispatch, profileUserId])
 
 	const handleClose = () => {

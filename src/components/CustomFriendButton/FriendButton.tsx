@@ -10,20 +10,20 @@ interface IProps {
 	className?: any,
 }
 //
-export const FriendButton: React.FC<IProps> = ({ id, followed, ...props}) => {
+export const FriendButton: React.FC<IProps> = ({ id, followed, ...props }) => {
 	const followingInProgress = useSelector((state: RootState) => state.users.followingInProgress);
 	const dispatch = useDispatch();
 	return (
-			<Button
-				{...props}
-				color={followed ? 'secondary' : 'primary'}
-				variant='contained'
-				disabled={followingInProgress.some((item) => item === id)}
-				onClick={() => {
-					dispatch(followUser(+id, followed));
-				}}>
-				{followed ? 'Unfriend' : 'Friend'}
-			</Button>
+		<Button
+			{...props}
+			color={followed ? 'secondary' : 'primary'}
+			variant='contained'
+			disabled={followingInProgress.some((item) => item === id)}
+			onClick={() => {
+				dispatch(followUser(+id, followed));
+			}}>
+			{followed ? 'Unfriend' : 'Friend'}
+		</Button>
 
 	);
 };

@@ -5,7 +5,7 @@ interface IProps {
 	label: string,
 	errors: string | undefined,
 	touched: boolean | undefined,
-	[x:string]: any;
+	[x: string]: any;
 }
 export const CustomTextField: React.FC<IProps> = ({ label, errors, touched, ...props }) => {
 	return (
@@ -19,7 +19,7 @@ export const CustomTextField: React.FC<IProps> = ({ label, errors, touched, ...p
 				{...props}
 			/>
 			{errors && touched &&
-				<div >
+				<div style={{ color: 'red' }} >
 					{errors}
 				</div>
 			}

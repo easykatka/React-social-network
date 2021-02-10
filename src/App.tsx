@@ -21,13 +21,13 @@ function App() {
 	const dispatch = useAppDispatch();
 	useEffect(() => dispatch(init()), [dispatch]);
 	return (
-		<Container >
+		<Container style={{width:1240}}>
 			{!isInit ? (
 				<Preloader3 />
 			) : !isAuth ? (
 				<LoginPage />
 			) : (
-				<>
+				<div >
 					<Header />
 					<Switch>
 						<Route exact path={'/profile/' + authUserId} render={() => <Redirect to={'/profile'} />} />
@@ -37,7 +37,7 @@ function App() {
 						<Route exact path='/messenger/:userId?' render={() => <MessengerPage />} />
 						<Route exact path='*' render={() => <Redirect to={'/profile'} />} />
 					</Switch>
-				</>
+				</div>
 			)}
 		</Container>
 	);

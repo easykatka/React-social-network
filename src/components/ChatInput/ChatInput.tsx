@@ -3,7 +3,7 @@ import { chatForm } from './chatInput_styles';
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 interface IProps {
 	disabled?: boolean,
-	[x:string]:any,
+	[x: string]: any,
 }
 
 export const ChatInput: React.FC<IProps> = ({ handleSubmit, ...props }) => {

@@ -15,12 +15,11 @@ export const UsersFilter: React.FC = () => {
 	const filter  = useSelector((state: RootState) => state.users.filter);
 	const classes = usersFilter();
 	const dispatch = useDispatch();
+	//дебаунс для фильтров ,чтобы не фетчить лишний раз данные
 	const debouncedSearchTerm = useDebounce(filter.searchTerm, 1000);
 	const debouncedCurrentPage = useDebounce(currentPage, 1000)
 	const debouncedpageSize = useDebounce(pageSize, 1000)
 	const debouncedFriend = useDebounce(filter.friend, 1000)
-
-	// получения списка пользователей и обновление его при изменении параметров
 	
 	useEffect(() => {
 		dispatch(getUsers(debouncedCurrentPage, debouncedpageSize, debouncedSearchTerm, debouncedFriend))
@@ -30,7 +29,7 @@ export const UsersFilter: React.FC = () => {
 	}, [dispatch, debouncedCurrentPage, debouncedpageSize, debouncedSearchTerm, debouncedFriend])
 
 
-
+	//DRY
 	const radioValues = [
 		{ value: 'null', label: 'All' },
 		{ value: 'true', label: 'Friends' },

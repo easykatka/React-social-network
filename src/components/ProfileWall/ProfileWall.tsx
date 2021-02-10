@@ -33,7 +33,7 @@ export const ProfileWall: React.FC = React.memo(() => {
 			resetForm();
 		},
 	});
-	console.log('render')
+
 	return (
 		<Grid className={classes.root}>
 			<ChatInput onChange={handleChange} handleSubmit={handleSubmit} value={values.message} />

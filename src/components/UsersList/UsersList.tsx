@@ -9,21 +9,21 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
 export const UsersList: React.FC = () => {
-	const users  = useSelector((state: RootState) => state.users.users)
-	const isFetching  = useSelector((state: RootState) => state.users.isFetching)
+	const users = useSelector((state: RootState) => state.users.users)
+	const isFetching = useSelector((state: RootState) => state.users.isFetching)
 	const classes = usersList();
 	return isFetching ? (
 		<Preloader3 />
 	) : (
-			<Grid container direction='row' alignItems='center' justify='center' className={classes.root} >
+			<Grid container direction='row'  justify='center' className={classes.root} >
 				{users.length === 0 && <div className={classes.notfound}>User not found</div>}
 				{users && users
 					.map((user) => (
-						<Grid item xs={12} md={6} lg={4}>
-							<Grid container direction='row' alignItems='center'
+						<Grid item xs={6} md={6} lg={4}>
+							<Grid container direction='row'
 								justify='space-between' className={classes.userWrapper}>
 								<NavLink to={'profile/' + user.id}>
-									<Grid container direction='row' alignItems='center' justify='space-between'>
+									<Grid container direction='row' alignItems='center' >
 										<Avatar className={classes.avatar}
 											src={user?.photos.large || defaultAvatar} />
 										<p className={classes.name}>{user?.name}</p>
