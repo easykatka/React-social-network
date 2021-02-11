@@ -5,12 +5,12 @@ import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
 import { RootState } from '../../app/store';
 import { profileInfoStyles } from './profileInfo_styles'
 
-interface IProps  {
+interface IProps {
 	setEditForm: Dispatch<boolean>
 	routerId: number
 }
 export const ProfileInfo: React.FC<IProps> = React.memo(({ setEditForm, routerId }) => {
-	const  profile  = useSelector((state: RootState) => state.profile.profile);
+	const profile = useSelector((state: RootState) => state.profile.profile);
 	const isContacts = profile.contacts && Object.values(profile.contacts).find((i) => !!i);
 	const classes = profileInfoStyles();
 	const editHandler = () => {
@@ -54,7 +54,7 @@ export const ProfileInfo: React.FC<IProps> = React.memo(({ setEditForm, routerId
 			)}
 			{!routerId && (
 				<Grid item>
-					<IconButton onClick={editHandler} color='secondary'>
+					<IconButton onClick={editHandler} color='primary'>
 						<SettingsSharpIcon />
 					</IconButton>
 				</Grid>

@@ -3,15 +3,35 @@ import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import { Grid, InputBase } from '@material-ui/core';
-import { useStatus } from './useStatus';
 import { profileStatus } from './profileStatus_styles';
+import { RootState, useAppDispatch } from '../../app/store';
+import { useSelector } from 'react-redux';
+import { updateStatus } from '../../app/reducers/profile-reducer';
 
-interface IProps  {
+interface IProps {
 	routerId: number
 }
 export const ProfileStatus: React.FC<IProps> = React.memo(({ routerId }) => {
-	const [onStatusChange, deactivateMode, editMode, setEditMode, userStatus, status] = useStatus();
+	const [editMode, setEditMode] = React.useState(false);
+	const [userStatus, setUserStatus] = React.useState('');
+	const status = useSelector((state: RootState) => state.profile.status);
+	const dispatch = useAppDispatch();
+	React.useEffect(() => {
+		setUserStatus(status);
+	}, [status]);
+	const deactivateMode = (action: boolean) => () => {
+		if (!action) {
+			setUserStatus(status);
+			setEditMode(false);
+		} else {
+			setEditMode(false);
+			dispatch(updateStatus(userStatus));
+		}
+	};
 	const classes = profileStatus();
+	const onStatusChange = ((event: React.ChangeEvent<HTMLInputElement>): void => {
+		setUserStatus(event.target.value);
+	})
 	return (
 		<div className={classes.root}>
 			{editMode && !routerId ? (
@@ -23,8 +43,8 @@ export const ProfileStatus: React.FC<IProps> = React.memo(({ routerId }) => {
 						value={userStatus}
 						endAdornment={
 							<>
-									<SaveIcon fontSize='small' color='primary' className={classes.icon} onClick={deactivateMode(true)}/>
-									<CloseIcon fontSize='small' color='secondary'className={classes.icon}  onClick={deactivateMode(false)}/>
+								<SaveIcon fontSize='small' color='primary' className={classes.icon} onClick={deactivateMode(true)} />
+								<CloseIcon fontSize='small' color='secondary' className={classes.icon} onClick={deactivateMode(false)} />
 							</>
 						} />
 				</Grid>

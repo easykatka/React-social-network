@@ -7,7 +7,7 @@ interface IProps {
 	touched: boolean | undefined,
 	[x: string]: any;
 }
-export const CustomTextField: React.FC<IProps> = ({ label, errors, touched, ...props }) => {
+export const CustomTextFieldWithErrors: React.FC<IProps> = ({ label, errors, touched, ...props }) => {
 	return (
 		<div>
 			<h2> {label}: </h2>

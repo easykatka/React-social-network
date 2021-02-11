@@ -39,7 +39,6 @@ export const ProfileFriends: React.FC = React.memo(() => {
 					</Grid>
 				</>
 			)}
-
 		</Grid>
 	);
 });

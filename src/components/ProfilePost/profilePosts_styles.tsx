@@ -4,8 +4,8 @@ export const profilePosts = makeStyles(() => ({
 		overflowY: 'auto',
 		height: 500,
 		width: '100%',
-		marginTop:20,
-		paddingRight:3
+		marginTop: 20,
+		paddingRight: 3
 
 	},
 	container: {
@@ -22,7 +22,7 @@ export const profilePosts = makeStyles(() => ({
 		display: 'flex',
 		backgroundColor: '#202225',
 		padding: 10,
-		marginBottom:10,
+		marginBottom: 10,
 		borderRadius: 5
 
 	},

@@ -7,7 +7,10 @@ import { chatUsersList, StyledBadge } from './chatUsersList_styles';
 
 export const ChatUsersList: React.FC = () => {
 	const { messages } = useSelector((state: RootState) => state.chat);
-	const usersList = messages.filter(((temp) => (a: any) => !temp[a.userId] && (temp[a.userId] = true))(Object.create(null)));
+	
+	const usersList = messages.filter(
+		((temp) => (a: any) => !temp[a.userId] && (temp[a.userId] = true))  (Object.create(null))
+		);
 
 	const classes = chatUsersList();
 	return (

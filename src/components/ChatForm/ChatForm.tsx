@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { sendMessage } from '../../app/reducers/chat-reducer';
 import { RootState } from '../../app/store';
 import { useAppDispatch } from '../../app/store';
-import { ChatInput } from '../ChatInput/ChatInput';
+import { ChatInput } from '../CustomInput/ChatInput';
 
 
 export const ChatForm: React.FC = () => {

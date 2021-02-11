@@ -8,7 +8,7 @@ import { profileEditForm } from './profileEditForm_style';
 import * as Yup from 'yup';
 import { Dispatch } from 'react';
 import { RootState } from '../../app/store';
-import { CustomTextField } from '../CustomTextField/CustomTextFeild';
+import { CustomTextFieldWithErrors } from '../CustomTextFieldWithErrors/CustomTextFieldWithErrors';
 
 
 interface IProps {
@@ -34,26 +34,28 @@ export const ProfileEditForm: React.FC<IProps> = ({ setEditForm }) => {
 		}),
 	});
 
-	const contactsName = ['vk', 'facebook', 'github'];
+	const contactsNames = ['vk', 'facebook', 'github'];
+	const inputs = [
+		{ label: 'Name', id: 'fullName' },
+		{ label: 'About me', id: 'aboutMe' },
+		{ label: 'Skills', id: 'lookingForAJobDescription' }
+	]
+
 	return (
 		<Grid component='form' onSubmit={handleSubmit} className={classes.root}>
 			<Grid container direction='row' justify='space-around' alignItems='center'>
 				<div className={classes.leftBlock}>
-					<CustomTextField label='Name' id='fullName' errors={errors.fullName} touched={touched.fullName}
-						onBlur={handleBlur} onChange={handleChange} value={values.fullName} />
-					<div>
-						<CustomTextField label='About me' id='aboutMe' errors={errors.aboutMe} touched={touched.aboutMe}
-							onBlur={handleBlur} onChange={handleChange} value={values.aboutMe} />
-					</div>
-					<div>
-						<CustomTextField label='Skills' id='lookingForAJobDescription' errors={errors.lookingForAJobDescription}
-							touched={touched.lookingForAJobDescription}
-							onBlur={handleBlur} onChange={handleChange} value={values.lookingForAJobDescription} />
-					</div>
+					{inputs.map(({ id, label }) => {
+						return (
+							// @ts-ignore
+							<CustomTextFieldWithErrors label={label} id={id} errors={'errors.' + id} touched={touched[id]}
+								onBlur={handleBlur} onChange={handleChange} value={'values.' + id} />
+						)
+					})}
 				</div>
 				<div className={classes.rightBlock}>
 					<h2>Contacts:</h2>
-					{contactsName.map((item) => {
+					{contactsNames.map((item) => {
 						return (
 							<TextField
 								key={item}

@@ -7,7 +7,7 @@ import { setPost } from '../../app/reducers/profile-reducer';
 import { ProfilePosts } from '../ProfilePost/ProfilePosts';
 import { profileWall } from './profileWall_styles';
 import React from 'react'
-import { ChatInput } from '../ChatInput/ChatInput';
+import { ChatInput } from '../CustomInput/ChatInput';
 
 
 

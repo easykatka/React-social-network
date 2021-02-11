@@ -2,7 +2,7 @@
 import { useFormik } from 'formik';
 import { sendMessage } from '../../app/reducers/dialogs-reducer';
 import { useAppDispatch } from '../../app/store';
-import { ChatInput } from '../ChatInput/ChatInput';
+import { ChatInput } from '../CustomInput/ChatInput';
 
 type PropsType = {
 	routerId: number

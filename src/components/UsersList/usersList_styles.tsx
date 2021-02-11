@@ -15,7 +15,6 @@ export const usersList = makeStyles((theme) => ({
 	root: {
 		overflowY: 'scroll',
 		height: 420,
-
 		padding: 10
 	},
 	userWrapper: {

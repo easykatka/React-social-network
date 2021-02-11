@@ -68,7 +68,6 @@ export const UsersFilter: React.FC = () => {
 				onChangePage={(_, newPage: number) => { dispatch(setCurrentPage(newPage)) }}
 				rowsPerPage={pageSize}
 				labelRowsPerPage='rows/page'
-				
 				onChangeRowsPerPage={(event: React.ChangeEvent<HTMLInputElement>) => { dispatch(setPageSize(parseInt(event.target.value, 10))) }}
 			/>
 		</Grid>

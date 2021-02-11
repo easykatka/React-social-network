@@ -5,7 +5,6 @@ import App from "./App";
 import store from "./app/store";
 import { Provider } from "react-redux";
 import { BrowserRouter, HashRouter } from "react-router-dom";
-import * as serviceWorker from "./serviceWorker";
 import { createMuiTheme, CssBaseline, ThemeProvider } from "@material-ui/core";
 
 const theme = createMuiTheme({
@@ -36,4 +35,4 @@ ReactDOM.render(
 	document.getElementById("root")
 );
 
-serviceWorker.unregister();
+
