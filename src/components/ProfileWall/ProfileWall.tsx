@@ -21,7 +21,7 @@ export const ProfileWall: React.FC = React.memo(() => {
 			message: '',
 		},
 		onSubmit: ({ message }) => {
-			dispatch(
+			message && dispatch(
 				setPost({
 					userId: userId,
 					body: message,

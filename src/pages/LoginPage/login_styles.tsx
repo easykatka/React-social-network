@@ -24,5 +24,12 @@ export const loginStyles = makeStyles((theme) => ({
 	},
 	error: {
 		color: 'red',
+	},
+	btn:{
+		marginBottom:15
+	},
+	free:{
+		fontWeight:'bold',
+		color:'orange'
 	}
 }))

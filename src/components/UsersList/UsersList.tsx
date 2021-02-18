@@ -15,11 +15,11 @@ export const UsersList: React.FC = () => {
 	return isFetching ? (
 		<Preloader3 />
 	) : (
-			<Grid container direction='row'  justify='center' className={classes.root} >
+			<Grid container direction='row' justify='center' className={classes.root} >
 				{users.length === 0 && <div className={classes.notfound}>User not found</div>}
 				{users && users
 					.map((user) => (
-						<Grid item xs={6} md={6} lg={4}>
+						<Grid item xs={4} md={4} lg={4}>
 							<Grid container direction='row'
 								justify='space-between' className={classes.userWrapper}>
 								<NavLink to={'profile/' + user.id}>

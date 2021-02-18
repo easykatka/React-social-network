@@ -14,7 +14,7 @@ export const profileStatus = makeStyles((theme) => ({
 		cursor:'pointer',
 	},
 	input: {
-		width: 300,
+		width: 200,
 		fontSize: 20,
 		marginRight:10,
 		textAlign:'center'

@@ -6,8 +6,9 @@ import { Avatar, Checkbox, FormControlLabel, Grid } from '@material-ui/core';
 import { useAppDispatch } from '../../app/store';
 import { setLike } from "../../app/reducers/profile-reducer";
 import { profilePosts } from "./profilePosts_styles";
+import React from 'react'
 
-export const ProfilePosts: React.FC = () => {
+export const ProfilePosts: React.FC = React.memo(() => {
 	const { authUser, posts, profile } = useSelector((state: RootState) => state.profile);
 	const dispatch = useAppDispatch()
 	const classes = profilePosts()
@@ -40,4 +41,4 @@ export const ProfilePosts: React.FC = () => {
 			</div>
 		</div>
 	)
-}
+})

@@ -81,11 +81,11 @@ export const LoginPage: React.FC = () => {
 					/>
 				</>
 			)}
-			<Button variant='contained' startIcon={<VpnKeyRoundedIcon />} size='large' type='submit' color='primary'>
+			<Button className={classes.btn} variant='contained' startIcon={<VpnKeyRoundedIcon />} size='large' type='submit' color='primary'>
 				Log In
 			</Button>
 			<p>Для тестового просмотра используйте пару логин/пароль: </p>
-			<p> free@free.com / free</p>
+			<p className={classes.free}> free@free.com / free</p>
 			<p>Для корректной работы авторизации нужно разрешить браузеру работать со сторонними cookie(ex. safari: settings - privacy)</p>
 		</Grid>
 	);

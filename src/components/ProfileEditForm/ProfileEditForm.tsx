@@ -48,8 +48,8 @@ export const ProfileEditForm: React.FC<IProps> = ({ setEditForm }) => {
 					{inputs.map(({ id, label }) => {
 						return (
 							// @ts-ignore
-							<CustomTextFieldWithErrors label={label} id={id} errors={'errors.' + id} touched={touched[id]}
-								onBlur={handleBlur} onChange={handleChange} value={'values.' + id} />
+							<CustomTextFieldWithErrors value={values[id]}  errors={errors[id]} touched={touched[id]}
+								onBlur={handleBlur} onChange={handleChange} label={label} id={id} />
 						)
 					})}
 				</div>

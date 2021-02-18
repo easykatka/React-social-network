@@ -21,11 +21,10 @@ export const ProfileStatus: React.FC<IProps> = React.memo(({ routerId }) => {
 	}, [status]);
 	const deactivateMode = (action: boolean) => () => {
 		if (!action) {
-			setUserStatus(status);
 			setEditMode(false);
 		} else {
 			setEditMode(false);
-			dispatch(updateStatus(userStatus));
+			userStatus && dispatch(updateStatus(userStatus));
 		}
 	};
 	const classes = profileStatus();
